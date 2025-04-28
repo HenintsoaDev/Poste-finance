@@ -29,6 +29,7 @@ import { MatIconModule } from '@angular/material/icon';
 import { AdmComponent } from './views/modules/adm/adm.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
+import { ToastrModule } from 'ngx-toastr';
 
 @NgModule({
   
@@ -53,7 +54,8 @@ import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espe
     MatNativeDateModule,
     NgxIntlTelInputModule,
     DataTablesModule,
-    Ng2TelInputModule
+    Ng2TelInputModule,
+    ToastrModule.forRoot() // configuration globale
   ],
   declarations: [
     AppComponent,

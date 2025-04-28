@@ -21,6 +21,7 @@
               "src/favicon.ico"
             ],
             "styles": [
+              "node_modules/ngx-toastr/toastr.css",
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
                "node_modules/intl-tel-input/build/css/intlTelInput.css",
               "node_modules/perfect-scrollbar/css/perfect-scrollbar.css",
