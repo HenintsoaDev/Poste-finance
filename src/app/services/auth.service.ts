@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
@@ -13,8 +13,12 @@ export class AuthService {
     constructor(private http: HttpClient, private httpService: HttpService) {}
 
     login(credentials: { login: string, password: string }): Observable<any> {
-        return this.http.post<any>(`${this.authUrl}/auth/loginAgence`, credentials).pipe(
+        return this.http.post<any>(`${this.authUrl}/auth/loginAgence`, $.param(credentials),{
+            headers: new HttpHeaders().set('Content-Type', 'application/x-www-form-urlencoded').set('Accept', 'application/json'),
+            withCredentials: true
+        }).pipe(
             tap(response => {
+                console.log('Login response:', response);
                 if (response['code'] === 200 || response['code'] === 403) {
                     localStorage.setItem('access_token', response['data']['access_token']);
                 }
