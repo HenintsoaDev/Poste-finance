@@ -11,9 +11,17 @@ import { ToastrService } from 'ngx-toastr';
 })
 export class LoginComponent extends Translatable implements OnInit {
 
-    showPassword:Boolean = false;
     login = '';
     password = '';
+    isResetPasswort: Boolean = false;
+    oldPassword = '';
+    newPassword = '';
+    confirmNewPassword = '';
+
+    showPassword:Boolean = false;
+    showOldPassword:Boolean = false;
+    showNewPassword:Boolean = false;
+    showConfirmPassword:Boolean = false;
 
     constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,
         ) {
@@ -29,22 +37,42 @@ export class LoginComponent extends Translatable implements OnInit {
                 if(res['code'] == 200) {
                     this.router.navigate(['/home']);
                     this.toastr.success("Connecté", 'Erreur');
-
-                }else{
+                }if(res['code'] == 403) {
+                    this.isResetPasswort = true;
                     this.toastr.error(res['msg'], 'Erreur');
-
+                }
+                else{
+                    this.toastr.error(res['msg'], 'Erreur');
                 }                
             },
             error: (err) => {
-
                 console.error('Login failed', err);
             }
         });
     }
 
-    setShowPassword()
+    onResetPassword()
     {
-        this.showPassword = !this.showPassword;
+        if(this.newPassword != this.confirmNewPassword) {
+            this.toastr.error("Les mots de passe ne correspondent pas", 'Erreur');
+            return;
+        }
+        this.authService.resetPassword({ old_password: this.oldPassword, new_password: this.newPassword }).subscribe({
+            next: (res) => {
+                
+                if(res['code'] == 201) {
+                    this.login = "";
+                    this.password = "";
+                    this.isResetPasswort = false;
+                    this.toastr.success(res['msg'], 'Succès');
+                }else{
+                    this.toastr.error(res['msg'], 'Erreur');
+                }                
+            },
+            error: (err) => {
+                this.toastr.error("Connexion échouée", 'Erreur');
+            }
+        });
     }
 
 }

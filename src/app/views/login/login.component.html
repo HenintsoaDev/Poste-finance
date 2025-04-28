@@ -16,7 +16,7 @@
                     </div>
                 </div>
         </div>
-        <div class="col-md-4 centered-container">
+        <div *ngIf="!isResetPasswort" class="col-md-4 centered-container">
             <form style="width: 30rem;">
                 <div style="text-align: center;width: 100%;margin-bottom: 2vh;">
                     <i class="material-icons icon-primary">account_circle</i>
@@ -35,8 +35,8 @@
                         <mat-form-field class="example-full-width">
                             <input matInput [(ngModel)]="password" placeholder="{{ __('auth.password') }}" [type]="showPassword ? 'text' : 'password'">
                             <mat-icon matSuffix>
-                                <i *ngIf="showPassword"  class="material-icons" style="cursor: pointer;" (click)="setShowPassword()">visibility</i>
-                                <i *ngIf="!showPassword" class="material-icons" style="cursor: pointer;" (click)="setShowPassword()">visibility_off</i>
+                                <i *ngIf="showPassword"  class="material-icons" style="cursor: pointer;" (click)="showPassword = !showPassword">visibility</i>
+                                <i *ngIf="!showPassword" class="material-icons" style="cursor: pointer;" (click)="showPassword = !showPassword">visibility_off</i>
                             </mat-icon>
                         </mat-form-field>
                     </div>
@@ -46,6 +46,51 @@
                 </div>
                 <br>
                 <button mat-raised-button type="submit" class="btn btn-primary w-100" (click)="onLogin()">{{ __('global.login') }}</button>
+            </form>
+        </div>
+        <div *ngIf="isResetPasswort" class="col-md-4 centered-container">
+            <form style="width: 30rem;">
+                <div style="text-align: center;width: 100%;margin-bottom: 2vh;">
+                    <i class="material-icons icon-primary">account_circle</i>
+                </div>
+                <div class="row">
+                    <!--OLD PASSWORD-->
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [(ngModel)]="oldPassword" placeholder="Votre ancien mot de passe" [type]="showOldPassword ? 'text' : 'password'">
+                            <mat-icon matSuffix>
+                                <i *ngIf="showOldPassword"  class="material-icons" style="cursor: pointer;" (click)="showOldPassword = !showOldPassword">visibility</i>
+                                <i *ngIf="!showOldPassword" class="material-icons" style="cursor: pointer;" (click)="showOldPassword = !showOldPassword">visibility_off</i>
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <!--NEW PASSWORD-->
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [(ngModel)]="newPassword" placeholder="Votre nouveau mot de passe" [type]="showNewPassword ? 'text' : 'password'">
+                            <mat-icon matSuffix>
+                                <i *ngIf="showNewPassword"  class="material-icons" style="cursor: pointer;" (click)="showNewPassword = !showNewPassword">visibility</i>
+                                <i *ngIf="!showNewPassword" class="material-icons" style="cursor: pointer;" (click)="showNewPassword = !showNewPassword">visibility_off</i>
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div class="row">
+                    <!--CONFIRM NEW PASSWORD-->
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width">
+                            <input matInput [(ngModel)]="confirmNewPassword" placeholder="Confirmer votre nouveau mot de passe" [type]="showConfirmPassword ? 'text' : 'password'">
+                            <mat-icon matSuffix>
+                                <i *ngIf="showConfirmPassword"  class="material-icons" style="cursor: pointer;" (click)="showConfirmPassword = !showConfirmPassword">visibility</i>
+                                <i *ngIf="!showConfirmPassword" class="material-icons" style="cursor: pointer;" (click)="showConfirmPassword = !showConfirmPassword">visibility_off</i>
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <br>
+                <button mat-raised-button type="submit" class="btn btn-primary w-100" (click)="onResetPassword()">Changer le mot de passe</button>
             </form>
         </div>
     </div>

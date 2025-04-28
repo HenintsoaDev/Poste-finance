@@ -12,6 +12,7 @@ export class HttpService {
 
     private getHeaders(): HttpHeaders {
         const token = localStorage.getItem('access_token');
+        console.log('Token:', token);
         let headers = new HttpHeaders({ 'Content-Type': 'application/json' });
         if (token) {
             headers = headers.set('Authorization', `Bearer ${token}`);
