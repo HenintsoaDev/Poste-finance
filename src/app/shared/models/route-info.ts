@@ -39,8 +39,6 @@ export class MenuService {
 
   updateMenuItems(parentPath:string): void {
     const parent = ROUTES.find(route => route.path.includes(parentPath));
-    console.log("PARENTS");
-    console.log(parent);
     this.menuItemsSource.next(parent?.children || []);
   }
 
