@@ -1,0 +1,9 @@
+@import "../../../assets/scss/core/variables/_colors.scss";
+
+.title-page-profil{
+    background: white;
+    padding: 0.4rem;
+    border-left: solid 4px $secondary;
+    padding-top: 20px;
+    font-weight: bold;
+}

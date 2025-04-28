@@ -1,0 +1,34 @@
+@import "../../../assets/scss/core/variables/_colors.scss";
+
+.card
+{
+    border-radius: 0px;
+    cursor: pointer;
+    transition: 300ms;
+    padding: 0.5rem;
+}
+
+.card:hover{
+    .text-card {
+        color: white;
+    }
+
+    background: $primary;
+    color: white;
+}
+
+.text-card{
+    color: $primary;
+}
+
+@media all and (max-width: 1200px) {
+    .text-card{
+        font-size: 1rem !important;
+    }
+    
+}
+
+
+.bottom-border-card{
+    border-bottom: solid 4px $secondary;
+}

@@ -1,0 +1,73 @@
+{
+    "app" : {
+        "title" : "NUMHERIT",
+        "title-welcom" : "PLATEFORME TEMPLATE NUMHERIT"
+    },
+
+    "menu" : {
+        "home" : "Accueil",
+        "about" : "A propos",
+        "contact" : "Contact"
+    },
+
+    "global" : {
+        "save" : "Enregistrer",
+        "cancel" : "Annuler",
+        "edit" : "Modifier",
+        "delete" : "Supprimer",
+        "add" : "Ajouter",
+        "logout" : "Déconnexion",
+        "login" : "Connexion",
+        "back" : "Retour",
+        "search" : "Rechercher",
+        "next": "Suivant",
+        "export_pdf" : "Exporter en PDF",
+        "export_excel" : "Exporter en Excel",
+        "export_csv" : "Exporter en CSV",
+        "welcome" : "Bienvenu(e) sur la plateforme",
+        "welcome_module" : "Bienvenu(e) sur le module",
+        "back_home" : "Retour à l'accueil",
+        "transaction-success" : "Paiement réussi",
+        "print_ticket" : "Imprimer le reçu",
+        "currency" : "Ar",
+        "solde_wallet" : "Solde wallet",
+        "solde_carte" : "Solde carte"
+    },
+
+    "paiement" : {
+        "title" : "Paiement",
+        "title-welcom" : "Bienvenue sur la plateforme de paiement",
+        "title-transaction-welcom" : "Bienvenue sur la plateforme de transaction"
+    },
+
+    "auth" : {
+        "login" : "Login",
+        "password" : "Mot de passe",
+        "mdp_oublie" : "Mot de passe oublié"
+    },
+
+    "table_list" : {
+        "title" : "Liste des utilisateurs",
+        "add_list" : "Ajouter un utilisateur"
+    },
+    "profil" : {
+        "modification_mdp" : "Modification du mot de passe",
+        "actuel_mdp" : "Actuel mot de passe",
+        "votre_mdp_actu" : "Votre mot de passe actuel",
+        "nouveau_mdp" : "Nouveau mot de passe",
+        "votre_nouveau_mdp" : "Votre nouveau mot de passe",
+        "confirme_mdp" : "Confirmer le mot de passe",
+        "confirm_votre_mdp" : "Confirmation du mot de passe",
+        "modifier_photo_profil" : "Modifier la photo de profil"
+    },
+    "utilisateur" : {
+        "nom" : "Nom",
+        "prenom" : "Prénom(s)",
+        "email" : "Adresse email",
+        "telephone" : "N° téléphone",
+        "adresse" : "Adresse",
+        "profil" : "Profil"
+    }
+
+
+}

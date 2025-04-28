@@ -1,0 +1,59 @@
+<div class="container-fluid">
+    <div class="row" style="height: 100vh;">
+        <div class="col-md-8" style="background-image: url(assets/img/img-back2.jpg);
+            background-position: center;
+            position: relative;
+            z-index: 99999;
+            overflow: auto;
+            background-repeat: no-repeat;
+            background-size: cover;
+            padding: 0;">
+                <div class="auth-layout-wrap" style="height:100%">
+                    <img alt="" src="assets/img/num.webp" style="width: 15rem;">
+                    <div class="text-center mb-4"></div>
+                    <div style="font-size: 40px;font-weight: 600;color:#fff;text-shadow: 1px 1px 1px #7d6651">
+                        <!--<span class="num-acronyme">JI</span>RO SY <span class="num-acronyme">RA</span>NO <span class="jirama-acronyme">MA</span>LAGASY -->
+                        {{ __('app.title-welcom') }}.
+                    </div>
+                    <!--<div class="textWelcom"> Bienvenue sur l'agence en ligne de la Jirama. </div>-->
+                    <!--<div class="textWelcomMobile"> Bienvenue sur<br> L’agence en ligne<br> De la JIRAMA </div>-->
+                </div>
+        </div>
+        <div class="col-md-4 centered-container">
+            <form style="width: 30rem;">
+                <div style="text-align: center;width: 100%;margin-bottom: 2vh;">
+                    <!--<img alt="" src="assets/img/num.webp" style="width: 8rem;">-->
+                    <i class="material-icons icon-primary">account_circle</i>
+                </div>
+                <!--login-->
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ __('auth.login') }}">
+                        </mat-form-field>
+                    </div>
+                </div>
+                <!--password-->
+                <div class="row">
+                    <div class="col-md">
+                        <mat-form-field class="example-full-width">
+                            <input matInput placeholder="{{ __('auth.password') }}" [type]="showPassword ? 'text' : 'password'">
+                            <mat-icon matSuffix>
+                                <i *ngIf="showPassword" class="material-icons" style="cursor: pointer;" (click)="setShowPassword()">visibility</i>
+                                <i *ngIf="!showPassword" class="material-icons" style="cursor: pointer;" (click)="setShowPassword()">visibility_off</i>
+                            </mat-icon>
+                        </mat-form-field>
+                    </div>
+                </div>
+                <div style="text-align:end">
+                    <a class="text-muted" routerlink="/reset" style="font-size: 14px;color: #797878 !important;" href="/reset">{{ __('auth.mdp_oublie') }}</a>
+                </div>
+                <br>
+                <button mat-raised-button type="submit" class="btn btn-primary w-100" (click)="onLogin()">{{ __('global.login') }}</button>
+                <!--<h1 class="strikearound"> &nbsp;&nbsp;OU&nbsp;&nbsp; </h1>
+                <button mat-raised-button type="submit" class="btn btn-secondary w-100" >Inscrivez-vous</button>-->
+            </form>
+        </div>
+    </div>
+</div>
+

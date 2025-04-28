@@ -1,0 +1,81 @@
+<div class="dataTable-top">
+  <div >
+    <span style="color: #666 !important;" > Afficher  : </span> 
+
+    <select title="select item per page" name="pageSize" [(ngModel)]="filtreSelect" (change)="getFiltreSelect()" class="form-select ng-untouched ng-pristine ng-valid" style="width: auto;">
+      <option value="10">10</option>
+      <option value="20">20</option>
+      <option value="50">50</option>
+      <option value="100">100</option>
+      <option value="200">200</option>
+      <option value="500">500</option>
+      <option value="1000">1000</option>
+      <option value="2000">2000</option>
+      <option value="5000">5000</option>
+      <option value="10000">10000</option>
+      
+    </select>
+    <span style="color: #666 !important;" > éléments </span> 
+  </div>
+  
+
+  <div class="dataTable-search d-flex align-items-center">
+    <span style="color: #666 !important;" > Rechercher : </span>
+    <input class="search-input" type="text" name="searchTerm" placeholder="Recherche..." [(ngModel)]="searchInput" (keyup.enter)="getSearchInput()">
+    </div>
+  </div>
+
+<div class="table-responsive dt-responsive">
+    <table class="table table-hover table-striped mb-0">
+        <thead>
+        <tr>
+            <th *ngFor="let header of headerTable"> {{header.nomColonne}}
+                <span *ngIf="header.nomColonne != 'Action'">
+                <i class="fa fa-caret-down icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')" *ngIf="tri==header.table + '.' + header.colonneTable && order=='desc'" ></i>
+                <i class="fa fa-caret-up icon-tri"  (click)="triTable(header.table + '.' + header.colonneTable,'desc')"  *ngIf="tri==header.table + '.' + header.colonneTable && order=='asc'"  ></i>
+                <i class="fa fa-filter icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')"  *ngIf="tri!=header.table + '.' + header.colonneTable"></i>
+                <input type="text"  #ref class="inputCol" [name]="header.nomColonne" (keyup.enter)="getUrlDatatable(endpoint+'?page=1', header.colonneTable, ref.value, header.table)" id="">  
+                </span>
+            </th>
+        </tr>
+        </thead>
+
+        <tbody *ngIf="donneeAfficher.length != 0">
+        <tr *ngFor="let row of donneeAfficher" class="ng-star-inserted"> 
+            <td *ngFor="let cell of row" >
+                <!-- Si cell n'est pas un tableau, afficher le donnée -->
+                <span *ngIf="!isArray(cell)">  {{ formatCell(cell)   }}</span>
+                <!-- Si cell est un tableau, afficher les éléments du tableau -->
+                <span *ngIf="isArray(cell)">
+                <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i>
+                </span>
+        </tr>
+        </tbody>
+
+        <tbody *ngIf="donneeAfficher.length == 0">
+            <tr class="ng-star-inserted" >  <td colspan="9">  Pas de données pour le moment. </td> </tr>
+        </tbody>
+
+    </table>
+    <div class="row footer-paginate mt-4" >
+        <div class="col-lg-4">
+        <span class="three-point" style="padding-left: 0px;" >{{ infoData }}</span>
+        </div>
+        <div class="col-lg-8 btn-paginate"  >
+            <button [disabled]="currentPage <= 1"  (click)="getUrlDatatable(firstPage)" class="btn btn-primary paginate_button"> Premier </button>
+            <button [disabled]="currentPage <= 1"  (click)="getUrlDatatable(prevPage)" class="btn btn-primary paginate_button" > Precedent</button>
+            <button *ngIf="currentPage > 3" class="btn paginate_button"  (click)="getUrlDatatable(firstPage)" > 1 </button>
+            <span *ngIf="currentPage > 3" class="three-point" > ... </span>
+            <button *ngIf="cPage_less_2 > 0 && currentPage < 4" class="btn-primary btn-pagination-hr"  (click)="getUrlDatatable(path_cPage_less_2)" > {{cPage_less_2}} </button>
+            <button *ngIf="cPage_less_1 > 0" class="btn btn-primary paginate_button" (click)="getUrlDatatable(path_cPage_less_1)" > {{cPage_less_1}} </button>
+            <button (click)="getUrlDatatable(prevPage)" class="btn btn-primary bg-pantone btn-pantone current data-table-pagination-active" > {{currentPage}} </button>
+            <button *ngIf="cPage_more_1 > 0" class="btn btn-primary paginate_button" (click)="getUrlDatatable(path_cPage_more_1)" > {{cPage_more_1}} </button>
+            <button *ngIf="(cPage_more_2 > 0 && cPage_more_2 > lastNumPage && cPage_more_1 > lastNumPage && currentPage > lastNumPage) || cPage_more_2 == lastNumPage" class="btn-primary btn-pagination-hr"  (click)="getUrlDatatable(path_cPage_more_2)" > {{cPage_more_2}} </button>
+            <span *ngIf="cPage_more_2 < lastNumPage && cPage_more_1 < lastNumPage && currentPage < lastNumPage" class="three-point" > ... </span>
+            <button *ngIf="cPage_more_2 < lastNumPage && cPage_more_1 < lastNumPage && currentPage < lastNumPage" class="btn btn-primary bg-pantone btn-pantone" (click)="getUrlDatatable(lastPage)" > {{lastNumPage}} </button>
+            <button  (click)="getUrlDatatable(nextPage)" class="btn btn-primary paginate_button"  > Suivant </button>
+            <button   (click)="getUrlDatatable(lastPage)"class="btn btn-primary paginate_button"  > Dernier </button>
+        </div>
+    </div>
+
+</div>

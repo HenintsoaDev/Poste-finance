@@ -1,0 +1,65 @@
+<div class="main-content">
+
+    <div class="container mt-4">
+        <div class="title-page-profil">
+            <h5 class="text-primary"><b>Profil</b></h5>
+        </div>
+        
+
+        <div class="row mt-3 g-3">
+            <!-- Photo de profil -->
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm w-100 h-100">
+                    <div class="card-body text-center">
+                        <i class="material-icons text-primary " style="font-size: 18rem;">account_circle</i>
+                        <p><a href="#" class="btn btn-sm btn-outline-primary">{{ __('profil.modifier_photo_profil') }}</a></p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Informations utilisateur -->
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm w-100 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">Information profil utilisateur</h5>
+                        <p><strong>{{ __('utilisateur.nom') }} :</strong> IBRAHIMA</p>
+                        <p><strong>{{ __('utilisateur.prenom') }} :</strong> FALL</p>
+                        <p><strong>{{ __('utilisateur.email') }} :</strong> ibrahimafall.com</p>
+                        <p><strong>{{ __('utilisateur.telephone') }} :</strong> 0340505392</p>
+                        <p><strong>{{ __('utilisateur.adresse') }} :</strong> Lot II A 345 Talatamaty</p>
+                        <p><strong>{{ __('utilisateur.profil') }} :</strong> Super Admin MNDPT</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Modification du mot de passe -->
+            <div class="col-md-4 d-flex">
+                <div class="card shadow-sm w-100 h-100">
+                    <div class="card-body">
+                        <h5 class="card-title text-primary">{{ __('profil.modification_mdp') }}</h5>
+                        <form>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('profil.actuel_mdp') }}</label>
+                                <input type="password" class="form-control" placeholder="{{ __('profil.votre_mdp_actu') }} ">
+                            </div>
+                            <div class="mb-3"> 
+                                <label class="form-label">{{ __('profil.nouveau_mdp') }}</label>
+                                <input type="password" class="form-control" placeholder="{{ __('profil.votre_nouveau_mdp') }}">
+                            </div>
+                            <div class="mb-3">
+                                <label class="form-label">{{ __('profil.confirme_mdp') }}</label>
+                                <input type="password" class="form-control" placeholder="{{ __('profil.confirm_votre_mdp') }}">
+                            </div>
+                            <div class="d-flex justify-content-between">
+                                <button type="reset" class="btn btn-danger">{{ __('global.cancel') }}</button>
+                                <button type="submit" class="btn btn-success">{{ __('global.save') }}</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>
