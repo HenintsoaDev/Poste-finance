@@ -1,11 +1,11 @@
 [<p align="center"><img src="https://github.com/numherit-dev/pmp/blob/main/src/assets/img/num.webp" alt="logo numherit" width="200"/></p>](#)
 
-[<p align="center"><h1 style="color:#e2590f">WELCOME TO NUMHERIT TEMPLATE</h1></p>](#)
+[<p align="center"><h1 style="color:#e2590f">WELCOME TO PHCO</h1></p>](#)
 
 1. ## _Structure du projet_
 
 ```
-admin-numherit-template
+PHCO V2
 ├── CHANGELOG.md
 ├── LICENSE.md
 ├── README.md
