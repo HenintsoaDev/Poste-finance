@@ -38,7 +38,9 @@ export class LoginComponent extends Translatable implements OnInit {
                     this.router.navigate(['/home']);
                     this.toastr.success("Connecté", 'Erreur');
                 }if(res['code'] == 403) {
-                    this.isResetPasswort = true;
+                    if(res['data']['force_update']){
+                        this.isResetPasswort = true;
+                    }
                     this.toastr.error(res['msg'], 'Erreur');
                 }
                 else{
