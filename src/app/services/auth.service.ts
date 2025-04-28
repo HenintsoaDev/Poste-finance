@@ -14,8 +14,8 @@ export class AuthService {
     login(credentials: { login: string, password: string }): Observable<any> {
         return this.http.post<any>(`${this.authUrl}/auth/loginAgence`, credentials).pipe(
             tap(response => {
-                if (response.token) {
-                    localStorage.setItem('token', response.token);
+                if (response['code'] === 200) {
+                    localStorage.setItem('access_token', response['data']['access_token']);
                 }
             })
         );
