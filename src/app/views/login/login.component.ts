@@ -24,7 +24,9 @@ export class LoginComponent extends Translatable implements OnInit {
         this.authService.login({ login: this.login, password: this.password }).subscribe({
             next: (res) => {
                 console.log('Logged in!', res);
-                this.router.navigate(['/home']);
+                if(res['code'] == 200) {
+                    this.router.navigate(['/home']);
+                }                
             },
             error: (err) => {
                 console.error('Login failed', err);
