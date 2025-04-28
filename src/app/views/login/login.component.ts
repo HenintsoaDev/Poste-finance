@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { AuthService } from 'app/services/auth.service';
 import { Translatable } from 'shared/constants/Translatable';
 
 @Component({
@@ -10,16 +11,25 @@ import { Translatable } from 'shared/constants/Translatable';
 export class LoginComponent extends Translatable implements OnInit {
 
     showPassword:Boolean = false;
+    login = '';
+    password = '';
 
-    constructor(private router: Router) {
-      super();
+    constructor(private authService: AuthService, private router: Router) {
+        super();
     }
 
-    ngOnInit(): void {
-    }
+    ngOnInit(): void {}
 
     onLogin() {
-        this.router.navigate(['/home']);
+        this.authService.login({ login: this.login, password: this.password }).subscribe({
+            next: (res) => {
+                console.log('Logged in!', res);
+                this.router.navigate(['/home']);
+            },
+            error: (err) => {
+                console.error('Login failed', err);
+            }
+        });
     }
 
     setShowPassword()
