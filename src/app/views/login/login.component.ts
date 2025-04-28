@@ -33,22 +33,20 @@ export class LoginComponent extends Translatable implements OnInit {
     onLogin() {
         this.authService.login({ login: this.login, password: this.password }).subscribe({
             next: (res) => {
-                console.log('Logged in!', res);
                 if(res['code'] == 200) {
                     this.router.navigate(['/home']);
-                    this.toastr.success("Connecté", 'Erreur');
-                }if(res['code'] == 403) {
+                    this.toastr.success(this.__("global.connecter"), this.__("global.success"));
+                }else if(res['code'] == 403) {
                     if(res['data']['force_update']){
                         this.isResetPasswort = true;
                     }
-                    this.toastr.error(res['msg'], 'Erreur');
+                    this.toastr.error(res['msg'], this.__("global.error"));
                 }
                 else{
-                    this.toastr.error(res['msg'], 'Erreur');
+                    this.toastr.error(res['msg'], this.__("global.error"));
                 }                
             },
             error: (err) => {
-                console.error('Login failed', err);
             }
         });
     }
@@ -56,7 +54,7 @@ export class LoginComponent extends Translatable implements OnInit {
     onResetPassword()
     {
         if(this.newPassword != this.confirmNewPassword) {
-            this.toastr.error("Les mots de passe ne correspondent pas", 'Erreur');
+            this.toastr.error(this.__("global.mdp_non_identique"), 'Erreur');
             return;
         }
         this.authService.resetPassword({ old_password: this.oldPassword, new_password: this.newPassword }).subscribe({
@@ -66,13 +64,13 @@ export class LoginComponent extends Translatable implements OnInit {
                     this.login = "";
                     this.password = "";
                     this.isResetPasswort = false;
-                    this.toastr.success(res['msg'], 'Succès');
+                    this.toastr.success(res['msg'], this.__("global.success"));
                 }else{
-                    this.toastr.error(res['msg'], 'Erreur');
+                    this.toastr.error(res['msg'], this.__("global.error"));
                 }                
             },
             error: (err) => {
-                this.toastr.error("Connexion échouée", 'Erreur');
+                this.toastr.error(this.__("global.connection_echec"), 'Erreur');
             }
         });
     }

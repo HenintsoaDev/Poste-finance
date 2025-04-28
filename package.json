@@ -57,6 +57,7 @@
     "ngx-mat-intl-tel-input": "^5.0.0",
     "ngx-mat-select-search": "^8.0.0",
     "ngx-toastr": "^14.3.0",
+    "number-handler": "^1.0.4",
     "perfect-scrollbar": "1.5.5",
     "popper.js": "1.16.1",
     "rxjs": "~7.5.0",

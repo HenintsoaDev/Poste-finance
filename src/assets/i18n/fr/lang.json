@@ -9,6 +9,7 @@
         "about" : "A propos",
         "contact" : "Contact"
     },
+  
 
     "global" : {
         "save" : "Enregistrer",
@@ -31,7 +32,12 @@
         "print_ticket" : "Imprimer le reçu",
         "currency" : "Ar",
         "solde_wallet" : "Solde wallet",
-        "solde_carte" : "Solde carte"
+        "solde_carte" : "Solde carte",
+        "mdp_non_identique" : "Les mots de passe ne correspondent pas",
+        "connection_echec": "Connexion échouée",
+        "success" : "Success",
+        "error": "Erreur",
+        "connecter" : "Vous êtes connecter."
     },
 
     "paiement" : {
