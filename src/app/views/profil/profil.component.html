@@ -39,20 +39,36 @@
                         <h5 class="card-title text-primary">{{ __('profil.modification_mdp') }}</h5>
                         <form>
                             <div class="mb-3">
-                                <label class="form-label">{{ __('profil.actuel_mdp') }}</label>
-                                <input type="password" class="form-control" placeholder="{{ __('profil.votre_mdp_actu') }} ">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="oldPassword" placeholder="Votre ancien mot de passe" [type]="showOldPassword ? 'text' : 'password'">
+                                    <mat-icon matSuffix>
+                                        <i *ngIf="showOldPassword"  class="material-icons" style="cursor: pointer;" (click)="showOldPassword = !showOldPassword">visibility</i>
+                                        <i *ngIf="!showOldPassword" class="material-icons" style="cursor: pointer;" (click)="showOldPassword = !showOldPassword">visibility_off</i>
+                                    </mat-icon>
+                                </mat-form-field>
                             </div>
                             <div class="mb-3"> 
-                                <label class="form-label">{{ __('profil.nouveau_mdp') }}</label>
-                                <input type="password" class="form-control" placeholder="{{ __('profil.votre_nouveau_mdp') }}">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="newPassword" placeholder="Votre nouveau mot de passe" [type]="showNewPassword ? 'text' : 'password'">
+                                    <mat-icon matSuffix>
+                                        <i *ngIf="showNewPassword"  class="material-icons" style="cursor: pointer;" (click)="showNewPassword = !showNewPassword">visibility</i>
+                                        <i *ngIf="!showNewPassword" class="material-icons" style="cursor: pointer;" (click)="showNewPassword = !showNewPassword">visibility_off</i>
+                                    </mat-icon>
+                                </mat-form-field>
                             </div>
                             <div class="mb-3">
-                                <label class="form-label">{{ __('profil.confirme_mdp') }}</label>
-                                <input type="password" class="form-control" placeholder="{{ __('profil.confirm_votre_mdp') }}">
+                                <mat-form-field class="example-full-width">
+                                    <input matInput [(ngModel)]="confirmNewPassword" placeholder="Confirmer votre nouveau mot de passe" [type]="showConfirmPassword ? 'text' : 'password'">
+                                    <mat-icon matSuffix>
+                                        <i *ngIf="showConfirmPassword"  class="material-icons" style="cursor: pointer;" (click)="showConfirmPassword = !showConfirmPassword">visibility</i>
+                                        <i *ngIf="!showConfirmPassword" class="material-icons" style="cursor: pointer;" (click)="showConfirmPassword = !showConfirmPassword">visibility_off</i>
+                                    </mat-icon>
+                                </mat-form-field>
                             </div>
-                            <div class="d-flex justify-content-between">
-                                <button type="reset" class="btn btn-danger">{{ __('global.cancel') }}</button>
-                                <button type="submit" class="btn btn-success">{{ __('global.save') }}</button>
+                            <div class="justify-content-between">
+                                <button mat-raised-button type="submit" class="btn btn-primary w-100" (click)="onResetPassword()">{{ __('global.change_mdp') }}</button>
+                                <button mat-raised-button type="reset" class="btn btn-secondary w-100"  data-dismiss="modal">{{ __('global.back') }}</button> 
+                           
                             </div>
                         </form>
                     </div>

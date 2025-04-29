@@ -37,7 +37,9 @@
         "connection_echec": "Connexion échouée",
         "success" : "Success",
         "error": "Erreur",
-        "connecter" : "Vous êtes connecter."
+        "connecter" : "Vous êtes connecter.",
+        "change_mdp" : "Modifier le mot de passe",
+        "champs_obligatoire" : "Ce champs est obligatoire"
     },
 
     "paiement" : {
