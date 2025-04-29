@@ -4,6 +4,8 @@ import { NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
+import { AuthService } from 'app/services/auth.service';
+import { Auth } from 'app/shared/models/db';
 
 declare const $: any;
 
@@ -40,6 +42,8 @@ export class SidebarComponent implements OnInit {
     routes: RouteInfo[] = ROUTES;
     //isModule:boolean = false;
 
+    public user    : Auth = new Auth();
+
     // Gère les clics partout sur le document
     @HostListener('document:click', ['$event.target'])
     onClick(target: HTMLElement): void {
@@ -55,7 +59,7 @@ export class SidebarComponent implements OnInit {
         }
     }
 
-    constructor(private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService) {
+    constructor(private authService: AuthService, private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService) {
         this.router.events.subscribe(() => {
             this.currentRoute = this.router.url;
             this.updateActiveRoutes();
@@ -63,7 +67,11 @@ export class SidebarComponent implements OnInit {
         });
     }
 
-    ngOnInit() {
+    async ngOnInit() {
+
+        this.user = <Auth> await  this.authService.getLoginUser();
+        console.log("xxxxxx", this.user);
+        
         this.sidebar = document.getElementsByClassName("sidebar")[0] as HTMLElement;
         this.toggleSidebarEvent(); 
         this.routes = this.menuService.getCurrentMenuItems();

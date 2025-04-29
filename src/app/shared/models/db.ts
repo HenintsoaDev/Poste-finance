@@ -10,6 +10,8 @@ export class user {
     connect: number;
     state: number;
     superviseur: number;
+    email: string;
+    name: string;
 }
 
 export class Auth {

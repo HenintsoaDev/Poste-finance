@@ -39,7 +39,10 @@
         "error": "Erreur",
         "connecter" : "Vous êtes connecter.",
         "change_mdp" : "Modifier le mot de passe",
-        "champs_obligatoire" : "Ce champs est obligatoire"
+        "champs_obligatoire" : "Ce champs est obligatoire",
+        "modifier_mdp_?" : "Voulez-vous vraiment modifier votre mot de passe",
+        "confirmation" : "Confirmation",
+        "oui_modifier" : "Oui, modifier"
     },
 
     "paiement" : {
