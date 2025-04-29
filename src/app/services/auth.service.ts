@@ -7,13 +7,14 @@ import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
 import { Auth } from 'app/shared/models/db';
 import { Router } from '@angular/router';
+import { MenuService } from 'app/shared/models/route-info';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private http: HttpClient, private httpService: HttpService,private  router: Router) {}
+    constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
     login(credentials: { login: string, password: string }): Observable<any> {
         return this.http.post<any>(`${environment.baseUrl}/auth/loginAgence`, $.param(credentials),{
@@ -35,6 +36,8 @@ export class AuthService {
             tap(async response => {
                 console.log('User info response:', response);
                 if (response['code'] === 200) {
+                    this.menuService.setRoutes(response['data']['modules']);
+                    //this.initAutority(response['data']['sous_module'],response['data']['module']);
                     await this.setLoginUser(response['data']);
                     //await this.setToken(response['data']['access_token'], response['data']['expires_in']);
                 }
