@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { Auth } from 'app/shared/models/db';
+import { AuthService } from 'app/services/auth.service';
+import { Auth, module_user } from 'app/shared/models/db';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { Translatable } from 'shared/constants/Translatable';
 
@@ -15,13 +16,19 @@ export class HomeComponent extends Translatable implements OnInit {
 
     routes: RouteInfo[] = ROUTES;
     public user    : Auth = new Auth();
-    //public modules : module [] = [] ;
+    public modules : module_user [] = [];
 
-    constructor(private router: Router, private menuService: MenuService) {
+    constructor(private auth: AuthService, private router: Router, private menuService: MenuService) {
         super();
     }
 
-    ngOnInit(): void {}
+    async ngOnInit() {
+        this.user = <Auth> await  this.auth.getLoginUser();
+        console.log("USER : ",this.user);
+        this.modules = this.user.modules;
+        this.modules =this.modules.filter(_=>( _.hasOneSubModuleAction && _.state == 1)  || (this.user.info.admin === 1 && _.state == 1) );
+        console.log("MODULES : ",this.modules)
+    }
 
     getMenuChildrenByPath(parentPath: string): any[] {
         const parent = ROUTES.find(route => route.path === parentPath);

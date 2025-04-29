@@ -6,13 +6,14 @@ import { HttpService } from './http.service';
 import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
 import { Auth } from 'app/shared/models/db';
+import { Router } from '@angular/router';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-    constructor(private http: HttpClient, private httpService: HttpService) {}
+    constructor(private http: HttpClient, private httpService: HttpService,private  router: Router) {}
 
     login(credentials: { login: string, password: string }): Observable<any> {
         return this.http.post<any>(`${environment.baseUrl}/auth/loginAgence`, $.param(credentials),{
@@ -34,11 +35,31 @@ export class AuthService {
             tap(async response => {
                 console.log('User info response:', response);
                 if (response['code'] === 200) {
-                    await this.setLoginUser(response['data']['info']);
+                    await this.setLoginUser(response['data']);
                     //await this.setToken(response['data']['access_token'], response['data']['expires_in']);
                 }
             })
         );
+    }
+
+    public async  getLoginUser(reload:boolean = false){
+        try {
+            let user ={};
+            if(reload || !localStorage.getItem(environment.userItemName)){
+                let res = await this.http.get<any>(environment.baseUrl + environment.userAuth, valuesys.httpAuthOptions()).toPromise() ;
+                if(res.code === 200){
+                    user = res.data ;
+                    this.setLoginUser(user) ;
+                }else {
+                    await  this.router.navigate(["/logout"])
+                }
+            }
+            user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
+            return user;
+        } catch (e) {
+            await  this.router.navigate(["/logout"]) ;
+            return null ;
+        } 
     }
 
     /*

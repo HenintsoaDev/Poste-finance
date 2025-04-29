@@ -14,10 +14,10 @@ export class user {
 
 export class Auth {
     info : user|null;
-    modules: module[] | []
+    modules: module_user[] | []
 }
 
-export class module {
+export class module_user {
     id: number ;
     name: string ;
     code: string ;
