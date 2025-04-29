@@ -5,6 +5,7 @@ import { Observable } from 'rxjs';
 import { HttpService } from './http.service';
 import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
+import { Auth } from 'app/shared/models/db';
 
 @Injectable({
   providedIn: 'root'
@@ -22,6 +23,7 @@ export class AuthService {
                 console.log('Login response:', response);
                 if (response['code'] === 200 || response['code'] === 403) {
                     localStorage.setItem(environment.authItemName, response['data']['access_token']);
+                    this.setToken(response['data']['access_token'], response['data']['expires_in']);
                 }
             })
         );
@@ -32,11 +34,30 @@ export class AuthService {
             tap(async response => {
                 console.log('User info response:', response);
                 if (response['code'] === 200) {
-                    localStorage.setItem(environment.authItemName, response['data']['access_token']);
                     await this.setLoginUser(response['data']['info']);
+                    //await this.setToken(response['data']['access_token'], response['data']['expires_in']);
                 }
             })
         );
+    }
+
+    /*
+    * Code sous module un tableau ou un string | le premier element du tableau on ne renseigne pas son code de module
+    * Mais le reste du table on doit renseignez leur code de module dans modules
+    * */
+    public initAutority(codeSousModule:string|Array<string>,modules:Array<string> = []){
+        if(typeof codeSousModule === 'string'){
+            codeSousModule = [codeSousModule]
+        }
+
+        modules.push(window['module'].toString())
+        window['authority'] =[];
+        window['actions'] = null;
+        window['authority']['module'] = modules;
+        window['authority']['sous_module'] = codeSousModule;
+        let user:Auth ;
+        user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
+        window['authority']['user'] = user;
     }
 
     public setToken(token:string,expires_in:number){
@@ -44,6 +65,24 @@ export class AuthService {
         let t = new Date();
         t.setSeconds(t.getSeconds() + (expires_in));
         localStorage.setItem(valuesys.timeTokenName, t.getTime() + "");
+    }
+
+    /*async refreshToken(){
+        setTimeout(async ()=>{
+            if(AuthService.refresh()){
+            let {data,code} = await this.http.get(environment.baseUrl+environment.refresh,valuesys.httpAuthOptions()).toPromise();
+            if(code === 200){
+                this.setToken(data.access_token,data.expires_in)
+            }
+            }
+        },70) 
+    }*/
+
+    private static refresh(){
+        let timeToken_ =  +window.localStorage.getItem(valuesys.timeTokenName) || 0;
+            let now = (new Date()).getTime();
+            console.log((timeToken_ - now) / 1000 );
+        return timeToken_ - now   <= valuesys.authRefreshInterval;
     }
 
     private async setLoginUser(user:any){

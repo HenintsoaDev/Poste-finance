@@ -1,4 +1,4 @@
-export class plateforme {
+export class user {
     rowid: number;
     nom: string;
     prenom: string;
@@ -10,4 +10,37 @@ export class plateforme {
     connect: number;
     state: number;
     superviseur: number;
+}
+
+export class Auth {
+    info : user|null;
+    modules: module[] | []
+}
+
+export class module {
+    id: number ;
+    name: string ;
+    code: string ;
+    icon: string | null ;
+    state: number | null ;
+    hasOneSubModuleAction: boolean;
+    sousModules: sous_module [] | null ;
+}
+
+export class sous_module {
+    id: number ;
+    name: string ;
+    code: string ;
+    icon: string | null ;
+    state: number | null ;
+    actions: action [] | null | [];
+}
+
+export class action {
+    id: number ;
+    name: string ;
+    code: string ;
+    url: string ;
+    state: number | null ;
+    type_action_id: number ;
 }

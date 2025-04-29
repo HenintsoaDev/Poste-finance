@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { Auth } from 'app/shared/models/db';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { Translatable } from 'shared/constants/Translatable';
 
@@ -13,6 +14,8 @@ import { Translatable } from 'shared/constants/Translatable';
 export class HomeComponent extends Translatable implements OnInit {
 
     routes: RouteInfo[] = ROUTES;
+    public user    : Auth = new Auth();
+    //public modules : module [] = [] ;
 
     constructor(private router: Router, private menuService: MenuService) {
         super();
