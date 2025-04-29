@@ -1,4 +1,6 @@
 import { Injectable } from "@angular/core";
+import * as path from "path";
+import { title } from "process";
 import { BehaviorSubject, Observable } from "rxjs";
 
 export interface RouteInfo {
@@ -7,6 +9,7 @@ export interface RouteInfo {
     icon: string;
     class: string;
     showChildrenClass?: string;
+    state?: boolean;
     children?: RouteInfo[];
 }
 
@@ -32,17 +35,61 @@ export const ROUTES: RouteInfo[] = [
 })
 export class MenuService {
 
-  private menuItemsSource = new BehaviorSubject<RouteInfo[]>(ROUTES);
-  public menuItems$: Observable<RouteInfo[]> = this.menuItemsSource.asObservable();
+    private menuItemsSource = new BehaviorSubject<RouteInfo[]>(ROUTES);
+    public menuItems$: Observable<RouteInfo[]> = this.menuItemsSource.asObservable();
 
-  constructor() {}
+    constructor() {}
 
-  updateMenuItems(parentPath:string): void {
-    const parent = ROUTES.find(route => route.path.includes(parentPath));
-    this.menuItemsSource.next(parent?.children || []);
-  }
+    setRoutes(module)
+    {
+        console.log("setRoutes",module);
+        const moduleItem: RouteInfo[] = []; 
+        for(let i = 0; i < module.length; i++) {
 
-  getCurrentMenuItems(): RouteInfo[] {
-    return this.menuItemsSource.getValue();
-  }
+            const sousModule = [];
+
+            for(let j = 0; j < module[i]['sous_modules'].length; j++) {
+
+                const actions = [];
+
+                for(let k = 0; k < module[i]['sous_modules'][j].actions.length; k++) {
+                    if(module[i]['sous_modules'][j].actions[k].type_action_id == 1) {
+                        actions.push({
+                            path: '/' + module[i]['sous_modules'][j].actions[k].url,
+                            title: module[i]['sous_modules'][j].actions[k].name,
+                        })
+                    }
+                    
+                }
+
+                sousModule.push({
+                    path: '/' + module[i]['sous_modules'][j].code,
+                    title: module[i]['sous_modules'][j].name,
+                    icon: module[i]['sous_modules'][j].icon || 'home',
+                    class: '',
+                    children : actions
+                })
+            }
+
+            moduleItem.push({
+                path: '/' + module[i].code,
+                title: module[i].name,
+                icon: module[i].icon || 'home',
+                class: '',
+                children : sousModule
+            });
+        }
+        this.menuItemsSource.next(moduleItem);
+    }
+
+
+    updateMenuItems(parentPath:string): void {
+        //const parent = ROUTES.find(route => route.path.includes(parentPath));
+        const parent = this.menuItemsSource.getValue().find(route => route.path.includes(parentPath));
+        this.menuItemsSource.next(parent?.children || []);
+    }
+
+    getCurrentMenuItems(): RouteInfo[] {
+        return this.menuItemsSource.getValue();
+    }
 }

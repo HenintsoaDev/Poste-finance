@@ -140,16 +140,16 @@
 
         li{
             > a{
-              &:hover,
-              &:focus{
-                  background-color: transparent;
-                  outline: none;
-              }
+                &:hover,
+                &:focus{
+                    background-color: transparent;
+                    outline: none;
+                }
             }
 
-            &:first-child > a{
-                margin: 0 15px;
-            }
+            /*&:first-child > a{
+                margin: 0 5px;
+            }*/
 
             &:hover > a,
             & .dropdown-menu a:hover,
@@ -212,14 +212,14 @@
 
     .nav li a,
     .nav li .dropdown-menu a{
-          margin: 10px 15px 0;
+          margin: 2px 5px;
           border-radius: $border-radius-base;
           color: $black-color;
-          padding-left: 10px;
-          padding-right: 10px;
+          padding-left: 5px;
+          padding-right: 5px;
           text-transform: capitalize;
           font-size: $font-paragraph - 1;
-          padding: 10px 15px;
+          //padding: 10px 15px;
           font-weight: 600;
 
             &[data-text-color="white"] {

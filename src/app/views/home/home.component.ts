@@ -27,7 +27,9 @@ export class HomeComponent extends Translatable implements OnInit {
         console.log("USER : ",this.user);
         this.modules = this.user.modules;
         this.modules =this.modules.filter(_=>( _.hasOneSubModuleAction && _.state == 1)  || (this.user.info.admin === 1 && _.state == 1) );
-        console.log("MODULES : ",this.modules)
+        this.menuService.setRoutes(this.modules);
+        this.routes = this.menuService.getCurrentMenuItems();
+        console.log("MODULES : ",)
     }
 
     getMenuChildrenByPath(parentPath: string): any[] {
