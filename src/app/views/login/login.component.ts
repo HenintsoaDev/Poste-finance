@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { AuthService } from 'app/services/auth.service';
 import { Translatable } from 'shared/constants/Translatable';
 import { ToastrService } from 'ngx-toastr';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
@@ -22,39 +23,55 @@ export class LoginComponent extends Translatable implements OnInit {
     showOldPassword:Boolean = false;
     showNewPassword:Boolean = false;
     showConfirmPassword:Boolean = false;
+    loginForm: FormGroup;
+    submitted = false;
 
-    constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,
+    constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,private fb: FormBuilder
         ) {
         super();
+
+        this.loginForm = this.fb.group({
+            login: ['', [Validators.required]],
+            password: ['', [Validators.required]]
+          });
     }
 
     ngOnInit(): void {}
 
     onLogin() {
-        this.authService.login({ login: this.login, password: this.password }).subscribe({
-            next: (res) => {
-                if(res['code'] == 200) {
-                    this.authService.me().subscribe({
-                        next: (res) => {
-                            if(res['code'] == 200) {
-                                this.router.navigate(['/home']);
-                                this.toastr.success(this.__("global.connecter"), this.__("global.success"));
+        this.submitted = true;
+        if (this.loginForm.valid) {
+            this.authService.login({ login: this.login, password: this.password }).subscribe({
+                next: (res) => {
+                    if(res['code'] == 200) {
+                        this.authService.me().subscribe({
+                            next: (res) => {
+                                if(res['code'] == 200) {
+                                    this.router.navigate(['/home']);
+                                    this.toastr.success(this.__("global.connecter"), this.__("global.success"));
+                                }
                             }
+                        })
+                    }else if(res['code'] == 403) {
+                        if(res['data']['force_update']){
+                            this.isResetPasswort = true;
                         }
-                    })
-                }else if(res['code'] == 403) {
-                    if(res['data']['force_update']){
-                        this.isResetPasswort = true;
+                        this.toastr.error(res['msg'], this.__("global.error"));
                     }
-                    this.toastr.error(res['msg'], this.__("global.error"));
+                    else{
+                        this.toastr.error(res['msg'], this.__("global.error"));
+                    }                
+                },
+                error: (err) => {
                 }
-                else{
-                    this.toastr.error(res['msg'], this.__("global.error"));
-                }                
-            },
-            error: (err) => {
-            }
-        });
+            });
+          } else {
+            this.loginForm.markAllAsTouched();
+          }
+
+
+
+       
     }
 
     onResetPassword()
@@ -79,6 +96,10 @@ export class LoginComponent extends Translatable implements OnInit {
                 this.toastr.error(this.__("global.connection_echec"), 'Erreur');
             }
         });
+    }
+
+    backToLogin(){
+        this.isResetPasswort = false;
     }
 
 }
