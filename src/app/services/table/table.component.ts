@@ -188,7 +188,6 @@ async getSearchInput(){
     triage = "&__order__=" + this.order + "," + this.tri;
   }
 
-  console.log("*****", this.search  +  this.searchCol);
  // --- Appel endpopint ---->
 
   let toogle = await this.http.get<any>(url + this.where + this.searchCol + this.search    + filtre + triage  ,valuesys.httpAuthOptions()).toPromise();
@@ -379,7 +378,6 @@ async getSearchInput(){
   );
 
   this.donneeAfficher = tableau;
-  console.log(this.donneeAfficher);
 
   
 

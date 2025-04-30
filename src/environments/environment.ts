@@ -14,5 +14,5 @@ export const environment = {
   authItemName:'__token_api_gate_way_phco',
   userItemName:'__user_api_gate_way_phco',
 
-  module : BASE_URL + '/parametrage/module',
+  module :'parametrage/module',
 };

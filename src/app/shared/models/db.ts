@@ -38,6 +38,15 @@ export class sous_module {
     actions: action [] | null | [];
 }
 
+export class module {
+    id: number ;
+    name: string ;
+    code: string ;
+    icon: string | null ;
+    state: number | null ;
+    actions: action [] | null | [];
+}
+
 export class action {
     id: number ;
     name: string ;

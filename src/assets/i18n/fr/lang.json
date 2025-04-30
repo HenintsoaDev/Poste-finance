@@ -39,10 +39,12 @@
         "error": "Erreur",
         "connecter" : "Vous êtes connecter.",
         "change_mdp" : "Modifier le mot de passe",
-        "champs_obligatoire" : "Ce champs est obligatoire",
-        "modifier_mdp_?" : "Voulez-vous vraiment modifier votre mot de passe",
+        "champs_obligatoire" : "Ce champ est obligatoire",
+        "modifier_mdp_?" : "Voulez-vous vraiment modifier votre mot de passe ?",
         "confirmation" : "Confirmation",
-        "oui_modifier" : "Oui, modifier"
+        "oui_modifier" : "Oui, modifier",
+        "oui_enregistrer" : "Oui, enregistrer",
+        "enregistrer_donnee_?" : "Voulez-vous vraiment enregistrer cette donnée ? "
     },
 
     "paiement" : {
@@ -78,6 +80,14 @@
         "telephone" : "N° téléphone",
         "adresse" : "Adresse",
         "profil" : "Profil"
+    },
+    "module" : {
+        "title" : "Gestion des modules",
+        "name" : "Libelle",
+        "code" : "Code",
+        "icon" : "Icon",
+        "add" : "Ajouter un module",
+        "title_add_modal" : "Ajout d'un module"
     }
 
 
