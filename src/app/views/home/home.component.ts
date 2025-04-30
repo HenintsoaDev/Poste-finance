@@ -24,12 +24,9 @@ export class HomeComponent extends Translatable implements OnInit {
 
     async ngOnInit() {
         this.user = <Auth> await  this.auth.getLoginUser();
-        console.log("USER : ",this.user);
         this.modules = this.user.modules;
         this.modules =this.modules.filter(_=>( _.hasOneSubModuleAction && _.state == 1)  || (this.user.info.admin === 1 && _.state == 1) );
-        this.menuService.setRoutes(this.modules);
         this.routes = this.menuService.getCurrentMenuItems();
-        console.log("MODULES : ",)
     }
 
     getMenuChildrenByPath(parentPath: string): any[] {
@@ -39,11 +36,9 @@ export class HomeComponent extends Translatable implements OnInit {
 
     goTo(module : string, pathSelected)
     {
-        console.log(this.getMenuChildrenByPath(module));
         this.menuService.updateMenuItems(module);
-        this.router.navigate(['/'+module],{
-            state: { modules : module,selectedRoute: pathSelected, menuModule : this.getMenuChildrenByPath(module) }
-        });
+        this.menuService.setMenuItemsModule(module);
+        this.router.navigate(['/app-module', module.replace('/','')]);
     }
 
     

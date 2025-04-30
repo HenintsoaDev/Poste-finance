@@ -9,6 +9,8 @@ export const environment = {
   production: false,
   baseUrl : BASE_URL,
   userAuth : 'auth/me',
+  menuItemsStorage : 'menuItemsPHCO',
+  menuItemsSelectedStorage : 'menuItemsSelectedPHCO',
   authItemName:'__token_api_gate_way_phco',
   userItemName:'__user_api_gate_way_phco',
 };

@@ -30,6 +30,7 @@ import { AdmComponent } from './views/modules/adm/adm.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { ToastrModule } from 'ngx-toastr';
+import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 
 @NgModule({
   
@@ -65,8 +66,7 @@ import { ToastrModule } from 'ngx-toastr';
     AdmComponent,
     MonetiqueComponent,
     RechargeEspeceComponent,
-    
-
+    WelcomeModuleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -1,4 +1,5 @@
 import { Injectable } from "@angular/core";
+import { environment } from "environments/environment";
 import * as path from "path";
 import { title } from "process";
 import { BehaviorSubject, Observable } from "rxjs";
@@ -59,7 +60,6 @@ export class MenuService {
                             title: module[i]['sous_modules'][j].actions[k].name,
                         })
                     }
-                    
                 }
 
                 sousModule.push({
@@ -80,16 +80,43 @@ export class MenuService {
             });
         }
         this.menuItemsSource.next(moduleItem);
+        //Stockage dans le local storage
+        localStorage.setItem(environment.menuItemsStorage, JSON.stringify(moduleItem));
     }
 
+    setMenuItemsModule(moduleSelected:string) {
+        const storedMenuItems = localStorage.getItem(environment.menuItemsStorage);
+        if (storedMenuItems) {
+            const parsedMenuItems = JSON.parse(storedMenuItems);
+            const module = parsedMenuItems.find((item: RouteInfo) => item.path === moduleSelected);
+            if (module) {
+                localStorage.setItem(environment.menuItemsSelectedStorage, JSON.stringify(module.children)); 
+            } else {
+                this.menuItemsSource.next([]);
+            }
+        } else {
+            this.menuItemsSource.next([]);
+        }
+    }
 
     updateMenuItems(parentPath:string): void {
         //const parent = ROUTES.find(route => route.path.includes(parentPath));
-        const parent = this.menuItemsSource.getValue().find(route => route.path.includes(parentPath));
+        const parent = this.getCurrentMenuItems().find(route => route.path.includes(parentPath));
         this.menuItemsSource.next(parent?.children || []);
     }
 
     getCurrentMenuItems(): RouteInfo[] {
+        // Vérifier si le local storage contient les éléments de menu
+        const storedMenuItems = localStorage.getItem(environment.menuItemsStorage);
+        if (storedMenuItems) {
+            // Si oui, les utiliser
+            const parsedMenuItems = JSON.parse(storedMenuItems);
+            this.menuItemsSource.next(parsedMenuItems);
+        } else {
+            // Sinon, utiliser les éléments de menu par défaut
+            this.menuItemsSource.next(ROUTES);
+        }
+        // Retourner les éléments de menu actuels
         return this.menuItemsSource.getValue();
     }
 }
