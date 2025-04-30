@@ -32,6 +32,7 @@ import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espe
 import { ToastrModule } from 'ngx-toastr';
 import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { TableComponent } from './services/table/table.component';
+import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 
 @NgModule({
   exports:[
@@ -71,10 +72,8 @@ import { TableComponent } from './services/table/table.component';
     MonetiqueComponent,
     RechargeEspeceComponent,
     ModuleComponent,
-    TableComponent
-    
-    
-
+    TableComponent,
+    WelcomeModuleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

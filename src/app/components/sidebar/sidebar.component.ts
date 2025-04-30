@@ -5,7 +5,8 @@ import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { AuthService } from 'app/services/auth.service';
-import { Auth } from 'app/shared/models/db';
+import { Auth, user } from 'app/shared/models/db';
+import { environment } from 'environments/environment';
 
 declare const $: any;
 
@@ -42,7 +43,7 @@ export class SidebarComponent implements OnInit {
     routes: RouteInfo[] = ROUTES;
     //isModule:boolean = false;
 
-    public user    : Auth = new Auth();
+    public user  : Auth = new Auth();
 
     // Gère les clics partout sur le document
     @HostListener('document:click', ['$event.target'])
@@ -62,19 +63,20 @@ export class SidebarComponent implements OnInit {
     constructor(private authService: AuthService, private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService) {
         this.router.events.subscribe(() => {
             this.currentRoute = this.router.url;
-            this.updateActiveRoutes();
             this.userMenuUserActive = (this.currentRoute === '/my-profil' );
         });
     }
 
     async ngOnInit() {
-
         this.user = <Auth> await  this.authService.getLoginUser();
-        console.log("xxxxxx", this.user);
-        
         this.sidebar = document.getElementsByClassName("sidebar")[0] as HTMLElement;
         this.toggleSidebarEvent(); 
-        this.routes = this.menuService.getCurrentMenuItems();
+        const menuSelectedModule = localStorage.getItem(environment.menuItemsSelectedStorage);
+        if(menuSelectedModule)
+        {
+            const parsedMenuItems = JSON.parse(menuSelectedModule);
+            this.routes = parsedMenuItems;
+        }
         this.updateActiveRoutes();
     }
 
@@ -158,7 +160,6 @@ export class SidebarComponent implements OnInit {
         });
     }
     
-
     goToLogin()
     {
         Swal.fire({
