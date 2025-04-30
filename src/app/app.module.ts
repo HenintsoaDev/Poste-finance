@@ -30,8 +30,13 @@ import { AdmComponent } from './views/modules/adm/adm.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ModuleComponent } from './views/modules/adm/module/module.component';
+import { TableComponent } from './services/table/table.component';
 
 @NgModule({
+  exports:[
+    TableComponent,
+  ],
   
   imports: [
     BrowserAnimationsModule,
@@ -65,6 +70,9 @@ import { ToastrModule } from 'ngx-toastr';
     AdmComponent,
     MonetiqueComponent,
     RechargeEspeceComponent,
+    ModuleComponent,
+    TableComponent
+    
     
 
   ],

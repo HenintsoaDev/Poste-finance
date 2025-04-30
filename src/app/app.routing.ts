@@ -12,6 +12,7 @@ import { ProfilComponent } from './views/profil/profil.component';
 import { AdmComponent } from './views/modules/adm/adm.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
+import { ModuleComponent } from './views/modules/adm/module/module.component';
 
 const routes: Routes =[
   
@@ -19,7 +20,7 @@ const routes: Routes =[
   { path: '',redirectTo: 'login',pathMatch: 'full'}, 
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
   //{ path: 'administration', component: AdministrationComponent }, 
-  { path: 'ADM', component: AdmComponent,data: { breadcrumb: 'Administration' },children:[
+  { path: 'ADM', component: ModuleComponent,data: { breadcrumb: 'Administration' },children:[
     {path : 'gestion-personnel',data: { breadcrumb: 'Géstion Personnelles' },children:[
       {path : 'list-personnel',component: DataTableComponent,data: { breadcrumb: 'Liste des personnels' }},
     ]},

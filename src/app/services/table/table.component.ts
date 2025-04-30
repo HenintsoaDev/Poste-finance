@@ -5,6 +5,7 @@ import { Component, Input } from '@angular/core';
 import { PassageService } from './passage.service';
 import formatNumber from 'number-handler'
 import { Subscription } from 'rxjs';
+import { valuesys } from 'app/shared/models/options';
 
 @Component({
   selector: 'app-table',
@@ -75,7 +76,7 @@ async ngOnInit() {
   this.subscription = this.passageService.getObservable().subscribe(filtre => {
 
     const url = `${this.endpoint}?page=1`;
-
+    
     if (filtre === '') {
       this.getUrlDatatable(url);
     } else {
@@ -190,179 +191,179 @@ async getSearchInput(){
   console.log("*****", this.search  +  this.searchCol);
  // --- Appel endpopint ---->
 
-  //let toogle = await this.http.get<any>(url + this.where + this.searchCol + this.search    + filtre + triage  ,valuesys.httpAuthOptions()).toPromise();
-  //let res = toogle.data;
+  let toogle = await this.http.get<any>(url + this.where + this.searchCol + this.search    + filtre + triage  ,valuesys.httpAuthOptions()).toPromise();
+  let res = toogle.data;
 
-  let res =  {
-    "current_page": 1,
-    "data": [
-        {
-            "date_update": "2025-03-03",
-            "nom": "FREDNIBRUNAPIZA",
-            "prenom": "MAMY LEA",
-            "date_naissance": "2000-06-23",
-            "date_livrance": "2025-03-03",
-            "cin_passeport": "114012041107",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "1N6370000019",
-            "email": "tddbru@gmail.comAAA",
-            "telephone": "0345036777",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": "2025-03-03",
-            "nom": "LEMAINTY",
-            "prenom": "JERRY JENNIA",
-            "date_naissance": "1999-09-11",
-            "date_livrance": "2025-03-04",
-            "cin_passeport": "101212243753",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0B9380000018",
-            "email": "jerryjenia@yahoo.com",
-            "telephone": "0328702475",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": "2025-03-03",
-            "nom": "MALALANIRINA",
-            "prenom": "MANOU SYLVANA",
-            "date_naissance": "2000-03-23",
-            "date_livrance": "2025-03-30",
-            "cin_passeport": "999999999999",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0N3370000018",
-            "email": "positraOK.digitalisation@gmail.com",
-            "telephone": "0340111111",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": "2025-03-03",
-            "nom": "MIASALAHY",
-            "prenom": "KALORIANA ARIELLE",
-            "date_naissance": "1999-12-20",
-            "date_livrance": "2023-01-02",
-            "cin_passeport": "101252207208",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0KC380000013",
-            "email": "ariellemiah@gmail.com",
-            "telephone": "0322838906",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": "2025-03-03",
-            "nom": "RANDRIANARIMANANA",
-            "prenom": "AINA FANJAVA",
-            "date_naissance": "2001-02-17",
-            "date_livrance": "2025-03-01",
-            "cin_passeport": "101252215107",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0H2360000015",
-            "email": "fa.randriii17@gmail.com",
-            "telephone": "0346693170",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": "2025-03-03",
-            "nom": "MEVALAZA",
-            "prenom": "Jean Etiennes",
-            "date_naissance": "1999-01-20",
-            "date_livrance": "2014-12-12",
-            "cin_passeport": "123456789035",
-            "name": "ISTA - L - INFORMATIQUE",
-            "code_nin2": "0K1380000026",
-            "email": "etiennemevalaza@gmail.com",
-            "telephone": null,
-            "faculte_name": "IST AMBOSITRA",
-            "mention": "ISTA - L - INFORMATIQUE",
-            "nom_domaine": "Sciences de l'ing\u00e9nieur",
-            "niveau": "Licence 1"
-        },
-        {
-            "date_update": null,
-            "nom": "RABENARIVO",
-            "prenom": "SANDA",
-            "date_naissance": "1999-12-06",
-            "date_livrance": null,
-            "cin_passeport": "105012015620",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "06C380000012",
-            "email": "sandarabenarivo@yahoo.fr",
-            "telephone": "0347068184",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": null,
-            "nom": "RAFARANIAINA",
-            "prenom": "AMBOARA LAURA",
-            "date_naissance": "2000-08-13",
-            "date_livrance": null,
-            "cin_passeport": "101232171380",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0D8370000018",
-            "email": "laurahopefulmie@gmail.com",
-            "telephone": "0348719026",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": null,
-            "nom": "RAHANTANIRINA",
-            "prenom": "FINARITRA SANDRINE",
-            "date_naissance": "1999-12-27",
-            "date_livrance": null,
-            "cin_passeport": "117152023735",
-            "name": "TNR - M - PHARMACIE",
-            "code_nin2": "0RC380000018",
-            "email": "positra.digitalisation@gmail.com",
-            "telephone": "0340651349",
-            "faculte_name": "FACULTE DE MEDECINE - TNR",
-            "mention": "TNR - M - PHARMACIE",
-            "nom_domaine": "Sciences de la Sant\u00e9",
-            "niveau": "Master 1"
-        },
-        {
-            "date_update": null,
-            "nom": "RAJAONA",
-            "prenom": "LALAINA AMBININTSOA",
-            "date_naissance": "2001-01-22",
-            "date_livrance": "2025-02-18",
-            "cin_passeport": "108052019684",
-            "name": "ISTA - L - INFORMATIQUE",
-            "code_nin2": "0M1360000017",
-            "email": "ambinintsoarajaona01@gmail.com",
-            "telephone": "0345620238",
-            "faculte_name": "IST AMBOSITRA",
-            "mention": "ISTA - L - INFORMATIQUE",
-            "nom_domaine": "Sciences de l'ing\u00e9nieur",
-            "niveau": "Licence 1"
-        }
-    ],
-    "from": 1,
-    "last_page": 19676,
-    "per_page": 10,
-    "to": 10,
-    "total": 196758
-}
+//   let res =  {
+//     "current_page": 1,
+//     "data": [
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "FREDNIBRUNAPIZA",
+//             "prenom": "MAMY LEA",
+//             "date_naissance": "2000-06-23",
+//             "date_livrance": "2025-03-03",
+//             "cin_passeport": "114012041107",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "1N6370000019",
+//             "email": "tddbru@gmail.comAAA",
+//             "telephone": "0345036777",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "LEMAINTY",
+//             "prenom": "JERRY JENNIA",
+//             "date_naissance": "1999-09-11",
+//             "date_livrance": "2025-03-04",
+//             "cin_passeport": "101212243753",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0B9380000018",
+//             "email": "jerryjenia@yahoo.com",
+//             "telephone": "0328702475",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "MALALANIRINA",
+//             "prenom": "MANOU SYLVANA",
+//             "date_naissance": "2000-03-23",
+//             "date_livrance": "2025-03-30",
+//             "cin_passeport": "999999999999",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0N3370000018",
+//             "email": "positraOK.digitalisation@gmail.com",
+//             "telephone": "0340111111",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "MIASALAHY",
+//             "prenom": "KALORIANA ARIELLE",
+//             "date_naissance": "1999-12-20",
+//             "date_livrance": "2023-01-02",
+//             "cin_passeport": "101252207208",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0KC380000013",
+//             "email": "ariellemiah@gmail.com",
+//             "telephone": "0322838906",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "RANDRIANARIMANANA",
+//             "prenom": "AINA FANJAVA",
+//             "date_naissance": "2001-02-17",
+//             "date_livrance": "2025-03-01",
+//             "cin_passeport": "101252215107",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0H2360000015",
+//             "email": "fa.randriii17@gmail.com",
+//             "telephone": "0346693170",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": "2025-03-03",
+//             "nom": "MEVALAZA",
+//             "prenom": "Jean Etiennes",
+//             "date_naissance": "1999-01-20",
+//             "date_livrance": "2014-12-12",
+//             "cin_passeport": "123456789035",
+//             "name": "ISTA - L - INFORMATIQUE",
+//             "code_nin2": "0K1380000026",
+//             "email": "etiennemevalaza@gmail.com",
+//             "telephone": null,
+//             "faculte_name": "IST AMBOSITRA",
+//             "mention": "ISTA - L - INFORMATIQUE",
+//             "nom_domaine": "Sciences de l'ing\u00e9nieur",
+//             "niveau": "Licence 1"
+//         },
+//         {
+//             "date_update": null,
+//             "nom": "RABENARIVO",
+//             "prenom": "SANDA",
+//             "date_naissance": "1999-12-06",
+//             "date_livrance": null,
+//             "cin_passeport": "105012015620",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "06C380000012",
+//             "email": "sandarabenarivo@yahoo.fr",
+//             "telephone": "0347068184",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": null,
+//             "nom": "RAFARANIAINA",
+//             "prenom": "AMBOARA LAURA",
+//             "date_naissance": "2000-08-13",
+//             "date_livrance": null,
+//             "cin_passeport": "101232171380",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0D8370000018",
+//             "email": "laurahopefulmie@gmail.com",
+//             "telephone": "0348719026",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": null,
+//             "nom": "RAHANTANIRINA",
+//             "prenom": "FINARITRA SANDRINE",
+//             "date_naissance": "1999-12-27",
+//             "date_livrance": null,
+//             "cin_passeport": "117152023735",
+//             "name": "TNR - M - PHARMACIE",
+//             "code_nin2": "0RC380000018",
+//             "email": "positra.digitalisation@gmail.com",
+//             "telephone": "0340651349",
+//             "faculte_name": "FACULTE DE MEDECINE - TNR",
+//             "mention": "TNR - M - PHARMACIE",
+//             "nom_domaine": "Sciences de la Sant\u00e9",
+//             "niveau": "Master 1"
+//         },
+//         {
+//             "date_update": null,
+//             "nom": "RAJAONA",
+//             "prenom": "LALAINA AMBININTSOA",
+//             "date_naissance": "2001-01-22",
+//             "date_livrance": "2025-02-18",
+//             "cin_passeport": "108052019684",
+//             "name": "ISTA - L - INFORMATIQUE",
+//             "code_nin2": "0M1360000017",
+//             "email": "ambinintsoarajaona01@gmail.com",
+//             "telephone": "0345620238",
+//             "faculte_name": "IST AMBOSITRA",
+//             "mention": "ISTA - L - INFORMATIQUE",
+//             "nom_domaine": "Sciences de l'ing\u00e9nieur",
+//             "niveau": "Licence 1"
+//         }
+//     ],
+//     "from": 1,
+//     "last_page": 19676,
+//     "per_page": 10,
+//     "to": 10,
+//     "total": 196758
+// }
   
   localStorage.setItem('data', JSON.stringify(res));
 
