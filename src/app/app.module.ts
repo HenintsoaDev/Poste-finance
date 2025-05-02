@@ -26,14 +26,18 @@ import { Ng2TelInputModule } from 'ng2-tel-input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
 import { MatIconModule } from '@angular/material/icon';
 //import { SousModuleComponent } from './sous-module/sous-module.component';
-import { AdmComponent } from './views/modules/adm/adm.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { ToastrModule } from 'ngx-toastr';
+import { ModuleComponent } from './views/modules/adm/module/module.component';
+import { TableComponent } from './services/table/table.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
+  exports:[
+    TableComponent,
+  ],
   
   imports: [
     BrowserAnimationsModule,
@@ -64,9 +68,10 @@ import { AuthInterceptor } from './services/auth.interceptor';
     AdminLayoutComponent,
     LoginComponent,
     //SousModuleComponent,
-    AdmComponent,
     MonetiqueComponent,
     RechargeEspeceComponent,
+    ModuleComponent,
+    TableComponent,
     WelcomeModuleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],

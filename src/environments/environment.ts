@@ -13,4 +13,6 @@ export const environment = {
   menuItemsSelectedStorage : 'menuItemsSelectedPHCO',
   authItemName:'__token_api_gate_way_phco',
   userItemName:'__user_api_gate_way_phco',
+
+  module :'parametrage/module',
 };
