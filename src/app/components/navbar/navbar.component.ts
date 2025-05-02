@@ -3,7 +3,7 @@ import { Component, OnInit, ElementRef, HostListener, ViewChild } from '@angular
 import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common';
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
-import { ROUTES } from 'app/shared/models/route-info';
+import { MenuService, ROUTES } from 'app/shared/models/route-info';
 
 
 @Component({
@@ -38,7 +38,7 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    constructor(location: Location,  private element: ElementRef, private router: Router) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private menuService: MenuService) {
         this.location = location;
         this.sidebarVisible = false;
         this.router.events.subscribe(() => {
@@ -48,7 +48,8 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(){
-        this.listTitles = ROUTES.filter(listTitle => listTitle);
+        //this.listTitles = ROUTES.filter(listTitle => listTitle);
+        this.listTitles = this.menuService.getCurrentMenuItems();
         const navbar: HTMLElement = this.element.nativeElement;
         this.toggleButton = navbar.getElementsByClassName('navbar-toggler')[0];
         this.router.events.subscribe((event) => {
@@ -239,11 +240,11 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    goTo(module : String, pathSelected)
+    goTo(module : string, pathSelected)
     {
-        this.router.navigate(['/'+module],{
-            state: { modules : module,selectedRoute: pathSelected }
-        });
+        this.menuService.updateMenuItems(module);
+        this.menuService.setMenuItemsModule(module);
+        this.router.navigate(['/app-module', module.replace('/','')]);
     }
 
     goToLogin()

@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -31,6 +31,7 @@ import { MonetiqueComponent } from './views/modules/monetique/monetique.componen
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { ToastrModule } from 'ngx-toastr';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
+import { AuthInterceptor } from './services/auth.interceptor';
 
 @NgModule({
   
@@ -71,6 +72,11 @@ import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.co
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     DatePipe
   ],
   bootstrap: [AppComponent]

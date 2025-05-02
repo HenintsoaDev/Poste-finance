@@ -100,7 +100,6 @@ export class MenuService {
     }
 
     updateMenuItems(parentPath:string): void {
-        //const parent = ROUTES.find(route => route.path.includes(parentPath));
         const parent = this.getCurrentMenuItems().find(route => route.path.includes(parentPath));
         this.menuItemsSource.next(parent?.children || []);
     }

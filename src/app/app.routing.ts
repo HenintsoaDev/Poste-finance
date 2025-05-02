@@ -20,7 +20,6 @@ const routes: Routes =[
   { path: '',redirectTo: 'login',pathMatch: 'full'}, 
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
   { path: 'app-module/:module', component: WelcomeModuleComponent,data: { breadcrumb: 'Module' }},
-  //{ path: 'administration', component: AdministrationComponent }, 
   { path: 'ADM', component: AdmComponent,data: { breadcrumb: 'Administration' },children:[
     {path : 'gestion-personnel',data: { breadcrumb: 'Géstion Personnelles' },children:[
       {path : 'list-personnel',component: DataTableComponent,data: { breadcrumb: 'Liste des personnels' }},
