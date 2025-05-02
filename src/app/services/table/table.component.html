@@ -50,7 +50,11 @@
               <span *ngIf="!isArray(cell)">  {{ formatCell(cell)   }}</span>
               <!-- Si cell est un tableau, afficher les éléments du tableau -->
               <span *ngIf="isArray(cell)">
-                <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i>
+                <i *ngFor="let icon of cell" class="material-icons" (click)="openModal(icon)" style="margin-right: 15px !important; cursor: pointer;" >{{ icon.icon }}</i>
+
+                <!-- Si on utilise font awesome ---
+                   <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i> 
+                  -->
               </span>
 
         </tr>

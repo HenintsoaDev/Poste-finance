@@ -1,9 +1,11 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ModuleService } from 'app/services/admin/module.service';
+import { PassageService } from 'app/services/table/passage.service';
 import { module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 
@@ -35,6 +37,9 @@ header = [
     "colonneTable" : "icon",
     "table" : "module"
   },
+  {
+    "nomColonne" : "Action"
+  }
 
   
  
@@ -53,9 +58,21 @@ objetBody = [
           'name' : 'icon',
           'type' : 'text',
         },
+        {'name' :  'id'}
+
+        
       
 ]
-listIcon = []
+listIcon = [
+  {
+    'icon' : 'edit',
+    'action' : 'edit'
+  },
+  {
+    'icon' : 'delete',
+    'action' : 'delete'
+  },
+]
 
 searchGlobal = ['module.name', 'module.code', 'module.icon']
  
@@ -72,14 +89,31 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
   @ViewChild('myModal', { static: false }) modalElement!: ElementRef;
 
 
-  constructor(private fb: FormBuilder,  private toastr: ToastrService, private moduleService: ModuleService) {
+  constructor(private fb: FormBuilder,  
+              private toastr: ToastrService, 
+              private moduleService: ModuleService,     
+              private passageService: PassageService,
+    ) {
     super();
    }
+
+
+
+
+subscription: Subscription;
 
   async ngOnInit() {
 
      /***************************************** */
         // Écouter les changements de modal à travers le service si il y a des actions
+        this.subscription = this.passageService.getObservable().subscribe(data => {
+
+          console.log("Passe???????", data)
+
+      // if(data.action == 'edit') this.openModalEditEnseignant();
+      // else this.openModalAffectEtablissementEnseignant();
+       // Ouvrir le modal
+    });
         this.endpoint = environment.baseUrl + '/' + environment.module;
     /***************************************** */
 
@@ -88,6 +122,12 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
           code: ['', [Validators.required]],
           icon: ['', [Validators.required]]
       });
+  }
+
+  ngOnDestroy() {
+    if (this.subscription) {
+      this.subscription.unsubscribe();
+    }
   }
 
 
@@ -113,6 +153,7 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
               next: (res) => {
                   if(res['code'] == 201) {
                     this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
                   }
                   else{
                       this.toastr.error(res['msg'], this.__("global.error"));
@@ -139,6 +180,10 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
       modalInstance.hide();
     }
   }
+
+  actualisationTableau(){
+    this.passageService.appelURL('');
+ }
 
 
 }

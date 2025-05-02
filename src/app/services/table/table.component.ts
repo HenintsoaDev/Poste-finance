@@ -72,17 +72,28 @@ subscription: Subscription;
 
 async ngOnInit() {
 
-  // Écouter le changement du tableau à travers le service
-  this.subscription = this.passageService.getObservable().subscribe(filtre => {
 
-    const url = `${this.endpoint}?page=1`;
-    
-    if (filtre === '') {
-      this.getUrlDatatable(url);
-    } else {
-      this.getUrlDatatable(url, '', '', '', filtre);
+  this.subscription = this.passageService.getObservable().subscribe(event => {
+    console.log("EEEEEVVVEEENNNN :" , event);
+
+   
+  
+    if (event.type === 'url' || event.type === '' ) {
+      const filtre = event.data;
+      const url = `${this.endpoint}?page=1`;
+  
+      if (!filtre) {
+        this.getUrlDatatable(url);
+      } else {
+        this.getUrlDatatable(url, '', '', '', filtre);
+      }
     }
   });
+
+
+
+
+
 }
 
 ngOnDestroy() {
@@ -371,7 +382,7 @@ async getSearchInput(){
     this.body.map((col: any) => 
         col.name === "id"
         ? this.listIcon.map(i => 
-          ({ icon: i.icon, action: i.action, id: row[col] }) // Placer les icônes et les IDs dans un objet
+          ({ icon: i.icon, action: i.action, id: row[col.name] }) // Placer les icônes et les IDs dans un objet
         )
         : row[col.name] + '###' + col.type
     )

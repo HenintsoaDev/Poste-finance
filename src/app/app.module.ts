@@ -32,6 +32,7 @@ import { ToastrModule } from 'ngx-toastr';
 import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { TableComponent } from './services/table/table.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   exports:[
@@ -60,7 +61,8 @@ import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.co
     NgxIntlTelInputModule,
     DataTablesModule,
     Ng2TelInputModule,
-    ToastrModule.forRoot() // configuration globale
+    ToastrModule.forRoot(),
+    NgbModule 
   ],
   declarations: [
     AppComponent,
