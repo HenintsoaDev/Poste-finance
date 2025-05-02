@@ -7,7 +7,6 @@ import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.compon
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
 //import { AdministrationComponent } from './administration/administration.component';
-import { DataTableComponent } from './views/modules/adm/data-table/data-table.component';
 import { ProfilComponent } from './views/profil/profil.component';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';

@@ -14,7 +14,6 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import {MatDialogModule} from '@angular/material/dialog';
 import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from 'app/views/home/home.component';
-import { DataTableComponent } from 'app/views/modules/adm/data-table/data-table.component';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatNativeDateModule } from '@angular/material/core';
 import { NgxIntlTelInputModule } from 'ngx-intl-tel-input';
@@ -54,7 +53,6 @@ import { MatIconModule } from '@angular/material/icon';
   ],
   declarations: [
     HomeComponent,
-    DataTableComponent,
     ProfilComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
