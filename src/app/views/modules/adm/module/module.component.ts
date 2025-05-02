@@ -6,7 +6,7 @@ import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 declare var bootstrap: any;
 
 @Component({
@@ -16,54 +16,55 @@ declare var bootstrap: any;
 })
 export class ModuleComponent extends Translatable implements OnInit {
 
+  modalRef?: BsModalRef;
   
-/***************************************** */
-endpoint = "";
-header = [
-  {
-    "nomColonne" : "Name",
-    "colonneTable" : "name",
-    "table" : "module"
-  },
-  {
-    "nomColonne" : "Code",
-    "colonneTable" : "code",
-    "table" : "module"
-  },
-  {
-    "nomColonne" : "Icon",
-    "colonneTable" : "icon",
-    "table" : "module"
-  },
+  /***************************************** */
+  endpoint = "";
+  header = [
+    {
+      "nomColonne" : "Name",
+      "colonneTable" : "name",
+      "table" : "module"
+    },
+    {
+      "nomColonne" : "Code",
+      "colonneTable" : "code",
+      "table" : "module"
+    },
+    {
+      "nomColonne" : "Icon",
+      "colonneTable" : "icon",
+      "table" : "module"
+    },
 
+    
   
- 
-]
+  ]
 
-objetBody = [
-        {
-          'name' : 'name',
-          'type' : 'text',
-        },
-        {
-          'name' : 'code',
-          'type' : 'text',
-        },
-        {
-          'name' : 'icon',
-          'type' : 'text',
-        },
-      
-]
-listIcon = []
+  objetBody = [
+          {
+            'name' : 'name',
+            'type' : 'text',
+          },
+          {
+            'name' : 'code',
+            'type' : 'text',
+          },
+          {
+            'name' : 'icon',
+            'type' : 'text',
+          },
+        
+  ]
+  listIcon = []
 
-searchGlobal = ['module.name', 'module.code', 'module.icon']
- 
-@ViewChild('saisirCIN') saisirCIN: TemplateRef<any> | undefined;
+  searchGlobal = ['module.name', 'module.code', 'module.icon']
+  
+  @ViewChild('saisirCIN') saisirCIN: TemplateRef<any> | undefined;
   minlength: number = 12;
   maxlength: number = 12;
  
-/***************************************** */
+  /***************************************** */
 
 
 
@@ -72,9 +73,15 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
   @ViewChild('myModal', { static: false }) modalElement!: ElementRef;
 
 
-  constructor(private fb: FormBuilder,  private toastr: ToastrService, private moduleService: ModuleService) {
+  constructor(
+    private fb: FormBuilder,  
+    private toastr: ToastrService, 
+    private moduleService: ModuleService,
+    private modalService: BsModalService
+  ) 
+  {
     super();
-   }
+  }
 
   async ngOnInit() {
 
@@ -89,7 +96,6 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
           icon: ['', [Validators.required]]
       });
   }
-
 
   onSubmit() {
     if (this.moduleForm.valid) {
@@ -133,12 +139,15 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
       }
   }
 
-  closeModal() {
-    const modalInstance = bootstrap.Modal.getInstance(this.modalElement.nativeElement);
-    if (modalInstance) {
-      modalInstance.hide();
-    }
+  openModal(template: TemplateRef<any>) {
+    this.modalRef = this.modalService.show(template, {
+      backdrop: 'static',
+      keyboard: false
+    });
   }
 
+  closeModal() {
+    this.modalRef?.hide();
+  }
 
 }

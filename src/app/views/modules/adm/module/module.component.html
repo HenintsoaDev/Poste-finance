@@ -14,8 +14,8 @@
                                 </button>
                             </div>
                             <div class="right-button">
-                                
-                                <button class="btn btn-secondary" data-toggle="modal" data-target="#myModal"> {{ __("module.add")}}</button>
+                                <!--<button class="btn btn-secondary" data-toggle="modal" data-target="#myModal"> {{ __("module.add")}}</button>-->
+                                <button class="btn btn-secondary" (click)="openModal(myModal)"> {{ __("module.add")}}</button>
                             </div>
                         </div>
                     </div>
@@ -53,51 +53,43 @@
 
 <!-- MODAL -->
  <!-- Modal avec Material Design -->
- <div #myModal class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="myModalLabel"><b> {{ __('module.title_add_modal')}}</b></h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form #f="ngForm" [formGroup]="moduleForm" (ngSubmit)="onSubmit()">
-                    <div class="modal-body">
-                     
-                        <div class="form-group">
-                            <mat-form-field>
-                                <mat-label>{{ __('module.name')}}</mat-label>
-                                <input matInput type="text" [(ngModel)]="module.name" placeholder="{{ __('module.name')}}" formControlName="name" name="name">
-                            </mat-form-field>
-                        </div>
-                        <div class="form-group">
-                            <mat-form-field>
-                                <mat-label>{{ __('module.code')}}</mat-label>
-                                <input matInput type="text" [(ngModel)]="module.code" placeholder="{{ __('module.code')}}" formControlName="code" name="code">
-                            </mat-form-field>
-                        </div>
-                        <div class="form-group">
-                            <mat-form-field>
-                                <mat-label>{{ __('module.icon')}}</mat-label>
-                                <input matInput type="text" [(ngModel)]="module.icon" placeholder="{{ __('module.icon')}}" formControlName="icon" name="icon">
-                            </mat-form-field>
-                        </div>
-                        
-                      
-                    </div>
-
-                    <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
-                        <button type="submit" class="btn btn-primary" [disabled]="moduleForm.invalid">{{ __('global.save')}}</button>
-                    </div>
-                </form>
-            </div>
-            <!--<div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Annuler</button>
-                <button type="button" class="btn btn-primary" (click)="onConfirm()">Confirmer</button>
-            </div>-->
-        </div>
+ <ng-template #myModal>
+    <div class="modal-header">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ __('module.title_add_modal')}}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
-</div>
+    <div class="modal-body">
+        <form #f="ngForm" [formGroup]="moduleForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('module.name')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="module.name" placeholder="{{ __('module.name')}}" formControlName="name" name="name">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('module.code')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="module.code" placeholder="{{ __('module.code')}}" formControlName="code" name="code">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('module.icon')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="module.icon" placeholder="{{ __('module.icon')}}" formControlName="icon" name="icon">
+                    </mat-form-field>
+                </div>
+                
+                
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
+                <button type="submit" class="btn btn-primary" [disabled]="moduleForm.invalid">{{ __('global.save')}}</button>
+            </div>
+        </form>
+    </div>
+</ng-template>

@@ -33,6 +33,7 @@ import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { TableComponent } from './services/table/table.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { AuthInterceptor } from './services/auth.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
 
 @NgModule({
   exports:[
@@ -61,6 +62,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
     NgxIntlTelInputModule,
     DataTablesModule,
     Ng2TelInputModule,
+    ModalModule.forRoot(),
     ToastrModule.forRoot() // configuration globale
   ],
   declarations: [
