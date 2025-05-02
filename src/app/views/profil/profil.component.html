@@ -22,12 +22,12 @@
                 <div class="card shadow-sm w-100 h-100">
                     <div class="card-body">
                         <h5 class="card-title text-primary">Information profil utilisateur</h5>
-                        <p><strong>{{ __('utilisateur.nom') }} :</strong> {{ user.info.nom }} </p>
-                        <p><strong>{{ __('utilisateur.prenom') }} :</strong> {{ user.info.prenom }} </p>
-                        <p><strong>{{ __('utilisateur.email') }} :</strong>  {{ user.info.email }} </p>
-                        <p><strong>{{ __('utilisateur.telephone') }} :</strong> {{ user.info.telephone }}</p>
-                        <p><strong>{{ __('utilisateur.adresse') }} :</strong> {{ user.info.email }}</p>
-                        <p><strong>{{ __('utilisateur.profil') }} :</strong> {{ user.info.name }} </p>
+                        <p><strong>{{ __('utilisateur.nom') }} :</strong> {{ user.info?.nom }} </p>
+                        <p><strong>{{ __('utilisateur.prenom') }} :</strong> {{ user.info?.prenom }} </p>
+                        <p><strong>{{ __('utilisateur.email') }} :</strong>  {{ user.info?.email }} </p>
+                        <p><strong>{{ __('utilisateur.telephone') }} :</strong> {{ user.info?.telephone }}</p>
+                        <p><strong>{{ __('utilisateur.adresse') }} :</strong> {{ user.info?.email }}</p>
+                        <p><strong>{{ __('utilisateur.profil') }} :</strong> {{ user.info?.name }} </p>
                     </div>
                 </div>
             </div>

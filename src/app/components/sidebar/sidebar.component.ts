@@ -159,6 +159,11 @@ export class SidebarComponent implements OnInit {
             state: { modules : module,selectedRoute: pathSelected }
         });
     }
+
+    goToProfil()
+    {
+        this.router.navigate(['/my-profil']);
+    }
     
     goToLogin()
     {
