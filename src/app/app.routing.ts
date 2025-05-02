@@ -23,7 +23,6 @@ const routes: Routes =[
   { path: ':module',data: { breadcrumb: 'Module' }, children:[
     {path : 'parametrage',data: { breadcrumb: 'Parametrage' },children : [
       {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Module' }},
-      
     ]},
   ]},
 

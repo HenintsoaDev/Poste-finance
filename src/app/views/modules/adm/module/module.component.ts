@@ -8,7 +8,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
-
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 declare var bootstrap: any;
 
 @Component({
@@ -18,32 +18,34 @@ declare var bootstrap: any;
 })
 export class ModuleComponent extends Translatable implements OnInit {
 
+  modalRef?: BsModalRef;
   
 /***************************************** */
 endpoint = "";
 header = [
   {
-    "nomColonne" : "Name",
+    "nomColonne" : this.__('module.name'),
     "colonneTable" : "name",
     "table" : "module"
   },
   {
-    "nomColonne" : "Code",
+    "nomColonne" : this.__('module.code'),
     "colonneTable" : "code",
     "table" : "module"
   },
   {
-    "nomColonne" : "Icon",
+    "nomColonne" : this.__('module.icon'),
     "colonneTable" : "icon",
     "table" : "module"
   },
+ 
   {
-    "nomColonne" : "Action"
+    "nomColonne" : this.__('global.action')
   }
 
+    
   
- 
-]
+  ]
 
 objetBody = [
         {
@@ -58,44 +60,49 @@ objetBody = [
           'name' : 'icon',
           'type' : 'text',
         },
-        {'name' :  'id'}
-
-        
       
+        {'name' :  'state#id'}
 ]
+
 listIcon = [
   {
     'icon' : 'edit',
-    'action' : 'edit'
+    'action' : 'edit',
+    'tooltip' : 'Modification',
+
   },
   {
     'icon' : 'delete',
-    'action' : 'delete'
+    'action' : 'delete',
+    'tooltip' : 'Supression',
+
   },
 ]
 
-searchGlobal = ['module.name', 'module.code', 'module.icon']
+  searchGlobal = ['module.name', 'module.code', 'module.icon']
  
-@ViewChild('saisirCIN') saisirCIN: TemplateRef<any> | undefined;
-  minlength: number = 12;
-  maxlength: number = 12;
- 
-/***************************************** */
+  /***************************************** */
 
 
 
   moduleForm: FormGroup;
   module: module = new module();
-  @ViewChild('myModal', { static: false }) modalElement!: ElementRef;
+  listModules:module [] = [];
+
+  @ViewChild('addModule') addModule: TemplateRef<any> | undefined;
+  idModule : number;
+  titleModal: string = "";
 
 
   constructor(private fb: FormBuilder,  
               private toastr: ToastrService, 
               private moduleService: ModuleService,     
               private passageService: PassageService,
+              private modalService: BsModalService
+
     ) {
     super();
-   }
+  }
 
 
 
@@ -103,16 +110,19 @@ searchGlobal = ['module.name', 'module.code', 'module.icon']
 subscription: Subscription;
 
   async ngOnInit() {
+    this.titleModal = this.__('module.title_add_modal');
 
      /***************************************** */
         // Écouter les changements de modal à travers le service si il y a des actions
-        this.subscription = this.passageService.getObservable().subscribe(data => {
+        this.subscription = this.passageService.getObservable().subscribe(event => {
 
-          console.log("Passe???????", data)
+          console.log("Passe???????", event);
+          this.idModule = event.data.id;
 
-      // if(data.action == 'edit') this.openModalEditEnseignant();
-      // else this.openModalAffectEtablissementEnseignant();
-       // Ouvrir le modal
+        if(event.data.action == 'edit') this.openModalEditModule();
+        else if(event.data.action == 'delete') this.openModalDeleteModule();
+        else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
+      
     });
         this.endpoint = environment.baseUrl + '/' + environment.module;
     /***************************************** */
@@ -130,16 +140,27 @@ subscription: Subscription;
     }
   }
 
-
+  // Quand on faire l'ajout ou modification
   onSubmit() {
     if (this.moduleForm.valid) {
 
+      let msg = "";
+      let msg_btn = "";
+
+      if(!this.module.id){
+         msg = this.__("global.enregistrer_donnee_?");
+         msg_btn = this.__("global.oui_enregistrer");
+      }else{
+         msg = this.__("global.modifier_donnee_?");
+         msg_btn = this.__("global.oui_modifier");
+      }
+
         Swal.fire({
           title: this.__("global.confirmation"),
-          text: this.__("global.enregistrer_donnee_?"),
+          text: msg,
           icon: 'warning',
           showCancelButton: true,
-          confirmButtonText: this.__("global.oui_enregistrer"),
+          confirmButtonText: msg_btn,
           cancelButtonText: this.__("global.cancel"),
           allowOutsideClick: false,
           customClass: {
@@ -149,19 +170,43 @@ subscription: Subscription;
           }).then((result) => {
           if (result.isConfirmed) {
 
-            this.moduleService.ajoutModule(this.module).subscribe({
-              next: (res) => {
-                  if(res['code'] == 201) {
-                    this.toastr.success(res['msg'], this.__("global.success"));
-                    this.actualisationTableau();
+            if(!this.module.id){
+              console.log("add")
+
+               this.moduleService.ajoutModule(this.module).subscribe({
+                next: (res) => {
+                    if(res['code'] == 201) {
+                      this.toastr.success(res['msg'], this.__("global.success"));
+                      this.actualisationTableau();
+                      this.closeModal();
+                    }
+                    else{
+                        this.toastr.error(res['msg'], this.__("global.error"));
+                    }                
+                  },
+                  error: (err) => {
                   }
-                  else{
-                      this.toastr.error(res['msg'], this.__("global.error"));
-                  }                
-                },
-                error: (err) => {
-                }
-            });
+              }); 
+
+            }else{
+              console.log("edit")
+               this.moduleService.modifierModule(this.module).subscribe({
+                next: (res) => {
+                    if(res['code'] == 201) {
+                      this.toastr.success(res['msg'], this.__("global.success"));
+                      this.actualisationTableau();
+                      this.closeModal();
+                    }
+                    else{
+                        this.toastr.error(res['msg'], this.__("global.error"));
+                    }                
+                  },
+                  error: (err) => {
+                  }
+              }); 
+            }
+
+           
 
 
             
@@ -174,16 +219,150 @@ subscription: Subscription;
       }
   }
 
-  closeModal() {
-    const modalInstance = bootstrap.Modal.getInstance(this.modalElement.nativeElement);
-    if (modalInstance) {
-      modalInstance.hide();
+  // Ouverture de modal pour modification
+  openModalEditModule() {
+
+    this.titleModal = this.__('module.title_edit_modal');
+
+    if (this.addModule) {
+
+      // Récupérer la liste affichée dans le tableau depuis le localStorage.
+      const storedData = localStorage.getItem('data');
+      let result : any;
+      if (storedData) result = JSON.parse(storedData);
+      this.listModules = result.data;
+
+      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+      let res = this.listModules.filter(_ => _.id == this.idModule);
+      this.module = res[0];
+
+      // Ouverture de modal
+      this.modalRef = this.modalService.show(this.addModule, { backdrop: 'static',keyboard: false });
     }
   }
 
+
+   // SUppression d'un modal
+   openModalDeleteModule() {
+
+    Swal.fire({
+      title: this.__("global.confirmation"),
+      text: this.__("global.supprimer_donnee_?"),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.__("global.oui_supprimer"),
+      cancelButtonText: this.__("global.cancel"),
+      allowOutsideClick: false,
+      customClass: {
+          confirmButton: 'swal-button--confirm-custom',
+          cancelButton: 'swal-button--cancel-custom'
+      },
+      }).then((result) => {
+      if (result.isConfirmed) {
+
+           this.moduleService.supprimerModule(this.idModule).subscribe({
+            next: (res) => {
+                if(res['code'] == 204) {
+                  this.toastr.success(res['msg'], this.__("global.success"));
+                  this.actualisationTableau();
+                }
+                else{
+                    this.toastr.error(res['msg'], this.__("global.error"));
+                }                
+              },
+              error: (err) => {
+              }
+          }); 
+
+      
+
+
+        
+        }
+    });
+
+  }
+
+
+    // Ouverture de modal pour modification
+    openModalToogleStateModule() {
+
+      console.log("ssssssssssssxxxxxx");
+
+      // Récupérer la liste affichée dans le tableau depuis le localStorage.
+      const storedData = localStorage.getItem('data');
+      let result : any;
+      if (storedData) result = JSON.parse(storedData);
+      this.listModules = result.data;
+      console.log(this.listModules);
+      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+      let res = this.listModules.filter(_ => _.id == this.idModule);
+      this.module = res[0];
+
+      
+      
+
+      Swal.fire({
+        title: this.__("global.confirmation"),
+        text: this.__("global.changer_state_?"),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: this.__("global.oui_changer"),
+        cancelButtonText: this.__("global.cancel"),
+        allowOutsideClick: false,
+        customClass: {
+            confirmButton: 'swal-button--confirm-custom',
+            cancelButton: 'swal-button--cancel-custom'
+        },
+        }).then((result) => {
+        if (result.isConfirmed) {
+          let state = 0;
+          if(this.module.state == 1) state = 0;
+          else state = 1;
+
+  
+             this.moduleService.changementStateModule(this.module, state).subscribe({
+              next: (res) => {
+                  if(res['code'] == 201) {
+                    this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
+                  }
+                  else{
+                      this.toastr.error(res['msg'], this.__("global.error"));
+                  }                
+                },
+                error: (err) => {
+                }
+            }); 
+  
+        
+  
+  
+          
+          }
+      });
+  
+    }
+  
+
+
+  // Ouverture du modal pour l'ajout
+  openModalAdd(template: TemplateRef<any>) {
+    this.titleModal = this.__('module.title_add_modal');
+    this.modalRef = this.modalService.show(template, {
+      backdrop: 'static',
+      keyboard: false
+    });
+  }
+
+  // Actualisation des données
   actualisationTableau(){
     this.passageService.appelURL('');
  }
 
+ // Fermeture du modal
+  closeModal() {
+    this.modalRef?.hide();
+  }
 
 }

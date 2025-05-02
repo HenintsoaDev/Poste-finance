@@ -22,6 +22,7 @@
         "back" : "Retour",
         "search" : "Rechercher",
         "next": "Suivant",
+        "action": "Action",
         "export_pdf" : "Exporter en PDF",
         "export_excel" : "Exporter en Excel",
         "export_csv" : "Exporter en CSV",
@@ -44,7 +45,14 @@
         "confirmation" : "Confirmation",
         "oui_modifier" : "Oui, modifier",
         "oui_enregistrer" : "Oui, enregistrer",
-        "enregistrer_donnee_?" : "Voulez-vous vraiment enregistrer cette donnée ? "
+        "oui_supprimer" : "Oui, supprimer",
+        "oui_changer" : "Oui, changer",
+        "enregistrer_donnee_?" : "Voulez-vous vraiment enregistrer cette donnée ? ",
+        "modifier_donnee_?" : "Voulez-vous vraiment modifier cette donnée ? ",
+        "supprimer_donnee_?" : "Voulez-vous vraiment supprimer cette donnée ? ",
+        "changer_state_?" : "Voulez-vous vraiment changer cette statut ? ",
+        "clique_pour_activer" : "Cliquez pour activer",
+        "clique_pour_desactiver" : "Cliquez pour desactiver"
     },
 
     "paiement" : {
@@ -87,6 +95,7 @@
         "code" : "Code",
         "icon" : "Icon",
         "add" : "Ajouter un module",
+        "title_edit_modal" : "Modification d'un module",
         "title_add_modal" : "Ajout d'un module"
     }
 

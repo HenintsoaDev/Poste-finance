@@ -50,8 +50,9 @@
               <span *ngIf="!isArray(cell)">  {{ formatCell(cell)   }}</span>
               <!-- Si cell est un tableau, afficher les éléments du tableau -->
               <span *ngIf="isArray(cell)">
-                <i *ngFor="let icon of cell" class="material-icons" (click)="openModal(icon)" style="margin-right: 15px !important; cursor: pointer;" >{{ icon.icon }}</i>
-
+                
+                <i *ngFor="let icon of cell"  class="material-icons" mat-raised-button matTooltip="{{verifTooltipIcon(icon)}}" [ngStyle]="{ 'color': verifColorIcon(icon) }" (click)="openModal(icon)"  style="margin-right: 15px !important; font-size: 18px; cursor: pointer;" >{{ verifIcon(icon) }}</i>
+             
                 <!-- Si on utilise font awesome ---
                    <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i> 
                   -->
@@ -74,17 +75,17 @@
       <div class="col-lg-8 btn-paginate"  >
             <button [disabled]="currentPage <= 1"  (click)="getUrlDatatable(firstPage, '', '','', this.search)" class="btn btn-primary paginate_button"> Premier </button>
             <button [disabled]="currentPage <= 1"  (click)="getUrlDatatable(prevPage, '', '','', this.search)" class="btn btn-primary paginate_button" > Precedent</button>
-            <button *ngIf="currentPage > 3" class="btn paginate_button"  (click)="getUrlDatatable(firstPage, '', '','', this.search)" > 1 </button>
+            <button *ngIf="currentPage > 3" class="btn btn-primary paginate_button"  (click)="getUrlDatatable(firstPage, '', '','', this.search)" > 1 </button>
             <span *ngIf="currentPage > 3" class="three-point" > ... </span>
-            <button *ngIf="cPage_less_2 > 0 && currentPage < 4" class="btn-primary btn-pagination-hr"  (click)="getUrlDatatable(path_cPage_less_2, '', '','', this.search)" > {{cPage_less_2}} </button>
+            <button *ngIf="cPage_less_2 > 0 && currentPage < 4" class="btn btn-primary paginate_button"  (click)="getUrlDatatable(path_cPage_less_2, '', '','', this.search)" > {{cPage_less_2}} </button>
             <button *ngIf="cPage_less_1 > 0" class="btn btn-primary paginate_button" (click)="getUrlDatatable(path_cPage_less_1, '', '','', this.search)" > {{cPage_less_1}} </button>
             <button (click)="getUrlDatatable(prevPage, '', '','', this.search)" class="btn btn-primary bg-pantone btn-pantone current data-table-pagination-active"  > {{currentPage}} </button>
             <button *ngIf="cPage_more_1 > 0" class="btn btn-primary paginate_button" (click)="getUrlDatatable(path_cPage_more_1, '', '','', this.search)" > {{cPage_more_1}} </button>
-            <button *ngIf="(cPage_more_2 > 0 && cPage_more_2 > lastNumPage && cPage_more_1 > lastNumPage && currentPage > lastNumPage) || cPage_more_2 == lastNumPage" class="btn-primary btn-pagination-hr"  (click)="getUrlDatatable(path_cPage_more_2, '', '','', this.search)" > {{cPage_more_2}} </button>
+            <button *ngIf="(cPage_more_2 > 0 && cPage_more_2 > lastNumPage && cPage_more_1 > lastNumPage && currentPage > lastNumPage) || cPage_more_2 == lastNumPage" class="btn btn-primary paginate_button"  (click)="getUrlDatatable(path_cPage_more_2, '', '','', this.search)" > {{cPage_more_2}} </button>
             <span *ngIf="cPage_more_2 < lastNumPage && cPage_more_1 < lastNumPage && currentPage < lastNumPage" class="three-point" > ... </span>
-            <button *ngIf="cPage_more_2 < lastNumPage && cPage_more_1 < lastNumPage && currentPage < lastNumPage" class="btn btn-primary bg-pantone btn-pantone" (click)="getUrlDatatable(lastPage, '', '','', this.search)" > {{lastNumPage}} </button>
-            <button  (click)="getUrlDatatable(nextPage, '', '','', this.search)" class="btn btn-primary paginate_button"  > Suivant </button>
-            <button   (click)="getUrlDatatable(lastPage, '', '','', this.search)"class="btn btn-primary paginate_button"  > Dernier </button>
+            <button *ngIf="cPage_more_2 < lastNumPage && cPage_more_1 < lastNumPage && currentPage < lastNumPage" class="btn btn-primary bg-pantone paginate_button" (click)="getUrlDatatable(lastPage, '', '','', this.search)" > {{lastNumPage}} </button>
+            <button  [disabled]="!path_cPage_more_1 || lastNumPage == currentPage" (click)="getUrlDatatable(nextPage, '', '','', this.search)" class="btn btn-primary paginate_button"  > Suivant </button>
+            <button   [disabled]="!path_cPage_more_1 || lastNumPage == currentPage " (click)="getUrlDatatable(lastPage, '', '','', this.search)"class="btn btn-primary paginate_button"  > Dernier </button>
       </div>
     </div>
 

@@ -1,7 +1,7 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
 import { AppRoutingModule } from './app.routing';
 import { ComponentsModule } from './components/components.module';
@@ -32,7 +32,9 @@ import { ToastrModule } from 'ngx-toastr';
 import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { TableComponent } from './services/table/table.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
-import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { AuthInterceptor } from './services/auth.interceptor';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { MatTooltipModule } from '@angular/material/tooltip';
 
 @NgModule({
   exports:[
@@ -52,6 +54,7 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     MatSelectModule,
     MatButtonModule,
     MatIconModule,
+    MatTooltipModule,
     MatAutocompleteModule,
     OverlayModule,
     MatMenuModule,
@@ -61,8 +64,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     NgxIntlTelInputModule,
     DataTablesModule,
     Ng2TelInputModule,
-    ToastrModule.forRoot(),
-    NgbModule 
+    ModalModule.forRoot(),
+    ToastrModule.forRoot() // configuration globale
   ],
   declarations: [
     AppComponent,
@@ -78,6 +81,11 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
     { provide: MAT_DATE_LOCALE, useValue: 'fr-FR' }, 
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: AuthInterceptor,
+      multi: true
+    },
     DatePipe
   ],
   bootstrap: [AppComponent]

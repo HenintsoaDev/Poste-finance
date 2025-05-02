@@ -33,6 +33,38 @@ export class ModuleService {
             })
         );
     }
+    modifierModule(credentials: module): Observable<any> {
+        
+        return this.httpService.put<any>(environment.module + '/' + credentials.id, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+    supprimerModule(id): Observable<any> {
+        
+        return this.httpService.delete<any>(environment.module + '/' + id,).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+    changementStateModule(data, state): Observable<any> {
+        
+        return this.httpService.get<any>(environment.module + '/' + data.id + '/state/' + state + '?state=' + state).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
 
    
 }
