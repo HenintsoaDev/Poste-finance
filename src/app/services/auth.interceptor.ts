@@ -24,7 +24,7 @@ export class AuthInterceptor implements HttpInterceptor {
         let uri = window.location.href.split('/').reverse()[0];
         if(event.body.code == 401  &&  uri !== 'login'&&  uri !== 'logout'){
           this.toast.warning(event.body.msg  || "Veuillez vous reconnecter votre session est exprirer","Erreur");
-         return  this.router.navigate(['/logout']);
+         return  this.router.navigate(['/login']);
         }else if(event.body.code == 503   ){
           this.toast.warning((event.body.msg ),"Erreur");
          // return  this.router.navigate(['/app']);

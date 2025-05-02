@@ -19,25 +19,21 @@ const routes: Routes =[
   { path: 'login', component: LoginComponent }, 
   { path: '',redirectTo: 'login',pathMatch: 'full'}, 
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
+  { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
   { path: 'app-module/:module', component: WelcomeModuleComponent,data: { breadcrumb: 'Module' }},
   { path: ':module',data: { breadcrumb: 'Module' }, children:[
     {path : 'parametrage',data: { breadcrumb: 'Parametrage' },children : [
       {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Module' }},
     ]},
-  ]},
-
- 
-
- 
-  { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
-  {
+  ]}, 
+  /*{
     path: '',
     component: AdminLayoutComponent,
     children: [{
       path: '',
       loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
     }]
-  }
+  }*/
 ];
 
 @NgModule({
