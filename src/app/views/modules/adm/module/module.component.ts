@@ -45,10 +45,10 @@ header = [
     "nomColonne" : this.__('global.action')
   }
 
-    
-  
-  ]
 
+      
+    
+    ]
 objetBody = [
         {
           'name' : 'code',
@@ -67,25 +67,24 @@ objetBody = [
         {'name' :  'state#id'}
 ]
 
-listIcon = [
-  {
-    'icon' : 'edit',
-    'action' : 'edit',
-    'tooltip' : 'Modification',
+  listIcon = [
+    {
+      'icon' : 'edit',
+      'action' : 'edit',
+      'tooltip' : 'Modification',
 
-  },
-  {
-    'icon' : 'delete',
-    'action' : 'delete',
-    'tooltip' : 'Supression',
+    },
+    {
+      'icon' : 'delete',
+      'action' : 'delete',
+      'tooltip' : 'Supression',
 
-  },
-]
+    },
+  ]
 
   searchGlobal = [ 'module.code', 'module.name', 'module.icon']
  
   /***************************************** */
-
 
 
   moduleForm: FormGroup;
@@ -96,6 +95,8 @@ listIcon = [
   idModule : number;
   titleModal: string = "";
 
+  /***Loading data */
+  loadingTable = false;
 
   constructor(private fb: FormBuilder,  
               private toastr: ToastrService, 

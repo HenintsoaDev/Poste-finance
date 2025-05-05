@@ -22,7 +22,7 @@ const routes: Routes =[
   { path: '',redirectTo: 'login',pathMatch: 'full'}, 
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
   { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
-  { path: 'app-module/:module', component: WelcomeModuleComponent,data: { breadcrumb: 'Module' }},
+  { path: 'app-module/:module', component: WelcomeModuleComponent},
   { path: ':module',data: { breadcrumb: 'Administration' }, children:[
     {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
       {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},

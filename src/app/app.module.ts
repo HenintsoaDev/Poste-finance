@@ -35,6 +35,7 @@ import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.co
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.component';
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
@@ -42,6 +43,7 @@ import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil
 @NgModule({
   exports:[
     TableComponent,
+    TableShimmerComponent
   ],
   
   imports: [
@@ -80,6 +82,7 @@ import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil
     ModuleComponent,
     TableComponent,
     WelcomeModuleComponent,
+    TableShimmerComponent,
     SousModuleComponent,
     TypeBureauxComponent,
     TypeProfilComponent,

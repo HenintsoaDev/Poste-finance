@@ -48,7 +48,11 @@
                     <a class="text-muted" routerlink="/reset" style="font-size: 14px;color: #797878 !important;" href="/reset">{{ __('auth.mdp_oublie') }}</a>
                 </div>
                 <br>
-                <button mat-raised-button type="submit" class="btn btn-primary w-100">{{ __('global.login') }}</button>
+
+                <button *ngIf="!loadingLogin" mat-raised-button type="submit" class="btn btn-primary w-100">{{ __('global.login') }}</button>
+                <button *ngIf="loadingLogin" mat-raised-button type="submit" class="btn btn-primary w-100">
+                    <img src="assets/img/loading-spinner-button.gif" width="25px">
+                </button>
             </form>
         </div>
         <div *ngIf="isResetPasswort" class="col-md-4 centered-container">
