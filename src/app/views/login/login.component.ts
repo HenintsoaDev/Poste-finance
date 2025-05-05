@@ -25,6 +25,7 @@ export class LoginComponent extends Translatable implements OnInit {
     showConfirmPassword:Boolean = false;
     loginForm: FormGroup;
     submitted = false;
+    loadingLogin = false;
 
     constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,private fb: FormBuilder
         ) {
@@ -41,12 +42,14 @@ export class LoginComponent extends Translatable implements OnInit {
     onLogin() {
         this.submitted = true;
         if (this.loginForm.valid) {
+            this.loadingLogin = true;
             this.authService.login({ login: this.login, password: this.password }).subscribe({
                 next: (res) => {
                     if(res['code'] == 200) {
                         this.authService.me().subscribe({
                             next: (res) => {
                                 if(res['code'] == 200) {
+                                    this.loadingLogin = false;    
                                     this.router.navigate(['/home']);
                                     this.toastr.success(this.__("global.connecter"), this.__("global.success"));
                                 }
@@ -57,13 +60,18 @@ export class LoginComponent extends Translatable implements OnInit {
                             this.isResetPasswort = true;
                         }
                         this.toastr.error(res['msg'], this.__("global.error"));
+                        this.loadingLogin = false;    
                     }
                     else{
                         this.toastr.error(res['msg'], this.__("global.error"));
-                    }                
+                        this.loadingLogin = false;    
+                    }    
+                            
                 },
                 error: (err) => {
+                    this.loadingLogin = false;
                 }
+                
             });
           } else {
             this.loginForm.markAllAsTouched();
