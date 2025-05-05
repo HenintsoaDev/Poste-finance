@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
+import { AuthService } from 'app/services/auth.service';
 declare var bootstrap: any;
 
 @Component({
@@ -98,10 +99,11 @@ listIcon = [
               private toastr: ToastrService, 
               private moduleService: ModuleService,     
               private passageService: PassageService,
-              private modalService: BsModalService
-
+              private modalService: BsModalService,
+              private authService : AuthService
     ) {
     super();
+    this.authService.initAutority("PRM");
   }
 
 

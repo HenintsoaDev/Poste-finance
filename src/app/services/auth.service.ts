@@ -73,8 +73,8 @@ export class AuthService {
         if(typeof codeSousModule === 'string'){
             codeSousModule = [codeSousModule]
         }
-
-        modules.push(window['module'].toString())
+        
+        modules.push(window['moduleSelected'])
         window['authority'] =[];
         window['actions'] = null;
         window['authority']['module'] = modules;

@@ -1,4 +1,4 @@
-import { Auth } from "app/shared/models/db";
+import { action, Auth, module, module_user, sous_module } from "app/shared/models/db";
 import { IAction } from "../interfaces/IAction";
 import { IMe } from "../interfaces/IMe";
 import { IModule } from "../interfaces/IModule";
@@ -52,10 +52,10 @@ export  class Translatable{
         if(user.info.admin === 1){
             return true ;
         }
-        //return !!this.actionModule().find((item)=> item.code === codeAction && item.state ===1);
+        return !!this.actionModule().find((item)=> item.code === codeAction && item.state ===1);
     }
 
-    /*public actionModule(): profilage_droit[]{
+    public actionModule(): action[]{
         if(window['actions']){
             return window['actions'] ;
         }
@@ -64,31 +64,32 @@ export  class Translatable{
         // console.log('WWW',codeModule)
         let  user =<Auth>  window['authority']['user'];
         try {
-            let module: profilage_module[] = user.modules.filter((item:profilage_module)=>  codeModule.indexOf(item.code)!==-1);
-        // console.log('mod',module);
-            let sousModule:profilage_sous_module []=[];
+            let module: module_user[] = user.modules.filter((item:module_user)=>  codeModule.indexOf(item.code)!==-1);
+            // console.log('mod',module);
+            let sousModule:sous_module []=[];
             if(module){
-            {
+                
                 for (let i=0 ;i< module.length ;i++){
-                let sous_module_ = module[i].sous_modules.filter((item)=>  codeSousModule.indexOf(item.code) !== -1);
-                //console.log('OK SOUS MODULE',sous_module_)
-                if(sous_module_){
-                    sousModule.push(...sous_module_);
+                    let sous_module_ = module[i].sousModules.filter((item)=>  codeSousModule.indexOf(item.code) !== -1);
+                    //console.log('OK SOUS MODULE',sous_module_)
+                    if(sous_module_){
+                        sousModule.push(...sous_module_);
+                    }
                 }
+
+                let actions:action[]=[];
+                for (let i= 0;i< sousModule.length;i++){
+                    actions.push(...sousModule[i].actions)
                 }
-            }
-            let actions:profilage_droit[]=[];
-            for (let i= 0;i< sousModule.length;i++){
-                actions.push(...sousModule[i].actions)
-            }
-            //console.log("ASC",actions,sousModule,codeSousModule)
-            return   window['actions'] = actions;
+
+                //console.log("ASC",actions,sousModule,codeSousModule)
+                return   window['actions'] = actions;
             }
             return [];
         } catch (e) {
             return  [] ;
         }
-    }*/
+    }
 
 
     
