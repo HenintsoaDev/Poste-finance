@@ -12,6 +12,7 @@ import { MonetiqueComponent } from './views/modules/monetique/monetique.componen
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { ModuleComponent } from './views/modules/adm/module/module.component';
+import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 
 const routes: Routes =[
   
@@ -23,6 +24,8 @@ const routes: Routes =[
   { path: ':module',data: { breadcrumb: 'Administration' }, children:[
     {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
       {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
+      {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
+
     ]},
   ]}, 
   /*{

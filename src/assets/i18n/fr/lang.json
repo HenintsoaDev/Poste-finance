@@ -97,6 +97,16 @@
         "add" : "Ajouter un module",
         "title_edit_modal" : "Modification d'un module",
         "title_add_modal" : "Ajout d'un module"
+    },
+    "sous_module" : {
+        "title" : "Gestion des sous modules",
+        "name" : "Libelle",
+        "code" : "Code",
+        "icon" : "Icon",
+        "module" : "Module",
+        "add" : "Ajouter un sous module",
+        "title_edit_modal" : "Modification d'un sous module",
+        "title_add_modal" : "Ajout d'un sous module"
     }
 
 

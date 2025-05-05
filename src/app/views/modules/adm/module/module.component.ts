@@ -22,48 +22,50 @@ export class ModuleComponent extends Translatable implements OnInit {
   modalRef?: BsModalRef;
   
 /***************************************** */
-  endpoint = "";
-  header = [
-    {
-      "nomColonne" : this.__('module.name'),
-      "colonneTable" : "name",
-      "table" : "module"
-    },
-    {
-      "nomColonne" : this.__('module.code'),
-      "colonneTable" : "code",
-      "table" : "module"
-    },
-    {
-      "nomColonne" : this.__('module.icon'),
-      "colonneTable" : "icon",
-      "table" : "module"
-    },
+endpoint = "";
+header = [
   
-    {
-      "nomColonne" : this.__('global.action')
-    }
+  {
+    "nomColonne" : this.__('module.code'),
+    "colonneTable" : "code",
+    "table" : "module"
+  },
+  {
+    "nomColonne" : this.__('module.name'),
+    "colonneTable" : "name",
+    "table" : "module"
+  },
+  {
+    "nomColonne" : this.__('module.icon'),
+    "colonneTable" : "icon",
+    "table" : "module"
+  },
+ 
+  {
+    "nomColonne" : this.__('global.action')
+  }
+
 
       
     
     ]
-
-  objetBody = [
-          {
-            'name' : 'name',
-            'type' : 'text',
-          },
-          {
-            'name' : 'code',
-            'type' : 'text',
-          },
-          {
-            'name' : 'icon',
-            'type' : 'text',
-          },
-        
-          {'name' :  'state#id'}
-  ]
+objetBody = [
+        {
+          'name' : 'code',
+          'type' : 'text',
+        },
+        {
+          'name' : 'name',
+          'type' : 'text',
+        },
+      
+        {
+          'name' : 'icon',
+          'type' : 'text',
+        },
+      
+        {'name' :  'state#id'}
+]
 
   listIcon = [
     {
@@ -80,7 +82,7 @@ export class ModuleComponent extends Translatable implements OnInit {
     },
   ]
 
-  searchGlobal = ['module.name', 'module.code', 'module.icon']
+  searchGlobal = [ 'module.code', 'module.name', 'module.icon']
  
   /***************************************** */
 
@@ -183,7 +185,10 @@ subscription: Subscription;
                       this.actualisationTableau();
                       this.closeModal();
                     }
-                    else{
+                    else if(res['code'] == 400){
+                      if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                      else this.toastr.error(res['data'], this.__("global.error"));
+                    }else{
                         this.toastr.error(res['msg'], this.__("global.error"));
                     }                
                   },

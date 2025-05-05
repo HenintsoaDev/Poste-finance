@@ -36,6 +36,7 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.component';
+import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 
 @NgModule({
   exports:[
@@ -80,6 +81,7 @@ import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.comp
     TableComponent,
     WelcomeModuleComponent,
     TableShimmerComponent,
+    SousModuleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
