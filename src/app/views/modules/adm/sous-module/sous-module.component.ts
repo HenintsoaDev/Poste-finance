@@ -140,10 +140,11 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
           if(event.data.action == 'edit') this.openModalEditSousModule();
           else if(event.data.action == 'delete') this.openModalDeleteSousModule();
-          else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateSousModule();
+          else if(event.data.state == 0 || event.data.state == 1) {
+            this.openModalToogleStateSousModule();
+            //this.passageService.clear(); 
+          }
           
-          // Nettoyage immédiat de l'event
-          this.passageService.clear();  // ==> à implémenter dans ton service
         
       });
           this.endpoint = environment.baseUrl + '/' + environment.sous_module;

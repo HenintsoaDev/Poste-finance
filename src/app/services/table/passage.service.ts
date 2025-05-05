@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject, Subject } from 'rxjs';
 
 export interface PassageEvent {
-  type: '' | 'modal' | 'url';
+  type: any;
   data: any;
 }
 
@@ -34,6 +34,6 @@ export class PassageService {
   }
 
   clear(): void {
-    this.passageSubject.next({ type: '', data: null });
+    this.passageSubject.next({ type: 'cc', data: null });
   }
 }

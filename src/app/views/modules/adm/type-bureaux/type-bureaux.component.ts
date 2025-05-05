@@ -110,8 +110,8 @@ subscription: Subscription;
         else if(event.data.action == 'delete') this.openModalDeleteTypeBureau();
         else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
 
-        // Nettoyage immédiat de l'event
-        this.passageService.clear();  // ==> à implémenter dans ton service
+        // // Nettoyage immédiat de l'event
+        // this.passageService.clear();  // ==> à implémenter dans ton service
       
     });
         this.endpoint = environment.baseUrl + '/' + environment.type_bureau;

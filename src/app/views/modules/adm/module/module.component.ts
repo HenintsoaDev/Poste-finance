@@ -126,10 +126,12 @@ subscription: Subscription;
 
         if(event.data.action == 'edit') this.openModalEditModule();
         else if(event.data.action == 'delete') this.openModalDeleteModule();
-        else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
+        else if(event.data.state == 0 || event.data.state == 1){
+          this.openModalToogleStateModule();
+         // this.passageService.clear(); 
+        } 
 
-        // Nettoyage immédiat de l'event
-        this.passageService.clear();  // ==> à implémenter dans ton service
+        
       
     });
         this.endpoint = environment.baseUrl + '/' + environment.module;
