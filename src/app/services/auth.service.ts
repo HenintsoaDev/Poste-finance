@@ -140,4 +140,12 @@ export class AuthService {
     isLoggedIn(): boolean {
         return !!localStorage.getItem('token');
     }
+
+    public async getSelectList(endpoint:string,text: string[] | string,id:string="id"){
+        let res:any = await this.http.get<any>(`${environment.baseUrl}/${endpoint}`,valuesys.httpAuthOptions()).toPromise();
+        console.log("xxxxx", res)
+        let data  = res.data ;
+        
+        return data ; 
+      }
 }

@@ -23,14 +23,15 @@ export class ModuleComponent extends Translatable implements OnInit {
 /***************************************** */
 endpoint = "";
 header = [
-  {
-    "nomColonne" : this.__('module.name'),
-    "colonneTable" : "name",
-    "table" : "module"
-  },
+  
   {
     "nomColonne" : this.__('module.code'),
     "colonneTable" : "code",
+    "table" : "module"
+  },
+  {
+    "nomColonne" : this.__('module.name'),
+    "colonneTable" : "name",
     "table" : "module"
   },
   {
@@ -49,13 +50,14 @@ header = [
 
 objetBody = [
         {
-          'name' : 'name',
-          'type' : 'text',
-        },
-        {
           'name' : 'code',
           'type' : 'text',
         },
+        {
+          'name' : 'name',
+          'type' : 'text',
+        },
+      
         {
           'name' : 'icon',
           'type' : 'text',
@@ -79,7 +81,7 @@ listIcon = [
   },
 ]
 
-  searchGlobal = ['module.name', 'module.code', 'module.icon']
+  searchGlobal = [ 'module.code', 'module.name', 'module.icon']
  
   /***************************************** */
 
@@ -180,7 +182,10 @@ subscription: Subscription;
                       this.actualisationTableau();
                       this.closeModal();
                     }
-                    else{
+                    else if(res['code'] == 400){
+                      if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                      else this.toastr.error(res['data'], this.__("global.error"));
+                    }else{
                         this.toastr.error(res['msg'], this.__("global.error"));
                     }                
                   },

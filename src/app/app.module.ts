@@ -35,6 +35,7 @@ import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.co
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 
 @NgModule({
   exports:[
@@ -77,6 +78,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
     ModuleComponent,
     TableComponent,
     WelcomeModuleComponent,
+    SousModuleComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

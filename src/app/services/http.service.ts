@@ -37,4 +37,7 @@ export class HttpService {
     delete<T>(endpoint: string): Observable<T> {
         return this.http.delete<T>(`${environment.baseUrl}/${endpoint}`, valuesys.httpAuthOptions() );
     }
+
+
+  
 }

@@ -1,0 +1,39 @@
+.button-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    padding: 10px;
+    /* Optionnel, pour délimiter la zone */
+}
+
+.left-buttons {
+    display: flex;
+    gap: 10px;
+    /* Espace entre les boutons */
+}
+
+
+
+
+.right-button {
+    display: flex;
+}
+
+::ng-deep .cdk-overlay-container,
+::ng-deep .cdk-overlay-pane {
+    z-index: 2000 !important;
+    /* Assure-toi que c'est supérieur à celui du modal Bootstrap (généralement 1050) */
+}
+
+/****/
+.wrapper {
+    margin-bottom: 20px;
+}
+
+/*****************************************************
+	Custom styling example bellow.
+*****************************************************/
+
+
+

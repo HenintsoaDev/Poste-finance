@@ -34,6 +34,7 @@ export class sous_module {
     name: string ;
     code: string ;
     icon: string | null ;
+    module_id: string | null ;
     state: number | null ;
     actions: action [] | null | [];
 }
