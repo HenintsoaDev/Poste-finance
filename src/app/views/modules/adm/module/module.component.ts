@@ -22,68 +22,67 @@ export class ModuleComponent extends Translatable implements OnInit {
   modalRef?: BsModalRef;
   
 /***************************************** */
-endpoint = "";
-header = [
-  {
-    "nomColonne" : this.__('module.name'),
-    "colonneTable" : "name",
-    "table" : "module"
-  },
-  {
-    "nomColonne" : this.__('module.code'),
-    "colonneTable" : "code",
-    "table" : "module"
-  },
-  {
-    "nomColonne" : this.__('module.icon'),
-    "colonneTable" : "icon",
-    "table" : "module"
-  },
- 
-  {
-    "nomColonne" : this.__('global.action')
-  }
-
-    
+  endpoint = "";
+  header = [
+    {
+      "nomColonne" : this.__('module.name'),
+      "colonneTable" : "name",
+      "table" : "module"
+    },
+    {
+      "nomColonne" : this.__('module.code'),
+      "colonneTable" : "code",
+      "table" : "module"
+    },
+    {
+      "nomColonne" : this.__('module.icon'),
+      "colonneTable" : "icon",
+      "table" : "module"
+    },
   
+    {
+      "nomColonne" : this.__('global.action')
+    }
+
+      
+    
+    ]
+
+  objetBody = [
+          {
+            'name' : 'name',
+            'type' : 'text',
+          },
+          {
+            'name' : 'code',
+            'type' : 'text',
+          },
+          {
+            'name' : 'icon',
+            'type' : 'text',
+          },
+        
+          {'name' :  'state#id'}
   ]
 
-objetBody = [
-        {
-          'name' : 'name',
-          'type' : 'text',
-        },
-        {
-          'name' : 'code',
-          'type' : 'text',
-        },
-        {
-          'name' : 'icon',
-          'type' : 'text',
-        },
-      
-        {'name' :  'state#id'}
-]
+  listIcon = [
+    {
+      'icon' : 'edit',
+      'action' : 'edit',
+      'tooltip' : 'Modification',
 
-listIcon = [
-  {
-    'icon' : 'edit',
-    'action' : 'edit',
-    'tooltip' : 'Modification',
+    },
+    {
+      'icon' : 'delete',
+      'action' : 'delete',
+      'tooltip' : 'Supression',
 
-  },
-  {
-    'icon' : 'delete',
-    'action' : 'delete',
-    'tooltip' : 'Supression',
-
-  },
-]
+    },
+  ]
 
   searchGlobal = ['module.name', 'module.code', 'module.icon']
  
   /***************************************** */
-
 
 
   moduleForm: FormGroup;
@@ -94,6 +93,8 @@ listIcon = [
   idModule : number;
   titleModal: string = "";
 
+  /***Loading data */
+  loadingTable = false;
 
   constructor(private fb: FormBuilder,  
               private toastr: ToastrService, 
