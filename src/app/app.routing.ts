@@ -21,10 +21,11 @@ const routes: Routes =[
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
   { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
   { path: 'app-module/:module', component: WelcomeModuleComponent,data: { breadcrumb: 'Module' }},
-  { path: ':module',data: { breadcrumb: 'Module' }, children:[
-    {path : 'parametrage',data: { breadcrumb: 'Parametrage' },children : [
-      {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Module' }},
-      {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Sous module' }},
+  { path: ':module',data: { breadcrumb: 'Administration' }, children:[
+    {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
+      {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
+      {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
+
     ]},
   ]}, 
   /*{

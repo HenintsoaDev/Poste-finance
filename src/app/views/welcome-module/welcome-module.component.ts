@@ -17,7 +17,8 @@ export class WelcomeModuleComponent extends Translatable implements OnInit{
     }
 
     ngOnInit(): void {
-        const module = this.route.snapshot.paramMap.get('module');
+        const module: String = this.route.snapshot.paramMap.get('module');
+        window['moduleSelected'] = module;
         const storedMenuItems = localStorage.getItem(environment.menuItemsStorage);
         this.nameModule = storedMenuItems ? JSON.parse(storedMenuItems).find((item: any) => item.path === "/" + module)?.title : '';
     }

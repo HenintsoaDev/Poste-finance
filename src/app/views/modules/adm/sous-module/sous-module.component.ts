@@ -79,12 +79,15 @@ export class SousModuleComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
+      'autority' : 'PRM_2',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
+      'autority' : 'PRM_3',
+
   
     },
   ]
@@ -117,6 +120,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
       ) {
       super();
+      this.authService.initAutority("PRM");
+
     }
   
   
