@@ -15,7 +15,8 @@ export interface PassageEvent {
 export class PassageService {
 
   // Créer un sujet pour notifier l'ouverture du modal
-  private passageSubject = new BehaviorSubject<PassageEvent>({ type: '', data: null });  
+  //private passageSubject = new BehaviorSubject<PassageEvent>({ type: '', data: null });  
+  private passageSubject = new BehaviorSubject<any>({ type: 'url', data: null });
   constructor() { }
 
   // Méthode pour ouvrir le modal avec des données spécifiques
@@ -34,6 +35,6 @@ export class PassageService {
   }
 
   clear(): void {
-    this.passageSubject.next({ type: 'cc', data: null });
+    this.passageSubject.next({ type: 'clear', data: null });
   }
 }

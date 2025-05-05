@@ -131,6 +131,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
     async ngOnInit() {
       this.titleModal = this.__('sous_module.title_add_modal');
   
+      this.passageService.appelURL(null);
+
        /***************************************** */
           // Écouter les changements de modal à travers le service si il y a des actions
           this.subscription = this.passageService.getObservable().subscribe(event => {
@@ -140,11 +142,10 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
           if(event.data.action == 'edit') this.openModalEditSousModule();
           else if(event.data.action == 'delete') this.openModalDeleteSousModule();
-          else if(event.data.state == 0 || event.data.state == 1) {
-            this.openModalToogleStateSousModule();
-            //this.passageService.clear(); 
-          }
+          else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateSousModule();
           
+          // Nettoyage immédiat de l'event
+          this.passageService.clear();  // ==> à implémenter dans ton service
         
       });
           this.endpoint = environment.baseUrl + '/' + environment.sous_module;

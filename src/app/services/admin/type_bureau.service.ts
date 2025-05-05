@@ -34,8 +34,13 @@ export class TypeBureauService {
         );
     }
     modifierTypeBureau(credentials: type_bureau): Observable<any> {
+
+        let data  = {
+            'id' : credentials.id,
+            'name' : credentials.name
+        }
         
-        return this.httpService.put<any>(environment.type_bureau + '/' + credentials.id, credentials).pipe(
+        return this.httpService.put<any>(environment.type_bureau + '/' + credentials.id, data).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)

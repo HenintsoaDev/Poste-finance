@@ -77,6 +77,9 @@ export class TableComponent extends Translatable {
 
 
       this.subscription = this.passageService.getObservable().subscribe(event => {
+        console.log("mijery event ------", event);
+
+        
 
         if (event.type === 'url' || event.type === '' ) {
           const filtre = event.data;

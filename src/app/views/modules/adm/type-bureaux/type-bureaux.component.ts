@@ -97,13 +97,15 @@ listIcon = [
 subscription: Subscription;
 
   async ngOnInit() {
-    this.titleModal = this.__('type_bureau.title_add_modal');
 
+      this.titleModal = this.__('type_bureau.title_add_modal');
+
+      this.passageService.appelURL(null);
+      
      /***************************************** */
         // Écouter les changements de modal à travers le service si il y a des actions
         this.subscription = this.passageService.getObservable().subscribe(event => {
 
-          console.log("Passe???????", event);
           this.idTypeBureau = event.data.id;
 
         if(event.data.action == 'edit') this.openModalEditTypeBureau();
@@ -111,7 +113,7 @@ subscription: Subscription;
         else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
 
         // // Nettoyage immédiat de l'event
-        // this.passageService.clear();  // ==> à implémenter dans ton service
+        this.passageService.clear();  // ==> à implémenter dans ton service
       
     });
         this.endpoint = environment.baseUrl + '/' + environment.type_bureau;

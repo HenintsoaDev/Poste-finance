@@ -45,10 +45,10 @@ header = [
     "nomColonne" : this.__('global.action')
   }
 
-
-      
     
-    ]
+  
+  ]
+
 objetBody = [
         {
           'name' : 'code',
@@ -67,24 +67,25 @@ objetBody = [
         {'name' :  'state#id'}
 ]
 
-  listIcon = [
-    {
-      'icon' : 'edit',
-      'action' : 'edit',
-      'tooltip' : 'Modification',
+listIcon = [
+  {
+    'icon' : 'edit',
+    'action' : 'edit',
+    'tooltip' : 'Modification',
 
-    },
-    {
-      'icon' : 'delete',
-      'action' : 'delete',
-      'tooltip' : 'Supression',
+  },
+  {
+    'icon' : 'delete',
+    'action' : 'delete',
+    'tooltip' : 'Supression',
 
-    },
-  ]
+  },
+]
 
   searchGlobal = [ 'module.code', 'module.name', 'module.icon']
  
   /***************************************** */
+
 
 
   moduleForm: FormGroup;
@@ -95,8 +96,6 @@ objetBody = [
   idModule : number;
   titleModal: string = "";
 
-  /***Loading data */
-  loadingTable = false;
 
   constructor(private fb: FormBuilder,  
               private toastr: ToastrService, 
@@ -117,6 +116,8 @@ subscription: Subscription;
   async ngOnInit() {
     this.titleModal = this.__('module.title_add_modal');
 
+        this.passageService.appelURL(null);
+
      /***************************************** */
         // Écouter les changements de modal à travers le service si il y a des actions
         this.subscription = this.passageService.getObservable().subscribe(event => {
@@ -126,12 +127,10 @@ subscription: Subscription;
 
         if(event.data.action == 'edit') this.openModalEditModule();
         else if(event.data.action == 'delete') this.openModalDeleteModule();
-        else if(event.data.state == 0 || event.data.state == 1){
-          this.openModalToogleStateModule();
-         // this.passageService.clear(); 
-        } 
+        else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
 
-        
+        // Nettoyage immédiat de l'event
+        this.passageService.clear();  // ==> à implémenter dans ton service
       
     });
         this.endpoint = environment.baseUrl + '/' + environment.module;
