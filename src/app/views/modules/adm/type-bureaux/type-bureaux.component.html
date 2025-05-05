@@ -14,7 +14,7 @@
                                 </button> -->
                             </div>
                             <div class="right-button">
-                                <button *ngIf="autority('PRM_2')" class="btn btn-secondary" (click)="openModalAdd(addModule)"> {{ __("module.add")}}</button>
+                                <button *ngIf="autority('PRM_2')" class="btn btn-secondary" (click)="openModalAdd(addTypeBureau)"> {{ __("type_bureau.add")}}</button>
                             </div>
                         </div>
                     </div>
@@ -47,7 +47,7 @@
 
 <!-- MODAL -->
  <!-- Modal avec Material Design -->
- <ng-template #addModule>
+ <ng-template #addTypeBureau>
     <div class="modal-header btn-primary">
         <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
         <button type="button" class="close" (click)="closeModal()">
@@ -55,36 +55,26 @@
         </button>
     </div>
     <div class="modal-body">
-        <form #f="ngForm" [formGroup]="moduleForm" (ngSubmit)="onSubmit()">
+        <form #f="ngForm" [formGroup]="typeBureauForm" (ngSubmit)="onSubmit()">
             <div class="modal-body">
-                <div class="form-group">
-                    <mat-form-field>
-                        <mat-label>{{ __('module.code')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="module.code" placeholder="{{ __('module.code')}}" formControlName="code" name="code">
-                    </mat-form-field>
-                </div>
+               
                 
                 <div class="form-group">
                     <mat-form-field>
-                        <mat-label>{{ __('module.name')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="module.name" placeholder="{{ __('module.name')}}" formControlName="name" name="name">
+                        <mat-label>{{ __('type_bureau.name')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="type_bureau.name" placeholder="{{ __('type_bureau.name')}}" formControlName="name" name="name">
                     </mat-form-field>
                 </div>
                
-                <div class="form-group">
-                    <mat-form-field>
-                        <mat-label>{{ __('module.icon')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="module.icon" placeholder="{{ __('module.icon')}}" formControlName="icon" name="icon">
-                    </mat-form-field>
-                </div>
+              
                 
                 
             </div>
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
-                <button type="submit" class="btn btn-primary" *ngIf="!module.id" [disabled]="moduleForm.invalid">{{ __('global.save')}}</button>
-                <button type="submit" class="btn btn-primary" *ngIf="module.id" [disabled]="moduleForm.invalid">{{ __('global.edit')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="!type_bureau.id" [disabled]="typeBureauForm.invalid">{{ __('global.save')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="type_bureau.id" [disabled]="typeBureauForm.invalid">{{ __('global.edit')}}</button>
             </div>
         </form>
     </div>

@@ -13,6 +13,8 @@ import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espe
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
+import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
+import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
 
 const routes: Routes =[
   
@@ -25,6 +27,8 @@ const routes: Routes =[
     {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
       {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
       {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
+      {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
+      {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
 
     ]},
   ]}, 

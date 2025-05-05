@@ -107,6 +107,23 @@
         "add" : "Ajouter un sous module",
         "title_edit_modal" : "Modification d'un sous module",
         "title_add_modal" : "Ajout d'un sous module"
+    },
+    "type_bureau" : {
+        "title" : "Gestion des types de bureaux",
+        "name" : "Libelle",
+        "module" : "Module",
+        "add" : "Ajouter un type de bureau",
+        "title_edit_modal" : "Modification d'un type de bureau",
+        "title_add_modal" : "Ajout d'un type de bureau"
+    },
+    "type_profil" : {
+        "title" : "Gestion des types profils",
+        "code" : "Code",
+        "name" : "Libelle",
+        "module" : "Module",
+        "add" : "Ajouter un type profil",
+        "title_edit_modal" : "Modification d'un type profil",
+        "title_add_modal" : "Ajout d'un type profil"
     }
 
 

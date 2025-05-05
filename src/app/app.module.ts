@@ -36,6 +36,8 @@ import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
+import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
+import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
 
 @NgModule({
   exports:[
@@ -79,6 +81,8 @@ import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module
     TableComponent,
     WelcomeModuleComponent,
     SousModuleComponent,
+    TypeBureauxComponent,
+    TypeProfilComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

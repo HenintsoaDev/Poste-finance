@@ -56,3 +56,15 @@ export class action {
     state: number | null ;
     type_action_id: number ;
 }
+export class type_bureau {
+    id: number ;
+    name: string ;
+    state: number | null ;
+}
+
+export class type_profil {
+    id: number ;
+    name: string ;
+    code: string ;
+    state: number | null ;
+}

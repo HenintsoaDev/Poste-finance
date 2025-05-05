@@ -17,5 +17,7 @@ export const environment = {
   module :'parametrage/module',
   sous_module :'parametrage/sousmodule',
   liste_module_active :'parametrage/consult/module/liste_module_active',
-  
+  type_bureau :'parametrage/type_bureau',
+  type_profil :'parametrage/type_profil',
+
 };

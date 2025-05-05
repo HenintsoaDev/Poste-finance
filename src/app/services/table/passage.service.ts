@@ -32,4 +32,8 @@ export class PassageService {
   getObservable() {
     return this.passageSubject.asObservable();
   }
+
+  clear(): void {
+    this.passageSubject.next({ type: '', data: null });
+  }
 }
