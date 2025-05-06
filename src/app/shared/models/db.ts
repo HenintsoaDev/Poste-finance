@@ -12,6 +12,7 @@ export class utilisateur {
     superviseur: number;
     email: string;
     name: string;
+    id_type_agence: any;
 }
 
 export class Auth {

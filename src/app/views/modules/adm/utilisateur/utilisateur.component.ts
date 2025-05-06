@@ -181,7 +181,6 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
           if(event.data.action == 'edit') this.openModalEditutilisateur();
           else if(event.data.action == 'delete') this.openModalDeleteutilisateur();
-          else if(event.data.action == 'affect') this.openModalAffectutilisateur();
           else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateutilisateur();
           
           // Nettoyage immédiat de l'event
@@ -330,25 +329,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     }
   
 
-      // Ouverture de modal pour modification
-      openModalAffectutilisateur() {
-  
-        this.titleModal = this.__('utilisateur.title_edit_modal');
-  
-        if (this.affectationutilisateur) {
-    
-          this.recupererDonnee();
-          this.actualisationSelectProfil();
-          this.actualisationSelectTypeBureau();
-          this.actualisationSelectBureau();
-
-          // Ouverture de modal
-          this.modalRef = this.modalService.show(this.affectationutilisateur, {
-            class: 'modal-xl'
-          });
-        }
-      }
-    
+      
   
      // SUppression d'un modal
      openModalDeleteutilisateur() {
@@ -447,7 +428,17 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     // Ouverture du modal pour l'ajout
     async openModalAdd(template: TemplateRef<any>) {
       this.titleModal = this.__('utilisateur.title_add_modal');
-      this.utilisateur = new utilisateur();
+      this.utilisateurForm = this.fb.group({
+          nom: ['', Validators.required],
+          prenom: ['', [Validators.required]],
+          login: ['', [Validators.required]],
+          email: ['', [Validators.required]],
+          telephone: ['', [Validators.required]],
+          fk_agence: ['', [Validators.required]],
+          fk_profil: ['', [Validators.required]], 
+          id_type_agence: ['', [Validators.required]] 
+      });
+
       this.actualisationSelectProfil();
       this.actualisationSelectBureau();
       this.actualisationSelectTypeBureau();
@@ -510,13 +501,26 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       if (storedData) result = JSON.parse(storedData);
       this.listutilisateurs = result.data;
 
-      console.log(this.listutilisateurs);      console.log(this.idUtilisateur);
-
+      console.log(storedData);
+      console.log(this.idUtilisateur);
 
       // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
       let res = this.listutilisateurs.filter(_ => _.rowid == this.idUtilisateur);
       if(res.length != 0){
         this.utilisateur = res[0];
+
+        
+
+        this.utilisateurForm.patchValue({
+          nom: this.utilisateur.nom,
+          prenom: this.utilisateur.prenom,
+          login: this.utilisateur.login,
+          email: this.utilisateur.email,
+          telephone: this.utilisateur.telephone,
+          fk_agence: this.utilisateur.fk_agence,
+          fk_profil: this.utilisateur.fk_profil,
+          id_type_agence: this.utilisateur.id_type_agence
+        });
       }
    }
   

@@ -203,7 +203,10 @@ export class TableComponent extends Translatable {
       let res = toogle.data;
       this.isLoading = false;
       
-      localStorage.setItem('data', JSON.stringify(res));
+      await localStorage.setItem('data', JSON.stringify(res));
+      const storedData = localStorage.getItem('data');
+
+      console.log(storedData);
 
       //** Affichage de donnée dynamiser */
       let tableau = res.data.map((row: any) => 
