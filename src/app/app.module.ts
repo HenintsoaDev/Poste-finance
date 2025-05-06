@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -20,7 +20,7 @@ import { OverlayModule } from '@angular/cdk/overlay';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DataTablesModule } from "angular-datatables";
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { ProfilComponent } from './views/profil/profil.component';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -39,7 +39,9 @@ import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.comp
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
+import localeFr from '@angular/common/locales/fr';
 
+registerLocaleData(localeFr);
 @NgModule({
   exports:[
     TableComponent,
@@ -95,6 +97,7 @@ import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil
       useClass: AuthInterceptor,
       multi: true
     },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     DatePipe
   ],
   bootstrap: [AppComponent]
