@@ -10,8 +10,8 @@ import { Translatable } from 'shared/constants/Translatable';
 })
 export class BreadcrumbComponent extends Translatable implements OnInit {
 
-    walletSolde = 0;
-    carteSolde = 0;
+    walletSolde: String = "0";
+    carteSolde: String = "0";
 
     constructor(public breadcrumbService: BreadcrumbService,private soldeService: SoldeService) { 
         super();

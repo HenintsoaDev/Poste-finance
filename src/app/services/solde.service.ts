@@ -8,8 +8,8 @@ import { environment } from 'environments/environment';
 })
 export class SoldeService {
     
-    private walletSoldeSubject = new BehaviorSubject<number>(0);
-    private carteSoldeSubject = new BehaviorSubject<number>(0);
+    private walletSoldeSubject = new BehaviorSubject<String>("0");
+    private carteSoldeSubject = new BehaviorSubject<String>("0");
 
     walletSolde$ = this.walletSoldeSubject.asObservable();
     carteSolde$ = this.carteSoldeSubject.asObservable();
@@ -28,51 +28,39 @@ export class SoldeService {
 
                     const localStorageValue = localStorage.getItem(environment.soldeWelletStorage);
                     if (localStorageValue) {
-                        const parsedValue = parseFloat(localStorageValue);
-                        if (!isNaN(parsedValue)) {
-                            this.walletSoldeSubject.next(parsedValue);
-                        }
+                        this.walletSoldeSubject.next(localStorageValue);
                     }
 
                     const localStorageValueCarte = localStorage.getItem(environment.soldeCarteStorage);
                     if (localStorageValueCarte) {
-                        const parsedValueCarte = parseFloat(localStorageValueCarte);
-                        if (!isNaN(parsedValueCarte)) {
-                            this.carteSoldeSubject.next(parsedValueCarte);
-                        }
+                        this.carteSoldeSubject.next(localStorageValueCarte);
                     }
                 }
             })
         );
     }
 
-    setWalletSolde(newValue: number) {
+    setWalletSolde(newValue: String) {
         this.walletSoldeSubject.next(newValue);
     }
 
-    setCarteSolde(newValue: number) {
+    setCarteSolde(newValue: String) {
         this.carteSoldeSubject.next(newValue);
     }
 
-    getWalletSolde(): number {
+    getWalletSolde(): String {
         // Check if the value is in localStorage
         const localStorageValue = localStorage.getItem(environment.soldeWelletStorage);
         if (localStorageValue) {
-            const parsedValue = parseFloat(localStorageValue);
-            if (!isNaN(parsedValue)) {
-                this.walletSoldeSubject.next(parsedValue);
-            }
+            this.walletSoldeSubject.next(localStorageValue);
         }
         return this.walletSoldeSubject.value;
     }
 
-    getCarteSolde(): number {
+    getCarteSolde(): String {
         const localStorageValueCarte = localStorage.getItem(environment.soldeCarteStorage);
         if (localStorageValueCarte) {
-            const parsedValueCarte = parseFloat(localStorageValueCarte);
-            if (!isNaN(parsedValueCarte)) {
-                this.carteSoldeSubject.next(parsedValueCarte);
-            }
+            this.carteSoldeSubject.next(localStorageValueCarte);
         }
         return this.carteSoldeSubject.value;
     }

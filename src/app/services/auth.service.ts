@@ -54,13 +54,13 @@ export class AuthService {
                     user = res.data ;
                     this.setLoginUser(user) ;
                 }else {
-                    await  this.router.navigate(["/logout"])
+                    await  this.router.navigate(["/login"])
                 }
             }
             user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
             return user;
         } catch (e) {
-            await  this.router.navigate(["/logout"]) ;
+            await  this.router.navigate(["/login"]) ;
             return null ;
         } 
     }
