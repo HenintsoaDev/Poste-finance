@@ -18,13 +18,17 @@ export class BreadcrumbComponent extends Translatable implements OnInit {
     }
 
     ngOnInit(): void {
-        this.soldeService.walletSolde$.subscribe(value => {
+
+        this.walletSolde = this.soldeService.getWalletSolde();
+        this.carteSolde = this.soldeService.getCarteSolde();
+        
+        /*this.soldeService.walletSolde$.subscribe(value => {
             this.walletSolde = value;
         });
       
         this.soldeService.carteSolde$.subscribe(value => {
             this.carteSolde = value;
-        });
+        });*/
     }
 
     goTo(){

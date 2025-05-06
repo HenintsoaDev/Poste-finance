@@ -21,8 +21,26 @@ export class SoldeService {
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
-                    this.walletSoldeSubject.next(response['data']['solde']);
-                    this.carteSoldeSubject.next(response['data']['solde_carte']);
+                    //this.walletSoldeSubject.next(response['data']['solde']);
+                    //this.carteSoldeSubject.next(response['data']['solde_carte']);
+                    localStorage.setItem('soldeWallet',response['data']['solde']);
+                    localStorage.setItem('soldeCarte',response['data']['solde_carte']);
+
+                    const localStorageValue = localStorage.getItem('soldeWallet');
+                    if (localStorageValue) {
+                        const parsedValue = parseFloat(localStorageValue);
+                        if (!isNaN(parsedValue)) {
+                            this.walletSoldeSubject.next(parsedValue);
+                        }
+                    }
+
+                    const localStorageValueCarte = localStorage.getItem('soldeCarte');
+                    if (localStorageValueCarte) {
+                        const parsedValueCarte = parseFloat(localStorageValueCarte);
+                        if (!isNaN(parsedValueCarte)) {
+                            this.carteSoldeSubject.next(parsedValueCarte);
+                        }
+                    }
                 }
             })
         );
@@ -37,10 +55,25 @@ export class SoldeService {
     }
 
     getWalletSolde(): number {
+        // Check if the value is in localStorage
+        const localStorageValue = localStorage.getItem('soldeWallet');
+        if (localStorageValue) {
+            const parsedValue = parseFloat(localStorageValue);
+            if (!isNaN(parsedValue)) {
+                this.walletSoldeSubject.next(parsedValue);
+            }
+        }
         return this.walletSoldeSubject.value;
     }
 
     getCarteSolde(): number {
+        const localStorageValueCarte = localStorage.getItem('soldeCarte');
+        if (localStorageValueCarte) {
+            const parsedValueCarte = parseFloat(localStorageValueCarte);
+            if (!isNaN(parsedValueCarte)) {
+                this.carteSoldeSubject.next(parsedValueCarte);
+            }
+        }
         return this.carteSoldeSubject.value;
     }
 }
