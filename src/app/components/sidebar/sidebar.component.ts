@@ -181,7 +181,8 @@ export class SidebarComponent implements OnInit {
             allowOutsideClick: false,
             }).then((result) => {
             if (result.isConfirmed) {
-                this.router.navigate(['/login'])
+
+                this.authService.logout();
             }
         });
     }

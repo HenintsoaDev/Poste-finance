@@ -23,10 +23,10 @@ export class SoldeService {
                     console.log("response XHR", response)
                     //this.walletSoldeSubject.next(response['data']['solde']);
                     //this.carteSoldeSubject.next(response['data']['solde_carte']);
-                    localStorage.setItem('soldeWallet',response['data']['solde']);
-                    localStorage.setItem('soldeCarte',response['data']['solde_carte']);
+                    localStorage.setItem(environment.soldeWelletStorage,response['data']['solde']);
+                    localStorage.setItem(environment.soldeCarteStorage,response['data']['solde_carte']);
 
-                    const localStorageValue = localStorage.getItem('soldeWallet');
+                    const localStorageValue = localStorage.getItem(environment.soldeWelletStorage);
                     if (localStorageValue) {
                         const parsedValue = parseFloat(localStorageValue);
                         if (!isNaN(parsedValue)) {
@@ -34,7 +34,7 @@ export class SoldeService {
                         }
                     }
 
-                    const localStorageValueCarte = localStorage.getItem('soldeCarte');
+                    const localStorageValueCarte = localStorage.getItem(environment.soldeCarteStorage);
                     if (localStorageValueCarte) {
                         const parsedValueCarte = parseFloat(localStorageValueCarte);
                         if (!isNaN(parsedValueCarte)) {
@@ -56,7 +56,7 @@ export class SoldeService {
 
     getWalletSolde(): number {
         // Check if the value is in localStorage
-        const localStorageValue = localStorage.getItem('soldeWallet');
+        const localStorageValue = localStorage.getItem(environment.soldeWelletStorage);
         if (localStorageValue) {
             const parsedValue = parseFloat(localStorageValue);
             if (!isNaN(parsedValue)) {
@@ -67,7 +67,7 @@ export class SoldeService {
     }
 
     getCarteSolde(): number {
-        const localStorageValueCarte = localStorage.getItem('soldeCarte');
+        const localStorageValueCarte = localStorage.getItem(environment.soldeCarteStorage);
         if (localStorageValueCarte) {
             const parsedValueCarte = parseFloat(localStorageValueCarte);
             if (!isNaN(parsedValueCarte)) {

@@ -7,6 +7,9 @@ export const environment = {
   menuItemsSelectedStorage : 'menuItemsSelectedPHCO',
   authItemName:'__token_api_gate_way_phco',
   userItemName:'__user_api_gate_way_phco',
+  phcoTimeToken : '_phco_time_token',
+  soldeWelletStorage : 'soldeWallet',
+  soldeCarteStorage : 'soldeCarte',
 
   module :'parametrage/module',
   sous_module :'parametrage/sousmodule',
