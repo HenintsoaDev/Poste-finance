@@ -4,6 +4,7 @@ import { AuthService } from 'app/services/auth.service';
 import { Translatable } from 'shared/constants/Translatable';
 import { ToastrService } from 'ngx-toastr';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { SoldeService } from 'app/services/solde.service';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +28,7 @@ export class LoginComponent extends Translatable implements OnInit {
     submitted = false;
     loadingLogin = false;
 
-    constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,private fb: FormBuilder
+    constructor(private authService: AuthService, private router: Router, private toastr: ToastrService,private fb: FormBuilder, private soldeService: SoldeService
         ) {
         super();
 
@@ -49,9 +50,17 @@ export class LoginComponent extends Translatable implements OnInit {
                         this.authService.me().subscribe({
                             next: (res) => {
                                 if(res['code'] == 200) {
-                                    this.loadingLogin = false;    
-                                    this.router.navigate(['/home']);
-                                    this.toastr.success(this.__("global.connecter"), this.__("global.success"));
+
+                                    this.soldeService.getSoldeUser().subscribe({
+                                        next: (res) => {
+                                            if(res['code'] == 200) {
+                                                this.loadingLogin = false;    
+                                                this.router.navigate(['/home']);
+                                                this.toastr.success(this.__("global.connecter"), this.__("global.success"));
+                                            }
+                                        }
+                                    });
+
                                 }
                             }
                         })
