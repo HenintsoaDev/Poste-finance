@@ -54,13 +54,13 @@ export class AuthService {
                     user = res.data ;
                     this.setLoginUser(user) ;
                 }else {
-                    await  this.router.navigate(["/logout"])
+                    await  this.router.navigate(["/login"])
                 }
             }
             user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
             return user;
         } catch (e) {
-            await  this.router.navigate(["/logout"]) ;
+            await  this.router.navigate(["/login"]) ;
             return null ;
         } 
     }
@@ -122,19 +122,28 @@ export class AuthService {
     } 
 
     resetPassword(credentials: { old_password: string, new_password: string }): Observable<any> {
-        console.log('Resetting password with credentials:', credentials);
-        console.log('TOKEN:', localStorage.getItem('access_token'));
         return this.httpService.post<any>(`parametrage/user/updateUserPassword`, credentials).pipe(
             tap(response => {
                 if (response['code'] === 200) {
-                    localStorage.setItem('access_token', response['data']['access_token']);
+                    localStorage.setItem(environment.authItemName, response['data']['access_token']);
                 }
             })
         );
     }
 
-    logout(): void {
-        localStorage.removeItem('token');
+    async logout() {
+        let res = await this.http.get<any>(environment.baseUrl + '/auth/logout', valuesys.httpAuthOptions()).toPromise() ;
+        if(res['code'] === 200){
+            localStorage.removeItem(environment.menuItemsSelectedStorage);
+            localStorage.removeItem(environment.menuItemsStorage);
+            localStorage.removeItem(environment.userAuth);
+            localStorage.removeItem(environment.authItemName);
+            localStorage.removeItem(environment.userItemName);
+            localStorage.removeItem(environment.soldeWelletStorage);
+            localStorage.removeItem(environment.soldeCarteStorage);
+            localStorage.removeItem(environment.phcoTimeToken);
+            this.router.navigate(['/login']);
+        }
     }
 
     isLoggedIn(): boolean {

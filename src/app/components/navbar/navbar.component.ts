@@ -4,6 +4,7 @@ import {Location, LocationStrategy, PathLocationStrategy} from '@angular/common'
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MenuService, ROUTES } from 'app/shared/models/route-info';
+import { AuthService } from 'app/services/auth.service';
 
 
 @Component({
@@ -38,7 +39,7 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    constructor(location: Location,  private element: ElementRef, private router: Router,private menuService: MenuService) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private menuService: MenuService, private authService : AuthService) {
         this.location = location;
         this.sidebarVisible = false;
         this.router.events.subscribe(() => {
@@ -263,7 +264,7 @@ export class NavbarComponent implements OnInit {
             },
             }).then((result) => {
             if (result.isConfirmed) {
-                this.router.navigate(['/login'])
+                this.authService.logout();
             }
         });
     }

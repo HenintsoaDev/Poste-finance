@@ -1,5 +1,5 @@
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { CUSTOM_ELEMENTS_SCHEMA, NgModule } from '@angular/core';
+import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule } from '@angular/router';
@@ -21,7 +21,7 @@ import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatRadioModule } from '@angular/material/radio';
 import { DataTablesModule } from "angular-datatables";
-import { DatePipe } from '@angular/common';
+import { DatePipe, registerLocaleData } from '@angular/common';
 import { ProfilComponent } from './views/profil/profil.component';
 import { Ng2TelInputModule } from 'ng2-tel-input';
 import { NgxMatSelectSearchModule } from 'ngx-mat-select-search';
@@ -44,6 +44,9 @@ import { ProfilsComponent } from './views/modules/adm/profils/profils.component'
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
 import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateur.component';
+import localeFr from '@angular/common/locales/fr';
+
+registerLocaleData(localeFr);
 @NgModule({
   exports:[
     TableComponent,
@@ -105,6 +108,7 @@ import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateu
       useClass: AuthInterceptor,
       multi: true
     },
+    { provide: LOCALE_ID, useValue: 'fr-FR' },
     DatePipe
   ],
   bootstrap: [AppComponent]

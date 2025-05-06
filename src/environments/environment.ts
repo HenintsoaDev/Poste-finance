@@ -13,6 +13,9 @@ export const environment = {
   menuItemsSelectedStorage : 'menuItemsSelectedPHCO',
   authItemName:'__token_api_gate_way_phco',
   userItemName:'__user_api_gate_way_phco',
+  phcoTimeToken : '_phco_time_token',
+  soldeWelletStorage : 'soldeWallet',
+  soldeCarteStorage : 'soldeCarte',
 
   module :'parametrage/module',
   sous_module :'parametrage/sousmodule',
@@ -25,4 +28,6 @@ export const environment = {
   utilisateur :'parametrage/user',
   liste_bureau_active :'parametrage/consult/bureaux/liste_bureaux_active',
   liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
+  getSoldeUser : 'parametrage/consult/bureaux/get_solde',
+
 };
