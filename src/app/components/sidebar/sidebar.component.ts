@@ -5,7 +5,7 @@ import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { AuthService } from 'app/services/auth.service';
-import { Auth, user } from 'app/shared/models/db';
+import { Auth, utilisateur } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 
 declare const $: any;

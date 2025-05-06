@@ -215,7 +215,14 @@ export class TableComponent extends Translatable {
               tooltip: i.tooltip,
               id: row.id         
             })).concat({ state: row.state, id: row.id  })
-          : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id", concaténer
+          : col.name === "state#rowid"
+            ? this.listIcon.map(i => ({
+                icon: i.icon,
+                action: i.action,
+                tooltip: i.tooltip,
+                id: row.rowid         
+              })).concat({ state: row.state, id: row.rowid  }) 
+          : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id" ou "state#rowid" , concaténer
       )
     );
     

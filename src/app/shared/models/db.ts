@@ -1,4 +1,4 @@
-export class user {
+export class utilisateur {
     rowid: number;
     nom: string;
     prenom: string;
@@ -15,7 +15,7 @@ export class user {
 }
 
 export class Auth {
-    info : user|null;
+    info : utilisateur|null;
     modules: module_user[] | []
 }
 
@@ -68,3 +68,14 @@ export class type_profil {
     code: string ;
     state: number | null ;
 }
+
+export class profil {
+    id: number ;
+    name: string ;
+    code: string ;
+    wallet_carte: number | null ;
+    type_profil_id: string | null ;
+    state: number | null ;
+    actions: action [] | null | [];
+}
+

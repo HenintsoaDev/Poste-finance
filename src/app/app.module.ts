@@ -19,6 +19,7 @@ import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { MatMenuModule } from '@angular/material/menu';
 import { MatDialogModule } from '@angular/material/dialog';
+import { MatRadioModule } from '@angular/material/radio';
 import { DataTablesModule } from "angular-datatables";
 import { DatePipe } from '@angular/common';
 import { ProfilComponent } from './views/profil/profil.component';
@@ -39,7 +40,10 @@ import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.comp
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
-
+import { ProfilsComponent } from './views/modules/adm/profils/profils.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateur.component';
 @NgModule({
   exports:[
     TableComponent,
@@ -60,10 +64,14 @@ import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
+
+    MatExpansionModule,
+    MatCheckboxModule,
     MatAutocompleteModule,
     OverlayModule,
     MatMenuModule,
     MatDialogModule,
+    MatRadioModule,
     MatDatepickerModule,
     MatNativeDateModule,
     NgxIntlTelInputModule,
@@ -86,6 +94,8 @@ import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil
     SousModuleComponent,
     TypeBureauxComponent,
     TypeProfilComponent,
+    ProfilsComponent,
+    UtilisateurComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -79,15 +79,30 @@
         "votre_nouveau_mdp" : "Votre nouveau mot de passe",
         "confirme_mdp" : "Confirmer le mot de passe",
         "confirm_votre_mdp" : "Confirmation du mot de passe",
-        "modifier_photo_profil" : "Modifier la photo de profil"
+        "modifier_photo_profil" : "Modifier la photo de profil",
+        "title" : "Gestion des profils",
+        "name" : "Libelle",
+        "code" : "Code",
+        "wallet_carte" : "Wallet carte",
+        "type" : "Type de profil",
+        "add" : "Ajouter un profil",
+        "title_edit_modal" : "Modification d'un profil",
+        "title_add_modal" : "Ajout d'un profil"
     },
     "utilisateur" : {
+        "title" : "Gestion des utilisateurs",
         "nom" : "Nom",
         "prenom" : "Prénom(s)",
         "email" : "Adresse email",
         "telephone" : "N° téléphone",
         "adresse" : "Adresse",
-        "profil" : "Profil"
+        "profil" : "Profil",
+        "type_bureau" : "Type de bureau",
+        "bureau" : "Bureau",
+        "login" : "Login",
+        "add" : "Ajouter un utilisateur",
+        "title_edit_modal" : "Modification d'un utilisateur",
+        "title_add_modal" : "Ajout d'un utilisateur"
     },
     "module" : {
         "title" : "Gestion des modules",

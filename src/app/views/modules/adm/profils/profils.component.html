@@ -1,0 +1,189 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <div class="button-container">
+                            <div class="left-buttons">
+                               <!--  <button class="btn btn-secondary export-btn excel text-white">
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button> -->
+                            </div>
+                            <div class="right-button">
+                                <button class="btn btn-secondary" *ngIf="autority('PRM_2')" (click)="openModalAdd(addprofil)"> {{ __("profil.add")}}</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <app-table
+                                [endpoint]="endpoint"
+                                [headerTable]="header"
+                                [body]="objetBody"
+                                [listIcon]="listIcon"
+                                [searchGlobal]="searchGlobal">
+                            </app-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+<!-- MODAL -->
+ <!-- Modal avec Material Design -->
+ <ng-template #addprofil>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form #f="ngForm" [formGroup]="profilForm" (ngSubmit)="onSubmit()">
+            <div class="modal-body">
+                
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('profil.name')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="profil.name" placeholder="{{ __('profil.name')}}" formControlName="name" name="name">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('profil.code')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="profil.code" placeholder="{{ __('profil.code')}}" formControlName="code" name="code">
+                    </mat-form-field>
+                </div>
+                <div class="form-group">
+                    <mat-radio-group  [(ngModel)]="wallet_carte" formControlName="wallet_carte">
+                        <mat-radio-button class="mr-3" value="W">Wallet</mat-radio-button>
+                        <mat-radio-button class="mr-3" value="C">Carte</mat-radio-button>
+                        <mat-radio-button class="mr-3" value="WC">Wallet et carte</mat-radio-button>
+                      </mat-radio-group>
+                </div>
+                
+
+                <div class="form-group"> 
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ __('profil.type')}}</mat-label>
+                        <mat-select [(ngModel)]="profil.type_profil_id" name="type_profil_id" formControlName="type_profil_id" >
+                          <!-- Champ de recherche -->
+                          <mat-option>
+                            <input matInput placeholder="Rechercher..." [formControl]="searchControl" (click)="$event.stopPropagation()" />
+                          </mat-option>
+                      
+                          <!-- Affichage des options filtrées -->
+                          <mat-option *ngFor="let type of filteredTypes" [value]="type.id"> {{ type.name }} </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                </div>
+                
+                  
+
+                
+                
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="!profil.id" [disabled]="profilForm.invalid">{{ __('global.save')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="profil.id" [disabled]="profilForm.invalid">{{ __('global.edit')}}</button>
+            </div>
+        </form>
+    </div>
+</ng-template>
+
+
+
+
+<!-- MODAL -->
+ <!-- Modal avec Material Design -->
+ <ng-template #affectationprofil>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+
+
+        <mat-dialog-title>Profilage : Admin Établissement</mat-dialog-title>
+
+                <mat-accordion>
+
+                <!-- Section Administration -->
+                <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                    <mat-panel-title>Administration</mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <!-- Gestion établissements -->
+                    <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-checkbox> </mat-checkbox>
+                        <mat-panel-title class="section-title">Gestion établissements</mat-panel-title>
+                    </mat-expansion-panel-header>
+
+                    <div class="checkbox-grid">
+                        <mat-checkbox>Lister les établissements</mat-checkbox>
+                        <mat-checkbox>Ajouter un établissement</mat-checkbox>
+                        <mat-checkbox>Modifier un établissement</mat-checkbox>
+                        <mat-checkbox>Afficher un établissement</mat-checkbox>
+                        <mat-checkbox>Supprimer un établissement</mat-checkbox>
+                        <mat-checkbox>Désactiver un établissement</mat-checkbox>
+                        <mat-checkbox>Changer président d'un établissement</mat-checkbox>
+                    </div>
+                    </mat-expansion-panel>
+
+                    <!-- Gestion année scolaire -->
+                    <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-checkbox> </mat-checkbox>
+                        <mat-panel-title>Gestion année scolaire</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <!-- Gestion utilisateurs -->
+                    <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-checkbox> </mat-checkbox>
+                        <mat-panel-title>Gestion utilisateurs</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                    <!-- Gestion profils -->
+                    <mat-expansion-panel>
+                    <mat-expansion-panel-header>
+                        <mat-checkbox> </mat-checkbox>
+                        <mat-panel-title>Gestion profils</mat-panel-title>
+                    </mat-expansion-panel-header>
+                    </mat-expansion-panel>
+
+                </mat-expansion-panel>
+                </mat-accordion>
+
+
+       
+    </div>
+</ng-template>
+
+
+

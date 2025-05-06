@@ -15,6 +15,8 @@ import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
+import { ProfilsComponent } from './views/modules/adm/profils/profils.component';
+import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateur.component';
 
 const routes: Routes =[
   
@@ -29,6 +31,12 @@ const routes: Routes =[
       {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
       {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
       {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
+      {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'Lister des profils' }},
+
+    ]},
+    {path : 'parametrage',data: { breadcrumb: 'Gestion utilisateurs' },children : [
+      {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
+    
 
     ]},
   ]}, 

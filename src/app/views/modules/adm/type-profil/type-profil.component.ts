@@ -350,6 +350,8 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     // Ouverture du modal pour l'ajout
     openModalAdd(template: TemplateRef<any>) {
       this.titleModal = this.__('type_profil.title_add_modal');
+      this.type_profil = new type_profil();
+
       this.modalRef = this.modalService.show(template, {
         backdrop: 'static',
         keyboard: false

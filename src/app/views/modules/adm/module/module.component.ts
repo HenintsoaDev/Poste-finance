@@ -238,15 +238,7 @@ subscription: Subscription;
 
     if (this.addModule) {
 
-      // Récupérer la liste affichée dans le tableau depuis le localStorage.
-      const storedData = localStorage.getItem('data');
-      let result : any;
-      if (storedData) result = JSON.parse(storedData);
-      this.listModules = result.data;
-
-      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-      let res = this.listModules.filter(_ => _.id == this.idModule);
-      this.module = res[0];
+      this.recupererDonnee();
 
       // Ouverture de modal
       this.modalRef = this.modalService.show(this.addModule, { backdrop: 'static',keyboard: false });
@@ -301,18 +293,9 @@ subscription: Subscription;
 
       console.log("ssssssssssssxxxxxx");
 
-      // Récupérer la liste affichée dans le tableau depuis le localStorage.
-      const storedData = localStorage.getItem('data');
-      let result : any;
-      if (storedData) result = JSON.parse(storedData);
-      this.listModules = result.data;
-      console.log(this.listModules);
-      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-      let res = this.listModules.filter(_ => _.id == this.idModule);
-      this.module = res[0];
-
+     
       
-      
+      this.recupererDonnee();
 
       Swal.fire({
         title: this.__("global.confirmation"),
@@ -361,10 +344,25 @@ subscription: Subscription;
   // Ouverture du modal pour l'ajout
   openModalAdd(template: TemplateRef<any>) {
     this.titleModal = this.__('module.title_add_modal');
+    this.module = new module();
+
     this.modalRef = this.modalService.show(template, {
       backdrop: 'static',
       keyboard: false
     });
+  }
+
+  // Récuperation des données via plocal
+  recupererDonnee(){
+    // Récupérer la liste affichée dans le tableau depuis le localStorage.
+    const storedData = localStorage.getItem('data');
+    let result : any;
+    if (storedData) result = JSON.parse(storedData);
+    this.listModules = result.data;
+    console.log(this.listModules);
+    // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+    let res = this.listModules.filter(_ => _.id == this.idModule);
+    this.module = res[0];
   }
 
   // Actualisation des données
