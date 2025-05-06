@@ -139,6 +139,9 @@ export class AuthService {
             localStorage.removeItem(environment.userAuth);
             localStorage.removeItem(environment.authItemName);
             localStorage.removeItem(environment.userItemName);
+            localStorage.removeItem(environment.soldeWelletStorage);
+            localStorage.removeItem(environment.soldeCarteStorage);
+            localStorage.removeItem(environment.phcoTimeToken);
             this.router.navigate(['/login']);
         }
     }
