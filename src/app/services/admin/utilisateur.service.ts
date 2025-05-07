@@ -66,5 +66,16 @@ export class UtilisateurService {
         );
     }
 
+    regenererMotDePasse(credentials: any): Observable<any> {
+        
+        return this.httpService.post<any>(environment.regenerer_mdp, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
    
 }

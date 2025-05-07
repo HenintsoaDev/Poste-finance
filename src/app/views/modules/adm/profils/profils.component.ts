@@ -147,16 +147,20 @@ export class ProfilsComponent extends Translatable implements OnInit {
             // Écouter les changements de modal à travers le service si il y a des actions
             this.subscription = this.passageService.getObservable().subscribe(event => {
     
-              this.idProfil = event.data.id;
+
+              if(event.data){
+                this.idProfil = event.data.id;
     
-            if(event.data.action == 'edit') this.openModalEditProfil();
-            else if(event.data.action == 'delete') this.openModalDeleteProfil();
-            else if(event.data.action == 'affect') this.openModalAffectProfil();
-            else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateProfil();
-            
-            // Nettoyage immédiat de l'event
-            this.passageService.clear();  // ==> à implémenter dans ton service
-          
+                if(event.data.action == 'edit') this.openModalEditProfil();
+                else if(event.data.action == 'delete') this.openModalDeleteProfil();
+                else if(event.data.action == 'affect') this.openModalAffectProfil();
+                else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateProfil();
+                
+                // Nettoyage immédiat de l'event
+                this.passageService.clear();  // ==> à implémenter dans ton service
+              
+              }
+             
         });
             this.endpoint = environment.baseUrl + '/' + environment.profil;
         /***************************************** */
@@ -186,7 +190,6 @@ export class ProfilsComponent extends Translatable implements OnInit {
       // Quand on faire l'ajout ou modification
       onSubmit() {
   
-        console.log(this.profil);
         if (this.profilForm.valid) {
     
             let msg = "";
@@ -221,7 +224,6 @@ export class ProfilsComponent extends Translatable implements OnInit {
               if (result.isConfirmed) {
     
                 if(!this.profil.id){
-                  console.log("add")
     
                    this.ProfilService.ajoutProfil(this.profil).subscribe({
                     next: (res) => {
@@ -244,7 +246,6 @@ export class ProfilsComponent extends Translatable implements OnInit {
                   }); 
     
                 }else{
-                  console.log("edit")
                    this.ProfilService.modifierProfil(this.profil).subscribe({
                     next: (res) => {
                         if(res['code'] == 201) {
@@ -355,9 +356,6 @@ export class ProfilsComponent extends Translatable implements OnInit {
         // Ouverture de modal pour modification
         openModalToogleStateProfil() {
     
-          console.log("ssssssssssssxxxxxx");
-    
-          
           this.recupererDonnee();
 
           
