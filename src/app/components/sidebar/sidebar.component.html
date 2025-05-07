@@ -52,7 +52,7 @@
         
         <div *ngIf="menuItem.children.length" [class]="currentRoute == menuItem.path ? 'collapse show' : 'collapse'" [id]="'collapse' + i" >
             <ul class="nav">
-                <li *ngFor="let child of menuItem.children" [class]="currentRoute == menuItem.path + child.path ? 'nav-item active' : 'nav-item'">
+                <li *ngFor="let child of menuItem.children" [class]="currentRoute == child.path ? 'nav-item active' : 'nav-item'">
                     <!-- (click)="goToPage(menuItem.path + child.path,menuItem.path)"-->
                     <a routerLink="{{child.path}}" class="nav-link text-white"  >
                         <i class="material-icons">chevron_right</i><span class="sidebar-normal" style="font-size:12px">{{child.title}}</span>

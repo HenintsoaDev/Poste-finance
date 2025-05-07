@@ -31,13 +31,14 @@ const routes: Routes =[
   {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
     {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
     {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
+    {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'Lister les profils' }},
     {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
     {path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
   ]}, 
   
-  { path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
+  { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];
 
 @NgModule({
