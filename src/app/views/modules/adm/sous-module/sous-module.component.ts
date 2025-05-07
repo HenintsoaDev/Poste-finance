@@ -263,21 +263,29 @@ export class SousModuleComponent extends Translatable implements OnInit {
 
       if (this.addSousModule) {
   
-        // Récupérer la liste affichée dans le tableau depuis le localStorage.
-        const storedData = localStorage.getItem('data');
-        let result : any;
-        if (storedData) result = JSON.parse(storedData);
-        this.listSousModules = result.data;
-  
-        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-        let res = this.listSousModules.filter(_ => _.id == this.idSousModule);
-        this.sous_module = res[0];
+       
+        this.recupererDonnee();
 
         this.actualisationSelect();
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addSousModule, { backdrop: 'static',keyboard: false });
       }
+    }
+
+    // Récuperation des donnée
+    recupererDonnee(){
+
+        // Récupérer la liste affichée dans le tableau depuis le localStorage.
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        this.listSousModules = result.data;
+
+        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+        let res = this.listSousModules.filter(_ => _.id == this.idSousModule);
+        this.sous_module = res[0];
+
     }
   
   
@@ -326,17 +334,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
       // Ouverture de modal pour modification
       openModalToogleStateSousModule() {
   
-        console.log("ssssssssssssxxxxxx");
   
-        // Récupérer la liste affichée dans le tableau depuis le localStorage.
-        const storedData = localStorage.getItem('data');
-        let result : any;
-        if (storedData) result = JSON.parse(storedData);
-        this.listSousModules = result.data;
-        console.log(this.listSousModules);
-        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-        let res = this.listSousModules.filter(_ => _.id == this.idSousModule);
-        this.sous_module = res[0];
+        this.recupererDonnee();
   
         
         
@@ -389,13 +388,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
     // Ouverture du modal pour l'ajout
     async openModalAdd(template: TemplateRef<any>) {
       this.titleModal = this.__('sous_module.title_add_modal');
-
+      this.sous_module = new sous_module();
       this.actualisationSelect();
-
-     
-
-
-
       this.modalRef = this.modalService.show(template, {
         backdrop: 'static',
         keyboard: false

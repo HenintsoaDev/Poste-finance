@@ -342,6 +342,7 @@ subscription: Subscription;
   // Ouverture du modal pour l'ajout
   openModalAdd(template: TemplateRef<any>) {
     this.titleModal = this.__('type_bureau.title_add_modal');
+    this.type_bureau = new type_bureau();
     this.modalRef = this.modalService.show(template, {
       backdrop: 'static',
       keyboard: false

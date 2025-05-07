@@ -22,6 +22,12 @@ export const environment = {
   liste_module_active :'parametrage/consult/module/liste_module_active',
   type_bureau :'parametrage/type_bureau',
   type_profil :'parametrage/type_profil',
-  getSoldeUser : 'parametrage/consult/bureaux/get_solde',
+  profil :'parametrage/profil',
+  liste_profil_active :'parametrage/consult/profil/allActivatedProfil',
+  liste_type_profil_active :'parametrage/consult/type_profil/liste_type_profil_active',
+  utilisateur :'parametrage/user',
+  liste_bureau_active :'parametrage/consult/bureaux/liste_bureaux_active',
+  liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
+  getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
 
 };

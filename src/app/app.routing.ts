@@ -16,6 +16,8 @@ import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { ProfilsComponent } from './views/modules/adm/profils/profils.component';
+import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateur.component';
 
 const routes: Routes =[
   
@@ -33,6 +35,9 @@ const routes: Routes =[
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
     {path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
   ]}, 
+    {path : 'parametrage',data: { breadcrumb: 'Gestion utilisateurs' },children : [
+      {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
+    ]},
   
   { path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
 ];

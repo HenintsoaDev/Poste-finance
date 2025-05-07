@@ -203,7 +203,10 @@ export class TableComponent extends Translatable {
       let res = toogle.data;
       this.isLoading = false;
       
-      localStorage.setItem('data', JSON.stringify(res));
+      await localStorage.setItem('data', JSON.stringify(res));
+      const storedData = localStorage.getItem('data');
+
+      console.log(storedData);
 
       //** Affichage de donnée dynamiser */
       let tableau = res.data.map((row: any) => 
@@ -215,7 +218,14 @@ export class TableComponent extends Translatable {
               tooltip: i.tooltip,
               id: row.id         
             })).concat({ state: row.state, id: row.id  })
-          : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id", concaténer
+          : col.name === "state#rowid"
+            ? this.listIcon.map(i => ({
+                icon: i.icon,
+                action: i.action,
+                tooltip: i.tooltip,
+                id: row.rowid         
+              })).concat({ state: row.state, id: row.rowid  }) 
+          : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id" ou "state#rowid" , concaténer
       )
     );
     
