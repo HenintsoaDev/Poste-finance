@@ -107,7 +107,7 @@
                                 placeholder="3X XX XXX XX"
                                 autocomplete="off"
                                 class="form-control form-icon-input"
-                                oninput="this.value=this.value.replace(/[^0-9]/g,'');"
+                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"
                                 ng2TelInput
                                 [ng2TelInputOptions]="{
                                     allowDropdown: true,
@@ -153,7 +153,7 @@
                         <div class="form-group"> 
                             <mat-form-field appearance="fill">
                                 <mat-label>{{ __('utilisateur.type_bureau')}}</mat-label>
-                                <mat-select name="id_type_agence" formControlName="id_type_agence" >
+                                <mat-select name="id_type_agence"   (selectionChange)="recupererBureau($event)" formControlName="id_type_agence" >
                                   <!-- Champ de recherche -->
                                   <mat-option>
                                     <input matInput placeholder="Rechercher..." [formControl]="searchControl" (click)="$event.stopPropagation()" />

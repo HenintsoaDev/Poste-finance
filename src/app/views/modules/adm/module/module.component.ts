@@ -122,16 +122,18 @@ subscription: Subscription;
         // Écouter les changements de modal à travers le service si il y a des actions
         this.subscription = this.passageService.getObservable().subscribe(event => {
 
-          console.log("Passe???????", event);
-          this.idModule = event.data.id;
+          if(event.data){
+            this.idModule = event.data.id;
 
-        if(event.data.action == 'edit') this.openModalEditModule();
-        else if(event.data.action == 'delete') this.openModalDeleteModule();
-        else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
-
-        // Nettoyage immédiat de l'event
-        this.passageService.clear();  // ==> à implémenter dans ton service
-      
+            if(event.data.action == 'edit') this.openModalEditModule();
+            else if(event.data.action == 'delete') this.openModalDeleteModule();
+            else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
+    
+            // Nettoyage immédiat de l'event
+            this.passageService.clear();  // ==> à implémenter dans ton service
+          
+          }
+         
     });
         this.endpoint = environment.baseUrl + '/' + environment.module;
     /***************************************** */

@@ -137,16 +137,18 @@ export class SousModuleComponent extends Translatable implements OnInit {
           // Écouter les changements de modal à travers le service si il y a des actions
           this.subscription = this.passageService.getObservable().subscribe(event => {
   
-            console.log("Passe Sous module ???????", event);
-            this.idSousModule = event.data.id;
+            if(event.data){
+              this.idSousModule = event.data.id;
   
-          if(event.data.action == 'edit') this.openModalEditSousModule();
-          else if(event.data.action == 'delete') this.openModalDeleteSousModule();
-          else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateSousModule();
-          
-          // Nettoyage immédiat de l'event
-          this.passageService.clear();  // ==> à implémenter dans ton service
-        
+              if(event.data.action == 'edit') this.openModalEditSousModule();
+              else if(event.data.action == 'delete') this.openModalDeleteSousModule();
+              else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateSousModule();
+              
+              // Nettoyage immédiat de l'event
+              this.passageService.clear();  // ==> à implémenter dans ton service
+            
+            }
+            
       });
           this.endpoint = environment.baseUrl + '/' + environment.sous_module;
       /***************************************** */

@@ -17,4 +17,5 @@ export const environment = {
   type_bureau :'parametrage/type_bureau',
   type_profil :'parametrage/type_profil',
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
+  regenerer_mdp :'parametrage/user/regenerer_password',
 };

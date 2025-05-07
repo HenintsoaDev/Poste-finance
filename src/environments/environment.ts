@@ -29,5 +29,6 @@ export const environment = {
   liste_bureau_active :'parametrage/consult/bureaux/liste_bureaux_active',
   liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
+  regenerer_mdp :'parametrage/user/regenerer_password',
 
 };

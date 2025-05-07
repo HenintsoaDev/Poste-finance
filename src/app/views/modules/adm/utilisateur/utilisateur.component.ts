@@ -11,6 +11,7 @@ import Swal from 'sweetalert2';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from 'app/services/auth.service';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
+import { MatSelectChange } from '@angular/material/select';
 
 @Component({
   selector: 'app-utilisateur',
@@ -48,6 +49,11 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       "colonneTable" : "name",
       "table" : "profil"
     },
+    {
+      "nomColonne" : this.__('utilisateur.bureau'),
+      "colonneTable" : "name",
+      "table" : "agence"
+    },
 
     
     {
@@ -80,6 +86,10 @@ export class UtilisateurComponent extends Translatable implements OnInit {
             'name' : 'profil',
             'type' : 'text',
           },
+          {
+            'name' : 'agence',
+            'type' : 'text',
+          },
          
         
           {'name' :  'state#rowid'}
@@ -87,6 +97,13 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
   listIcon = [
   
+    {
+      'icon' : 'lock_reset',
+      'action' : 'regenerer_mdp',
+      'tooltip' : 'Régeneration de mot de passe',
+      'autority' : 'PRM_2',
+  
+    },
     {
       'icon' : 'edit',
       'action' : 'edit',
@@ -103,8 +120,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
     },
   ]
-  
-    searchGlobal = [ 'user.nom', 'user.prenom', 'user.email',  'user.telephone', 'profil.name']
+    searchGlobal = [ 'user.nom', 'user.prenom', 'user.email',  'user.telephone', 'profil.name', 'agence.name']
    
     /***************************************** */
   
@@ -150,6 +166,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
     selectedCountryISO = 'mg';
     phoneNumber = '';
+    dialCode: any = '261';
 
     constructor(private fb: FormBuilder,  
                 private toastr: ToastrService, 
@@ -177,15 +194,20 @@ export class UtilisateurComponent extends Translatable implements OnInit {
           // Écouter les changements de modal à travers le service si il y a des actions
           this.subscription = this.passageService.getObservable().subscribe(event => {
   
-            this.idUtilisateur = event.data.id;
+            if( event.data){
+              this.idUtilisateur = event.data.id;
   
-          if(event.data.action == 'edit') this.openModalEditutilisateur();
-          else if(event.data.action == 'delete') this.openModalDeleteutilisateur();
-          else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateutilisateur();
-          
-          // Nettoyage immédiat de l'event
-          this.passageService.clear();  // ==> à implémenter dans ton service
+              if(event.data.action == 'edit') this.openModalEditutilisateur();
+              else if(event.data.action == 'delete') this.openModalDeleteutilisateur();
+              else if(event.data.action == 'regenerer_mdp') this.openModalRegenererMotDePasse();
+              else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateutilisateur();
+              
+              // Nettoyage immédiat de l'event
+              this.passageService.clear();  // ==> à implémenter dans ton service
         
+            }
+           
+          
       });
           this.endpoint = environment.baseUrl + '/' + environment.utilisateur;
       /***************************************** */
@@ -221,15 +243,14 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
       if (this.utilisateurForm.valid) {
 
-
         this.utilisateur = {
           ...this.utilisateur,
           ...this.utilisateurForm.value
         };
 
-        console.log(this.utilisateur);
+        this.utilisateur.telephone = this.dialCode + this.utilisateur.telephone;
 
-  
+
           let msg = "";
           let msg_btn = "";
           
@@ -319,7 +340,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
         this.actualisationSelectProfil();
         this.actualisationSelectTypeBureau();
-        this.actualisationSelectBureau();
+        this.actualisationSelectBureau(this.utilisateur.id_type_agence);
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addutilisateur, {
@@ -363,10 +384,48 @@ export class UtilisateurComponent extends Translatable implements OnInit {
                 }
             }); 
   
-        
+          }
+      });
   
+    }
+
+
+     // SUppression d'un modal
+     openModalRegenererMotDePasse() {
   
-          
+      Swal.fire({
+        title: this.__("global.confirmation"),
+        text: this.__("global.regenerer_mdp?"),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: this.__("global.oui_generer"),
+        cancelButtonText: this.__("global.cancel"),
+        allowOutsideClick: false,
+        customClass: {
+            confirmButton: 'swal-button--confirm-custom',
+            cancelButton: 'swal-button--cancel-custom'
+        },
+        }).then((result) => {
+        if (result.isConfirmed) {
+
+              let data = {
+                'user_id' : this.idUtilisateur
+              }
+  
+             this.utilisateurService.regenererMotDePasse(data).subscribe({
+              next: (res) => {
+                  if(res['code'] == 201) {
+                    this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
+                  }
+                  else{
+                      this.toastr.error(res['msg'], this.__("global.error"));
+                  }                
+                },
+                error: (err) => {
+                }
+            }); 
+  
           }
       });
   
@@ -440,8 +499,8 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       });
 
       this.actualisationSelectProfil();
-      this.actualisationSelectBureau();
       this.actualisationSelectTypeBureau();
+      //this.actualisationSelectBureau();
       this.modalRef = this.modalService.show(template, {
         class: 'modal-lg'
       });
@@ -473,8 +532,19 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
     }
 
-    async actualisationSelectBureau(){
-      this.bureaux = await this.authService.getSelectList(environment.liste_bureau_active,['name']);
+    recupererBureau(event: MatSelectChange) {
+      const idTypeAgence = event.value;
+      this.actualisationSelectBureau(idTypeAgence);
+      
+    }
+
+    async actualisationSelectBureau(idTypeAgence = null){
+      let endpointBureau = "";
+
+      if(idTypeAgence != null) endpointBureau = environment.liste_bureau_active + "?where=idtype_agence|e|" + idTypeAgence;
+      else  endpointBureau = environment.liste_bureau_active ;
+
+      this.bureaux = await this.authService.getSelectList(endpointBureau,['name']);
       this.filteredBureau = this.bureaux;
 
       this.searchControl.valueChanges.subscribe(value => {
@@ -501,8 +571,6 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       if (storedData) result = JSON.parse(storedData);
       this.listutilisateurs = result.data;
 
-      console.log(storedData);
-      console.log(this.idUtilisateur);
 
       // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
       let res = this.listutilisateurs.filter(_ => _.rowid == this.idUtilisateur);
@@ -538,9 +606,13 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
     telInputObject(m:any){
       this.objetPhone = m.s
+      
     }
 
-    onCountryChange(m:any){}
+    onCountryChange(event: any) {
+      this.dialCode = event.dialCode; // ← ici tu obtiens '261' ou '221'
+      
+    }
 
     controle(element:any){}
 

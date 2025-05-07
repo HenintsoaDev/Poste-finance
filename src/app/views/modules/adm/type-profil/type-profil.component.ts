@@ -114,15 +114,17 @@ export class TypeProfilComponent extends Translatable implements OnInit {
           // Écouter les changements de modal à travers le service si il y a des actions
           this.subscription = this.passageService.getObservable().subscribe(event => {
   
-            this.idTypeBureau = event.data.id;
+            if( event.data){
+              this.idTypeBureau = event.data.id;
   
-          if(event.data.action == 'edit') this.openModalEditTypeBureau();
-          else if(event.data.action == 'delete') this.openModalDeleteTypeBureau();
-          else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
+              if(event.data.action == 'edit') this.openModalEditTypeBureau();
+              else if(event.data.action == 'delete') this.openModalDeleteTypeBureau();
+              else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
 
-           // Nettoyage immédiat de l'event
-          this.passageService.clear();  // ==> à implémenter dans ton service
-        
+              // Nettoyage immédiat de l'event
+              this.passageService.clear();  // ==> à implémenter dans ton service
+            
+            }
       });
           this.endpoint = environment.baseUrl + '/' + environment.type_profil;
       /***************************************** */
