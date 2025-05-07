@@ -91,7 +91,8 @@
         "type" : "Type de profil",
         "add" : "Ajouter un profil",
         "title_edit_modal" : "Modification d'un profil",
-        "title_add_modal" : "Ajout d'un profil"
+        "title_add_modal" : "Ajout d'un profil",
+        "title_affect_modal" : "Affectation de profil "
     },
     "utilisateur" : {
         "title" : "Gestion des utilisateurs",

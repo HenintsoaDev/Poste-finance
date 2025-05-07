@@ -79,14 +79,14 @@ export class SousModuleComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
-      'autority' : 'PRM_2',
+      'autority' : 'PRM_21',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
-      'autority' : 'PRM_3',
+      'autority' : 'PRM_23',
 
   
     },

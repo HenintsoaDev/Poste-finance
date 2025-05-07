@@ -26,9 +26,10 @@ export const environment = {
   liste_profil_active :'parametrage/consult/profil/allActivatedProfil',
   liste_type_profil_active :'parametrage/consult/type_profil/liste_type_profil_active',
   utilisateur :'parametrage/user',
-  liste_bureau_active :'parametrage/consult/bureaux/liste_bureaux_active',
+  liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
   liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   regenerer_mdp :'parametrage/user/regenerer_password',
+  profilage : 'parametrage/profilage'
 
 };

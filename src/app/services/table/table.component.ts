@@ -7,6 +7,7 @@ import formatNumber from 'number-handler'
 import { Subscription } from 'rxjs';
 import { valuesys } from 'app/shared/models/options';
 import { Translatable } from 'shared/constants/Translatable';
+import { AuthService } from '../auth.service';
 
 @Component({
   selector: 'app-table',
@@ -65,10 +66,13 @@ export class TableComponent extends Translatable {
     constructor(             
       private http: HttpClient,
       private passageService: PassageService,
-      private datePipe: DatePipe
+      private datePipe: DatePipe,
+      private authService : AuthService
+
 
       ) { 
         super();
+        this.authService.initAutority("PRM");
     }
 
     subscription: Subscription;
@@ -213,6 +217,7 @@ export class TableComponent extends Translatable {
               icon: i.icon,
               action: i.action,
               tooltip: i.tooltip,
+              autority: i.autority,
               id: row.id         
             })).concat({ state: row.state, id: row.id  })
           : col.name === "state#rowid"
@@ -220,6 +225,7 @@ export class TableComponent extends Translatable {
                 icon: i.icon,
                 action: i.action,
                 tooltip: i.tooltip,
+                autority: i.autority,
                 id: row.rowid         
               })).concat({ state: row.state, id: row.rowid  }) 
           : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id" ou "state#rowid" , concaténer
@@ -363,6 +369,13 @@ export class TableComponent extends Translatable {
         case 'edit': return '#35558d';
         default: return '';
       }
+    }
+
+
+    verificationAutority(dataIcon: any){
+      console.log(dataIcon.autority);
+
+      return dataIcon.autority;
     }
     
 

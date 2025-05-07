@@ -50,8 +50,18 @@
                 <!-- Si cell est un tableau, afficher les éléments du tableau -->
                 <span *ngIf="isArray(cell)">
                   
-                  <i *ngFor="let icon of cell"  class="material-icons" mat-raised-button matTooltip="{{verifTooltipIcon(icon)}}" [ngStyle]="{ 'color': verifColorIcon(icon) }" (click)="openModal(icon)"  style="margin-right: 5px !important; font-size: 18px; cursor: pointer;" >{{ verifIcon(icon) }}</i>
-              
+                 
+                  <ng-container *ngFor="let icon of cell">
+                    <i *ngIf="autority(icon.autority)"
+                        class="material-icons"
+                        mat-raised-button
+                        matTooltip="{{ verifTooltipIcon(icon) }}"
+                        [ngStyle]="{ 'color': verifColorIcon(icon) }"
+                        (click)="openModal(icon)"
+                        style="margin-right: 5px !important; font-size: 18px; cursor: pointer;">
+                        {{ verifIcon(icon) }}
+                      </i>
+                  </ng-container>
                   <!-- Si on utilise font awesome ---
                     <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i> 
                     -->

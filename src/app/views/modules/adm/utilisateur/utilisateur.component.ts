@@ -541,7 +541,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     async actualisationSelectBureau(idTypeAgence = null){
       let endpointBureau = "";
 
-      if(idTypeAgence != null) endpointBureau = environment.liste_bureau_active + "?where=idtype_agence|e|" + idTypeAgence;
+      if(idTypeAgence != null) endpointBureau = environment.liste_bureau_active + "?where=agence.idtype_agence|e|" + idTypeAgence;
       else  endpointBureau = environment.liste_bureau_active ;
 
       this.bureaux = await this.authService.getSelectList(endpointBureau,['name']);

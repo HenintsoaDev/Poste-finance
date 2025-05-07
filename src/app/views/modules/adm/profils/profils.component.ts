@@ -10,6 +10,8 @@ import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from 'app/services/auth.service';
+import { valuesys } from 'app/shared/models/options';
+import { HttpClient } from '@angular/common/http';
 declare var bootstrap: any;
 
 @Component({
@@ -120,13 +122,15 @@ export class ProfilsComponent extends Translatable implements OnInit {
       
       filteredTypes: type_profil[] = [];
       searchControl = new FormControl('');
+      modules: any;
   
       constructor(private fb: FormBuilder,  
                   private toastr: ToastrService, 
                   private ProfilService: ProfilService,     
                   private passageService: PassageService,
                   private modalService: BsModalService,
-                  private authService : AuthService
+                  private authService : AuthService,
+                  private http: HttpClient
     
         ) {
         super();
@@ -151,10 +155,26 @@ export class ProfilsComponent extends Translatable implements OnInit {
               if(event.data){
                 this.idProfil = event.data.id;
     
-                if(event.data.action == 'edit') this.openModalEditProfil();
-                else if(event.data.action == 'delete') this.openModalDeleteProfil();
-                else if(event.data.action == 'affect') this.openModalAffectProfil();
-                else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateProfil();
+                    const action = event.data.action;
+                    const state = event.data.state;
+
+                    switch (action) {
+                      case 'edit':
+                        this.openModalEditProfil();
+                        break;
+                      case 'delete':
+                        this.openModalDeleteProfil();
+                        break;
+                      case 'affect':
+                        this.openModalAffectProfil();
+                        break;
+                      default:
+                        if (state === 0 || state === 1) {
+                          this.openModalToogleStateProfil();
+                        }
+                        break;
+                    }
+
                 
                 // Nettoyage immédiat de l'event
                 this.passageService.clear();  // ==> à implémenter dans ton service
@@ -217,54 +237,44 @@ export class ProfilsComponent extends Translatable implements OnInit {
               cancelButtonText: this.__("global.cancel"),
               allowOutsideClick: false,
               customClass: {
-                  confirmButton: 'swal-button--confirm-custom',
-                  cancelButton: 'swal-button--cancel-custom'
-              },
-              }).then((result) => {
-              if (result.isConfirmed) {
-    
-                if(!this.profil.id){
-    
-                   this.ProfilService.ajoutProfil(this.profil).subscribe({
-                    next: (res) => {
-                        
-                          if(res['code'] == 201) {
-                            this.toastr.success(res['msg'], this.__("global.success"));
-                            this.actualisationTableau();
-                            this.closeModal();
-                          }
-                          else if(res['code'] == 400){
-                            if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
-                            else this.toastr.error(res['data'], this.__("global.error"));
-                          }else{
-                              this.toastr.error(res['msg'], this.__("global.error"));
-                          }            
-                                
-                      },
-                      error: (err) => {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+              }
+            }).then((result) => {
+              if (!result.isConfirmed) return;
+            
+              const request$ = this.profil.id
+                ? this.ProfilService.modifierProfil(this.profil)
+                : this.ProfilService.ajoutProfil(this.profil);
+            
+              request$.subscribe({
+                next: (res) => {
+                  switch (res.code) {
+                    case 201:
+                      this.toastr.success(res.msg, this.__("global.success"));
+                      this.actualisationTableau();
+                      this.closeModal();
+                      break;
+            
+                    case 400:
+                      if (res.data?.code) {
+                        this.toastr.error(res.data.code[0], this.__("global.error"));
+                      } else {
+                        this.toastr.error(res.data || res.msg, this.__("global.error"));
                       }
-                  }); 
-    
-                }else{
-                   this.ProfilService.modifierProfil(this.profil).subscribe({
-                    next: (res) => {
-                        if(res['code'] == 201) {
-                          this.toastr.success(res['msg'], this.__("global.success"));
-                          this.actualisationTableau();
-                          this.closeModal();
-                        }
-                        else{
-                            this.toastr.error(res['msg'], this.__("global.error"));
-                        }                
-                      },
-                      error: (err) => {
-                      }
-                  }); 
+                      break;
+            
+                    default:
+                      this.toastr.error(res.msg, this.__("global.error"));
+                  }
+                },
+                error: (err) => {
+                  this.toastr.error(this.__("global.error"), this.__("global.error"));
+                  console.error('Erreur serveur :', err);
                 }
-    
-               
-                }
+              });
             });
+            
     
         
           } else {
@@ -294,14 +304,18 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
 
         // Ouverture de modal pour modification
-        openModalAffectProfil() {
+        async openModalAffectProfil() {
     
-          this.titleModal = this.__('profil.title_edit_modal');
     
           if (this.affectationprofil) {
-      
+
             this.recupererDonnee();
-                      this.actualisationSelect();
+            this.titleModal = this.__('profil.title_affect_modal') + ' : ' + this.profil.name;
+
+            this.modules = await this.authService.getSelectList(environment.profilage + "/" + this.idProfil,['name']);
+            console.log(this.modules);
+      
+             //this.recupererProfilage();
   
             // Ouverture de modal
             this.modalRef = this.modalService.show(this.affectationprofil, {
@@ -454,6 +468,86 @@ export class ProfilsComponent extends Translatable implements OnInit {
       closeModal() {
         this.modalRef?.hide();
       }
+
+
+      async updateActionAll(actions: any[], elm: HTMLInputElement, event: Event) {
+        event.stopPropagation();
+        elm.disabled = true;
+      
+        const isChecked = elm.checked;
+        const state = isChecked ? 1 : 0;
+        const ids = actions.map(item => item.id).join(',');
+      
+        const payload = {
+          action_id: ids,
+          profil_id: this.idProfil,
+          state
+        };
+      
+        try {
+          const res = await this.http
+            .post<any>(`${environment.baseUrl}/${environment.profilage}`, payload, valuesys.httpAuthOptions())
+            .toPromise();
+      
+          if (res.code === 201) {
+            this.toastr.success(res.msg, this.__("global.success"));
+      
+            // Mettre à jour les états localement
+            actions.forEach(item => item.state = state);
+          } else {
+            // Réaction à l’échec : on inverse la case à cocher
+            elm.checked = !isChecked;
+            this.toastr.error(res.msg, this.__("global.error"));
+          }
+      
+        } catch (error) {
+          elm.checked = !isChecked;
+          this.toastr.error(this.__("global.error"), this.__("global.error"));
+        } finally {
+          elm.disabled = false;
+        }
+      }
+      
+      
+      async updateAction(action: any, elm: HTMLInputElement) {
+        elm.disabled = true;
+      
+        const isChecked = elm.checked;
+        const state = isChecked ? 1 : 0;
+        const payload = {
+          action_id: action.id,
+          profil_id: this.idProfil,
+          state
+        };
+      
+        try {
+          const res = await this.http
+            .post<any>(`${environment.baseUrl}/${environment.profilage}`, payload, valuesys.httpAuthOptions())
+            .toPromise();
+      
+          if (res.code === 201) {
+            this.toastr.success(res.msg, this.__("global.success"));
+            action.state = state;
+          } else {
+            // Revenir à l'état précédent si échec
+            elm.checked = !isChecked;
+            this.toastr.error(res.msg, this.__("global.error"));
+          }
+      
+        } catch (error) {
+          elm.checked = !isChecked;
+          this.toastr.error(this.__("global.error"), this.__("global.error"));
+        } finally {
+          elm.disabled = false;
+        }
+      }
+      
+
+      isCheckedAll(s_module:any){
+    
+        return  s_module.actions.filter((item)=>item.state == 1).length ==  s_module.actions.length
+      }
+    
   
     
 }
