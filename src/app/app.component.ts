@@ -1,6 +1,7 @@
 import { Component, ElementRef, HostListener, ViewChild} from '@angular/core';
-import { Router } from '@angular/router';
+import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import * as e from 'express';
+import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
 
 
@@ -40,13 +41,29 @@ export class AppComponent {
     }
 
     
-    constructor(private router: Router) {
-        this.router.events.subscribe(() => {
-        const currentRoute = this.router.url;
-        this.showLayout = !(currentRoute === '/login');
-        this.showSidebar = !(currentRoute === '/home');
-        this.showBreadcrumb = !(currentRoute === '/login' || currentRoute === '/home');
+    constructor(private router: Router,private activatedRoute: ActivatedRoute) {
+        this.router.events
+        .pipe(filter(event => event instanceof NavigationEnd))
+        .subscribe(() => {
+            const currentRoute = this.router.url;
+           
+            // Get the current activated route
+            // and traverse to the deepest child route
+            let currentRoutes =  this.activatedRoute;
+            while (currentRoutes.firstChild) {
+                currentRoutes = currentRoutes.firstChild;
+            }
+
+            // Check if the current route has a data property : is404
+            const is404 = currentRoutes.snapshot.data['is404'] === true;
+            this.showLayout = !(currentRoute === '/login');
+            this.showSidebar = !(currentRoute === '/home' || is404);
+            this.showBreadcrumb = !(currentRoute === '/login' || currentRoute === '/home' || is404);
         });
+    }
+
+    ngOnInit(): void{
+        
     }
 
     goToLogin()

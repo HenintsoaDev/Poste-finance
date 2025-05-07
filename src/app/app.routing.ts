@@ -15,6 +15,7 @@ import { ModuleComponent } from './views/modules/adm/module/module.component';
 import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
+import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 const routes: Routes =[
   
@@ -23,23 +24,17 @@ const routes: Routes =[
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
   { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
   { path: 'app-module/:module', component: WelcomeModuleComponent},
-  { path: ':module',data: { breadcrumb: 'Administration' }, children:[
-    {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
-      {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
-      {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
-      {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
-      {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
-
-    ]},
+  
+  //Module Administration : ADM
+  {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
+    {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
+    {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
+    {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
+    {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
+    {path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
   ]}, 
-  /*{
-    path: '',
-    component: AdminLayoutComponent,
-    children: [{
-      path: '',
-      loadChildren: () => import('./layouts/admin-layout/admin-layout.module').then(m => m.AdminLayoutModule)
-    }]
-  }*/
+  
+  { path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
 ];
 
 @NgModule({

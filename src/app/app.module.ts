@@ -40,6 +40,7 @@ import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module
 import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
 import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
 import localeFr from '@angular/common/locales/fr';
+import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -88,6 +89,7 @@ registerLocaleData(localeFr);
     SousModuleComponent,
     TypeBureauxComponent,
     TypeProfilComponent,
+    PageNotFoundComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
