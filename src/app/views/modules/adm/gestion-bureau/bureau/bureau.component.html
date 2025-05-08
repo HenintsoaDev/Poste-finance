@@ -222,7 +222,7 @@
                         <div class="form-group"> 
                             <mat-form-field appearance="fill">
                                 <mat-label>{{ __('bureau.province')}}</mat-label>
-                                <mat-select name="province"    formControlName="province" >
+                                <mat-select name="province"   (selectionChange)="recupererDepartement($event)"  formControlName="province" >
                                   <!-- Champ de recherche -->
                                   <mat-option>
                                     <input matInput placeholder="Rechercher..." [formControl]="searchControl" (click)="$event.stopPropagation()" />
@@ -276,6 +276,21 @@
                 <button type="submit" class="btn btn-primary" *ngIf="bureau.id" [disabled]="bureauForm.invalid">{{ __('global.edit')}}</button>
             </div>
         </form>
+    </div>
+</ng-template>
+
+
+<!-- MODAL -->
+ <!-- Modal avec Material Design -->
+ <ng-template #detailBureau>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+       
     </div>
 </ng-template>
 

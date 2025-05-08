@@ -163,7 +163,7 @@
         "code" : "Code",
         "name" : "Libelle",
         "responsable" : "Responsable",
-        "departement" : "Departement",
+        "departement" : "Région",
         "province" : "Province",
         "adresse" : "Adresse",
         "telephone" : "Téléphone",
@@ -174,7 +174,8 @@
         "solde_max_rapatrie" : "Solde",
         "add" : "Ajouter un bureau",
         "title_edit_modal" : "Modification d'un bureau",
-        "title_add_modal" : "Ajout d'un bureau"
+        "title_add_modal" : "Ajout d'un bureau",
+        "title_detail_modal" : "Information d'un bureau"
     }
 
 
