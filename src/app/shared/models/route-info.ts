@@ -58,6 +58,7 @@ export class MenuService {
                         actions.push({
                             path: '/' + module[i]['sous_modules'][j].actions[k].url,
                             title: module[i]['sous_modules'][j].actions[k].name,
+                            state: module[i]['sous_modules'][j].actions[k].state
                         })
                     }
                 }
@@ -67,6 +68,7 @@ export class MenuService {
                     title: module[i]['sous_modules'][j].name,
                     icon: module[i]['sous_modules'][j].icon || 'home',
                     class: '',
+                    hasOneAction: module[i]['sous_modules'][j].hasOneAction,
                     children : actions
                 })
             }

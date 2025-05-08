@@ -101,21 +101,21 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       'icon' : 'lock_reset',
       'action' : 'regenerer_mdp',
       'tooltip' : 'Régeneration de mot de passe',
-      'autority' : 'PRM_2',
+      'autority' : 'PRM_43',
   
     },
     {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
-      'autority' : 'PRM_2',
+      'autority' : 'PRM_39',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
-      'autority' : 'PRM_3',
+      'autority' : 'PRM_41',
 
   
     },
@@ -177,7 +177,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
       ) {
       super();
-      this.authService.initAutority("PRM");
+      this.authService.initAutority("PRM","ADM");
 
     }
   

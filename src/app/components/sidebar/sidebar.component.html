@@ -41,26 +41,28 @@
     </div>
     
     <div  *ngFor="let menuItem of routes; let i = index">
-        <ul class="nav" style="margin-top: 0px;">
-            <li class="nav-item">
-                <a class="nav-link" data-toggle="collapse" [href]="'#collapse' + i"  aria-expanded="true" style="color: white;">
-                    <i class="material-icons">{{menuItem.icon}}</i>
-                    <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;font-size:12px">{{menuItem.title }}<b class="caret"></b></p>
-                </a>
-            </li>
-        </ul>
-        
-        <div *ngIf="menuItem.children.length" [class]="currentRoute == menuItem.path ? 'collapse show' : 'collapse'" [id]="'collapse' + i" >
-            <ul class="nav">
-                <li *ngFor="let child of menuItem.children" [class]="currentRoute == child.path ? 'nav-item active' : 'nav-item'">
-                    <!-- (click)="goToPage(menuItem.path + child.path,menuItem.path)"-->
-                    <a routerLink="{{child.path}}" class="nav-link text-white"  >
-                        <i class="material-icons">chevron_right</i><span class="sidebar-normal" style="font-size:12px">{{child.title}}</span>
+        <ng-container *ngIf="menuItem.hasOneAction || user.info.admin == 1">
+            <ul class="nav" style="margin-top: 0px;">
+                <li class="nav-item">
+                    <a class="nav-link" data-toggle="collapse" [href]="'#collapse' + i"  aria-expanded="true" style="color: white;">
+                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;font-size:12px">{{menuItem.title }}<b class="caret"></b></p>
                     </a>
                 </li>
             </ul>
-        </div>
-
+            
+            <div *ngIf="menuItem.children.length" [class]="currentRoute == menuItem.path ? 'collapse show' : 'collapse'" [id]="'collapse' + i" >
+                <ul class="nav">
+                    <ng-container *ngFor="let child of menuItem.children">
+                        <li  *ngIf="child.state == 1 || user.info.admin == 1" [class]="currentRoute == child.path ? 'nav-item active' : 'nav-item'">
+                            <a routerLink="{{child.path}}" class="nav-link text-white"  >
+                                <i class="material-icons">chevron_right</i><span class="sidebar-normal" style="font-size:12px">{{child.title}}</span>
+                            </a>
+                        </li>
+                    </ng-container>
+                </ul>
+            </div>
+        </ng-container>
     </div>
     
 

@@ -97,7 +97,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
                 private authService : AuthService
       ) {
       super();
-      this.authService.initAutority("PRM");
+      this.authService.initAutority("PRM","ADM");
     }
   
   

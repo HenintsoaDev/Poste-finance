@@ -72,13 +72,13 @@ listIcon = [
     'icon' : 'edit',
     'action' : 'edit',
     'tooltip' : 'Modification',
-
+    'autority' : 'PRM_9'
   },
   {
     'icon' : 'delete',
     'action' : 'delete',
     'tooltip' : 'Supression',
-
+    'autority' : 'PRM_11'
   },
 ]
 
@@ -105,7 +105,7 @@ listIcon = [
               private authService : AuthService
     ) {
     super();
-    this.authService.initAutority("PRM");
+    this.authService.initAutority("PRM","ADM");
   }
 
 

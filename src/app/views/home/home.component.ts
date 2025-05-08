@@ -4,6 +4,7 @@ import { AuthService } from 'app/services/auth.service';
 import { Auth, module_user } from 'app/shared/models/db';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { Translatable } from 'shared/constants/Translatable';
+import Swal from 'sweetalert2';
 
 
 @Component({
@@ -39,6 +40,27 @@ export class HomeComponent extends Translatable implements OnInit {
         this.menuService.updateMenuItems(module);
         this.menuService.setMenuItemsModule(module);
         this.router.navigate(['/app-module', module.replace('/','')]);
+    }
+
+    goToLogin()
+    {
+        Swal.fire({
+            title: 'Déconnexion',
+            text: 'Voulez-vous vraiment vous déconnecter ?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Oui, déconnexion',
+            cancelButtonText: 'Annuler',
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+            }).then((result) => {
+            if (result.isConfirmed) {
+                this.auth.logout();
+            }
+        });
     }
 
     

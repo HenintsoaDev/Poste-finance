@@ -16,6 +16,8 @@ export const environment = {
   phcoTimeToken : '_phco_time_token',
   soldeWelletStorage : 'soldeWallet',
   soldeCarteStorage : 'soldeCarte',
+  authorityModule : 'authority_module',
+  authoritySousModule : 'authority_sousModule',
 
 //** Parametrage */
   module :'parametrage/module',

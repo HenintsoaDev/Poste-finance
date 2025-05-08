@@ -3,6 +3,7 @@ import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import * as e from 'express';
 import { filter } from 'rxjs';
 import Swal from 'sweetalert2';
+import { AuthService } from './services/auth.service';
 
 
 @Component({
@@ -41,7 +42,7 @@ export class AppComponent {
     }
 
     
-    constructor(private router: Router,private activatedRoute: ActivatedRoute) {
+    constructor(private router: Router,private activatedRoute: ActivatedRoute, private auth: AuthService) {
         this.router.events
         .pipe(filter(event => event instanceof NavigationEnd))
         .subscribe(() => {
@@ -74,10 +75,15 @@ export class AppComponent {
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: 'Oui, déconnexion',
-            cancelButtonText: 'Annuler'
+            cancelButtonText: 'Annuler',
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
             }).then((result) => {
             if (result.isConfirmed) {
-                this.router.navigate(['/login'])
+                this.auth.logout();
             }
         });
     }

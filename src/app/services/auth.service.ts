@@ -69,16 +69,25 @@ export class AuthService {
     * Code sous module un tableau ou un string | le premier element du tableau on ne renseigne pas son code de module
     * Mais le reste du table on doit renseignez leur code de module dans modules
     * */
-    public initAutority(codeSousModule:string|Array<string>,modules:Array<string> = []){
+    public initAutority(codeSousModule:string|Array<string>,modules:string|Array<string> = []){
         if(typeof codeSousModule === 'string'){
             codeSousModule = [codeSousModule]
         }
+
+        if(typeof modules === 'string'){
+            modules = [modules]
+        }
         
-        modules.push(window['moduleSelected'])
+        //modules.push(window['moduleSelected'])
         window['authority'] =[];
         window['actions'] = null;
-        window['authority']['module'] = modules;
-        window['authority']['sous_module'] = codeSousModule;
+        /*window['authority']['module'] = modules;
+        
+        window['authority']['sous_module'] = codeSousModule;*/
+        localStorage.setItem(environment.authorityModule, JSON.stringify(modules));
+        console.log("code module",modules);
+        console.log("code sous module",codeSousModule);
+        localStorage.setItem(environment.authoritySousModule, JSON.stringify(codeSousModule));
         let user:Auth ;
         user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
         window['authority']['user'] = user;
@@ -132,15 +141,19 @@ export class AuthService {
     }
 
     async logout() {
-        localStorage.removeItem(environment.menuItemsSelectedStorage);
-        localStorage.removeItem(environment.menuItemsStorage);
-        localStorage.removeItem(environment.userAuth);
-        localStorage.removeItem(environment.authItemName);
-        localStorage.removeItem(environment.userItemName);
-        localStorage.removeItem(environment.soldeWelletStorage);
-        localStorage.removeItem(environment.soldeCarteStorage);
-        localStorage.removeItem(environment.phcoTimeToken);
-        this.router.navigate(['/login']);
+        let res = await this.http.get<any>(environment.baseUrl + '/auth/logout', valuesys.httpAuthOptions()).toPromise() ;
+        if(res['code'] === 200){
+            localStorage.removeItem(environment.menuItemsSelectedStorage);
+            localStorage.removeItem(environment.menuItemsStorage);
+            localStorage.removeItem(environment.userAuth);
+            localStorage.removeItem(environment.authItemName);
+            localStorage.removeItem(environment.userItemName);
+            localStorage.removeItem(environment.soldeWelletStorage);
+            localStorage.removeItem(environment.soldeCarteStorage);
+            localStorage.removeItem(environment.phcoTimeToken);
+            this.router.navigate(['/login']);
+        }
+        
     }
 
     isLoggedIn(): boolean {

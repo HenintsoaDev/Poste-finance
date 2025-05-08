@@ -38,7 +38,7 @@ const routes: Routes =[
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
     {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
-    {path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
+    {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
     {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'Lister les bureaux' }},

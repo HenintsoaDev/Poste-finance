@@ -89,14 +89,14 @@ export class ProfilsComponent extends Translatable implements OnInit {
         'icon' : 'edit',
         'action' : 'edit',
         'tooltip' : 'Modification',
-        'autority' : 'PRM_2',
+        'autority' : 'PRM_34',
     
       },
       {
         'icon' : 'delete',
         'action' : 'delete',
         'tooltip' : 'Supression',
-        'autority' : 'PRM_3',
+        'autority' : 'PRM_36',
   
     
       },
@@ -134,7 +134,7 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
         ) {
         super();
-        this.authService.initAutority("PRM");
+        this.authService.initAutority("PRM","ADM");
   
       }
     
