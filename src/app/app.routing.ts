@@ -35,7 +35,7 @@ const routes: Routes =[
     {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
-    {path: '**', component: PageNotFoundComponent, data: { is404: true,breadcrumb: 'Lister les types de profil' } }
+    {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }

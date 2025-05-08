@@ -58,6 +58,7 @@ export class MenuService {
                         actions.push({
                             path: '/' + module[i]['sous_modules'][j].actions[k].url,
                             title: module[i]['sous_modules'][j].actions[k].name,
+                            state: module[i]['sous_modules'][j].actions[k].state
                         })
                     }
                 }
