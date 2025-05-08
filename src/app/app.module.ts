@@ -48,6 +48,7 @@ import localeFr from '@angular/common/locales/fr';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/bureau.component';
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
+import { SuiviComptePrincipalComponent } from './views/modules/adm/geston-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -104,7 +105,8 @@ registerLocaleData(localeFr);
     ProfilsComponent,
     UtilisateurComponent,
     BureauComponent,
-    ActionComponent
+    ActionComponent,
+    SuiviComptePrincipalComponent,
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

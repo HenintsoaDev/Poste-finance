@@ -20,6 +20,7 @@ import { ProfilsComponent } from './views/modules/adm/parametrage/profils/profil
 import { UtilisateurComponent } from './views/modules/adm/parametrage/utilisateur/utilisateur.component';
 import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/bureau.component';
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
+import { SuiviComptePrincipalComponent } from './views/modules/adm/geston-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 
 const routes: Routes =[
   
@@ -42,7 +43,9 @@ const routes: Routes =[
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
     {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'Lister les bureaux' }},
-   
+  ]}, 
+  {path : 'gestion_compte_principal',data: { breadcrumb: 'Gestion compte principal' },children : [
+    {path : 'suivi_compte',component: SuiviComptePrincipalComponent,data: { breadcrumb: 'Suivi compte' }},
   ]}, 
   
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
