@@ -57,6 +57,7 @@ export class ProfilComponent extends Translatable implements OnInit {
                 
                 if(res['code'] == 201) {
                     this.toastr.success(res['msg'], this.__("global.success"));
+                    this.authService.logout();
                 }else{
                     this.toastr.error(res['msg'], this.__("global.error"));
                 }                
