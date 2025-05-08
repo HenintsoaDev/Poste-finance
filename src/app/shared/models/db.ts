@@ -80,3 +80,30 @@ export class profil {
     actions: action [] | null | [];
 }
 
+export class bureau {
+    rowid: number ;
+    name: string ;
+    code: string ;
+    responsable: string | null ;
+    fk_quartier: number | null ;
+    province: number | null ;
+    adresse: string | null ;
+    tel: string | null ;
+    email: string | null ;
+    idtype_agence: number | null ;
+    email_dr: string | null ;
+    telephone_dr: string | null ;
+    rapatrie_auto: boolean | null ;
+    solde_max_rapatrie: number | null ;
+    state: number | null ;
+    actions: action [] | null | [];
+   
+}
+
+export class province {
+    id : number;
+    lib_region : string ;
+   
+}
+
+

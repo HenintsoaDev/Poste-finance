@@ -4,15 +4,15 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
-import { Auth, utilisateur } from 'app/shared/models/db';
+import { Auth, profil } from 'app/shared/models/db';
 import { Router } from '@angular/router';
 import { MenuService } from 'app/shared/models/route-info';
-import { HttpService } from '../http.service';
+import { HttpService } from '../../http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class UtilisateurService {
+export class ProfilService {
 
     constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
@@ -23,9 +23,9 @@ export class UtilisateurService {
 
    
 
-    ajoutUtilisateur(credentials: utilisateur): Observable<any> {
+    ajoutProfil(credentials: profil): Observable<any> {
         
-        return this.httpService.post<any>(environment.utilisateur, credentials).pipe(
+        return this.httpService.post<any>(environment.profil, credentials).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -33,20 +33,9 @@ export class UtilisateurService {
             })
         );
     }
-    modifierUtilisateur(credentials: utilisateur): Observable<any> {
+    modifierProfil(credentials: profil): Observable<any> {
         
-        return this.httpService.put<any>(environment.utilisateur + '/' + credentials.rowid, credentials).pipe(
-            tap(response => {
-                if (response['code'] === 200) {
-                    console.log("response XHR", response)
-                }
-            })
-        );
-    }
-
-    supprimerUtilisateur(id): Observable<any> {
-        
-        return this.httpService.delete<any>(environment.utilisateur + '/' + id,).pipe(
+        return this.httpService.put<any>(environment.profil + '/' + credentials.id, credentials).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -55,9 +44,9 @@ export class UtilisateurService {
         );
     }
 
-    changementStateUtilisateur(data, state): Observable<any> {
+    supprimerProfil(id): Observable<any> {
         
-        return this.httpService.get<any>(environment.utilisateur + '/' + data.rowid + '/state/' + state + '?state=' + state).pipe(
+        return this.httpService.delete<any>(environment.profil + '/' + id,).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -66,9 +55,9 @@ export class UtilisateurService {
         );
     }
 
-    regenererMotDePasse(credentials: any): Observable<any> {
+    changementStateProfil(data, state): Observable<any> {
         
-        return this.httpService.post<any>(environment.regenerer_mdp, credentials).pipe(
+        return this.httpService.get<any>(environment.profil + '/' + data.id + '/state/' + state + '?state=' + state).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)

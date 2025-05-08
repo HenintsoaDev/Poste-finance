@@ -30,22 +30,24 @@ import { MatIconModule } from '@angular/material/icon';
 import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
 import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { ToastrModule } from 'ngx-toastr';
-import { ModuleComponent } from './views/modules/adm/module/module.component';
+import { ModuleComponent } from './views/modules/adm/parametrage/module/module.component';
 import { TableComponent } from './services/table/table.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { AuthInterceptor } from './services/auth.interceptor';
 import { ModalModule } from 'ngx-bootstrap/modal';
 import { MatTooltipModule } from '@angular/material/tooltip';
 import { TableShimmerComponent } from './shared/table-shimmer/table-shimmer.component';
-import { SousModuleComponent } from './views/modules/adm/sous-module/sous-module.component';
-import { TypeBureauxComponent } from './views/modules/adm/type-bureaux/type-bureaux.component';
-import { TypeProfilComponent } from './views/modules/adm/type-profil/type-profil.component';
-import { ProfilsComponent } from './views/modules/adm/profils/profils.component';
+import { SousModuleComponent } from './views/modules/adm/parametrage/sous-module/sous-module.component';
+import { TypeBureauxComponent } from './views/modules/adm/parametrage/type-bureaux/type-bureaux.component';
+import { TypeProfilComponent } from './views/modules/adm/parametrage/type-profil/type-profil.component';
+import { ProfilsComponent } from './views/modules/adm/parametrage/profils/profils.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
-import { UtilisateurComponent } from './views/modules/adm/utilisateur/utilisateur.component';
+import { UtilisateurComponent } from './views/modules/adm/parametrage/utilisateur/utilisateur.component';
 import localeFr from '@angular/common/locales/fr';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
+import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/bureau.component';
+import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -100,7 +102,9 @@ registerLocaleData(localeFr);
     TypeProfilComponent,
     PageNotFoundComponent,
     ProfilsComponent,
-    UtilisateurComponent
+    UtilisateurComponent,
+    BureauComponent,
+    ActionComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

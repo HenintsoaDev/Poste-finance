@@ -1,11 +1,11 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TypeProfilService } from 'app/services/admin/type_profil.service';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { SousModuleService } from 'app/services/admin/parametrage/sous_module.service';
 import { PassageService } from 'app/services/table/passage.service';
-import { type_profil } from 'app/shared/models/db';
+import { module, sous_module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
-import { Subscription } from 'rxjs';
+import { map, startWith, Subscription, Subject, takeUntil } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
@@ -13,30 +13,36 @@ import { AuthService } from 'app/services/auth.service';
 declare var bootstrap: any;
 
 @Component({
-  selector: 'app-type-profil',
-  templateUrl: './type-profil.component.html',
-  styleUrls: ['./type-profil.component.scss']
+  selector: 'app-sous-module',
+  templateUrl: './sous-module.component.html',
+  styleUrls: ['./sous-module.component.scss']
 })
-export class TypeProfilComponent extends Translatable implements OnInit {
-
-  modalRef?: BsModalRef;
+export class SousModuleComponent extends Translatable implements OnInit {
   
   /***************************************** */
   endpoint = "";
   header = [
     
-   
     {
-      "nomColonne" : this.__('type_profil.code'),
+      "nomColonne" : this.__('sous_module.code'),
       "colonneTable" : "code",
-      "table" : "type_agence"
+      "table" : "sous_module"
     },
     {
-      "nomColonne" : this.__('type_profil.name'),
+      "nomColonne" : this.__('sous_module.name'),
       "colonneTable" : "name",
-      "table" : "type_agence"
+      "table" : "sous_module"
     },
-   
+    {
+      "nomColonne" : this.__('sous_module.icon'),
+      "colonneTable" : "icon",
+      "table" : "sous_module"
+    },
+    {
+      "nomColonne" : this.__('sous_module.module'),
+      "colonneTable" : "name",
+      "table" : "module"
+    },
    
     {
       "nomColonne" : this.__('global.action')
@@ -56,6 +62,15 @@ export class TypeProfilComponent extends Translatable implements OnInit {
             'type' : 'text',
           },
         
+          {
+            'name' : 'icon',
+            'type' : 'text',
+          },
+          {
+            'name' : 'module',
+            'type' : 'text',
+          },
+        
           {'name' :  'state#id'}
   ]
   
@@ -64,49 +79,57 @@ export class TypeProfilComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
+      'autority' : 'PRM_21',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
+      'autority' : 'PRM_23',
+
   
     },
   ]
   
-    searchGlobal = [ 'type_agence.name']
+    searchGlobal = [ 'sous_module.code', 'sous_module.name', 'sous_module.icon', 'module.name']
    
     /***************************************** */
   
   
-  
-    typeBureauForm: FormGroup;
-    type_profil: type_profil = new type_profil();
-    listTypeBureau:type_profil [] = [];
-  
-    @ViewChild('addTypeBureau') addTypeBureau: TemplateRef<any> | undefined;
-    idTypeBureau : number;
+    subscription: Subscription;
+    sous_moduleForm: FormGroup;
+    sous_module: sous_module = new sous_module();
+    listSousModules:sous_module [] = [];
+    modules:module [] = [];
+
+    @ViewChild('addSous_module') addSousModule: TemplateRef<any> | undefined;
+    idSousModule : number;
     titleModal: string = "";
-  
-  
+    modalRef?: BsModalRef;
+    
+    filteredModules: module[] = [];
+    searchControl = new FormControl('');
+
     constructor(private fb: FormBuilder,  
                 private toastr: ToastrService, 
-                private typeService: TypeProfilService,     
+                private sousModuleService: SousModuleService,     
                 private passageService: PassageService,
                 private modalService: BsModalService,
                 private authService : AuthService
+  
       ) {
       super();
       this.authService.initAutority("PRM");
+
     }
   
   
   
   
-  subscription: Subscription;
   
     async ngOnInit() {
-      this.titleModal = this.__('type_profil.title_add_modal');
+      this.titleModal = this.__('sous_module.title_add_modal');
   
       this.passageService.appelURL(null);
 
@@ -114,25 +137,37 @@ export class TypeProfilComponent extends Translatable implements OnInit {
           // Écouter les changements de modal à travers le service si il y a des actions
           this.subscription = this.passageService.getObservable().subscribe(event => {
   
-            if( event.data){
-              this.idTypeBureau = event.data.id;
+            if(event.data){
+              this.idSousModule = event.data.id;
   
-              if(event.data.action == 'edit') this.openModalEditTypeBureau();
-              else if(event.data.action == 'delete') this.openModalDeleteTypeBureau();
-              else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
-
+              if(event.data.action == 'edit') this.openModalEditSousModule();
+              else if(event.data.action == 'delete') this.openModalDeleteSousModule();
+              else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateSousModule();
+              
               // Nettoyage immédiat de l'event
               this.passageService.clear();  // ==> à implémenter dans ton service
             
             }
+            
       });
-          this.endpoint = environment.baseUrl + '/' + environment.type_profil;
+          this.endpoint = environment.baseUrl + '/' + environment.sous_module;
       /***************************************** */
   
-          this.typeBureauForm = this.fb.group({
-            name: ['', Validators.required]
+          this.sous_moduleForm = this.fb.group({
+            name: ['', Validators.required],
+            code: ['', [Validators.required]],
+            icon: ['', [Validators.required]],
+            module_id: ['', [Validators.required]]
         });
+
+
+        
+
+
     }
+
+   
+   
   
     ngOnDestroy() {
       if (this.subscription) {
@@ -142,12 +177,14 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
     // Quand on faire l'ajout ou modification
     onSubmit() {
-      if (this.typeBureauForm.valid) {
+
+      console.log(this.sous_module);
+      if (this.sous_moduleForm.valid) {
   
         let msg = "";
         let msg_btn = "";
   
-        if(!this.type_profil.id){
+        if(!this.sous_module.id){
            msg = this.__("global.enregistrer_donnee_?");
            msg_btn = this.__("global.oui_enregistrer");
         }else{
@@ -170,22 +207,24 @@ export class TypeProfilComponent extends Translatable implements OnInit {
             }).then((result) => {
             if (result.isConfirmed) {
   
-              if(!this.type_profil.id){
+              if(!this.sous_module.id){
                 console.log("add")
   
-                 this.typeService.ajoutTypeProfil(this.type_profil).subscribe({
+                 this.sousModuleService.ajoutSousModule(this.sous_module).subscribe({
                   next: (res) => {
-                      if(res['code'] == 201) {
-                        this.toastr.success(res['msg'], this.__("global.success"));
-                        this.actualisationTableau();
-                        this.closeModal();
-                      }
-                      else if(res['code'] == 400){
-                        if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
-                        else this.toastr.error(res['data'], this.__("global.error"));
-                      }else{
-                          this.toastr.error(res['msg'], this.__("global.error"));
-                      }                
+                      
+                        if(res['code'] == 201) {
+                          this.toastr.success(res['msg'], this.__("global.success"));
+                          this.actualisationTableau();
+                          this.closeModal();
+                        }
+                        else if(res['code'] == 400){
+                          if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                          else this.toastr.error(res['data'], this.__("global.error"));
+                        }else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }            
+                              
                     },
                     error: (err) => {
                     }
@@ -193,7 +232,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
               }else{
                 console.log("edit")
-                 this.typeService.modifierTypeProfil(this.type_profil).subscribe({
+                 this.sousModuleService.modifierSousModule(this.sous_module).subscribe({
                   next: (res) => {
                       if(res['code'] == 201) {
                         this.toastr.success(res['msg'], this.__("global.success"));
@@ -210,9 +249,6 @@ export class TypeProfilComponent extends Translatable implements OnInit {
               }
   
              
-  
-  
-              
               }
           });
   
@@ -223,30 +259,40 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     }
   
     // Ouverture de modal pour modification
-    openModalEditTypeBureau() {
+    openModalEditSousModule() {
   
-      this.titleModal = this.__('type_profil.title_edit_modal');
+      this.titleModal = this.__('sous_module.title_edit_modal');
+
+      if (this.addSousModule) {
   
-      if (this.addTypeBureau) {
-  
+       
+        this.recupererDonnee();
+
+        this.actualisationSelect();
+
+        // Ouverture de modal
+        this.modalRef = this.modalService.show(this.addSousModule, { backdrop: 'static',keyboard: false });
+      }
+    }
+
+    // Récuperation des donnée
+    recupererDonnee(){
+
         // Récupérer la liste affichée dans le tableau depuis le localStorage.
         const storedData = localStorage.getItem('data');
         let result : any;
         if (storedData) result = JSON.parse(storedData);
-        this.listTypeBureau = result.data;
-  
+        this.listSousModules = result.data;
+
         // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-        let res = this.listTypeBureau.filter(_ => _.id == this.idTypeBureau);
-        this.type_profil = res[0];
-  
-        // Ouverture de modal
-        this.modalRef = this.modalService.show(this.addTypeBureau, { backdrop: 'static',keyboard: false });
-      }
+        let res = this.listSousModules.filter(_ => _.id == this.idSousModule);
+        this.sous_module = res[0];
+
     }
   
   
      // SUppression d'un modal
-     openModalDeleteTypeBureau() {
+     openModalDeleteSousModule() {
   
       Swal.fire({
         title: this.__("global.confirmation"),
@@ -263,7 +309,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
         }).then((result) => {
         if (result.isConfirmed) {
   
-             this.typeService.supprimerTypeProfil(this.idTypeBureau).subscribe({
+             this.sousModuleService.supprimerSousModule(this.idSousModule).subscribe({
               next: (res) => {
                   if(res['code'] == 204) {
                     this.toastr.success(res['msg'], this.__("global.success"));
@@ -288,19 +334,10 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
   
       // Ouverture de modal pour modification
-      openModalToogleStateTypeBureau() {
+      openModalToogleStateSousModule() {
   
-        console.log("ssssssssssssxxxxxx");
   
-        // Récupérer la liste affichée dans le tableau depuis le localStorage.
-        const storedData = localStorage.getItem('data');
-        let result : any;
-        if (storedData) result = JSON.parse(storedData);
-        this.listTypeBureau = result.data;
-        console.log(this.listTypeBureau);
-        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-        let res = this.listTypeBureau.filter(_ => _.id == this.idTypeBureau);
-        this.type_profil = res[0];
+        this.recupererDonnee();
   
         
         
@@ -320,11 +357,11 @@ export class TypeProfilComponent extends Translatable implements OnInit {
           }).then((result) => {
           if (result.isConfirmed) {
             let state = 0;
-            if(this.type_profil.state == 1) state = 0;
+            if(this.sous_module.state == 1) state = 0;
             else state = 1;
   
     
-               this.typeService.changementStateTypeProfil(this.type_profil, state).subscribe({
+               this.sousModuleService.changementStateSousModule(this.sous_module, state).subscribe({
                 next: (res) => {
                     if(res['code'] == 201) {
                       this.toastr.success(res['msg'], this.__("global.success"));
@@ -347,19 +384,33 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     
       }
     
+      
   
   
     // Ouverture du modal pour l'ajout
-    openModalAdd(template: TemplateRef<any>) {
-      this.titleModal = this.__('type_profil.title_add_modal');
-      this.type_profil = new type_profil();
-
+    async openModalAdd(template: TemplateRef<any>) {
+      this.titleModal = this.__('sous_module.title_add_modal');
+      this.sous_module = new sous_module();
+      this.actualisationSelect();
       this.modalRef = this.modalService.show(template, {
         backdrop: 'static',
         keyboard: false
       });
     }
-  
+
+    async actualisationSelect(){
+      this.modules = await this.authService.getSelectList(environment.liste_module_active,['name']);
+      this.filteredModules = this.modules;
+
+      this.searchControl.valueChanges.subscribe(value => {
+        const lower = value?.toLowerCase() || '';
+        this.filteredModules = this.modules.filter(mod =>
+          mod.name.toLowerCase().includes(lower)
+        );
+      });
+    }
+
+   
     // Actualisation des données
     actualisationTableau(){
       this.passageService.appelURL('');
@@ -369,7 +420,9 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     closeModal() {
       this.modalRef?.hide();
     }
-  
 
   
-}
+  
+  }
+  
+

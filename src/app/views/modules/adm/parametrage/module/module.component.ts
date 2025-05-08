@@ -1,8 +1,8 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TypeBureauService } from 'app/services/admin/type_bureau.service';
+import { ModuleService } from 'app/services/admin/parametrage/module.service';
 import { PassageService } from 'app/services/table/passage.service';
-import { type_bureau } from 'app/shared/models/db';
+import { module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -13,11 +13,11 @@ import { AuthService } from 'app/services/auth.service';
 declare var bootstrap: any;
 
 @Component({
-  selector: 'app-type-bureaux',
-  templateUrl: './type-bureaux.component.html',
-  styleUrls: ['./type-bureaux.component.scss']
+  selector: 'app-module',
+  templateUrl: './module.component.html',
+  styleUrls: ['./module.component.scss']
 })
-export class TypeBureauxComponent extends Translatable implements OnInit {
+export class ModuleComponent extends Translatable implements OnInit {
 
   modalRef?: BsModalRef;
   
@@ -25,13 +25,21 @@ export class TypeBureauxComponent extends Translatable implements OnInit {
 endpoint = "";
 header = [
   
- 
   {
-    "nomColonne" : this.__('type_bureau.name'),
-    "colonneTable" : "name",
-    "table" : "type_agence"
+    "nomColonne" : this.__('module.code'),
+    "colonneTable" : "code",
+    "table" : "module"
   },
- 
+  {
+    "nomColonne" : this.__('module.name'),
+    "colonneTable" : "name",
+    "table" : "module"
+  },
+  {
+    "nomColonne" : this.__('module.icon'),
+    "colonneTable" : "icon",
+    "table" : "module"
+  },
  
   {
     "nomColonne" : this.__('global.action')
@@ -43,7 +51,16 @@ header = [
 
 objetBody = [
         {
+          'name' : 'code',
+          'type' : 'text',
+        },
+        {
           'name' : 'name',
+          'type' : 'text',
+        },
+      
+        {
+          'name' : 'icon',
           'type' : 'text',
         },
       
@@ -65,24 +82,24 @@ listIcon = [
   },
 ]
 
-  searchGlobal = [ 'type_agence.name']
+  searchGlobal = [ 'module.code', 'module.name', 'module.icon']
  
   /***************************************** */
 
 
 
-  typeBureauForm: FormGroup;
-  type_bureau: type_bureau = new type_bureau();
-  listTypeBureau:type_bureau [] = [];
+  moduleForm: FormGroup;
+  module: module = new module();
+  listModules:module [] = [];
 
-  @ViewChild('addTypeBureau') addTypeBureau: TemplateRef<any> | undefined;
-  idTypeBureau : number;
+  @ViewChild('addModule') addModule: TemplateRef<any> | undefined;
+  idModule : number;
   titleModal: string = "";
 
 
   constructor(private fb: FormBuilder,  
               private toastr: ToastrService, 
-              private typeService: TypeBureauService,     
+              private moduleService: ModuleService,     
               private passageService: PassageService,
               private modalService: BsModalService,
               private authService : AuthService
@@ -97,34 +114,34 @@ listIcon = [
 subscription: Subscription;
 
   async ngOnInit() {
+    this.titleModal = this.__('module.title_add_modal');
 
-      this.titleModal = this.__('type_bureau.title_add_modal');
+        this.passageService.appelURL(null);
 
-      this.passageService.appelURL(null);
-      
      /***************************************** */
         // Écouter les changements de modal à travers le service si il y a des actions
         this.subscription = this.passageService.getObservable().subscribe(event => {
 
           if(event.data){
-            this.idTypeBureau = event.data.id;
+            this.idModule = event.data.id;
 
-            if(event.data.action == 'edit') this.openModalEditTypeBureau();
-            else if(event.data.action == 'delete') this.openModalDeleteTypeBureau();
-            else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateTypeBureau();
+            if(event.data.action == 'edit') this.openModalEditModule();
+            else if(event.data.action == 'delete') this.openModalDeleteModule();
+            else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
     
-            // // Nettoyage immédiat de l'event
+            // Nettoyage immédiat de l'event
             this.passageService.clear();  // ==> à implémenter dans ton service
           
           }
-          
          
     });
-        this.endpoint = environment.baseUrl + '/' + environment.type_bureau;
+        this.endpoint = environment.baseUrl + '/' + environment.module;
     /***************************************** */
 
-        this.typeBureauForm = this.fb.group({
-          name: ['', Validators.required]
+        this.moduleForm = this.fb.group({
+          name: ['', Validators.required],
+          code: ['', [Validators.required]],
+          icon: ['', [Validators.required]]
       });
   }
 
@@ -136,12 +153,12 @@ subscription: Subscription;
 
   // Quand on faire l'ajout ou modification
   onSubmit() {
-    if (this.typeBureauForm.valid) {
+    if (this.moduleForm.valid) {
 
       let msg = "";
       let msg_btn = "";
 
-      if(!this.type_bureau.id){
+      if(!this.module.id){
          msg = this.__("global.enregistrer_donnee_?");
          msg_btn = this.__("global.oui_enregistrer");
       }else{
@@ -164,10 +181,10 @@ subscription: Subscription;
           }).then((result) => {
           if (result.isConfirmed) {
 
-            if(!this.type_bureau.id){
+            if(!this.module.id){
               console.log("add")
 
-               this.typeService.ajoutTypeBureau(this.type_bureau).subscribe({
+               this.moduleService.ajoutModule(this.module).subscribe({
                 next: (res) => {
                     if(res['code'] == 201) {
                       this.toastr.success(res['msg'], this.__("global.success"));
@@ -187,7 +204,7 @@ subscription: Subscription;
 
             }else{
               console.log("edit")
-               this.typeService.modifierTypeBureau(this.type_bureau).subscribe({
+               this.moduleService.modifierModule(this.module).subscribe({
                 next: (res) => {
                     if(res['code'] == 201) {
                       this.toastr.success(res['msg'], this.__("global.success"));
@@ -217,30 +234,22 @@ subscription: Subscription;
   }
 
   // Ouverture de modal pour modification
-  openModalEditTypeBureau() {
+  openModalEditModule() {
 
-    this.titleModal = this.__('type_bureau.title_edit_modal');
+    this.titleModal = this.__('module.title_edit_modal');
 
-    if (this.addTypeBureau) {
+    if (this.addModule) {
 
-      // Récupérer la liste affichée dans le tableau depuis le localStorage.
-      const storedData = localStorage.getItem('data');
-      let result : any;
-      if (storedData) result = JSON.parse(storedData);
-      this.listTypeBureau = result.data;
-
-      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-      let res = this.listTypeBureau.filter(_ => _.id == this.idTypeBureau);
-      this.type_bureau = res[0];
+      this.recupererDonnee();
 
       // Ouverture de modal
-      this.modalRef = this.modalService.show(this.addTypeBureau, { backdrop: 'static',keyboard: false });
+      this.modalRef = this.modalService.show(this.addModule, { backdrop: 'static',keyboard: false });
     }
   }
 
 
    // SUppression d'un modal
-   openModalDeleteTypeBureau() {
+   openModalDeleteModule() {
 
     Swal.fire({
       title: this.__("global.confirmation"),
@@ -257,7 +266,7 @@ subscription: Subscription;
       }).then((result) => {
       if (result.isConfirmed) {
 
-           this.typeService.supprimerTypeBureau(this.idTypeBureau).subscribe({
+           this.moduleService.supprimerModule(this.idModule).subscribe({
             next: (res) => {
                 if(res['code'] == 204) {
                   this.toastr.success(res['msg'], this.__("global.success"));
@@ -282,22 +291,13 @@ subscription: Subscription;
 
 
     // Ouverture de modal pour modification
-    openModalToogleStateTypeBureau() {
+    openModalToogleStateModule() {
 
       console.log("ssssssssssssxxxxxx");
 
-      // Récupérer la liste affichée dans le tableau depuis le localStorage.
-      const storedData = localStorage.getItem('data');
-      let result : any;
-      if (storedData) result = JSON.parse(storedData);
-      this.listTypeBureau = result.data;
-      console.log(this.listTypeBureau);
-      // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
-      let res = this.listTypeBureau.filter(_ => _.id == this.idTypeBureau);
-      this.type_bureau = res[0];
-
+     
       
-      
+      this.recupererDonnee();
 
       Swal.fire({
         title: this.__("global.confirmation"),
@@ -314,11 +314,11 @@ subscription: Subscription;
         }).then((result) => {
         if (result.isConfirmed) {
           let state = 0;
-          if(this.type_bureau.state == 1) state = 0;
+          if(this.module.state == 1) state = 0;
           else state = 1;
 
   
-             this.typeService.changementStateTypeBureau(this.type_bureau, state).subscribe({
+             this.moduleService.changementStateModule(this.module, state).subscribe({
               next: (res) => {
                   if(res['code'] == 201) {
                     this.toastr.success(res['msg'], this.__("global.success"));
@@ -345,12 +345,26 @@ subscription: Subscription;
 
   // Ouverture du modal pour l'ajout
   openModalAdd(template: TemplateRef<any>) {
-    this.titleModal = this.__('type_bureau.title_add_modal');
-    this.type_bureau = new type_bureau();
+    this.titleModal = this.__('module.title_add_modal');
+    this.module = new module();
+
     this.modalRef = this.modalService.show(template, {
       backdrop: 'static',
       keyboard: false
     });
+  }
+
+  // Récuperation des données via plocal
+  recupererDonnee(){
+    // Récupérer la liste affichée dans le tableau depuis le localStorage.
+    const storedData = localStorage.getItem('data');
+    let result : any;
+    if (storedData) result = JSON.parse(storedData);
+    this.listModules = result.data;
+    console.log(this.listModules);
+    // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+    let res = this.listModules.filter(_ => _.id == this.idModule);
+    this.module = res[0];
   }
 
   // Actualisation des données

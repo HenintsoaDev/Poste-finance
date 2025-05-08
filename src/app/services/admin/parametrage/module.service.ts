@@ -4,28 +4,21 @@ import { tap } from 'rxjs/operators';
 import { Observable } from 'rxjs';
 import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
-import { Auth, type_bureau } from 'app/shared/models/db';
+import { Auth, module } from 'app/shared/models/db';
 import { Router } from '@angular/router';
 import { MenuService } from 'app/shared/models/route-info';
-import { HttpService } from '../http.service';
+import { HttpService } from '../../http.service';
 
 @Injectable({
   providedIn: 'root'
 })
-export class TypeBureauService {
+export class ModuleService {
 
     constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
-  
-
-   
-
-
-   
-
-    ajoutTypeBureau(credentials: type_bureau): Observable<any> {
+    ajoutModule(credentials: module): Observable<any> {
         
-        return this.httpService.post<any>(environment.type_bureau, credentials).pipe(
+        return this.httpService.post<any>(environment.module, credentials).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -33,14 +26,9 @@ export class TypeBureauService {
             })
         );
     }
-    modifierTypeBureau(credentials: type_bureau): Observable<any> {
-
-        let data  = {
-            'id' : credentials.id,
-            'name' : credentials.name
-        }
+    modifierModule(credentials: module): Observable<any> {
         
-        return this.httpService.put<any>(environment.type_bureau + '/' + credentials.id, data).pipe(
+        return this.httpService.put<any>(environment.module + '/' + credentials.id, credentials).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -49,9 +37,9 @@ export class TypeBureauService {
         );
     }
 
-    supprimerTypeBureau(id): Observable<any> {
+    supprimerModule(id): Observable<any> {
         
-        return this.httpService.delete<any>(environment.type_bureau + '/' + id,).pipe(
+        return this.httpService.delete<any>(environment.module + '/' + id,).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)
@@ -60,9 +48,9 @@ export class TypeBureauService {
         );
     }
 
-    changementStateTypeBureau(data, state): Observable<any> {
+    changementStateModule(data, state): Observable<any> {
         
-        return this.httpService.get<any>(environment.type_bureau + '/' + data.id + '/state/' + state + '?state=' + state).pipe(
+        return this.httpService.get<any>(environment.module + '/' + data.id + '/state/' + state + '?state=' + state).pipe(
             tap(response => {
                 if (response['code'] === 200) {
                     console.log("response XHR", response)

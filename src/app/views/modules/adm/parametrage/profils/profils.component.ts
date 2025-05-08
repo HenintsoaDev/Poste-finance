@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProfilService } from 'app/services/admin/profil.service';
+import { ProfilService } from 'app/services/admin/parametrage/profil.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { module, profil, type_profil } from 'app/shared/models/db';
 import { environment } from 'environments/environment';

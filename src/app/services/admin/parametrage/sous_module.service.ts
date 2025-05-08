@@ -7,7 +7,7 @@ import { valuesys } from 'app/shared/models/options';
 import { Auth, sous_module } from 'app/shared/models/db';
 import { Router } from '@angular/router';
 import { MenuService } from 'app/shared/models/route-info';
-import { HttpService } from '../http.service';
+import { HttpService } from '../../http.service';
 
 @Injectable({
   providedIn: 'root'

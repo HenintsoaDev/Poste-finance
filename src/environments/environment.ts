@@ -17,6 +17,7 @@ export const environment = {
   soldeWelletStorage : 'soldeWallet',
   soldeCarteStorage : 'soldeCarte',
 
+//** Parametrage */
   module :'parametrage/module',
   sous_module :'parametrage/sousmodule',
   liste_module_active :'parametrage/consult/module/liste_module_active',
@@ -26,10 +27,19 @@ export const environment = {
   liste_profil_active :'parametrage/consult/profil/allActivatedProfil',
   liste_type_profil_active :'parametrage/consult/type_profil/liste_type_profil_active',
   utilisateur :'parametrage/user',
-  liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
   liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   regenerer_mdp :'parametrage/user/regenerer_password',
-  profilage : 'parametrage/profilage'
+  profilage : 'parametrage/profilage',
+  action : 'parametrage/action',
+  appendroute : 'parametrage/settings/appendroute',
+  generateroute : 'parametrage/settings/generateroute',
+  
+//** Gestion bureau */
+  liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
+  bureau : 'gestion_bureau/bureaux',
 
+//** Ressource */
+  province : 'resource/province/liste_province',
+  departement : 'resource/departement/liste_departement'
 };
