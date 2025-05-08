@@ -120,8 +120,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
       ) {
       super();
-      this.authService.initAutority("PRM");
-
+      this.authService.initAutority("PRM",["ADM"]);
+        //console.log(this.autority('PRM_20'));
     }
   
   

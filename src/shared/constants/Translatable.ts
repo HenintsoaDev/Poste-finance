@@ -43,16 +43,13 @@ export  class Translatable{
         return typeof result === 'string' ? result : key;
     }
 
-    authority(actionCode: string) : boolean{
-        return window['authorize'].find((item: string) => item == actionCode) ||  (storage.get(itemStorage.user_info) as IMe).info.admin == 1;
-    }
-
     autority(codeAction) : boolean{
         let  user = <Auth> window['authority']['user'];
         if(user.info.admin === 1){
             return true ;
         }
-        return !!this.actionModule().find((item)=> item.code === codeAction && item.state ===1);
+        
+        return !!this.actionModule().find((item)=> item.code === codeAction && item.state === 1);
     }
 
     public actionModule(): action[]{
@@ -61,17 +58,15 @@ export  class Translatable{
         }
         let codeSousModule:Array<string> = window['authority']['sous_module'] || [] ;
         let codeModule:Array<string> = window['authority']['module'];
-        // console.log('WWW',codeModule)
         let  user =<Auth>  window['authority']['user'];
         try {
             let module: module_user[] = user.modules.filter((item:module_user)=>  codeModule.indexOf(item.code)!==-1);
-            // console.log('mod',module);
+             
             let sousModule:sous_module []=[];
-            if(module){
-                
+            if(module.length > 0){
                 for (let i=0 ;i< module.length ;i++){
-                    let sous_module_ = module[i].sousModules.filter((item)=>  codeSousModule.indexOf(item.code) !== -1);
-                    //console.log('OK SOUS MODULE',sous_module_)
+                    let sous_module_ = module[i]['sous_modules'].filter((item)=>  codeSousModule.indexOf(item['code']) !== -1);
+                    
                     if(sous_module_){
                         sousModule.push(...sous_module_);
                     }
@@ -82,7 +77,6 @@ export  class Translatable{
                     actions.push(...sousModule[i].actions)
                 }
 
-                //console.log("ASC",actions,sousModule,codeSousModule)
                 return   window['actions'] = actions;
             }
             return [];
