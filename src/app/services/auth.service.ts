@@ -141,15 +141,19 @@ export class AuthService {
     }
 
     async logout() {
-        localStorage.removeItem(environment.menuItemsSelectedStorage);
-        localStorage.removeItem(environment.menuItemsStorage);
-        localStorage.removeItem(environment.userAuth);
-        localStorage.removeItem(environment.authItemName);
-        localStorage.removeItem(environment.userItemName);
-        localStorage.removeItem(environment.soldeWelletStorage);
-        localStorage.removeItem(environment.soldeCarteStorage);
-        localStorage.removeItem(environment.phcoTimeToken);
-        this.router.navigate(['/login']);
+        let res = await this.http.get<any>(environment.baseUrl + '/auth/logout', valuesys.httpAuthOptions()).toPromise() ;
+        if(res['code'] === 200){
+            localStorage.removeItem(environment.menuItemsSelectedStorage);
+            localStorage.removeItem(environment.menuItemsStorage);
+            localStorage.removeItem(environment.userAuth);
+            localStorage.removeItem(environment.authItemName);
+            localStorage.removeItem(environment.userItemName);
+            localStorage.removeItem(environment.soldeWelletStorage);
+            localStorage.removeItem(environment.soldeCarteStorage);
+            localStorage.removeItem(environment.phcoTimeToken);
+            this.router.navigate(['/login']);
+        }
+        
     }
 
     isLoggedIn(): boolean {
