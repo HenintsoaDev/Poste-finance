@@ -134,7 +134,7 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
         ) {
         super();
-        this.authService.initAutority("PRM");
+        this.authService.initAutority("PRM","ADM");
   
       }
     

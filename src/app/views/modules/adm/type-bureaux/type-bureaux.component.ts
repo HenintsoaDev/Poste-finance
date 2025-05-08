@@ -88,7 +88,7 @@ listIcon = [
               private authService : AuthService
     ) {
     super();
-    this.authService.initAutority("PRM");
+    this.authService.initAutority("PRM","ADM");
   }
 
 
