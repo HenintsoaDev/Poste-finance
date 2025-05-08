@@ -41,7 +41,7 @@
     </div>
     
     <div  *ngFor="let menuItem of routes; let i = index">
-        <ng-container *ngIf="menuItem.hasOneAction">
+        <ng-container *ngIf="menuItem.hasOneAction || user.info.admin == 1">
             <ul class="nav" style="margin-top: 0px;">
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" [href]="'#collapse' + i"  aria-expanded="true" style="color: white;">
