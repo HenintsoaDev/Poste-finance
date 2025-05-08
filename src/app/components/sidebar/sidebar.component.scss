@@ -1,12 +1,23 @@
 @import "../../../assets/scss/core/variables/_colors.scss";
 
+.user{
+    background: #0000005c;
+}
+
 .user:after {
     content: "";
     position: absolute;
     right: 15px;
     height: 1px;
     width: calc(100% - 30px);
-    background-color: hsla(0, 0%, 70.6%, .3);
+    //background-color: hsla(0, 0%, 70.6%, .3);
+}
+
+.user > .nav > li :hover{
+    background: $secondary;
+}
+.user > #collapseExample > .nav > li > a:hover{
+    background: $secondary;
 }
 
 .nav-item{
