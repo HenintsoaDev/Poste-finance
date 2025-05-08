@@ -5,6 +5,7 @@ import { IModule } from "../interfaces/IModule";
 import { ISubModule } from "../interfaces/ISubModule";
 import { itemStorage } from "./itemStorage";
 import { storage } from "./storage";
+import { environment } from "environments/environment";
 
 declare var require: any;
 declare var window: any;
@@ -56,8 +57,14 @@ export  class Translatable{
         if(window['actions']){
             return window['actions'] ;
         }
-        let codeSousModule:Array<string> = window['authority']['sous_module'] || [] ;
-        let codeModule:Array<string> = window['authority']['module'];
+
+        let codeSousModule = localStorage.getItem(environment.authoritySousModule);
+        let codeModule = localStorage.getItem(environment.authorityModule);
+
+        console.log(codeSousModule,codeModule);
+
+        //let codeSousModule:Array<string> = window['authority']['sous_module'] || [] ;
+        //let codeModule:Array<string> = window['authority']['module'];
         let  user =<Auth>  window['authority']['user'];
         try {
             let module: module_user[] = user.modules.filter((item:module_user)=>  codeModule.indexOf(item.code)!==-1);

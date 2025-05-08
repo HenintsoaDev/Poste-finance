@@ -72,7 +72,7 @@ export class TableComponent extends Translatable {
 
       ) { 
         super();
-        this.authService.initAutority("PRM");
+        //this.authService.initAutority("PRM");
     }
 
     subscription: Subscription;
