@@ -161,7 +161,7 @@
     "bureau" : {
         "title" : "Gestion des bureaux",
         "code" : "Code",
-        "name" : "Libelle",
+        "name" : "Agence",
         "responsable" : "Responsable",
         "departement" : "Région",
         "province" : "Province",

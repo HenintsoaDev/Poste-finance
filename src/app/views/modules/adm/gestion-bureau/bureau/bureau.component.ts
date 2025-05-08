@@ -411,14 +411,16 @@ export class BureauComponent extends Translatable implements OnInit {
 
 
      // SUppression d'un modal
-     openModalDetailBureau() {
+     async openModalDetailBureau() {
   
   
       this.titleModal = this.__('bureau.title_detail_modal');
 
       if (this.detailBureau) {
   
-        this.recupererDonnee();
+       let result = await this.authService.getSelectList(environment.bureau+ '/'+  this.idbureau,['lib_region']);
+       this.bureau = result[0];
+
 
 
         // Ouverture de modal

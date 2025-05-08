@@ -290,6 +290,47 @@
         </button>
     </div>
     <div class="modal-body">
+
+
+        <table style="width: 100%;">
+            <tr>
+                <td  class="text-right pr-3 bold">{{ __("bureau.code")}} : </td>
+                <td  class="text-left">{{  bureau.code }}</td>
+                <td  class="text-right pr-3">{{ __("bureau.name")}}  : </td>
+                <td  class="text-left">{{  bureau.name }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right pr-3 bold">{{ __("bureau.type_bureau")}} : </td>
+                <td  class="text-left">{{  bureau.type_agence }}</td>
+                <td  class="text-right pr-3 bold">{{ __("bureau.responsable")}}  : </td>
+                <td  class="text-left">{{  bureau.responsable }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right pr-3 bold">{{ __("bureau.email")}} : </td>
+                <td  class="text-left">{{  bureau.email }}</td>
+                <td  class="text-right pr-3 bold">{{ __("bureau.email_dr")}}  : </td>
+                <td  class="text-left">{{  bureau.email_dr }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right pr-3 bold">{{ __("bureau.telephone")}} : </td>
+                <td  class="text-left">{{  bureau.tel }}</td>
+                <td  class="text-right pr-3 bold">{{ __("bureau.telephone_dr")}}  : </td>
+                <td  class="text-left">{{  bureau.telephone_dr }}</td>
+            </tr>
+            <tr>
+
+                <td  class="text-right pr-3">{{ __("bureau.adresse")}}  : </td>
+                <td  class="text-left">{{  bureau.adresse }}</td>
+                <td  class="text-right pr-3">{{ __("bureau.province")}} : </td>
+                <td  class="text-left">{{  bureau.province }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right pr-3">{{ __("bureau.solde")}} : </td>
+                <td  class="text-left">{{  bureau.solde }}</td>
+                <td  class="text-right pr-3">{{ __("bureau.solde_carte")}}  : </td>
+                <td  class="text-left">{{  bureau.solde_carte }}</td>
+            </tr>
+        </table>
        
     </div>
 </ng-template>
