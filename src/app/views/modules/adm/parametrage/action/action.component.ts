@@ -1,4 +1,4 @@
-import { ActionService } from './../../../../../services/admin/parametrage/action.service';
+import { ActionService } from '../../../../../services/admin/parametre/action.service';
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { PassageService } from 'app/services/table/passage.service';

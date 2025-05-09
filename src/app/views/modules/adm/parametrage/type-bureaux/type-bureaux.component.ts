@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TypeBureauService } from 'app/services/admin/parametrage/type_bureau.service';
+import { TypeBureauService } from 'app/services/admin/parametre/type_bureau.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { type_bureau } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -55,12 +55,14 @@ listIcon = [
     'icon' : 'edit',
     'action' : 'edit',
     'tooltip' : 'Modification',
+    'autority' : 'PRM_25'
 
   },
   {
     'icon' : 'delete',
     'action' : 'delete',
     'tooltip' : 'Supression',
+    'autority' : 'PRM_27'
 
   },
 ]

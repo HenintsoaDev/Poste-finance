@@ -209,3 +209,56 @@
     </div>
 </ng-template>
 
+
+<!-- MODAL -->
+ <!-- Modal avec Material Design -->
+ <ng-template #detailUtilisateur>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+
+        <table style="width: 100%;">
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.nom")}} : </td>
+                <td  class="text-left">{{  utilisateur.nom }}</td>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.prenom")}}  : </td>
+                <td  class="text-left">{{  utilisateur.prenom }}</td>
+            </tr>
+           
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.email")}} : </td>
+                <td  class="text-left">{{  utilisateur.email }}</td>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.telephone")}}  : </td>
+                <td  class="text-left">{{  utilisateur.telephone }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.profil")}} : </td>
+                <td  class="text-left">{{  utilisateur.profil }}</td>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.bureau")}}  : </td>
+                <td  class="text-left">{{  utilisateur.agence }}</td>
+            </tr>
+       
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.user_creation")}} : </td>
+                <td  class="text-left">{{  utilisateur.user_creation  }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_creation  }} </td>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.user_modification")}}  : </td>
+                <td  class="text-left">{{  utilisateur.user_modification	 }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_modification	 }}</td>
+            </tr>
+            
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("utilisateur.state")}} : </td>
+                <td  class="text-left">{{  utilisateur.state }}</td>
+            </tr>
+        </table>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
+        </div>
+       
+    </div>
+</ng-template>

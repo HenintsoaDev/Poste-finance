@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { ModuleService } from 'app/services/admin/parametrage/module.service';
+import { ModuleService } from 'app/services/admin/parametre/module.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -72,13 +72,13 @@ listIcon = [
     'icon' : 'edit',
     'action' : 'edit',
     'tooltip' : 'Modification',
-    'autority' : 'PRM_9'
+    'autority' : 'PRM_10'
   },
   {
     'icon' : 'delete',
     'action' : 'delete',
     'tooltip' : 'Supression',
-    'autority' : 'PRM_11'
+    'autority' : 'PRM_12'
   },
 ]
 

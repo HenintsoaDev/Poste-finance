@@ -57,7 +57,9 @@
         "add_action_?" : "Voulez-vous vraiment ajouter un action ? ",
         "generer_action_?" : "Voulez-vous vraiment génerer l'action ? ",
         "clique_pour_activer" : "Cliquez pour activer",
-        "clique_pour_desactiver" : "Cliquez pour desactiver"
+        "clique_pour_desactiver" : "Cliquez pour desactiver",
+        "oui" : "Oui",
+        "non"  : "Non"
     },
 
     "paiement" : {
@@ -93,7 +95,12 @@
         "add" : "Ajouter un profil",
         "title_edit_modal" : "Modification d'un profil",
         "title_add_modal" : "Ajout d'un profil",
-        "title_affect_modal" : "Affectation de profil "
+        "title_affect_modal" : "Affectation de profil ",
+        "title_detail_modal" : "Information du profil",
+        "user_modification" : "Modifier par",   
+        "le" : "le",   
+        "state" : "State",
+        "user_creation" : "Créer par"  
     },
     "utilisateur" : {
         "title" : "Gestion des utilisateurs",
@@ -108,7 +115,13 @@
         "login" : "Login",
         "add" : "Ajouter un utilisateur",
         "title_edit_modal" : "Modification d'un utilisateur",
-        "title_add_modal" : "Ajout d'un utilisateur"
+        "title_add_modal" : "Ajout d'un utilisateur",
+        "title_detail_modal" : "Information d'un utilisateur",
+
+        "user_modification" : "Modifier par",   
+        "le" : "le",   
+        "state" : "State",
+        "user_creation" : "Créer par"  
     },
     "module" : {
         "title" : "Gestion des modules",
@@ -173,13 +186,17 @@
         "type_bureau" : "Type de bureau",
         "solde_max_rapatrie" : "Solde maximum de rapatriement",
         "rapatrie_auto" : "Rapatriement automatique",
+        "state" : "State",
         "solde" : "Solde",
         "solde_carte" : "Solde carte",
         "add" : "Ajouter un bureau",
         "title_edit_modal" : "Modification d'un bureau",
         "title_add_modal" : "Ajout d'un bureau",
-        "title_detail_modal" : "Information d'un bureau"
-    }
+        "title_detail_modal" : "Information d'un bureau",
+        "user_modification" : "Modifier par",   
+        "le" : "le",   
+        "user_creation" : "Créer par"   
+     }
 
 
 }

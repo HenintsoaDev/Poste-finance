@@ -194,8 +194,8 @@
                                 <label class="mat-label">{{ __('bureau.rapatrie_auto') }} *</label>
                               
                                 <mat-radio-group formControlName="rapatrie_auto">
-                                  <mat-radio-button class="mr-3" value="O">Oui</mat-radio-button>
-                                  <mat-radio-button class="mr-3" value="N">Non</mat-radio-button>
+                                  <mat-radio-button class="mr-3" value="O">{{ __("global.oui") }}</mat-radio-button>
+                                  <mat-radio-button class="mr-3" value="N">[{{ __("global.non") }}]</mat-radio-button>
                                 </mat-radio-group>
                               </div>
                             
@@ -345,6 +345,23 @@
                 <td  class="text-left">{{  bureau.solde }}</td>
                 <td  class="text-right p-3 bold">{{ __("bureau.solde_carte")}}  : </td>
                 <td  class="text-left">{{  bureau.solde_carte }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("bureau.rapatrie_auto")}} : </td>
+                <td  class="text-left">{{  bureau.rapatrie_auto == 0 ? __("global.non") : __("global.oui") }}</td>
+                <td  class="text-right p-3 bold">{{ __("bureau.solde_max_rapatrie")}}  : </td>
+                <td  class="text-left">{{  bureau.solde_max_rapatrie }}</td>
+            </tr>
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("bureau.user_creation")}} : </td>
+                <td  class="text-left">{{  bureau.user_creation  }} <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_creation  }} </td>
+                <td  class="text-right p-3 bold">{{ __("bureau.user_modification")}}  : </td>
+                <td  class="text-left">{{  bureau.user_modification	 }} <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_modification	 }}</td>
+            </tr>
+            
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("bureau.state")}} : </td>
+                <td  class="text-left">{{  bureau.state }}</td>
             </tr>
         </table>
 

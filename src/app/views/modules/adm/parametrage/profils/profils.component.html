@@ -14,7 +14,7 @@
                                 </button> -->
                             </div>
                             <div class="right-button">
-                                <button class="btn btn-secondary" *ngIf="autority('PRM_14')" (click)="openModalAdd(addprofil)"> {{ __("profil.add")}}</button>
+                                <button class="btn btn-secondary" *ngIf="autority('PRM_34')" (click)="openModalAdd(addprofil)"> {{ __("profil.add")}}</button>
                             </div>
                         </div>
                     </div>
@@ -169,5 +169,49 @@
     </div>
 </ng-template>
 
+
+
+<ng-template #detailProfil>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+
+        <table style="width: 100%;">
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("profil.code")}} : </td>
+                <td  class="text-left">{{  profil.code }}</td>
+                <td  class="text-right p-3 bold">{{ __("profil.name")}}  : </td>
+                <td  class="text-left">{{  profil.name }}</td>
+            </tr>
+           
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("profil.type")}} : </td>
+                <td  class="text-left">{{  profil.type_profil_name	 }}</td>
+
+                <td  class="text-right p-3 bold">{{ __("profil.state")}} : </td>
+                <td  class="text-left">{{  profil.state }}</td>
+            </tr>
+            <tr>
+       
+            <tr>
+                <td  class="text-right p-3 bold">{{ __("profil.user_creation")}} : </td>
+                <td  class="text-left">{{  profil.user_creation  }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_creation  }} </td>
+                <td  class="text-right p-3 bold">{{ __("profil.user_modification")}}  : </td>
+                <td  class="text-left">{{  profil.user_modification	 }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_modification	 }}</td>
+            </tr>
+            
+        </table>
+
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
+        </div>
+       
+    </div>
+</ng-template>
 
 

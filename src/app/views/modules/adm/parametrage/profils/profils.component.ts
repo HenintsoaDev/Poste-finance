@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { ProfilService } from 'app/services/admin/parametrage/profil.service';
+import { ProfilService } from 'app/services/admin/parametre/profil.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { module, profil, type_profil } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -79,24 +79,31 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
     listIcon = [
       {
+        'icon' : 'info',
+        'action' : 'detail',
+        'tooltip' : 'Détail',
+        'autority' : 'PRM_36',
+    
+      },
+      {
         'icon' : 'handshake',
         'action' : 'affect',
         'tooltip' : 'Affectation profil',
-        'autority' : 'PRM_2',
+        'autority' : 'PRM_39',
     
       },
       {
         'icon' : 'edit',
         'action' : 'edit',
         'tooltip' : 'Modification',
-        'autority' : 'PRM_34',
+        'autority' : 'PRM_35',
     
       },
       {
         'icon' : 'delete',
         'action' : 'delete',
         'tooltip' : 'Supression',
-        'autority' : 'PRM_36',
+        'autority' : 'PRM_37',
   
     
       },
@@ -116,6 +123,8 @@ export class ProfilsComponent extends Translatable implements OnInit {
   
       @ViewChild('addprofil') addProfil: TemplateRef<any> | undefined;
       @ViewChild('affectationprofil') affectationprofil: TemplateRef<any> | undefined;
+      @ViewChild('detailProfil') detailProfil: TemplateRef<any> | undefined;
+
       idProfil : number;
       titleModal: string = "";
       modalRef?: BsModalRef;
@@ -167,6 +176,9 @@ export class ProfilsComponent extends Translatable implements OnInit {
                         break;
                       case 'affect':
                         this.openModalAffectProfil();
+                        break;
+                      case 'detail':
+                        this.openModalDetailProfil();
                         break;
                       default:
                         if (state === 0 || state === 1) {
@@ -417,7 +429,25 @@ export class ProfilsComponent extends Translatable implements OnInit {
         }
       
         
-    
+        async openModalDetailProfil() {
+  
+  
+          this.titleModal = this.__('profil.title_detail_modal');
+      
+          if (this.detailProfil) {
+      
+           let result = await this.authService.getSelectList(environment.profil+ '/'+  this.idProfil);
+           this.profil = result;
+      
+      
+      
+            // Ouverture de modal
+            this.modalRef = this.modalService.show(this.detailProfil, {
+              class: 'modal-xl'
+            });
+          }
+      
+        }
     
       // Ouverture du modal pour l'ajout
       async openModalAdd(template: TemplateRef<any>) {
