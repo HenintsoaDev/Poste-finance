@@ -1,1 +1,92 @@
-<p>suivi-compte-principal works!</p>
+<div class="main-content">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="bg-white p-4 rounded mb-4">
+                            <form class="form-inline">
+                                <div class="form-group">
+                                    <label for="account-type-1">Type de compte</label>
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <mat-label>Type de compte</mat-label>
+                                        <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte">
+                                            <mat-option value="0">Tous les comptes</mat-option>
+                                            <mat-option value="1">E-Poketra</mat-option>
+                                            <mat-option value="2">Paositra Money</mat-option>
+                                        </mat-select>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="dateFonction">Du</label>
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="Choisir une date" (focus)="pickerDebut.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerDebut></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="form-group">
+                                    <label for="dateFonction">Au</label>
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="Choisir une date" (focus)="pickerFin.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerFin></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div cstyle="width: 100%;">
+                                    <button class="btn btn-primary btn-block" color="primary" type="submit" (click)="fitlerSuivi()">Filtrer</button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                        <div class="table-responsive">
+                            <table class="table table-striped table-no-bordered table-hover">
+                                <thead>
+                                    <tr>
+                                        <th>N°Transaction</th>
+                                        <th>Date Transaction</th>
+                                        <th>Solde avant</th>
+                                        <th>Montant (Ar)</th>
+                                        <th>Opération</th>
+                                        <th>Solde après</th>
+                                        <th>Commentaire</th>
+                                        <th>Type de compte</th>
+                                    </tr>
+                                </thead>
+                                <tbody *ngIf="!loadingData">
+                                    <tr *ngFor="let row of rows">
+                                        <td>{{ row.num_transac }}</td>
+                                        <td>{{ row.date_transaction }}</td>
+                                        <td>{{ row.solde_avant }}</td>
+                                        <td>{{ row.montant }}</td>
+                                        <td>{{ row.operation }}</td>
+                                        <td>{{ row.solde_apres}}</td>
+                                        <td>{{ row.commentaire }}</td>
+                                        <td>{{ row.wallet_carte }}</td>
+                                    </tr>
+                                </tbody>
+                                <tbody *ngIf="loadingData">
+                                    <tr *ngFor="let i of [0,1,2,3,4]">
+                                        <td *ngFor="let j of [0,1,2,3,4,5,6,7]">
+                                            <div class="shimmer shimmer-line"></div>
+                                        </td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                              
+                            <div class="pagination-controls">
+                                <button class="btn btn-primary" (click)="prevPage()" [disabled]="currentPage === 1">Précédent</button>
+                                <span>Page {{ currentPage }} / {{ lastPage }}</span>
+                                <button class="btn btn-primary" (click)="nextPage()" [disabled]="currentPage === lastPage">Suivant</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
