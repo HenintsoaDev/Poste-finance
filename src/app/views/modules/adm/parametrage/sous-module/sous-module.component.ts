@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { SousModuleService } from 'app/services/admin/parametrage/sous_module.service';
+import { SousModuleService } from 'app/services/admin/parametre/sous_module.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { module, sous_module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -79,13 +79,13 @@ export class SousModuleComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
-      'autority' : 'PRM_14',
+      'autority' : 'PRM_15',
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
-      'autority' : 'PRM_16',
+      'autority' : 'PRM_17',
 
   
     },

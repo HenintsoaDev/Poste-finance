@@ -160,7 +160,7 @@ export class AuthService {
         return !!localStorage.getItem('token');
     }
 
-    public async getSelectList(endpoint:string,text: string[] | string,id:string="id"){
+    public async getSelectList(endpoint:string,text: any = "",id:string="id"){
         let res:any = await this.http.get<any>(`${environment.baseUrl}/${endpoint}`,valuesys.httpAuthOptions()).toPromise();
         let data  = res.data ;
         

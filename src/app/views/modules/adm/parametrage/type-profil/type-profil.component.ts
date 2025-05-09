@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { TypeProfilService } from 'app/services/admin/parametrage/type_profil.service';
+import { TypeProfilService } from 'app/services/admin/parametre/type_profil.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { type_profil } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -64,12 +64,16 @@ export class TypeProfilComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
+      'autority' : 'PRM_30'
+
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
+      'autority' : 'PRM_32'
+
   
     },
   ]

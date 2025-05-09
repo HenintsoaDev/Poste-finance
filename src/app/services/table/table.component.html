@@ -53,7 +53,7 @@
                  
                   <ng-container *ngFor="let icon of cell">
                     <!-- <i *ngIf="autority(icon.autority)" -->
-                    <i 
+                    <i *ngIf="autority(icon.autority)"
                         class="material-icons"
                         mat-raised-button
                         matTooltip="{{ verifTooltipIcon(icon) }}"

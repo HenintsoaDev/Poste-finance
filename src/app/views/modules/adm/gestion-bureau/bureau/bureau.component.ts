@@ -417,7 +417,7 @@ export class BureauComponent extends Translatable implements OnInit {
     }
 
 
-     // SUppression d'un modal
+     // Detail d'un modal
      async openModalDetailBureau() {
   
   

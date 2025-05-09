@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { UtilisateurService } from 'app/services/admin/parametrage/utilisateur.service';
+import { UtilisateurService } from 'app/services/admin/parametre/utilisateur.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { module, profil, utilisateur } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -98,6 +98,14 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   listIcon = [
   
     {
+      'icon' : 'info',
+      'action' : 'detail',
+      'tooltip' : 'Détail',
+      'autority' : 'PRM_2',
+  
+    },
+    
+    {
       'icon' : 'lock_reset',
       'action' : 'regenerer_mdp',
       'tooltip' : 'Régeneration de mot de passe',
@@ -131,7 +139,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     listutilisateurs:utilisateur [] = [];
 
     @ViewChild('addutilisateur') addutilisateur: TemplateRef<any> | undefined;
-    @ViewChild('affectationutilisateur') affectationutilisateur: TemplateRef<any> | undefined;
+    @ViewChild('detailUtilisateur') detailUtilisateur: TemplateRef<any> | undefined;
     idUtilisateur : number;
     titleModal: string = "";
     modalRef?: BsModalRef;
@@ -199,6 +207,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
               if(event.data.action == 'edit') this.openModalEditutilisateur();
               else if(event.data.action == 'delete') this.openModalDeleteutilisateur();
+              else if(event.data.action == 'detail') this.openModalDetailUtilisateur();
               else if(event.data.action == 'regenerer_mdp') this.openModalRegenererMotDePasse();
               else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateutilisateur();
               
@@ -484,7 +493,27 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       }
     
       
+   // Detail d'un modal
+   async openModalDetailUtilisateur() {
   
+  
+    this.titleModal = this.__('utilisateur.title_detail_modal');
+
+    if (this.detailUtilisateur) {
+
+     let result = await this.authService.getSelectList(environment.utilisateur+ '/'+  this.idUtilisateur);
+     this.utilisateur = result;
+
+
+
+      // Ouverture de modal
+      this.modalRef = this.modalService.show(this.detailUtilisateur, {
+        class: 'modal-xl'
+      });
+    }
+
+  }
+
   
     // Ouverture du modal pour l'ajout
     async openModalAdd(template: TemplateRef<any>) {

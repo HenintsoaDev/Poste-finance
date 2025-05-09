@@ -72,7 +72,7 @@ export class TableComponent extends Translatable {
 
       ) { 
         super();
-        //this.authService.initAutority("PRM");
+        this.authService.initAutority("PRM","ADM");
     }
 
     subscription: Subscription;
@@ -96,6 +96,8 @@ export class TableComponent extends Translatable {
           }
         }
       });
+
+      
     }
 
     ngOnDestroy() {
@@ -208,6 +210,7 @@ export class TableComponent extends Translatable {
       
       await localStorage.setItem('data', JSON.stringify(res));
       const storedData = localStorage.getItem('data');
+      
 
       //** Affichage de donnée dynamiser */
       let tableau = res.data.map((row: any) => 
@@ -357,8 +360,8 @@ export class TableComponent extends Translatable {
       // Si "state" est présent
       if ('state' in dataIcon) {
         switch (dataIcon.state) {
-          case 1: return '#35558d'; // bleu
-          case 0: return '#ec6a31'; // orange
+          case 1: return 'green'; // bleu
+          case 0: return 'red'; // orange
           default: return dataIcon.tooltip ?? '';
         }
       }
@@ -367,7 +370,7 @@ export class TableComponent extends Translatable {
       switch (dataIcon.action) {
         case 'delete': return '#ec6a31';
         case 'edit': return '#35558d';
-        default: return '';
+        default: return '#35558d';
       }
     }
 
