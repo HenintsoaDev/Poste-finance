@@ -3,7 +3,9 @@ import { HttpParams } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { HttpService } from 'app/services/http.service';
 import { PassageService } from 'app/services/table/passage.service';
+import { Auth } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
+import { Toast, ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 
@@ -29,7 +31,10 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
 
     loadingData = false;
 
-    constructor(private passageService: PassageService,private httpService : HttpService) {
+    //UserStorage
+    userStorage: Auth;
+
+    constructor(private passageService: PassageService,private httpService : HttpService,private toastService : ToastrService) {
         super();
     }
 
@@ -49,7 +54,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
             ? formatDate(this.dateFin, 'yyyy-MM-dd', 'en-US')
             : undefined;
 
-        let url = `${this.endpoint}?page=${page}&per_page=2&__order__=desc,date_transaction`;
+        let url = `${this.endpoint}?page=${page}&__order__=desc,date_transaction`;
         if (dateDebutFormatted) url += `&date_debut=${dateDebutFormatted}`;
         if (dateFinFormatted) url += `&date_fin=${dateFinFormatted}`;
         if (this.typeCompte != "0") url += `&where=releve_des_comptes.wallet_carte|e|${this.typeCompte}`;
@@ -64,8 +69,16 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
                     this.currentPage = resultData.current_page;
                     this.lastPage = resultData.last_page;
                     this.total = resultData.total;
+                    this.solde = resultData.solde;
+                    this.soldeCarte = resultData.solde_carte;
+                }else{
+                    this.toastService.error(res['msg'] , this.__("global.error"));
                 }
             },
+            error: (err) => {
+                this.loadingData = false;
+                this.toastService.error(this.__("global.error"), this.__("global.error"));
+            }
         });
     }
 

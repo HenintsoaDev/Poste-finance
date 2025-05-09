@@ -1,13 +1,34 @@
 <div class="main-content">
     <div class="container-fluid">
-        
+        <div>
+            <h6 class="text-primary"><b>Suivi de compte paositra</b></h6>
+        </div>
+        <div class="row">
+            <div id="content-pm" class="content-solde">
+                <div class="">
+                    <span class="text-gray-600 font-medium" style="display: flex;">
+                        <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;Paositra Money
+                    </span>
+                </div>
+                <div class="text-2xl font-bold text-blue-700">{{ __('global.currency') }} {{ solde }}</div>
+                
+            </div>
+            <div id="content-epkt" class="content-solde">
+                <div class="">
+                    <span class="text-gray-600 font-medium" style="display: flex;">
+                        <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;E-Poketra
+                    </span>
+                </div>
+                <div class="text-2xl font-bold text-green-700">{{ __('global.currency') }} {{ soldeCarte }}</div>
+            </div>
+        </div>
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
                     <div class="card-body">
-                        <div class="bg-white p-4 rounded mb-4">
+                        <div class="bg-white">
                             <form class="form-inline">
-                                <div class="form-group">
+                                <div class="form-group col-3">
                                     <label for="account-type-1">Type de compte</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
                                         <mat-label>Type de compte</mat-label>
@@ -19,7 +40,7 @@
                                     </mat-form-field>
                                 </div>
                                 
-                                <div class="form-group">
+                                <div class="form-group col-3">
                                     <label for="dateFonction">Du</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
                                         <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="Choisir une date" (focus)="pickerDebut.open()">
@@ -28,7 +49,7 @@
                                     </mat-form-field>
                                 </div>
                                 
-                                <div class="form-group">
+                                <div class="form-group col-3">
                                     <label for="dateFonction">Au</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
                                         <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="Choisir une date" (focus)="pickerFin.open()">
@@ -37,20 +58,20 @@
                                     </mat-form-field>
                                 </div>
 
-                                <div cstyle="width: 100%;">
-                                    <button class="btn btn-primary btn-block" color="primary" type="submit" (click)="fitlerSuivi()">Filtrer</button>
+                                <div  class="col-3">
+                                    <button class="btn btn-primary w-100" color="primary" type="submit" (click)="fitlerSuivi()">Filtrer</button>
                                 </div>
                                 
                             </form>
                         </div>
                         <div class="table-responsive">
-                            <table class="table table-striped table-no-bordered table-hover">
+                            <table class="table table-striped table-bordered table-hover">
                                 <thead>
                                     <tr>
                                         <th>N°Transaction</th>
                                         <th>Date Transaction</th>
                                         <th>Solde avant</th>
-                                        <th>Montant (Ar)</th>
+                                        <th>Montant ({{ __('global.currency') }})</th>
                                         <th>Opération</th>
                                         <th>Solde après</th>
                                         <th>Commentaire</th>
