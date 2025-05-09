@@ -93,7 +93,7 @@ export class bureau {
     idtype_agence: number | null ;
     email_dr: string | null ;
     telephone_dr: string | null ;
-    rapatrie_auto: boolean | null ;
+    rapatrie_auto: any | null ;
     solde_max_rapatrie: number | null ;
     state: number | null ;
     actions: action [] | null | [];

@@ -236,8 +236,9 @@ export class BureauComponent extends Translatable implements OnInit {
         adresse: ['', [Validators.required]],
         tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
         idtype_agence: ['', [Validators.required]],
-        telephone_dr: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-        email_dr: ['', [Validators.required, Validators.email]],
+        telephone_dr: [''],
+        email_dr: ['', [Validators.email]],
+        rapatrie_auto: ['N', [Validators.required]], 
         solde_max_rapatrie: ['', [Validators.required]] 
       });
 
@@ -259,6 +260,7 @@ export class BureauComponent extends Translatable implements OnInit {
     // Quand on faire l'ajout ou modification
     onSubmit() {
 
+
       if (this.bureauForm.valid) {
 
         this.bureau = {
@@ -268,8 +270,12 @@ export class BureauComponent extends Translatable implements OnInit {
 
         this.bureau.tel = this.dialCode + this.bureau.tel;
         this.bureau.telephone_dr = this.dialCodeDr + this.bureau.telephone_dr;
-        this.bureau.rapatrie_auto = true;
 
+        if(this.bureau.rapatrie_auto ==  'N') this.bureau.rapatrie_auto = 0;
+        else this.bureau.rapatrie_auto = 1;
+
+
+        
 
           let msg = "";
           let msg_btn = "";
@@ -310,7 +316,8 @@ export class BureauComponent extends Translatable implements OnInit {
                           this.closeModal();
                         }
                         else if(res['code'] == 400){
-                          if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                          if(res['data'].tel) this.toastr.error(res['data'].tel[0], this.__("global.error"));
+                          if(res['data'].email) this.toastr.error(res['data'].email[0], this.__("global.error"));
                           else this.toastr.error(res['data'], this.__("global.error"));
                         }else{
                             this.toastr.error(res['msg'], this.__("global.error"));
@@ -419,13 +426,13 @@ export class BureauComponent extends Translatable implements OnInit {
       if (this.detailBureau) {
   
        let result = await this.authService.getSelectList(environment.bureau+ '/'+  this.idbureau,['lib_region']);
-       this.bureau = result[0];
+       this.bureau = result;
 
 
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.detailBureau, {
-          class: 'modal-lg'
+          class: 'modal-xl'
         });
       }
 
@@ -497,8 +504,9 @@ export class BureauComponent extends Translatable implements OnInit {
         adresse: ['', [Validators.required]],
         tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
         idtype_agence: ['', [Validators.required]],
-        telephone_dr: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
-        email_dr: ['', [Validators.required, Validators.email]],
+        telephone_dr: [''],
+        email_dr: ['', [Validators.email]],
+        rapatrie_auto: ['N', [Validators.required]], 
         solde_max_rapatrie: ['', [Validators.required]] 
       });
 
@@ -582,6 +590,8 @@ export class BureauComponent extends Translatable implements OnInit {
       if(res.length != 0){
         this.bureau = res[0];
 
+        if(this.bureau.rapatrie_auto ==  0) this.bureau.rapatrie_auto = "N";
+        else this.bureau.rapatrie_auto = "O";
         
         console.log("bureaux", this.bureau)
         this.bureauForm.patchValue({
@@ -596,6 +606,7 @@ export class BureauComponent extends Translatable implements OnInit {
           idtype_agence: this.bureau.idtype_agence,
           telephone_dr: this.bureau.telephone_dr,
           email_dr: this.bureau.email_dr,
+          rapatrie_auto:  this.bureau.rapatrie_auto,
           solde_max_rapatrie: this.bureau.solde_max_rapatrie,
 
           
