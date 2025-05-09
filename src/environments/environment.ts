@@ -19,7 +19,7 @@ export const environment = {
   authorityModule : 'authority_module',
   authoritySousModule : 'authority_sousModule',
 
-//** Parametrage */
+  //** Parametrage */
   module :'parametrage/module',
   sous_module :'parametrage/sousmodule',
   liste_module_active :'parametrage/consult/module/liste_module_active',
@@ -37,11 +37,14 @@ export const environment = {
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
   
-//** Gestion bureau */
+  //** Gestion bureau */
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
   bureau : 'gestion_bureau/bureaux',
 
-//** Ressource */
+  //** Ressource */
   province : 'resource/province/liste_province',
-  departement : 'resource/departement/liste_departement'
+  departement : 'resource/departement/liste_departement',
+
+  //** Gestion compte principal */
+  suivi_compte : "gestion_compte_principal/suivi_compte"
 };

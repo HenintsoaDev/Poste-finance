@@ -1,0 +1,22 @@
+.form-inline {
+    display: flex;
+    flex-flow: row wrap;
+    align-items: center;
+    gap: 1rem; /* espace horizontal et vertical entre les champs */
+}
+
+.form-container {
+    transition: all 0.3s ease;
+    margin: 0 10px;
+}
+.form-container:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+}
+.form-title {
+    margin-bottom: 15px;
+    color: #495057;
+}
+.btn-submit {
+    transition: all 0.3s ease;
+}
