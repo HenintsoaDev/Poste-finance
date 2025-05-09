@@ -35,7 +35,7 @@ export class BureauComponent extends Translatable implements OnInit {
       "colonneTable" : "name",
       "table" : "agence"
     },
-    {
+  /*   {
       "nomColonne" : this.__('bureau.telephone'),
       "colonneTable" : "tel",
       "table" : "agence"
@@ -44,7 +44,7 @@ export class BureauComponent extends Translatable implements OnInit {
       "nomColonne" : this.__('bureau.email'),
       "colonneTable" : "email",
       "table" : "agence"
-    },    
+    },     */
     {
       "nomColonne" : this.__('bureau.responsable'),
       "colonneTable" : "responsable",
@@ -56,10 +56,10 @@ export class BureauComponent extends Translatable implements OnInit {
       "table" : "agence"
     },
     {
-      "nomColonne" : this.__('bureau.solde_max_rapatrie'),
-      "colonneTable" : "solde_max_rapatrie",
-      "table" : "agence"
-    },
+      "nomColonne" : this.__('bureau.departement'),
+      "colonneTable" : "name",
+      "table" : "departement"
+    }, 
   
 
     
@@ -80,14 +80,14 @@ export class BureauComponent extends Translatable implements OnInit {
             'name' : 'name',
             'type' : 'text',
           },
-          {
+        /*   {
             'name' : 'tel',
             'type' : 'text',
           },
           {
             'name' : 'email',
             'type' : 'text',
-          },
+          }, */
           {
             'name' : 'responsable',
             'type' : 'text',
@@ -97,8 +97,8 @@ export class BureauComponent extends Translatable implements OnInit {
             'type' : 'text',
           },
           {
-            'name' : 'solde_max_rapatrie',
-            'type' : 'montant',
+            'name' : 'departement',
+            'type' : 'text',
           },
       
         
@@ -107,6 +107,14 @@ export class BureauComponent extends Translatable implements OnInit {
   
   listIcon = [
   
+    {
+      'icon' : 'info',
+      'action' : 'detail',
+      'tooltip' : 'Détail',
+      'autority' : 'PRM_2',
+  
+    },
+    
     {
       'icon' : 'edit',
       'action' : 'edit',
@@ -123,7 +131,7 @@ export class BureauComponent extends Translatable implements OnInit {
   
     },
   ]
-    searchGlobal = [ 'agence.code', 'agence.name',  'agence.tel','agence.email', 'agence.responsable', 'agence.adresse']
+    searchGlobal = [ 'agence.code', 'agence.name','departement.name', 'agence.responsable', 'agence.adresse']
    
     /***************************************** */
   
@@ -134,7 +142,7 @@ export class BureauComponent extends Translatable implements OnInit {
     listbureaux:bureau [] = [];
 
     @ViewChild('addbureau') addbureau: TemplateRef<any> | undefined;
-    @ViewChild('affectationbureau') affectationbureau: TemplateRef<any> | undefined;
+    @ViewChild('detailBureau') detailBureau: TemplateRef<any> | undefined;
     idbureau : number;
     titleModal: string = "";
     modalRef?: BsModalRef;
@@ -205,7 +213,7 @@ export class BureauComponent extends Translatable implements OnInit {
   
               if(event.data.action == 'edit') this.openModalEditbureau();
               else if(event.data.action == 'delete') this.openModalDeletebureau();
-              else if(event.data.action == 'regenerer_mdp') this.openModalRegenererMotDePasse();
+              else if(event.data.action == 'detail') this.openModalDetailBureau();
               else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStatebureau();
               
               // Nettoyage immédiat de l'event
@@ -218,20 +226,21 @@ export class BureauComponent extends Translatable implements OnInit {
           this.endpoint = environment.baseUrl + '/' + environment.bureau;
       /***************************************** */
   
-          this.bureauForm = this.fb.group({
-            name: ['', Validators.required],
-            responsable: ['', [Validators.required]],
-            code: ['', [Validators.required]],
-            email: ['', [Validators.required, Validators.email]],
-            fk_quartier: ['', [Validators.required]],
-            province: ['', [Validators.required]],
-            adresse: ['', [Validators.required]],
-            tel: ['', [Validators.required]],
-            idtype_agence: ['', [Validators.required]],
-            telephone_dr: ['', [Validators.required]],
-            email_dr: ['', [Validators.required, Validators.email]],
-            solde_max_rapatrie: ['', [Validators.required]] 
-        });
+      this.bureauForm = this.fb.group({
+        name: ['', Validators.required],
+        responsable: ['', [Validators.required]],
+        code: ['', [Validators.required]],
+        email: ['', [Validators.required, Validators.email]],
+        fk_quartier: ['', [Validators.required]],
+        province: ['', [Validators.required]],
+        adresse: ['', [Validators.required]],
+        tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+        idtype_agence: ['', [Validators.required]],
+        telephone_dr: [''],
+        email_dr: ['', [Validators.email]],
+        rapatrie_auto: ['N', [Validators.required]], 
+        solde_max_rapatrie: ['', [Validators.required]] 
+      });
 
 
         
@@ -251,6 +260,7 @@ export class BureauComponent extends Translatable implements OnInit {
     // Quand on faire l'ajout ou modification
     onSubmit() {
 
+
       if (this.bureauForm.valid) {
 
         this.bureau = {
@@ -260,8 +270,12 @@ export class BureauComponent extends Translatable implements OnInit {
 
         this.bureau.tel = this.dialCode + this.bureau.tel;
         this.bureau.telephone_dr = this.dialCodeDr + this.bureau.telephone_dr;
-        this.bureau.rapatrie_auto = true;
 
+        if(this.bureau.rapatrie_auto ==  'N') this.bureau.rapatrie_auto = 0;
+        else this.bureau.rapatrie_auto = 1;
+
+
+        
 
           let msg = "";
           let msg_btn = "";
@@ -302,7 +316,8 @@ export class BureauComponent extends Translatable implements OnInit {
                           this.closeModal();
                         }
                         else if(res['code'] == 400){
-                          if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                          if(res['data'].tel) this.toastr.error(res['data'].tel[0], this.__("global.error"));
+                          if(res['data'].email) this.toastr.error(res['data'].email[0], this.__("global.error"));
                           else this.toastr.error(res['data'], this.__("global.error"));
                         }else{
                             this.toastr.error(res['msg'], this.__("global.error"));
@@ -352,7 +367,7 @@ export class BureauComponent extends Translatable implements OnInit {
 
         this.actualisationSelectProvince();
         this.actualisationSelectTypeBureau();
-        this.actualisationSelectDepartemennt();
+        this.actualisationSelectDepartemennt(this.bureau.province);
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addbureau, {
@@ -403,44 +418,24 @@ export class BureauComponent extends Translatable implements OnInit {
 
 
      // SUppression d'un modal
-     openModalRegenererMotDePasse() {
+     async openModalDetailBureau() {
   
-      Swal.fire({
-        title: this.__("global.confirmation"),
-        text: this.__("global.regenerer_mdp?"),
-        icon: 'warning',
-        showCancelButton: true,
-        confirmButtonText: this.__("global.oui_generer"),
-        cancelButtonText: this.__("global.cancel"),
-        allowOutsideClick: false,
-        customClass: {
-            confirmButton: 'swal-button--confirm-custom',
-            cancelButton: 'swal-button--cancel-custom'
-        },
-        }).then((result) => {
-        if (result.isConfirmed) {
+  
+      this.titleModal = this.__('bureau.title_detail_modal');
 
-              let data = {
-                'user_id' : this.idbureau
-              }
+      if (this.detailBureau) {
   
-             this.bureauService.regenererMotDePasse(data).subscribe({
-              next: (res) => {
-                  if(res['code'] == 201) {
-                    this.toastr.success(res['msg'], this.__("global.success"));
-                    this.actualisationTableau();
-                  }
-                  else{
-                      this.toastr.error(res['msg'], this.__("global.error"));
-                  }                
-                },
-                error: (err) => {
-                }
-            }); 
-  
-          }
-      });
-  
+       let result = await this.authService.getSelectList(environment.bureau+ '/'+  this.idbureau,['lib_region']);
+       this.bureau = result;
+
+
+
+        // Ouverture de modal
+        this.modalRef = this.modalService.show(this.detailBureau, {
+          class: 'modal-xl'
+        });
+      }
+
     }
   
   
@@ -507,16 +502,17 @@ export class BureauComponent extends Translatable implements OnInit {
         fk_quartier: ['', [Validators.required]],
         province: ['', [Validators.required]],
         adresse: ['', [Validators.required]],
-        tel: ['', [Validators.required]],
+        tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
         idtype_agence: ['', [Validators.required]],
-        telephone_dr: ['', [Validators.required]],
-        email_dr: ['', [Validators.required, Validators.email]],
+        telephone_dr: [''],
+        email_dr: ['', [Validators.email]],
+        rapatrie_auto: ['N', [Validators.required]], 
         solde_max_rapatrie: ['', [Validators.required]] 
       });
 
       this.actualisationSelectProvince();
       this.actualisationSelectTypeBureau();
-      this.actualisationSelectDepartemennt();
+      //this.actualisationSelectDepartemennt();
       this.modalRef = this.modalService.show(template, {
         class: 'modal-lg'
       });
@@ -548,16 +544,18 @@ export class BureauComponent extends Translatable implements OnInit {
 
     }
 
-    recupererBureau(event: MatSelectChange) {
-      const idTypeAgence = event.value;
-      this.actualisationSelectDepartemennt();
+    recupererDepartement(event: MatSelectChange) {
+      const idProvince = event.value;
+      this.actualisationSelectDepartemennt(idProvince);
       
     }
 
-    async actualisationSelectDepartemennt(){
+    async actualisationSelectDepartemennt(idProvince = null){
       let endpointDepartement = "";
 
-      endpointDepartement = environment.departement ;
+      if(idProvince != null) endpointDepartement = environment.departement + "?where=departement.region_id|e|" + idProvince;
+      else  endpointDepartement = environment.departement ;
+
 
       this.departements = await this.authService.getSelectList(endpointDepartement,['name']);
       this.filteredDepartement = this.departements;
@@ -592,6 +590,8 @@ export class BureauComponent extends Translatable implements OnInit {
       if(res.length != 0){
         this.bureau = res[0];
 
+        if(this.bureau.rapatrie_auto ==  0) this.bureau.rapatrie_auto = "N";
+        else this.bureau.rapatrie_auto = "O";
         
         console.log("bureaux", this.bureau)
         this.bureauForm.patchValue({
@@ -606,6 +606,7 @@ export class BureauComponent extends Translatable implements OnInit {
           idtype_agence: this.bureau.idtype_agence,
           telephone_dr: this.bureau.telephone_dr,
           email_dr: this.bureau.email_dr,
+          rapatrie_auto:  this.bureau.rapatrie_auto,
           solde_max_rapatrie: this.bureau.solde_max_rapatrie,
 
           

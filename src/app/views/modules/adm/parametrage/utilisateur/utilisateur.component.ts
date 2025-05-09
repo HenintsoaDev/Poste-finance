@@ -217,7 +217,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
             prenom: ['', [Validators.required]],
             login: ['', [Validators.required]],
             email: ['', [Validators.required]],
-            telephone: ['', [Validators.required]],
+            telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
             fk_agence: ['', [Validators.required]],
             fk_profil: ['', [Validators.required]], 
             id_type_agence: ['', [Validators.required]] 
@@ -290,7 +290,9 @@ export class UtilisateurComponent extends Translatable implements OnInit {
                           this.closeModal();
                         }
                         else if(res['code'] == 400){
-                          if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                          if(res['data'].login) this.toastr.error(res['data'].login[0], this.__("global.error"));
+                          if(res['data'].telephone) this.toastr.error(res['data'].telephone[0], this.__("global.error"));
+                          if(res['data'].email) this.toastr.error(res['data'].email[0], this.__("global.error"));
                           else this.toastr.error(res['data'], this.__("global.error"));
                         }else{
                             this.toastr.error(res['msg'], this.__("global.error"));
@@ -492,7 +494,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
           prenom: ['', [Validators.required]],
           login: ['', [Validators.required]],
           email: ['', [Validators.required]],
-          telephone: ['', [Validators.required]],
+          telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
           fk_agence: ['', [Validators.required]],
           fk_profil: ['', [Validators.required]], 
           id_type_agence: ['', [Validators.required]] 
