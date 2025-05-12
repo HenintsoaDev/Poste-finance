@@ -69,7 +69,18 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.userStorage = JSON.parse(localStorage.getItem(environment.userItemName) || null);
         this.typeCompte = this.userStorage.info?.wallet_carte.toString();
         this.walletCarteProfil = this.userStorage.info?.wallet_carte.toString();
-        
+
+        /***************************************** */
+            // Écouter les changements de modal à travers le service si il y a des actions
+            this.subscription = this.passageService.getObservable().subscribe(event => {});
+
+    }
+
+     
+    ngOnDestroy() {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
     }
 
     filtreTableau() {
@@ -79,8 +90,8 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
             filtre_search = ",releve_des_comptes.wallet_carte|e|"+this.typeCompte;
         }
 
-        this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
-        this.dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+        let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        let dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
       
         let filtreDate = "" ;
         if(this.dateDebut && this.dateFin){
@@ -88,7 +99,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
               this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
               return;
             }else{
-              filtreDate = "&date_debut="+this.dateDebut +"&date_fin="+this.dateFin;
+              filtreDate = "&date_debut="+date_debut +"&date_fin="+dateFin;
             }
         }
         

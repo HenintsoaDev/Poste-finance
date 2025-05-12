@@ -90,6 +90,13 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         });
     }
 
+
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
+  
     filtreTableau()
     {
         let filtre_search = "" ; 
@@ -110,7 +117,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             }
         }
         
-        let filtreParMulti =  filtre_search + filtreDate;
+        let filtreParMulti =  filtre_search + filtreDate + "&_order_=desc,date_transaction";
         this.passageService.appelURL(filtreParMulti);
     }
 

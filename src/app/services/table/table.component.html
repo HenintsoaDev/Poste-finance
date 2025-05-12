@@ -31,11 +31,11 @@
         <tr>
            
             <th *ngFor="let header of headerTable"> <span class="bold"> {{header.nomColonne }}</span> &nbsp;
-              <span *ngIf="header.nomColonne != 'Action' && formSearch == true">
+              <span >
                 <i class="fa fa-caret-down icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')" *ngIf="tri==header.table + '.' + header.colonneTable && order=='desc'" ></i>
                 <i class="fa fa-caret-up icon-tri"  (click)="triTable(header.table + '.' + header.colonneTable,'desc')"  *ngIf="tri==header.table + '.' + header.colonneTable && order=='asc'"  ></i>
                 <i class="fa fa-filter icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')"  *ngIf="tri!=header.table + '.' + header.colonneTable"></i> <br>
-                <input type="text"  #ref class="inputCol" [name]="header.nomColonne" (keyup.enter)="getUrlDatatable(endpoint+'?page=1', header.colonneTable, ref.value, header.table, this.search)" id="">  
+                <input *ngIf="header.nomColonne != 'Action' && formSearch == true" type="text"  #ref class="inputCol" [name]="header.nomColonne" (keyup.enter)="getUrlDatatable(endpoint+'?page=1', header.colonneTable, ref.value, header.table, this.search)" id="">  
               </span>
             </th>
 
