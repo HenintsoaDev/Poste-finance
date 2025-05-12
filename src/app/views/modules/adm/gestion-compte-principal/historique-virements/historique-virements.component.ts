@@ -110,7 +110,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             }
         }
         
-        let filtreParMulti =  filtre_search + filtreDate;
+        let filtreParMulti =  filtre_search + filtreDate + "&_order_=desc,date_transaction";
         this.passageService.appelURL(filtreParMulti);
     }
 
