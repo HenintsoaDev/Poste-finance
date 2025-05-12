@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
+import { HistoriqueVirementsService } from 'app/services/admin/gestion-compte-principal/historique-virement.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { Auth } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -55,7 +56,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
     userStorage: Auth;
 
-    constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe) {
+    constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe, private hitsoriqueVirementService : HistoriqueVirementsService) {
         super();
     }
 
@@ -110,21 +111,18 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             },
         }).then((result) => {
             if (result.isConfirmed) {
-    
-                /*this.moduleService.supprimerModule(this.idModule).subscribe({
+                this.hitsoriqueVirementService.validerVirement(this.idVirement).subscribe({
                     next: (res) => {
-                        if(res['code'] == 204) {
-                        this.toastr.success(res['msg'], this.__("global.success"));
-                        this.actualisationTableau();
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
                         }
                         else{
                             this.toastr.error(res['msg'], this.__("global.error"));
                         }                
                     },
-                    error: (err) => {
-                    }
-                }); */
-    
+                    error: (err) => {}
+                });
             }
         });
     }
@@ -146,19 +144,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         }).then((result) => {
             if (result.isConfirmed) {
     
-                /*this.moduleService.supprimerModule(this.idModule).subscribe({
-                    next: (res) => {
-                        if(res['code'] == 204) {
-                        this.toastr.success(res['msg'], this.__("global.success"));
-                        this.actualisationTableau();
-                        }
-                        else{
-                            this.toastr.error(res['msg'], this.__("global.error"));
-                        }                
-                    },
-                    error: (err) => {
-                    }
-                }); */
+                
     
             }
         });
@@ -199,6 +185,11 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             }
         });
     
+    }
+
+    // Actualisation des données
+    actualisationTableau(){
+        this.passageService.appelURL('');
     }
 
 }

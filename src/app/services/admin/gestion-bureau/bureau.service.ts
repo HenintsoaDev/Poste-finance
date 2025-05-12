@@ -16,13 +16,6 @@ export class BureauService {
 
     constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
-  
-
-   
-
-
-   
-
     ajoutBureau(credentials: bureau): Observable<any> {
         
         return this.httpService.post<any>(environment.bureau, credentials).pipe(
