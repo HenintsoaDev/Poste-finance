@@ -83,7 +83,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
       
         let filtreDate = "" ;
-        if(this.dateDebut != '' && this.dateFin != ""){
+        if(this.dateDebut && this.dateFin){
             if( this.dateDebut > this.dateFin ){
               this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
               return;
@@ -135,9 +135,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     
         
         this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
-          (response: any)=>{
-            
-          },
+          (response: any)=>{},
           (error:any)=>{
             console.log(error)
           }
