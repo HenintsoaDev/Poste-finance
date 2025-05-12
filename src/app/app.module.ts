@@ -48,7 +48,9 @@ import localeFr from '@angular/common/locales/fr';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
 import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/bureau.component';
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
-import { SuiviComptePrincipalComponent } from './views/modules/adm/geston-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
+import { SuiviComptePrincipalComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
+import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte-principal/historique-virements/historique-virements.component';
+
 
 registerLocaleData(localeFr);
 @NgModule({
@@ -107,6 +109,7 @@ registerLocaleData(localeFr);
     BureauComponent,
     ActionComponent,
     SuiviComptePrincipalComponent,
+    HistoriqueVirementsComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

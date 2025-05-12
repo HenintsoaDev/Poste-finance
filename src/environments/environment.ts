@@ -22,6 +22,8 @@ export const environment = {
   soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
   exportPdf: BASE_URL + "/export_to/pdf",
   exportExcel: BASE_URL + "/export_to/excel",
+  soldeVirementCp : 'soldeVirementCp',
+  soldeVirementCarteCp : 'soldeVirementCarteCp',
 
   //** Parametrage */
   module :'parametrage/module',
@@ -51,5 +53,5 @@ export const environment = {
 
   //** Gestion compte principal */
   suivi_compte : "gestion_compte_principal/suivi_compte",
-  
+  historique_virement : "gestion_compte_principal/virement",
 };

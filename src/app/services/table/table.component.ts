@@ -210,9 +210,12 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
-      if(res.solde){localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
-      if(res.solde_carte) { localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
-
+       /** SET SOLDE (SUIVI COMPTE) in localstorage*/
+       if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
+       if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
+       /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
+       if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
+       if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
       if(res.totaux) this.donneeTotalSuiviCompte = res.totaux;
       
 

@@ -15,7 +15,6 @@ import { Translatable } from 'shared/constants/Translatable';
 })
 export class SuiviComptePrincipalComponent extends Translatable implements OnInit {
 
-    /***************************************** */
     endpoint = "";
     header = [
         {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_des_comptes"},
