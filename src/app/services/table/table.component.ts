@@ -8,6 +8,7 @@ import { Subscription } from 'rxjs';
 import { valuesys } from 'app/shared/models/options';
 import { Translatable } from 'shared/constants/Translatable';
 import { AuthService } from '../auth.service';
+import { environment } from 'environments/environment';
 
 @Component({
   selector: 'app-table',
@@ -208,8 +209,8 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
-      if(res.solde){await localStorage.setItem('soldeSuiviCompte', res.solde);} 
-      if(res.solde_carte) {await localStorage.setItem('soldeCarteSuiviCompte', res.solde_carte);} 
+      if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
+      if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
       
 
       //** Affichage de donnée dynamiser */

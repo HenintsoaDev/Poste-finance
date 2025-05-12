@@ -61,7 +61,9 @@
         "oui" : "Oui",
         "non"  : "Non",
         "wallet"  : "Paositra money",
-        "carte" : "E-poketra"
+        "carte" : "E-poketra",
+        "select_date" : "Sélectionner une date",
+        "filter" : "Filtrer"
     },
 
     "paiement" : {
@@ -198,7 +200,14 @@
         "user_modification" : "Modifier par",   
         "le" : "le",   
         "user_creation" : "Créer par"   
-     }
+    },
+
+    "suivi_compte" : {
+        "type_compte" : "Type de compte",
+        "all_compte" : "Tous les comptes",
+        "from" : "Du",
+        "to" : "Au"
+    }
 
 
 }

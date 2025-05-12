@@ -1,6 +1,7 @@
 import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { PassageService } from 'app/services/table/passage.service';
+import { Auth } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
@@ -46,6 +47,10 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     typeCompte: string = "2";
     dateDebut: string = new Date().toISOString().substring(0, 10);
     dateFin: string = new Date().toISOString().substring(0, 10);
+    walletCarteProfil : string = "2";
+
+    //UserStorage
+    userStorage: Auth;
 
     constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe) {
         super();
@@ -54,21 +59,24 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     ngOnInit(): void {
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.suivi_compte;
-        let soldeLocal = localStorage.getItem("soldeSuiviCompte");
-        let soldeCarteLocal = localStorage.getItem("soldeCarteSuiviCompte");
+        let soldeLocal = localStorage.getItem(environment.soldeSuiviCompte);
+        let soldeCarteLocal = localStorage.getItem(environment.soldeCarteSuiviCompte);
 
         this.soldeSuiviCompte = (soldeLocal) ? soldeLocal : undefined;
         this.soldeCarteCompte = (soldeCarteLocal) ? soldeCarteLocal : undefined;
+        this.userStorage = JSON.parse(localStorage.getItem(environment.userItemName) || null);
+        this.typeCompte = this.userStorage.info?.wallet_carte.toString();
+        this.walletCarteProfil = this.userStorage.info?.wallet_carte.toString();
 
-        console.log("soldeSuiviCompte", this.soldeSuiviCompte);
+        console.log("SOLDE SIOVI",this.soldeSuiviCompte);
     }
 
     filtreTableau() {
  
         let filtre_etab = "" ;
-        /*if(this.typeCompte != '2'){
-            filtre_etab = "&releve_des_comptes.wallet_carte|e|"+this.typeCompte;
-        }*/
+        if(this.typeCompte != '2'){
+            filtre_etab = "&where=releve_des_comptes.wallet_carte|e|"+this.typeCompte;
+        }
 
         this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
         this.dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
@@ -83,7 +91,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
             }
         }
         
-        let filtreParMulti =  filtre_etab + filtreDate ;
+        let filtreParMulti =  filtre_etab + filtreDate + "&__order__=desc,date_transaction";
         this.passageService.appelURL(filtreParMulti);
 
     }

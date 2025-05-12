@@ -4,7 +4,7 @@
             <div id="content-pm" class="content-solde" *ngIf="soldeSuiviCompte">
                 <div class="">
                     <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;Paositra Money
+                        <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.wallet') }}
                     </span>
                 </div>
                 <div class="text-2xl font-bold text-blue-700">{{ __('global.currency') }} {{ soldeSuiviCompte }}</div>
@@ -13,7 +13,7 @@
             <div id="content-epkt" class="content-solde" *ngIf="soldeCarteCompte">
                 <div class="">
                     <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;E-Poketra
+                        <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.carte') }}
                     </span>
                 </div>
                 <div class="text-2xl font-bold text-green-700">{{ __('global.currency') }} {{ soldeCarteCompte }}</div>
@@ -25,38 +25,41 @@
                     <div class="card-body">
                         <div class="bg-white">
                             <form class="form-inline">
-                                <!--<div class="form-group col-3">
-                                    <label for="account-type-1">Type de compte</label>
-                                    <mat-form-field appearance="fill" style="width: 100%;">
-                                        <mat-label>Type de compte</mat-label>
-                                        <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte">
-                                            <mat-option value="2">Tous les comptes</mat-option>
-                                            <mat-option value="1">E-Poketra</mat-option>
-                                            <mat-option value="0">Paositra Money</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>-->
+                                <div class="form-group col-3">
+                                    <label for="account-type-1">{{ __('suivi_compte.type_compte') }}</label>
+                                    <!-- POUR ADMIN -->
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>{{ __('suivi_compte.type_compte') }}</mat-label>
+                                            <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte" [disabled]="walletCarteProfil != '2'">
+                                                <mat-option value="2">{{ __('suivi_compte.all_compte') }}</mat-option>
+                                                <mat-option value="1">{{ __('global.carte') }}</mat-option>
+                                                <mat-option value="0">{{ __('global.wallet') }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
                                 
                                 <div class="form-group col-3">
-                                    <label for="dateFonction">Du</label>
+                                    <label for="dateFonction">{{ __('suivi_compte.from') }}</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
-                                        <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="Choisir une date" (focus)="pickerDebut.open()">
+                                        <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="{{ __('global.select_date') }}" (focus)="pickerDebut.open()">
                                         <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerDebut></mat-datepicker>
                                     </mat-form-field>
                                 </div>
                                 
                                 <div class="form-group col-3">
-                                    <label for="dateFonction">Au</label>
+                                    <label for="dateFonction">{{ __('suivi_compte.to') }}</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
-                                        <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="Choisir une date" (focus)="pickerFin.open()">
+                                        <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="{{ __('global.select_date') }}" (focus)="pickerFin.open()">
                                         <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
                                         <mat-datepicker #pickerFin></mat-datepicker>
                                     </mat-form-field>
                                 </div>
 
                                 <div  class="col-3">
-                                    <button class="btn btn-primary w-100" color="primary" (click)="filtreTableau()">Filtrer</button>
+                                    <button class="btn btn-primary w-100" color="primary" (click)="filtreTableau()">{{ __('global.filter') }}</button>
                                 </div>
                                 
                             </form>

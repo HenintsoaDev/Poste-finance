@@ -18,6 +18,8 @@ export const environment = {
   soldeCarteStorage : 'soldeCarte',
   authorityModule : 'authority_module',
   authoritySousModule : 'authority_sousModule',
+  soldeSuiviCompte : 'soldeSuiviCompte',
+  soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
 
   //** Parametrage */
   module :'parametrage/module',
