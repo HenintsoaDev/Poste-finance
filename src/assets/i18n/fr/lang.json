@@ -32,8 +32,8 @@
         "transaction-success" : "Paiement réussi",
         "print_ticket" : "Imprimer le reçu",
         "currency" : "Ar",
-        "solde_wallet" : "Solde wallet",
-        "solde_carte" : "Solde carte",
+        "solde_wallet" : "Solde Paositra money",
+        "solde_carte" : "Solde E-poketra",
         "mdp_non_identique" : "Les mots de passe ne correspondent pas",
         "connection_echec": "Connexion échouée",
         "success" : "Success",
@@ -59,7 +59,9 @@
         "clique_pour_activer" : "Cliquez pour activer",
         "clique_pour_desactiver" : "Cliquez pour desactiver",
         "oui" : "Oui",
-        "non"  : "Non"
+        "non"  : "Non",
+        "wallet"  : "Paositra money",
+        "carte" : "E-poketra"
     },
 
     "paiement" : {
