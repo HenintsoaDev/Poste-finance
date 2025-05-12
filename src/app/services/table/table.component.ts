@@ -414,7 +414,6 @@ export class TableComponent extends Translatable {
         const statutItem = cell.find(item => 'statut' in item);
         // Récupère la valeur
         const statut = statutItem ? (statutItem as { statut: number }).statut : undefined;
-        console.log("xxx", statut);
         return statut;
             
     }
