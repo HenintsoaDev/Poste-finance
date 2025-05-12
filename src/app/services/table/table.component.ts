@@ -382,12 +382,4 @@ export class TableComponent extends Translatable {
     }
 
 
-    verificationAutority(dataIcon: any){
-      console.log(dataIcon.autority);
-
-      return dataIcon.autority;
-    }
-    
-
-
 }

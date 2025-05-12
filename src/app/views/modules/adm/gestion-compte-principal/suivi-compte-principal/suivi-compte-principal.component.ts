@@ -78,7 +78,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
  
         let filtre_etab = "" ;
         if(this.typeCompte != '2'){
-            filtre_etab = "&where=releve_des_comptes.wallet_carte|e|"+this.typeCompte;
+            filtre_etab = ",releve_des_comptes.wallet_carte|e|"+this.typeCompte;
         }
 
         this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
@@ -111,13 +111,34 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.suivi_comptes = result.data;
     
         
-        this.authService.exportExcel(this.print(this.suivi_comptes),this.__("print.list") + this.__("client.clients")).then(
+        this.authService.exportExcel(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
           (response: any)=>{
             console.log('respons beee',response)
                 let a = document.createElement("a"); 
                 a.href = response.data;
                 a.download = `${fileName}.xlsx`;
                 a.click(); 
+          },
+          (error:any)=>{
+            console.log(error)
+          }
+        );
+      }
+
+      async exportPdf(fileName) {
+
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) {
+          result = JSON.parse(storedData);
+        }
+    
+        this.suivi_comptes = result.data;
+    
+        
+        this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
+          (response: any)=>{
+            
           },
           (error:any)=>{
             console.log(error)
