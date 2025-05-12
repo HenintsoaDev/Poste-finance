@@ -46,23 +46,35 @@
           <tr *ngFor="let row of donneeAfficher" class="ng-star-inserted"> 
             <td *ngFor="let cell of row" >
                 <!-- Si cell n'est pas un tableau, afficher le donnée -->
-                <span *ngIf="!isArray(cell)" [ngStyle]="{ 'color': verifColorText(cell) }">  {{ formatCell(cell)   }}</span>
+                <span *ngIf="!isArray(cell)"  [ngStyle]="{ 'color': verifColorText(cell) }">  {{ formatCell(cell)   }}</span>
                 <!-- Si cell est un tableau, afficher les éléments du tableau -->
                 <span *ngIf="isArray(cell)">
                   
+
+                  
+
+                  <div *ngIf="verifStatut(cell) != 0">
+                    <i class="material-icons" mat-raised-button> lock </i>
+                  </div>
+
+                  <div *ngIf="verifStatut(cell) == 0">
+                    <ng-container *ngFor="let icon of cell">
+                      <!-- <i *ngIf="autority(icon.autority)" -->
+                      <i *ngIf="autority(icon.autority)"
+                          class="material-icons"
+                          mat-raised-button
+                          matTooltip="{{ verifTooltipIcon(icon) }}"
+                          [ngStyle]="{ 'color': verifColorIcon(icon) }"
+                          (click)="openModal(icon)"
+                          style="margin-right: 5px !important; font-size: 18px; cursor: pointer;">
+                          {{ verifIcon(icon) }}
+                        </i>
+  
+                    </ng-container>
+                  </div>
                  
-                  <ng-container *ngFor="let icon of cell">
-                    <!-- <i *ngIf="autority(icon.autority)" -->
-                    <i *ngIf="autority(icon.autority)"
-                        class="material-icons"
-                        mat-raised-button
-                        matTooltip="{{ verifTooltipIcon(icon) }}"
-                        [ngStyle]="{ 'color': verifColorIcon(icon) }"
-                        (click)="openModal(icon)"
-                        style="margin-right: 5px !important; font-size: 18px; cursor: pointer;">
-                        {{ verifIcon(icon) }}
-                      </i>
-                  </ng-container>
+                 
+
                   <!-- Si on utilise font awesome ---
                     <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i> 
                     -->

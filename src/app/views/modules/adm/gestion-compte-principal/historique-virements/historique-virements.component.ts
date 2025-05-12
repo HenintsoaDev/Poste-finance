@@ -28,16 +28,17 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     objetBody = [
         {'name' : 'date_virement','type' : 'text',},
         {'name' : 'montant','type' : 'text',},
-        {'name' : 'statut_virement','type' : 'statut',},
+        {'name' : 'statut','type' : 'statut',},
         {'name' : 'date_validation','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',},
         {'name' :  'state#rowid'}
     ];
 
     listIcon = [
-        {'icon' : 'edit','action' : 'edit','tooltip' : 'Modification','autority' : 'PRM_15',},
-        {'icon' : 'check','action' : 'validation','tooltip' : 'Validation','autority' : 'GCP_6',},
-        {'icon' : 'delete','action' : 'delete','tooltip' : 'Supression','autority' : 'PRM_17',},
+        {'icon' : 'edit','action' : 'edit','tooltip' : 'Modification','autority' : 'GCP_5',},
+        {'icon' : 'check','action' : 'validation','tooltip' : 'Valider','autority' : 'GCP_6',},
+        {'icon' : 'close','action' : 'rejeter','tooltip' : 'Rejeter','autority' : 'GCP_7',},
+        {'icon' : 'delete','action' : 'delete','tooltip' : 'Supprimer','autority' : 'GCP_8',},
     ];
 
     searchGlobal = [ 'virement.datevirement', 'virement.datevalidation', 'virement.user_crea','virement.user_validation']; 
@@ -76,6 +77,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     
                 if(event.data.action == 'edit') this.openModalDeleteVirement();
                 else if(event.data.action == 'validation') this.openModalValidateVirement();
+                else if(event.data.action == 'rejeter') this.openModalRejetVirement();
                 else if(event.data.action == 'delete') this.openModalDeleteVirement();
                 //else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
         
@@ -100,6 +102,41 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             icon: 'warning',
             showCancelButton: true,
             confirmButtonText: this.__("virement.oui_valider"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+    
+                /*this.moduleService.supprimerModule(this.idModule).subscribe({
+                    next: (res) => {
+                        if(res['code'] == 204) {
+                        this.toastr.success(res['msg'], this.__("global.success"));
+                        this.actualisationTableau();
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }                
+                    },
+                    error: (err) => {
+                    }
+                }); */
+    
+            }
+        });
+    }
+
+    //Rejet virement
+    openModalRejetVirement() {
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.rejet_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_rejeter"),
             cancelButtonText: this.__("global.cancel"),
             allowOutsideClick: false,
             customClass: {

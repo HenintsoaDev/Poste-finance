@@ -83,8 +83,6 @@ export class TableComponent extends Translatable {
 
 
       this.subscription = this.passageService.getObservable().subscribe(event => {
-        //console.log("mijery event ------", event);
-        
 
         if (event.type === 'url' || event.type === '' ) {
           const filtre = event.data;
@@ -149,7 +147,6 @@ export class TableComponent extends Translatable {
       searchMulti?: any
     ) {
 
-      //console.log(searchMulti);
       this.isLoading = true;
     
       this.search = "";
@@ -188,8 +185,6 @@ export class TableComponent extends Translatable {
 
       
 
-      //console.log(this.searchCol );
-
 
       //** filtre de nombre d'affichage */
       let filtre: any = "";
@@ -225,34 +220,35 @@ export class TableComponent extends Translatable {
         if(res.totaux.CREDIT) this.donneeTotal.CREDIT = res.totaux.CREDIT;
 
       }
-      console.log("donneeTotal",this.donneeTotal);
       
 
-      //** Affichage de donnée dynamiser */
-      let tableau = res.data.map((row: any) => 
-      this.body.map((col: any) => 
-        col.name === "state#id"
-          ? this.listIcon.map(i => ({
+      let tableau = res.data.map((row: any) =>
+        this.body.map((col: any) => {
+          if (col.name === "state#id" || col.name === "state#rowid") {
+            const targetId = col.name === "state#id" ? row.id : row.rowid;
+      
+            const icons = this.listIcon.map(i => ({
               icon: i.icon,
               action: i.action,
               tooltip: i.tooltip,
               autority: i.autority,
-              id: row.id         
-            })).concat({ state: row.state, id: row.id  })
-          : col.name === "state#rowid"
-            ? this.listIcon.map(i => ({
-                icon: i.icon,
-                action: i.action,
-                tooltip: i.tooltip,
-                autority: i.autority,
-                id: row.rowid         
-              })).concat({ state: row.state, id: row.rowid  }) 
-          : `${row[col.name]}###${col.type}` // Si ce n'est pas "state#id" ou "state#rowid" , concaténer
-      )
-    );
+              id: targetId,
+            }));
+      
+            return icons.concat({
+              statut: row.statut,
+              state: row.state,
+              id: targetId,
+            });
+          }
+      
+          // Si ce n'est pas "state#id" ni "state#rowid"
+          return `${row[col.name]}###${col.type}`;
+        })
+      );
     
       this.donneeAfficher = tableau;
-      
+      console.log(this.donneeAfficher);
 
       this.path = this.endpoint;
       this.lastPage = this.path + "?page=" + res.last_page;
@@ -374,7 +370,7 @@ export class TableComponent extends Translatable {
       return dataIcon.tooltip ?? '';
 
     }
-
+   
     //** Verification pour le couleur de l'icon
     verifColorIcon(dataIcon: any): string {
       
@@ -391,15 +387,14 @@ export class TableComponent extends Translatable {
       switch (dataIcon.action) {
         case 'delete': return '#ec6a31';
         case 'edit': return '#35558d';
+        case 'rejeter': return '#d9534f';
         case 'validation': return '#5cb85c';
         default: return '#35558d';
       }
     }
 
     verifColorText(dataText: any)  {
-      console.log(dataText)
       let post = dataText.split('###');
-
 
       //** si la donnée est null */
       if(post[0] == "null") return '';
@@ -414,13 +409,32 @@ export class TableComponent extends Translatable {
 
     }
 
-
-    verificationAutority(dataIcon: any){
-      console.log(dataIcon.autority);
-
-      return dataIcon.autority;
+    verifStatut(cell: any)  {
+        // Cherche l'objet contenant 'statut'
+        const statutItem = cell.find(item => 'statut' in item);
+        // Récupère la valeur
+        const statut = statutItem ? (statutItem as { statut: number }).statut : undefined;
+        return statut;
+            
     }
-    
+
+
+    verifAlignText(dataText: any){
+        console.log(dataText)
+        let post = dataText.split('###');
+  
+        console.log("xxxxx", post[1])
+
+        //** si la donnée est null */
+        if(post[0] == "null") return '';
+  
+        if(post[1] == 'montant') return 'text-right';
+  
+  
+  
+      
+    }
+
 
 
 }
