@@ -82,7 +82,6 @@ export class TableComponent extends Translatable {
 
       this.subscription = this.passageService.getObservable().subscribe(event => {
         //console.log("mijery event ------", event);
-
         
 
         if (event.type === 'url' || event.type === '' ) {
@@ -209,7 +208,8 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
-      const storedData = localStorage.getItem('data');
+      if(res.solde){await localStorage.setItem('soldeSuiviCompte', res.solde);} 
+      if(res.solde_carte) {await localStorage.setItem('soldeCarteSuiviCompte', res.solde_carte);} 
       
 
       //** Affichage de donnée dynamiser */
