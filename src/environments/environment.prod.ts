@@ -12,6 +12,10 @@ export const environment = {
   soldeCarteStorage : 'soldeCarte',
   authorityModule : 'authority_module',
   authoritySousModule : 'authority_sousModule',
+  soldeSuiviCompte : 'soldeSuiviCompte',
+  soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
+  soldeVirementCp : 'soldeVirementCp',
+  soldeVirementCarteCp : 'soldeVirementCarteCp',
 
   //** Parametrage */
   module :'parametrage/module',
@@ -30,8 +34,6 @@ export const environment = {
   action : 'parametrage/action',
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
-  soldeSuiviCompte : 'soldeSuiviCompte',
-  soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
   
   //** Gestion bureau */
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
@@ -42,5 +44,6 @@ export const environment = {
   departement : 'resource/departement/liste_departement',
 
   //** Gestion compte principal */
-  suivi_compte : "gestion_compte_principal/suivi_compte"
+  suivi_compte : "gestion_compte_principal/suivi_compte",
+  historique_virement : "gestion_compte_principal/virement",
 };
