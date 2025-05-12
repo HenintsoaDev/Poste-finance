@@ -35,5 +35,16 @@ export class HistoriqueVirementsService {
         );
     }
 
+    deleteVirement(id): Observable<any>
+    {
+        return this.httpService.delete<any>(environment.historique_virement+'/'+id).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
 }
 

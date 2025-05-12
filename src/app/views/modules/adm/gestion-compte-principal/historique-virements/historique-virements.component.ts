@@ -159,7 +159,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         });
     }
 
-    // SUppression d'un modal
+    // Suppression virement
     openModalDeleteVirement() {
     
         Swal.fire({
@@ -176,20 +176,19 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             },
         }).then((result) => {
             if (result.isConfirmed) {
-    
-                /*this.moduleService.supprimerModule(this.idModule).subscribe({
+                
+                this.hitsoriqueVirementService.deleteVirement(this.idVirement).subscribe({
                     next: (res) => {
                         if(res['code'] == 204) {
-                        this.toastr.success(res['msg'], this.__("global.success"));
-                        this.actualisationTableau();
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
                         }
                         else{
                             this.toastr.error(res['msg'], this.__("global.error"));
                         }                
                     },
-                    error: (err) => {
-                    }
-                }); */
+                    error: (err) => {}
+                });
     
             }
         });
