@@ -5,6 +5,7 @@ import { Auth } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Translatable } from 'shared/constants/Translatable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-historique-virements',
@@ -83,5 +84,42 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     {
 
     }
+
+    // SUppression d'un modal
+    /*openModalDeleteModule() {
+    
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("global.supprimer_donnee_?"),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("global.oui_supprimer"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+    
+               this.moduleService.supprimerModule(this.idModule).subscribe({
+                next: (res) => {
+                    if(res['code'] == 204) {
+                      this.toastr.success(res['msg'], this.__("global.success"));
+                      this.actualisationTableau();
+                    }
+                    else{
+                        this.toastr.error(res['msg'], this.__("global.error"));
+                    }                
+                  },
+                  error: (err) => {
+                  }
+              }); 
+    
+            }
+        });
+    
+    }*/
 
 }

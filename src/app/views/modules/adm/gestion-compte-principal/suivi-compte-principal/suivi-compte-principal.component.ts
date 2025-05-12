@@ -69,8 +69,6 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.userStorage = JSON.parse(localStorage.getItem(environment.userItemName) || null);
         this.typeCompte = this.userStorage.info?.wallet_carte.toString();
         this.walletCarteProfil = this.userStorage.info?.wallet_carte.toString();
-
-        console.log("SOLDE SIOVI",this.soldeSuiviCompte);
         
     }
 

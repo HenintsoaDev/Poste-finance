@@ -62,7 +62,7 @@ export class TableComponent extends Translatable {
     resData : any;
     donneeAfficher: any[] = [];
     isLoading: boolean = false;
-    donneeTotalSuiviCompte: any = [];
+    donneeTotal: any = [];
 
 
     constructor(             
@@ -216,7 +216,16 @@ export class TableComponent extends Translatable {
        /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
        if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
        if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
-      if(res.totaux) this.donneeTotalSuiviCompte = res.totaux;
+      if(res.totaux){
+        //this.donneeTotal = res.totaux;
+        if(res.totaux.Carte) this.donneeTotal.Carte = res.totaux.Carte;
+        if(res.totaux.Wallet) this.donneeTotal.Wallet = res.totaux.Wallet;
+
+        if(res.totaux.DEBIT) this.donneeTotal.DEBIT = res.totaux.DEBIT;
+        if(res.totaux.CREDIT) this.donneeTotal.CREDIT = res.totaux.CREDIT;
+
+      }
+      console.log("donneeTotal",this.donneeTotal);
       
 
       //** Affichage de donnée dynamiser */
@@ -334,9 +343,9 @@ export class TableComponent extends Translatable {
       if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY');
       else if(post[1] == 'montant') return this.formatNumber(post[0], ' ');
       else if(post[1] == 'statut') {
-        if(post[0] == 1) return this.__('global.valide');
+        if(post[0] == 1) return this.__('global.validate');
         else if(post[0] == 0) return this.__('global.en_attente');
-        else if(post[0] == 2) return this.__('global.rejeter');
+        else if(post[0] == 2) return this.__('global.not_valide');
       }
       else return post[0]
 
@@ -395,9 +404,9 @@ export class TableComponent extends Translatable {
       if(post[0] == "null") return '';
 
       if(post[1] == 'statut') {
-        if(post[0] == 1) return 'green';
-        else if(post[0] == 0) return 'yellow';
-        else if(post[0] == 2) return 'red';
+        if(post[0] == 1) return '#5cb85c';
+        else if(post[0] == 0) return '#f0ad4e';
+        else if(post[0] == 2) return '#d9534f';
       }else return '';
 
 
