@@ -330,6 +330,11 @@ export class TableComponent extends Translatable {
       //** si le type de donnée est date */
       if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY');
       else if(post[1] == 'montant') return this.formatNumber(post[0], ' ');
+      else if(post[1] == 'statut') {
+        if(post[0] == 1) return this.__('global.valide');
+        else if(post[0] == 0) return this.__('global.en_attente');
+        else if(post[0] == 2) return this.__('global.rejeter');
+      }
       else return post[0]
 
     }
@@ -376,6 +381,24 @@ export class TableComponent extends Translatable {
         case 'edit': return '#35558d';
         default: return '#35558d';
       }
+    }
+
+    verifColorText(dataText: any)  {
+      console.log(dataText)
+      let post = dataText.split('###');
+
+
+      //** si la donnée est null */
+      if(post[0] == "null") return '';
+
+      if(post[1] == 'statut') {
+        if(post[0] == 1) return 'green';
+        else if(post[0] == 0) return 'yellow';
+        else if(post[0] == 2) return 'red';
+      }else return '';
+
+
+
     }
 
 

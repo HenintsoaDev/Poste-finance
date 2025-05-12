@@ -151,6 +151,8 @@ export class AuthService {
             localStorage.removeItem(environment.phcoTimeToken);
             localStorage.removeItem(environment.soldeSuiviCompte);
             localStorage.removeItem(environment.soldeCarteSuiviCompte);
+            localStorage.removeItem(environment.soldeVirementCp);
+            localStorage.removeItem(environment.soldeVirementCarteCp);
             this.router.navigate(['/login']);
         }
         
