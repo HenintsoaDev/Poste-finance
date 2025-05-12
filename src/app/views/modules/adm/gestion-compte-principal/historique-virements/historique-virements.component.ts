@@ -92,7 +92,26 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
     filtreTableau()
     {
+        let filtre_search = "" ;
+        if(this.typeCompte != '2'){
+            filtre_search = ",virement.wallet_carte|e|"+this.typeCompte;
+        }
 
+        this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        this.dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+      
+        let filtreDate = "" ;
+        if(this.dateDebut && this.dateFin){
+            if( this.dateDebut > this.dateFin ){
+              this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
+              return;
+            }else{
+              filtreDate = "&date_debut="+this.dateDebut +"&date_fin="+this.dateFin;
+            }
+        }
+        
+        let filtreParMulti =  filtre_search + filtreDate;
+        this.passageService.appelURL(filtreParMulti);
     }
 
     //Validate virement

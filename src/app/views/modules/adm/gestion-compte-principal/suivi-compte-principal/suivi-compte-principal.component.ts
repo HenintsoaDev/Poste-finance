@@ -74,9 +74,9 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
 
     filtreTableau() {
  
-        let filtre_etab = "" ;
+        let filtre_search = "" ;
         if(this.typeCompte != '2'){
-            filtre_etab = ",releve_des_comptes.wallet_carte|e|"+this.typeCompte;
+            filtre_search = ",releve_des_comptes.wallet_carte|e|"+this.typeCompte;
         }
 
         this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
@@ -92,7 +92,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
             }
         }
         
-        let filtreParMulti =  filtre_etab + filtreDate + "&__order__=desc,date_transaction";
+        let filtreParMulti =  filtre_search + filtreDate + "&__order__=desc,date_transaction";
         this.passageService.appelURL(filtreParMulti);
 
     }

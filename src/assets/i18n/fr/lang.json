@@ -81,7 +81,8 @@
         "not_valide" : "Rejeté",
         "en_attente" : "En attente de validation",
         "total_carte" : "Total carte",
-        "total_wallet" : "Total wallet"
+        "total_wallet" : "Total wallet",
+        "dateDebut_dateFin_error" : "La date début doit être avant de la date fin"
     },
 
     "paiement" : {
