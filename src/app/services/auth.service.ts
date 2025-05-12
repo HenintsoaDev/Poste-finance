@@ -85,8 +85,6 @@ export class AuthService {
         
         window['authority']['sous_module'] = codeSousModule;*/
         localStorage.setItem(environment.authorityModule, JSON.stringify(modules));
-        console.log("code module",modules);
-        console.log("code sous module",codeSousModule);
         localStorage.setItem(environment.authoritySousModule, JSON.stringify(codeSousModule));
         let user:Auth ;
         user = <Auth> JSON.parse(localStorage.getItem(environment.userItemName) || null);
