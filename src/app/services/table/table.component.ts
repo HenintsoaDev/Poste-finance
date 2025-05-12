@@ -391,6 +391,7 @@ export class TableComponent extends Translatable {
       switch (dataIcon.action) {
         case 'delete': return '#ec6a31';
         case 'edit': return '#35558d';
+        case 'validation': return '#5cb85c';
         default: return '#35558d';
       }
     }

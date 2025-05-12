@@ -4,6 +4,7 @@ import { PassageService } from 'app/services/table/passage.service';
 import { Auth } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
+import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 
@@ -30,30 +31,18 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         {'name' : 'statut_virement','type' : 'statut',},
         {'name' : 'date_validation','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',},
-        {'name' :  'state#id'}
+        {'name' :  'state#rowid'}
     ];
 
     listIcon = [
-        {
-          'icon' : 'edit',
-          'action' : 'edit',
-          'tooltip' : 'Modification',
-          'autority' : 'PRM_15',
-        },
-        {
-            'icon' : 'check',
-            'action' : 'validation',
-            'tooltip' : 'Validation',
-            'autority' : 'GCP_6',
-          },
-        {
-          'icon' : 'delete',
-          'action' : 'delete',
-          'tooltip' : 'Supression',
-          'autority' : 'PRM_17',  
-        },
-      ]
+        {'icon' : 'edit','action' : 'edit','tooltip' : 'Modification','autority' : 'PRM_15',},
+        {'icon' : 'check','action' : 'validation','tooltip' : 'Validation','autority' : 'GCP_6',},
+        {'icon' : 'delete','action' : 'delete','tooltip' : 'Supression','autority' : 'PRM_17',},
+    ];
+
     searchGlobal = [ 'virement.datevirement', 'virement.datevalidation', 'virement.user_crea','virement.user_validation']; 
+    subscription: Subscription;
+    idVirement : number;
 
     soldeVirementCP: string;
     soldeVirementCarteCp: string;
@@ -78,6 +67,24 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
         this.soldeVirementCP = (soldeLocalCP) ? soldeLocalCP : undefined;
         this.soldeVirementCarteCp = (soldeCarteLocalCP) ? soldeCarteLocalCP : undefined;
+
+        //Event for icon table
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+
+            if(event.data){
+                this.idVirement = event.data.id;
+    
+                if(event.data.action == 'edit') this.openModalDeleteVirement();
+                else if(event.data.action == 'validation') this.openModalValidateVirement();
+                else if(event.data.action == 'delete') this.openModalDeleteVirement();
+                //else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
+        
+                // Nettoyage immédiat de l'event
+                this.passageService.clear();  // ==> à implémenter dans ton service
+                
+            }
+            
+        });
     }
 
     filtreTableau()
@@ -85,8 +92,43 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
     }
 
+    //Validate virement
+    openModalValidateVirement() {
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.validate_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_valider"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+    
+                /*this.moduleService.supprimerModule(this.idModule).subscribe({
+                    next: (res) => {
+                        if(res['code'] == 204) {
+                        this.toastr.success(res['msg'], this.__("global.success"));
+                        this.actualisationTableau();
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }                
+                    },
+                    error: (err) => {
+                    }
+                }); */
+    
+            }
+        });
+    }
+
     // SUppression d'un modal
-    /*openModalDeleteModule() {
+    openModalDeleteVirement() {
     
         Swal.fire({
             title: this.__("global.confirmation"),
@@ -103,23 +145,23 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         }).then((result) => {
             if (result.isConfirmed) {
     
-               this.moduleService.supprimerModule(this.idModule).subscribe({
-                next: (res) => {
-                    if(res['code'] == 204) {
-                      this.toastr.success(res['msg'], this.__("global.success"));
-                      this.actualisationTableau();
+                /*this.moduleService.supprimerModule(this.idModule).subscribe({
+                    next: (res) => {
+                        if(res['code'] == 204) {
+                        this.toastr.success(res['msg'], this.__("global.success"));
+                        this.actualisationTableau();
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }                
+                    },
+                    error: (err) => {
                     }
-                    else{
-                        this.toastr.error(res['msg'], this.__("global.error"));
-                    }                
-                  },
-                  error: (err) => {
-                  }
-              }); 
+                }); */
     
             }
         });
     
-    }*/
+    }
 
 }

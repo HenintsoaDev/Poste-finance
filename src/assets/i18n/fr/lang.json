@@ -232,7 +232,11 @@
         "operation" : "Opération",
         "num_transac" : "N° transaction",
         "coms" : "Commentaire"
+    },
 
+    "virement" : {
+        "validate_virement" : "Valider le virement",
+        "oui_valider" : "Oui, valider"
     }
 
 
