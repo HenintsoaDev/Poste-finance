@@ -75,7 +75,12 @@
         "montant" : "Montant",
         "statut" : "Statut",
         "user_creation" : "Créé par",
-        "user_validation" : "Validé par"
+        "user_validation" : "Validé par",
+        "validate" : "Validé",
+        "not_valide" : "Rejeté",
+        "en_attente" : "En attente de validation",
+        "total_carte" : "Total carte",
+        "total_wallet" : "Total wallet"
     },
 
     "paiement" : {
