@@ -62,6 +62,7 @@
         "non"  : "Non",
         "wallet"  : "Wallet",
         "carte" : "Carte",
+        "wallet_carte" :  "Tous types comptes",
         "select_date" : "Sélectionner une date",
         "filter" : "Filtrer",
         "total_debit" : "Total debit",
