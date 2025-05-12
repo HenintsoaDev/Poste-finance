@@ -53,11 +53,11 @@
 
                   
 
-                  <div *ngIf="verifStatut(cell) != 0">
+                  <div *ngIf="verifStatut(cell) == 1 || verifStatut(cell) == 2 ">
                     <i class="material-icons" mat-raised-button> lock </i>
                   </div>
 
-                  <div *ngIf="verifStatut(cell) == 0">
+                  <div *ngIf="verifStatut(cell) == undefined || verifStatut(cell) == 0">
                     <ng-container *ngFor="let icon of cell">
                       <!-- <i *ngIf="autority(icon.autority)" -->
                       <i *ngIf="autority(icon.autority)"
