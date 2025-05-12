@@ -62,6 +62,7 @@ export class TableComponent extends Translatable {
     resData : any;
     donneeAfficher: any[] = [];
     isLoading: boolean = false;
+    donneeTotalSuiviCompte: any = [];
 
 
     constructor(             
@@ -209,12 +210,14 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
-      /** SET SOLDE (SUIVI COMPTE) in localstorage*/
-      if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
-      if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
-      /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
-      if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
-      if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
+       /** SET SOLDE (SUIVI COMPTE) in localstorage*/
+       if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
+       if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
+       /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
+       if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
+       if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
+      if(res.totaux) this.donneeTotalSuiviCompte = res.totaux;
+      
 
       //** Affichage de donnée dynamiser */
       let tableau = res.data.map((row: any) => 

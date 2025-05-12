@@ -64,6 +64,8 @@
         "carte" : "Carte",
         "select_date" : "Sélectionner une date",
         "filter" : "Filtrer",
+        "total_debit" : "Total debit",
+        "total_credit" : "Total credit",
         "date" : "Date",
         "of" : "de",
         "virement" : "Virement",
@@ -104,6 +106,7 @@
         "title" : "Gestion des profils",
         "name" : "Libelle",
         "code" : "Code",
+        "all_wallet_carte" : "Tous les comptes",
         "wallet_carte" : "Type de compte",
         "type" : "Type de profil",
         "add" : "Ajouter un profil",
@@ -216,7 +219,15 @@
         "type_compte" : "Type de compte",
         "all_compte" : "Tous les comptes",
         "from" : "Du",
-        "to" : "Au"
+        "to" : "Au",
+        "date" : "Date",
+        "solde_avant" : "Solde avant",
+        "solde_apres" : "Solde après",
+        "montant" : "Montant",
+        "operation" : "Opération",
+        "num_transac" : "N° transaction",
+        "coms" : "Commentaire"
+
     }
 
 

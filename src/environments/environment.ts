@@ -20,6 +20,8 @@ export const environment = {
   authoritySousModule : 'authority_sousModule',
   soldeSuiviCompte : 'soldeSuiviCompte',
   soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
+  exportPdf: BASE_URL + "/export_to/pdf",
+  exportExcel: BASE_URL + "/export_to/excel",
   soldeVirementCp : 'soldeVirementCp',
   soldeVirementCarteCp : 'soldeVirementCarteCp',
 
