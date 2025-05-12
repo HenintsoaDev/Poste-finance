@@ -92,7 +92,7 @@
         "title" : "Gestion des profils",
         "name" : "Libelle",
         "code" : "Code",
-        "wallet_carte" : "Wallet carte",
+        "wallet_carte" : "Tous les comptes",
         "type" : "Type de profil",
         "add" : "Ajouter un profil",
         "title_edit_modal" : "Modification d'un profil",

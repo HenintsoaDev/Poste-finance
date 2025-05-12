@@ -30,7 +30,7 @@
         <thead>
         <tr>
            
-            <th *ngFor="let header of headerTable"> {{header.nomColonne }}
+            <th *ngFor="let header of headerTable"> <span class="bold"> {{header.nomColonne }}</span> &nbsp;
               <span *ngIf="header.nomColonne != 'Action' && formSearch == true">
                 <i class="fa fa-caret-down icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')" *ngIf="tri==header.table + '.' + header.colonneTable && order=='desc'" ></i>
                 <i class="fa fa-caret-up icon-tri"  (click)="triTable(header.table + '.' + header.colonneTable,'desc')"  *ngIf="tri==header.table + '.' + header.colonneTable && order=='asc'"  ></i>
