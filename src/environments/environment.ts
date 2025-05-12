@@ -20,6 +20,8 @@ export const environment = {
   authoritySousModule : 'authority_sousModule',
   soldeSuiviCompte : 'soldeSuiviCompte',
   soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
+  exportPdf: BASE_URL + "/export_to/pdf",
+  exportExcel: BASE_URL + "/export_to/excel",
 
   //** Parametrage */
   module :'parametrage/module',
@@ -48,5 +50,6 @@ export const environment = {
   departement : 'resource/departement/liste_departement',
 
   //** Gestion compte principal */
-  suivi_compte : "gestion_compte_principal/suivi_compte"
+  suivi_compte : "gestion_compte_principal/suivi_compte",
+  
 };

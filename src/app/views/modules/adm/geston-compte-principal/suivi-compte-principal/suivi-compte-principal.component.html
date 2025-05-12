@@ -1,24 +1,50 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div id="content-pm" class="content-solde" *ngIf="soldeSuiviCompte">
-                <div class="">
-                    <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.wallet') }}
-                    </span>
+           
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <div class="button-container">
+                            <div class="left-buttons">
+
+                                <div id="content-pm" class="content-solde" *ngIf="soldeSuiviCompte">
+                                    <div class="">
+                                        <span class="text-gray-600 font-medium" style="display: flex;">
+                                            <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.wallet') }}
+                                        </span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-blue-700">{{ __('global.currency') }} {{ soldeSuiviCompte }}</div>
+                                    
+                                </div>
+                                <div id="content-epkt" class="content-solde" *ngIf="soldeCarteCompte">
+                                    <div class="">
+                                        <span class="text-gray-600 font-medium" style="display: flex;">
+                                            <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.carte') }}
+                                        </span>
+                                    </div>
+                                    <div class="text-2xl font-bold text-green-700">{{ __('global.currency') }} {{ soldeCarteCompte }}</div>
+                                </div>
+
+                               <!--   -->
+                            </div>
+                            <div class="right-button">
+                                <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel('Liste des suivis compte principal')">
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-2xl font-bold text-blue-700">{{ __('global.currency') }} {{ soldeSuiviCompte }}</div>
-                
-            </div>
-            <div id="content-epkt" class="content-solde" *ngIf="soldeCarteCompte">
-                <div class="">
-                    <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.carte') }}
-                    </span>
-                </div>
-                <div class="text-2xl font-bold text-green-700">{{ __('global.currency') }} {{ soldeCarteCompte }}</div>
             </div>
         </div>
+
         <div class="row">
             <div class="col-md-12">
                 <div class="card">

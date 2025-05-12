@@ -168,4 +168,44 @@ export class AuthService {
         
         return data ; 
       }
+
+      downloadPdf(source, fileName) {
+        const link = document.createElement("a");
+        link.href = source;
+        link.download = `${fileName}.pdf`
+        link.click();
+      }
+
+
+      async exportPdf(entities: Array<Object>,title:string,url='') {
+    
+        try {
+            console.log("----");
+            title = title  ||  "Liste";
+            let res = await this.http.post(url || environment.exportPdf , {data: entities,'title' : title}, valuesys.httpAuthOptions()).toPromise();
+          
+            this.downloadPdf(res['data'],title);
+      
+            //window['download'](res['data'], title+ '.pdf', 'application/pdf');
+      
+            
+      
+            return res
+            console.log('respdf')
+          } catch (e) {
+            console.log(e)
+          }
+        }
+      
+        async exportExcel(entities: Array<Object>,title:string,url='') {
+          try {
+            title = title  ||  "Liste";
+            let res:any = await this.http.post(url || environment.exportExcel , {data: entities,'title' : title}, valuesys.httpAuthOptions()).toPromise();
+            return res;
+          } catch (e) {
+            console.log(e)
+          }
+        }
+  
+        
 }

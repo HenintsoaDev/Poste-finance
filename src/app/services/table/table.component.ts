@@ -62,6 +62,7 @@ export class TableComponent extends Translatable {
     resData : any;
     donneeAfficher: any[] = [];
     isLoading: boolean = false;
+    donneeTotalSuiviCompte: any = [];
 
 
     constructor(             
@@ -209,8 +210,10 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
-      if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
-      if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
+      if(res.solde){localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
+      if(res.solde_carte) { localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
+
+      if(res.totaux) this.donneeTotalSuiviCompte = res.totaux;
       
 
       //** Affichage de donnée dynamiser */
