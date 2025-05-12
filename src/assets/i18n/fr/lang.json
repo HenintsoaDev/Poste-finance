@@ -232,7 +232,8 @@
         "montant" : "Montant",
         "operation" : "Opération",
         "num_transac" : "N° transaction",
-        "coms" : "Commentaire"
+        "coms" : "Commentaire",
+        "list_suivi_compte" : "Liste des suivis compte principal"
 
     }
 
