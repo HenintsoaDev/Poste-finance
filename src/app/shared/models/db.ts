@@ -13,6 +13,7 @@ export class utilisateur {
     email: string;
     name: string;
     id_type_agence: any;
+    wallet_carte: number;
 }
 
 export class Auth {

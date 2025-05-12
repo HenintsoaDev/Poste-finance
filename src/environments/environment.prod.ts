@@ -30,6 +30,8 @@ export const environment = {
   action : 'parametrage/action',
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
+  soldeSuiviCompte : 'soldeSuiviCompte',
+  soldeCarteSuiviCompte : 'soldeCarteSuiviCompte',
   
   //** Gestion bureau */
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',

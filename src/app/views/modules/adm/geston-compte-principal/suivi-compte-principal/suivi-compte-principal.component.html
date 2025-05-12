@@ -25,17 +25,20 @@
                     <div class="card-body">
                         <div class="bg-white">
                             <form class="form-inline">
-                                <!--<div class="form-group col-3">
+                                <div class="form-group col-3">
                                     <label for="account-type-1">Type de compte</label>
-                                    <mat-form-field appearance="fill" style="width: 100%;">
-                                        <mat-label>Type de compte</mat-label>
-                                        <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte">
-                                            <mat-option value="2">Tous les comptes</mat-option>
-                                            <mat-option value="1">E-Poketra</mat-option>
-                                            <mat-option value="0">Paositra Money</mat-option>
-                                        </mat-select>
-                                    </mat-form-field>
-                                </div>-->
+                                    <!-- POUR ADMIN -->
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>Type de compte</mat-label>
+                                            <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte" [disabled]="walletCarteProfil != '2'">
+                                                <mat-option value="2">Tous les comptes</mat-option>
+                                                <mat-option value="1">E-Poketra</mat-option>
+                                                <mat-option value="0">Paositra Money</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
                                 
                                 <div class="form-group col-3">
                                     <label for="dateFonction">Du</label>
