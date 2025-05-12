@@ -83,8 +83,6 @@ export class TableComponent extends Translatable {
 
 
       this.subscription = this.passageService.getObservable().subscribe(event => {
-        //console.log("mijery event ------", event);
-        
 
         if (event.type === 'url' || event.type === '' ) {
           const filtre = event.data;
@@ -149,7 +147,6 @@ export class TableComponent extends Translatable {
       searchMulti?: any
     ) {
 
-      //console.log(searchMulti);
       this.isLoading = true;
     
       this.search = "";
@@ -188,8 +185,6 @@ export class TableComponent extends Translatable {
 
       
 
-      //console.log(this.searchCol );
-
 
       //** filtre de nombre d'affichage */
       let filtre: any = "";
@@ -225,7 +220,6 @@ export class TableComponent extends Translatable {
         if(res.totaux.CREDIT) this.donneeTotal.CREDIT = res.totaux.CREDIT;
 
       }
-      console.log("donneeTotal",this.donneeTotal);
       
 
       //** Affichage de donnée dynamiser */
@@ -396,9 +390,7 @@ export class TableComponent extends Translatable {
     }
 
     verifColorText(dataText: any)  {
-      console.log(dataText)
       let post = dataText.split('###');
-
 
       //** si la donnée est null */
       if(post[0] == "null") return '';
@@ -411,6 +403,22 @@ export class TableComponent extends Translatable {
 
 
 
+    }
+
+    verifAlignText(dataText: any){
+        console.log(dataText)
+        let post = dataText.split('###');
+  
+        console.log("xxxxx", post[1])
+
+        //** si la donnée est null */
+        if(post[0] == "null") return '';
+  
+        if(post[1] == 'montant') return 'text-right';
+  
+  
+  
+      
     }
 
 

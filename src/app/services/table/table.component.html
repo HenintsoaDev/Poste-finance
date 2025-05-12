@@ -46,7 +46,7 @@
           <tr *ngFor="let row of donneeAfficher" class="ng-star-inserted"> 
             <td *ngFor="let cell of row" >
                 <!-- Si cell n'est pas un tableau, afficher le donnée -->
-                <span *ngIf="!isArray(cell)" [ngStyle]="{ 'color': verifColorText(cell) }">  {{ formatCell(cell)   }}</span>
+                <span *ngIf="!isArray(cell)"  [ngStyle]="{ 'color': verifColorText(cell) }">  {{ formatCell(cell)   }}</span>
                 <!-- Si cell est un tableau, afficher les éléments du tableau -->
                 <span *ngIf="isArray(cell)">
                   
