@@ -88,7 +88,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     type_profil: type_profil = new type_profil();
     listTypeBureau:type_profil [] = [];
   
-    @ViewChild('addTypeBureau') addTypeBureau: TemplateRef<any> | undefined;
+    @ViewChild('addTypeProfil') addTypeProfil: TemplateRef<any> | undefined;
     idTypeBureau : number;
     titleModal: string = "";
   
@@ -231,7 +231,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
       this.titleModal = this.__('type_profil.title_edit_modal');
   
-      if (this.addTypeBureau) {
+      if (this.addTypeProfil) {
   
         // Récupérer la liste affichée dans le tableau depuis le localStorage.
         const storedData = localStorage.getItem('data');
@@ -244,7 +244,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
         this.type_profil = res[0];
   
         // Ouverture de modal
-        this.modalRef = this.modalService.show(this.addTypeBureau, { backdrop: 'static',keyboard: false });
+        this.modalRef = this.modalService.show(this.addTypeProfil, { backdrop: 'static',keyboard: false });
       }
     }
   

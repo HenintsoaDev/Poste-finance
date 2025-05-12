@@ -69,7 +69,18 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.userStorage = JSON.parse(localStorage.getItem(environment.userItemName) || null);
         this.typeCompte = this.userStorage.info?.wallet_carte.toString();
         this.walletCarteProfil = this.userStorage.info?.wallet_carte.toString();
-        
+
+        /***************************************** */
+            // Écouter les changements de modal à travers le service si il y a des actions
+            this.subscription = this.passageService.getObservable().subscribe(event => {});
+
+    }
+
+     
+    ngOnDestroy() {
+      if (this.subscription) {
+        this.subscription.unsubscribe();
+      }
     }
 
     filtreTableau() {

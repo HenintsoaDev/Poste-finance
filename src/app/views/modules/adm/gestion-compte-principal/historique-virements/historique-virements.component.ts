@@ -90,6 +90,13 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         });
     }
 
+
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
+  
     filtreTableau()
     {
         let filtre_search = "" ;
