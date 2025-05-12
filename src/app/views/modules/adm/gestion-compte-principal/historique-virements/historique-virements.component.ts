@@ -143,9 +143,18 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             },
         }).then((result) => {
             if (result.isConfirmed) {
-    
-                
-    
+                this.hitsoriqueVirementService.rejeterVirement(this.idVirement).subscribe({
+                    next: (res) => {
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }                
+                    },
+                    error: (err) => {}
+                });
             }
         });
     }

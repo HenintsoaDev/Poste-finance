@@ -24,5 +24,16 @@ export class HistoriqueVirementsService {
         );
     }
 
+    rejeterVirement(id): Observable<any>
+    {
+        return this.httpService.put<any>(environment.rejet_virement+'/'+id,'').pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
 }
 
