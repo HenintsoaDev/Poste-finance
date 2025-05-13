@@ -100,8 +100,8 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     {
       'icon' : 'info',
       'action' : 'detail',
-      'tooltip' : 'Détail',
-      'autority' : 'PRM_2',
+      'tooltip' : this.__('global.tooltip_detail'),
+      'autority' : 'PRM_41',
   
     },
     
@@ -109,21 +109,21 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       'icon' : 'lock_reset',
       'action' : 'regenerer_mdp',
       'tooltip' : 'Régeneration de mot de passe',
-      'autority' : 'PRM_43',
+      'autority' : 'PRM_44',
   
     },
     {
       'icon' : 'edit',
       'action' : 'edit',
-      'tooltip' : 'Modification',
-      'autority' : 'PRM_39',
+      'tooltip' : this.__('global.tooltip_edit'),
+      'autority' : 'PRM_40',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
-      'tooltip' : 'Supression',
-      'autority' : 'PRM_41',
+      'tooltip' : this.__('global.tooltip_delete'),
+      'autority' : 'PRM_42',
 
   
     },
@@ -228,7 +228,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
           this.utilisateurForm = this.fb.group({
             nom: ['', Validators.required],
-            prenom: ['', [Validators.required]],
+            prenom: [''],
             login: ['', [Validators.required]],
             email: ['', [Validators.required]],
             telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
@@ -525,7 +525,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       this.titleModal = this.__('utilisateur.title_add_modal');
       this.utilisateurForm = this.fb.group({
           nom: ['', Validators.required],
-          prenom: ['', [Validators.required]],
+          prenom: [''],
           login: ['', [Validators.required]],
           email: ['', [Validators.required]],
           telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],

@@ -82,7 +82,10 @@
         "en_attente" : "En attente de validation",
         "total_carte" : "Total carte",
         "total_wallet" : "Total wallet",
-        "dateDebut_dateFin_error" : "La date début doit être avant de la date fin"
+        "dateDebut_dateFin_error" : "La date début doit être avant de la date fin",
+        "tooltip_edit" : "Modification",
+        "tooltip_delete" : "Supression",
+        "tooltip_detail" :"Voir le détail"
     },
 
     "paiement" : {
@@ -124,7 +127,8 @@
         "user_modification" : "Modifier par",   
         "le" : "le",   
         "state" : "State",
-        "user_creation" : "Créer par"  
+        "user_creation" : "Créer par",
+        "affect" : "Affectation "  
     },
     "utilisateur" : {
         "title" : "Gestion des utilisateurs",

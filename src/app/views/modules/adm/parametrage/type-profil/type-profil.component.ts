@@ -63,7 +63,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     {
       'icon' : 'edit',
       'action' : 'edit',
-      'tooltip' : 'Modification',
+      'tooltip' : this.__('global.tooltip_edit'),
       'autority' : 'PRM_30'
 
   
@@ -71,7 +71,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     {
       'icon' : 'delete',
       'action' : 'delete',
-      'tooltip' : 'Supression',
+      'tooltip' : this.__('global.tooltip_delete'),
       'autority' : 'PRM_32'
 
   
