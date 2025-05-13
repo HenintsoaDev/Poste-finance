@@ -87,9 +87,11 @@ export class TableComponent extends Translatable {
         if (!event || typeof event !== 'object') return;
       
         const { type, data: filtre } = event;
+
+        console.log("xxx",type);
       
         // Vérifie si c'est un événement pertinent
-        if (type === 'url' || type === '') {
+        if ((type === 'url' || type === '') && this.endpoint) {
           const url = `${this.endpoint}?page=1`;
       
           if (filtre) {
