@@ -246,7 +246,11 @@
         "rejet_virement" : "Annuler le virement",
         "oui_rejeter" : "Oui, annuler",
         "update" : "Modifier le virement",
-        "add" : "Ajouter un virement"
+        "add" : "Ajouter un virement",
+        "confirm_add_virement" : "Voulez-vous vraiement enregistrer ce virement",
+        "oui_add" : "Oui, ajouter",
+        "confirm_update_virement" : "Voulez-vous vraiement modifier ce virement",
+        "oui_update" : "Oui, modifier"
     }
 
 

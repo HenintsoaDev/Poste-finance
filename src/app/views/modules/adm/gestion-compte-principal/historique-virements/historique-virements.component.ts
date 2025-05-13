@@ -69,6 +69,8 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     titleModal: string = "";
     modalRef?: BsModalRef;
 
+    loadingSendBtn : boolean = false;
+
     @ViewChild('updateVirement') updateVirement: TemplateRef<any> | undefined;
 
     userStorage: Auth;
@@ -290,41 +292,80 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
     //New virement
     sendAdd() {
-        this.hitsoriqueVirementService.addVirement(this.montantCompteAdd,this.typeCompteSelectedAdd).subscribe({
-            next: (res) => {
-                this.closeModal();
-                if(res['code'] == 201) {
-                    this.toastr.success(res['msg'], this.__("global.success"));
-                    this.actualisationTableau();
-                    this.montantCompteAdd = undefined;
-                    this.typeCompteSelectedAdd = undefined;
-                }
-                else{
-                    this.toastr.error(res['msg'], this.__("global.error"));
-                }                
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.confirm_add_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_add"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
             },
-            error: (err) => {}
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loadingSendBtn = true;
+                this.hitsoriqueVirementService.addVirement(this.montantCompteAdd,this.typeCompteSelectedAdd).subscribe({
+                    next: (res) => {
+                        this.closeModal();
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
+                            this.montantCompteAdd = undefined;
+                            this.typeCompteSelectedAdd = undefined;
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }              
+                        this.loadingSendBtn = false;  
+                    },
+                    error: (err) => {this.loadingSendBtn = false;}
+                });
+            }
         });
+        
     }
 
     //Update virement
     sendUpdate()
     {
-        this.hitsoriqueVirementService.updateVirement(this.dataVirement.rowid,this.montantCompteUpdate,this.typeCompteSelectedUpdate).subscribe({
-            next: (res) => {
-                this.closeModal();
-                if(res['code'] == 201) {
-                    this.toastr.success(res['msg'], this.__("global.success"));
-                    this.actualisationTableau();
-                    this.montantCompteUpdate = undefined;
-                    this.typeCompteSelectedUpdate = undefined;
-                }
-                else{
-                    this.toastr.error(res['msg'], this.__("global.error"));
-                }                
+
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.confirm_update_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_update"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
             },
-            error: (err) => {}
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loadingSendBtn = true;
+                this.hitsoriqueVirementService.updateVirement(this.dataVirement.rowid,this.montantCompteUpdate,this.typeCompteSelectedUpdate).subscribe({
+                    next: (res) => {
+                        this.closeModal();
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
+                            this.montantCompteUpdate = undefined;
+                            this.typeCompteSelectedUpdate = undefined;
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }   
+                        this.loadingSendBtn = false;             
+                    },
+                    error: (err) => {this.loadingSendBtn = false; }
+                });
+            }
         });
+        
     }
 
     // Fermeture du modal
