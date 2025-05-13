@@ -46,5 +46,33 @@ export class HistoriqueVirementsService {
         );
     }
 
+    addVirement(monant,wallet_cart): Observable<any>
+    {
+        return this.httpService.post<any>(environment.historique_virement,{
+            'montant' : monant,
+            'wallet_carte' : wallet_cart
+        }).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+    updateVirement(id,monant,wallet_cart): Observable<any>
+    {
+        return this.httpService.put<any>(environment.historique_virement+'/'+id,{
+            'montant' : monant,
+            'wallet_carte' : wallet_cart
+        }).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
 }
 

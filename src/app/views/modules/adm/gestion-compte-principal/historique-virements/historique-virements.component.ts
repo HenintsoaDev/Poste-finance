@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HistoriqueVirementsService } from 'app/services/admin/gestion-compte-principal/historique-virement.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { Auth } from 'app/shared/models/db';
@@ -7,7 +7,9 @@ import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-historique-virements',
@@ -54,13 +56,38 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     dateFin: string = ""//new Date().toISOString().substring(0, 10);
     walletCarteProfil : string = "2";
 
+    dataVirement : any;
+    typeCompteSelectedUpdate : any;
+    montantCompteUpdate : any;
+
+    typeCompteSelectedAdd : any;
+    montantCompteAdd : any;
+
+    virement_data: any = [];
+    virement_totaux: any;
+
+    titleModal: string = "";
+    modalRef?: BsModalRef;
+
+    loadingSendBtn : boolean = false;
+
+    @ViewChild('updateVirement') updateVirement: TemplateRef<any> | undefined;
+
     userStorage: Auth;
 
-    constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe, private hitsoriqueVirementService : HistoriqueVirementsService) {
+    constructor(
+        private passageService: PassageService,
+        private toastr: ToastrService,
+        private datePipe: DatePipe, 
+        private hitsoriqueVirementService : HistoriqueVirementsService,
+        private modalService: BsModalService,
+        private authService: AuthService
+    ) {
         super();
     }
 
     ngOnInit(): void {
+        this.authService.initAutority("GCP","ADM");
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
 
@@ -76,15 +103,13 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             if(event.data){
                 this.idVirement = event.data.id;
     
-                if(event.data.action == 'edit') this.openModalDeleteVirement();
+                if(event.data.action == 'edit') this.openModalUpdateVirement();
                 else if(event.data.action == 'validation') this.openModalValidateVirement();
                 else if(event.data.action == 'rejeter') this.openModalRejetVirement();
                 else if(event.data.action == 'delete') this.openModalDeleteVirement();
-                //else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
         
                 // Nettoyage immédiat de l'event
                 this.passageService.clear();  // ==> à implémenter dans ton service
-                
             }
             
         });
@@ -221,9 +246,192 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     
     }
 
+    //New virement
+    openModalAddVirement(template: TemplateRef<any>) {
+        this.titleModal = this.__('virement.add');
+        this.modalRef = this.modalService.show(template, {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    //Update virement
+    openModalUpdateVirement() {
+        this.recupererDonnee();
+        this.titleModal = this.__('virement.update');
+        this.modalRef = this.modalService.show(this.updateVirement, {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
     // Actualisation des données
     actualisationTableau(){
         this.passageService.appelURL('');
+    }
+
+    // Récuperation des données
+    recupererDonnee(){
+        // Récupérer la liste affichée dans le tableau depuis le localStorage.
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        this.dataVirement = result.data;
+
+        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+        let res = this.dataVirement.filter(_ => _.rowid == this.idVirement);
+        if(res.length != 0){
+            this.dataVirement = res[0];
+            let montantString = this.dataVirement.montant;
+            montantString = montantString.replace(/\s/g, '');
+            montantString = montantString.replace(',', '.');
+            this.montantCompteUpdate = parseFloat(montantString);
+            this.typeCompteSelectedUpdate = (this.dataVirement.wallet_carte == 'Wallet') ? "0" : "1";
+        }
+    }
+
+    //New virement
+    sendAdd() {
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.confirm_add_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_add"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loadingSendBtn = true;
+                this.hitsoriqueVirementService.addVirement(this.montantCompteAdd,this.typeCompteSelectedAdd).subscribe({
+                    next: (res) => {
+                        this.closeModal();
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
+                            this.montantCompteAdd = undefined;
+                            this.typeCompteSelectedAdd = undefined;
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }              
+                        this.loadingSendBtn = false;  
+                    },
+                    error: (err) => {this.loadingSendBtn = false;}
+                });
+            }
+        });
+        
+    }
+
+    //Update virement
+    sendUpdate()
+    {
+
+        Swal.fire({
+            title: this.__("global.confirmation"),
+            text: this.__("virement.confirm_update_virement") + " ?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: this.__("virement.oui_update"),
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loadingSendBtn = true;
+                this.hitsoriqueVirementService.updateVirement(this.dataVirement.rowid,this.montantCompteUpdate,this.typeCompteSelectedUpdate).subscribe({
+                    next: (res) => {
+                        this.closeModal();
+                        if(res['code'] == 201) {
+                            this.toastr.success(res['msg'], this.__("global.success"));
+                            this.actualisationTableau();
+                            this.montantCompteUpdate = undefined;
+                            this.typeCompteSelectedUpdate = undefined;
+                        }
+                        else{
+                            this.toastr.error(res['msg'], this.__("global.error"));
+                        }   
+                        this.loadingSendBtn = false;             
+                    },
+                    error: (err) => {this.loadingSendBtn = false; }
+                });
+            }
+        });
+        
+    }
+
+    // Fermeture du modal
+    closeModal() {
+        this.modalRef?.hide();
+    }
+
+    async exportExcel(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.virement_data = result.data;
+        this.virement_totaux = result.totaux;
+        
+        this.authService.exportExcel(this.print(this.virement_data),this.__("virement.list_virement")).then(
+            (response: any)=>{
+                console.log('respons beee',response)
+                    let a = document.createElement("a"); 
+                    a.href = response.data;
+                    a.download = `${fileName}.xlsx`;
+                    a.click(); 
+            },
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.virement_data = result.data;
+        this.virement_totaux = result.totaux;
+        
+        this.authService.exportPdf(this.print(this.virement_data),this.__("virement.list_virement")).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(virements:any[]){
+        let tab = virements.map((virement: any, index: number) => {
+            let t: any = {};
+                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')] = virement.date_virement;
+                t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = virement.montant;
+                t[this.__('global.user_creation')] = virement.user_crea;
+                t[this.__('global.statut')] = (virement.statut == 0) ? "En attente de validation" : (virement.statut == 1) ? "Validé" : "Rejeté";
+                t[this.__('global.user_validation')] = virement.user_validation;
+                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')] = virement.date_validation;
+                t[this.__('suivi_compte.type_compte')] = virement.wallet_carte;
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')]: '',
+          [this.__('global.montant')+ ' (' + this.__('global.currency') + ')']: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
+          [this.__('global.user_creation')]: '',
+          [this.__('global.statut') + ' (' + this.__('global.currency') + ')']: '',
+          [this.__('global.user_validation')]: '',
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')]: this.__('virement.total_wallet') + ": " + (this.virement_totaux?.Wallet ?? 0),
+          [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
     }
 
 }
