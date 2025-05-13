@@ -235,18 +235,26 @@ export class TableComponent extends Translatable {
         this.body.map((col: any) => {
           if (col.name === "state#id" || col.name === "state#rowid") {
             const targetId = col.name === "state#id" ? row.id : row.rowid;
-      
-            const icons = this.listIcon.map(i => ({
-              icon: i.icon,
-              action: i.action,
-              tooltip: i.tooltip,
-              autority: i.autority,
-              id: targetId,
-            }));
-      
+            
+            // 1. Trouver l'icône "home"
+            const stateIcon = this.listIcon.find(i => i.icon === 'state');
+
+            // 2. Mapper tous les autres icônes sauf "state"
+            const icons = this.listIcon
+              .filter(i => i.icon !== 'state')
+              .map(i => ({
+                icon: i.icon,
+                action: i.action,
+                tooltip: i.tooltip,
+                autority: i.autority,
+                id: targetId,
+              }));
+
+            // 3. Ajouter un objet via concat, utilisant l'autorité de l'icône "state"
             return icons.concat({
               statut: row.statut,
               state: row.state,
+              autority: stateIcon?.autority,
               id: targetId,
             });
           }

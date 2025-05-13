@@ -55,13 +55,13 @@
         </button>
     </div>
     <div class="modal-body">
-        <form #f="ngForm" [formGroup]="typeBureauForm" (ngSubmit)="onSubmit()">
+        <form #f="ngForm" [formGroup]="typeProfilForm" (ngSubmit)="onSubmit()">
             <div class="modal-body">
 
                 <div class="form-group">
                     <mat-form-field>
                         <mat-label>{{ __('type_profil.code')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="type_profil.code" placeholder="{{ __('type_profil.code')}}" formControlName="code" name="code">
+                        <input matInput type="text"  placeholder="{{ __('type_profil.code')}}" formControlName="code" >
                     </mat-form-field>
                 </div>
                
@@ -69,7 +69,7 @@
                 <div class="form-group">
                     <mat-form-field>
                         <mat-label>{{ __('type_profil.name')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="type_profil.name" placeholder="{{ __('type_profil.name')}}" formControlName="name" name="name">
+                        <input matInput type="text" placeholder="{{ __('type_profil.name')}}" formControlName="name" name="name">
                     </mat-form-field>
                 </div>
                
@@ -80,8 +80,8 @@
 
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
-                <button type="submit" class="btn btn-primary" *ngIf="!type_profil.id" [disabled]="typeBureauForm.invalid">{{ __('global.save')}}</button>
-                <button type="submit" class="btn btn-primary" *ngIf="type_profil.id" [disabled]="typeBureauForm.invalid">{{ __('global.edit')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="!type_profil.id" [disabled]="typeProfilForm.invalid">{{ __('global.save')}}</button>
+                <button type="submit" class="btn btn-primary" *ngIf="type_profil.id" [disabled]="typeProfilForm.invalid">{{ __('global.edit')}}</button>
             </div>
         </form>
     </div>

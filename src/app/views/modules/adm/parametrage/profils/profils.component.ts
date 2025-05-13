@@ -107,6 +107,10 @@ export class ProfilsComponent extends Translatable implements OnInit {
   
     
       },
+      {
+        'icon' : 'state',
+        'autority' : 'PRM_38',
+      },
     ]
     
       searchGlobal = [ 'profil.code', 'profil.name', 'type_profil.name']
@@ -143,7 +147,6 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
         ) {
         super();
-        this.authService.initAutority("PRM","ADM");
   
       }
     
@@ -152,6 +155,8 @@ export class ProfilsComponent extends Translatable implements OnInit {
     
     
       async ngOnInit() {
+        this.authService.initAutority("PRM","ADM");
+
         this.titleModal = this.__('profil.title_add_modal');
     
         this.passageService.appelURL(null);
