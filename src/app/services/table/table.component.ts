@@ -265,7 +265,6 @@ export class TableComponent extends Translatable {
       );
     
       this.donneeAfficher = tableau;
-      console.log(this.donneeAfficher);
 
       this.path = this.endpoint;
       this.lastPage = this.path + "?page=" + res.last_page;

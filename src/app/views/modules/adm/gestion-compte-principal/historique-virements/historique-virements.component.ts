@@ -89,7 +89,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     ngOnInit(): void {
         this.authService.initAutority("GCP","ADM");
         this.passageService.appelURL(null);
-        this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
+        //this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
 
         let soldeLocalCP = localStorage.getItem(environment.soldeVirementCp);
         let soldeCarteLocalCP = localStorage.getItem(environment.soldeVirementCarteCp);
@@ -99,7 +99,6 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
         //Event for icon table
         this.subscription = this.passageService.getObservable().subscribe(event => {
-
             if(event.data){
                 this.idVirement = event.data.id;
     
@@ -111,7 +110,6 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
                 // Nettoyage immédiat de l'event
                 this.passageService.clear();  // ==> à implémenter dans ton service
             }
-            
         });
     }
 
@@ -120,7 +118,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         if (this.subscription) {
           this.subscription.unsubscribe();
         }
-      }
+    }
   
     filtreTableau()
     {
