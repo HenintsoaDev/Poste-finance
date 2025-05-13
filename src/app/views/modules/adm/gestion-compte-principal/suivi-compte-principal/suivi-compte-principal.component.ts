@@ -20,8 +20,8 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_des_comptes"},
-        {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_des_comptes"},
+        {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.operation'),"colonneTable" : "operation","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.coms'),"colonneTable" : "commentaire","table" : "releve_des_comptes"},
         {"nomColonne" :  this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "releve_des_comptes"}
@@ -31,8 +31,8 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         {'name' : 'date_transaction','type' : 'text',},
         {'name' : 'num_transac','type' : 'text',},
         {'name' : 'solde_avant','type' : 'montant',},
-        {'name' : 'solde_apres','type' : 'montant',},
         {'name' : 'montant','type' : 'text',},
+        {'name' : 'solde_apres','type' : 'montant',},
         {'name' : 'operation','type' : 'text',},
         {'name' : 'commentaire','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',}
@@ -52,6 +52,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     //UserStorage
     userStorage: Auth;
     suivi_comptes: any = [];
+    suivi_comptes_totaux: any;
 
     constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe, private authService: AuthService) {
         super();
@@ -61,11 +62,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.passageService.appelURL(null);
         
         this.endpoint = environment.baseUrl + '/' + environment.suivi_compte;
-        let soldeLocal = localStorage.getItem(environment.soldeSuiviCompte);
-        let soldeCarteLocal = localStorage.getItem(environment.soldeCarteSuiviCompte);
-
-        this.soldeSuiviCompte = (soldeLocal) ? soldeLocal : undefined;
-        this.soldeCarteCompte = (soldeCarteLocal) ? soldeCarteLocal : undefined;
+      
         this.userStorage = JSON.parse(localStorage.getItem(environment.userItemName) || null);
         this.typeCompte = this.userStorage.info?.wallet_carte.toString();
         this.walletCarteProfil = this.userStorage.info?.wallet_carte.toString();
@@ -73,7 +70,17 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         /***************************************** */
             // Écouter les changements de modal à travers le service si il y a des actions
             this.subscription = this.passageService.getObservable().subscribe(event => {});
+            setTimeout(() => {
+              this.afficheSolde();
+            }, 2000);
+    }
 
+    afficheSolde(){
+      let soldeLocal = localStorage.getItem(environment.soldeSuiviCompte);
+      let soldeCarteLocal = localStorage.getItem(environment.soldeCarteSuiviCompte);
+
+      this.soldeSuiviCompte = (soldeLocal) ? soldeLocal : undefined;
+      this.soldeCarteCompte = (soldeCarteLocal) ? soldeCarteLocal : undefined;
     }
 
      
@@ -113,12 +120,12 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
 
         const storedData = localStorage.getItem('data');
         let result : any;
-        if (storedData) {
-          result = JSON.parse(storedData);
-        }
+        if (storedData) result = JSON.parse(storedData);
+        
     
         this.suivi_comptes = result.data;
-    
+        this.suivi_comptes_totaux = result.totaux;
+        
         
         this.authService.exportExcel(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
           (response: any)=>{
@@ -138,12 +145,11 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
 
         const storedData = localStorage.getItem('data');
         let result : any;
-        if (storedData) {
-          result = JSON.parse(storedData);
-        }
+        if (storedData) result = JSON.parse(storedData);
+        
     
         this.suivi_comptes = result.data;
-    
+        this.suivi_comptes_totaux = result.totaux;
         
         this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
           (response: any)=>{},
@@ -154,20 +160,40 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
       }
     
       print(suivis:any[]){
-        return  suivis.map((suivi : any)=>{
-          let t = {}
-          t[this.__('suivi_compte.date')] =  this.datePipe.transform(suivi.date_transaction, 'dd/MM/YYYY') 
-          t[this.__('suivi_compte.num_transac')] = suivi.num_transac 
-          t[this.__('suivi_compte.solde_avant')] = suivi.solde_avant 
-          t[this.__('suivi_compte.solde_apres')] = suivi.solde_apres
-          t[this.__('suivi_compte.montant')] = suivi.montant
-          t[this.__('suivi_compte.operation')] = suivi.operation
-          t[this.__('suivi_compte.coms')] = suivi.commentaire
-          t[this.__('suivi_compte.type_compte')] = suivi.wallet_carte
 
-           
-          return t ;
-        })  || [];
+        console.log(suivis);
+        let tab = suivis.map((suivi: any, index: number) => {
+          let t: any = {};
+            t[this.__('suivi_compte.date')] = this.datePipe.transform(suivi.date_transaction, 'dd/MM/YYYY');
+            t[this.__('suivi_compte.num_transac')] = suivi.num_transac;
+            t[this.__('suivi_compte.solde_avant')] = suivi.solde_avant;
+            t[this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] = suivi.montant;
+            t[this.__('suivi_compte.solde_apres')] = suivi.solde_apres;
+            t[this.__('suivi_compte.operation')] = suivi.operation;
+            t[this.__('suivi_compte.coms')] = suivi.commentaire;
+            t[this.__('suivi_compte.type_compte')] = suivi.wallet_carte;
+                  
+          return t;
+        });
+
+
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+          [this.__('suivi_compte.date')]: '',
+          [this.__('suivi_compte.num_transac')]: '',
+          [this.__('suivi_compte.solde_avant')] : this.__('global.total_debit'),
+          [this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] : this.suivi_comptes_totaux?.DEBIT,
+          [this.__('suivi_compte.solde_apres')] :  '',
+          [this.__('suivi_compte.operation')] : this.__('global.total_credit'),
+          [this.__('suivi_compte.coms')] : this.suivi_comptes_totaux?.CREDIT,
+          [this.__('suivi_compte.type_compte')] : '',
+        });
+
+        console.log(tab);
+
+
+        return tab;
     
       }
     
