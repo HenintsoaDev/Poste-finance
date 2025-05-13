@@ -57,6 +57,7 @@ export class TableComponent extends Translatable {
     @Input() listIcon : any;
     @Input() searchGlobal : any;
     @Input() formSearch: any = true;
+    @Input() triDescDefault: any = '';
 
 
     resData : any;
@@ -83,15 +84,22 @@ export class TableComponent extends Translatable {
 
 
       this.subscription = this.passageService.getObservable().subscribe(event => {
-
-        if (event.type === 'url' || event.type === '' ) {
-          const filtre = event.data;
+        if (!event || typeof event !== 'object') return;
+      
+        const { type, data: filtre } = event;
+      
+        // Vérifie si c'est un événement pertinent
+        if (type === 'url' || type === '') {
           const url = `${this.endpoint}?page=1`;
       
-          if (!filtre) {
-            this.getUrlDatatable(url);
-          } else {
+          if (filtre) {
+            // Appliquer un filtre s’il existe
             this.getUrlDatatable(url, '', '', '', filtre);
+          } else {
+            // Sinon appliquer un tri ou appeler l'URL brute
+            if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc');
+            else this.getUrlDatatable(url);
+            
           }
         }
       });
@@ -211,6 +219,7 @@ export class TableComponent extends Translatable {
        /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
        if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
        if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
+
       if(res.totaux){
         //this.donneeTotal = res.totaux;
         if(res.totaux.Carte) this.donneeTotal.Carte = res.totaux.Carte;
