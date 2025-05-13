@@ -50,8 +50,8 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     soldeVirementCarteCp: string;
 
     typeCompte: string = "2";
-    dateDebut: string = new Date().toISOString().substring(0, 10);
-    dateFin: string = new Date().toISOString().substring(0, 10);
+    dateDebut: string = "" //new Date().toISOString().substring(0, 10);
+    dateFin: string = ""//new Date().toISOString().substring(0, 10);
     walletCarteProfil : string = "2";
 
     userStorage: Auth;
@@ -99,21 +99,21 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
   
     filtreTableau()
     {
-        let filtre_search = "" ;
+        let filtre_search = "" ; 
         if(this.typeCompte != '2'){
             filtre_search = ",virement.wallet_carte|e|"+this.typeCompte;
         }
 
-        this.dateDebut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
-        this.dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+        let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        let date_fin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
       
         let filtreDate = "" ;
-        if(this.dateDebut && this.dateFin){
-            if( this.dateDebut > this.dateFin ){
+        if(date_debut && date_fin){
+            if( date_debut > date_fin ){
               this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
               return;
             }else{
-              filtreDate = "&date_debut="+this.dateDebut +"&date_fin="+this.dateFin;
+              filtreDate = "&date_debut="+date_debut +"&date_fin="+date_fin;
             }
         }
         
