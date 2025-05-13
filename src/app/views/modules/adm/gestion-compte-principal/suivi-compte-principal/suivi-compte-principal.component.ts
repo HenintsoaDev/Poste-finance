@@ -161,10 +161,9 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     
       print(suivis:any[]){
 
-        console.log(suivis);
         let tab = suivis.map((suivi: any, index: number) => {
           let t: any = {};
-            t[this.__('suivi_compte.date')] = this.datePipe.transform(suivi.date_transaction, 'dd/MM/YYYY');
+            t[this.__('suivi_compte.date')] = suivi.date_transaction;
             t[this.__('suivi_compte.num_transac')] = suivi.num_transac;
             t[this.__('suivi_compte.solde_avant')] = suivi.solde_avant;
             t[this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] = suivi.montant;
@@ -182,16 +181,13 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         tab.push({
           [this.__('suivi_compte.date')]: '',
           [this.__('suivi_compte.num_transac')]: '',
-          [this.__('suivi_compte.solde_avant')] : this.__('global.total_debit'),
-          [this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] : this.suivi_comptes_totaux?.DEBIT,
-          [this.__('suivi_compte.solde_apres')] :  '',
-          [this.__('suivi_compte.operation')] : this.__('global.total_credit'),
-          [this.__('suivi_compte.coms')] : this.suivi_comptes_totaux?.CREDIT,
-          [this.__('suivi_compte.type_compte')] : '',
+          [this.__('suivi_compte.solde_avant')]: this.__('global.total_debit'),
+          [this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')']: this.suivi_comptes_totaux?.DEBIT ?? 0,
+          [this.__('suivi_compte.solde_apres')]: '',
+          [this.__('suivi_compte.operation')]: this.__('global.total_credit'),
+          [this.__('suivi_compte.coms')]: this.suivi_comptes_totaux?.CREDIT ?? 0,
+          [this.__('suivi_compte.type_compte')]: '',
         });
-
-        console.log(tab);
-
 
         return tab;
     

@@ -127,6 +127,10 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
   
     },
+    {
+      'icon' : 'state',
+      'autority' : 'PRM_43',
+    },
   ]
     searchGlobal = [ 'user.nom', 'user.prenom', 'user.email',  'user.telephone', 'profil.name', 'agence.name']
    
@@ -185,7 +189,6 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
       ) {
       super();
-      this.authService.initAutority("PRM","ADM");
 
     }
   
@@ -194,6 +197,8 @@ export class UtilisateurComponent extends Translatable implements OnInit {
   
   
     async ngOnInit() {
+      this.authService.initAutority("PRM","ADM");
+
       this.titleModal = this.__('utilisateur.title_add_modal');
   
       this.passageService.appelURL(null);

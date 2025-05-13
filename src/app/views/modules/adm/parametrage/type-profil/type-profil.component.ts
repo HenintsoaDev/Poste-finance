@@ -76,6 +76,10 @@ export class TypeProfilComponent extends Translatable implements OnInit {
 
   
     },
+    {
+      'icon' : 'state',
+      'autority' : 'PRM_33',
+    },
   ]
   
     searchGlobal = [ 'type_agence.name']
@@ -84,7 +88,7 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
   
   
-    typeBureauForm: FormGroup;
+    typeProfilForm: FormGroup;
     type_profil: type_profil = new type_profil();
     listTypeBureau:type_profil [] = [];
   
@@ -133,7 +137,8 @@ export class TypeProfilComponent extends Translatable implements OnInit {
           this.endpoint = environment.baseUrl + '/' + environment.type_profil;
       /***************************************** */
   
-          this.typeBureauForm = this.fb.group({
+          this.typeProfilForm = this.fb.group({
+            code: ['', Validators.required],
             name: ['', Validators.required]
         });
     }
@@ -146,7 +151,14 @@ export class TypeProfilComponent extends Translatable implements OnInit {
   
     // Quand on faire l'ajout ou modification
     onSubmit() {
-      if (this.typeBureauForm.valid) {
+      if (this.typeProfilForm.valid) {
+
+        this.type_profil = {
+          ...this.type_profil,
+          ...this.typeProfilForm.value
+        };
+
+
   
         let msg = "";
         let msg_btn = "";
@@ -242,6 +254,13 @@ export class TypeProfilComponent extends Translatable implements OnInit {
         // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
         let res = this.listTypeBureau.filter(_ => _.id == this.idTypeBureau);
         this.type_profil = res[0];
+
+        console.log(this.type_profil);
+        this.typeProfilForm.patchValue({
+          name: this.type_profil.name,
+          code: this.type_profil.code,
+        });
+
   
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addTypeProfil, { backdrop: 'static',keyboard: false });
@@ -357,6 +376,11 @@ export class TypeProfilComponent extends Translatable implements OnInit {
     openModalAdd(template: TemplateRef<any>) {
       this.titleModal = this.__('type_profil.title_add_modal');
       this.type_profil = new type_profil();
+
+      this.typeProfilForm = this.fb.group({
+        code: ['', Validators.required],
+        name: ['', Validators.required]
+    });
 
       this.modalRef = this.modalService.show(template, {
         backdrop: 'static',

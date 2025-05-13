@@ -65,6 +65,10 @@ listIcon = [
     'autority' : 'PRM_27'
 
   },
+  {
+    'icon' : 'state',
+    'autority' : 'PRM_28',
+  },
 ]
 
   searchGlobal = [ 'type_agence.name']
@@ -90,7 +94,6 @@ listIcon = [
               private authService : AuthService
     ) {
     super();
-    this.authService.initAutority("PRM","ADM");
   }
 
 
@@ -99,6 +102,7 @@ listIcon = [
 subscription: Subscription;
 
   async ngOnInit() {
+    this.authService.initAutority("PRM","ADM");
 
       this.titleModal = this.__('type_bureau.title_add_modal');
 

@@ -80,6 +80,10 @@ listIcon = [
     'tooltip' : 'Supression',
     'autority' : 'PRM_12'
   },
+  {
+    'icon' : 'state',
+    'autority' : 'PRM_13',
+  },
 ]
 
   searchGlobal = [ 'module.code', 'module.name', 'module.icon']
@@ -105,7 +109,6 @@ listIcon = [
               private authService : AuthService
     ) {
     super();
-    this.authService.initAutority("PRM","ADM");
   }
 
 
@@ -114,6 +117,9 @@ listIcon = [
 subscription: Subscription;
 
   async ngOnInit() {
+
+    this.authService.initAutority("PRM","ADM");
+
     this.titleModal = this.__('module.title_add_modal');
 
         this.passageService.appelURL(null);

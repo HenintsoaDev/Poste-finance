@@ -111,7 +111,7 @@ export class BureauComponent extends Translatable implements OnInit {
       'icon' : 'info',
       'action' : 'detail',
       'tooltip' : 'Détail',
-      'autority' : 'PRM_2',
+      'autority' : 'GBU_25',
   
     },
     
@@ -119,16 +119,20 @@ export class BureauComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
-      'autority' : 'PRM_2',
+      'autority' : 'GBU_24',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
-      'autority' : 'PRM_3',
+      'autority' : 'GBU_26',
 
   
+    },
+    {
+      'icon' : 'state',
+      'autority' : 'GBU_27',
     },
   ]
     searchGlobal = [ 'agence.code', 'agence.name','departement.name', 'agence.responsable', 'agence.adresse']
@@ -191,7 +195,6 @@ export class BureauComponent extends Translatable implements OnInit {
   
       ) {
       super();
-      this.authService.initAutority("PRM");
 
     }
   
@@ -200,6 +203,8 @@ export class BureauComponent extends Translatable implements OnInit {
   
   
     async ngOnInit() {
+      this.authService.initAutority("GBU","ADM");
+
       this.titleModal = this.__('bureau.title_add_modal');
   
       this.passageService.appelURL(null);

@@ -89,6 +89,10 @@ export class SousModuleComponent extends Translatable implements OnInit {
 
   
     },
+    {
+      'icon' : 'state',
+      'autority' : 'PRM_18',
+    },
   ]
   
     searchGlobal = [ 'sous_module.code', 'sous_module.name', 'sous_module.icon', 'module.name']
@@ -119,7 +123,6 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
       ) {
       super();
-      this.authService.initAutority("PRM","ADM");
         //console.log(this.autority('PRM_20'));
     }
   
@@ -128,6 +131,8 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
   
     async ngOnInit() {
+      this.authService.initAutority("PRM","ADM");
+
       this.titleModal = this.__('sous_module.title_add_modal');
   
       this.passageService.appelURL(null);
