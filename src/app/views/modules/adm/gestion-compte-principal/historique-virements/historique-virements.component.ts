@@ -89,7 +89,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     ngOnInit(): void {
         this.authService.initAutority("GCP","ADM");
         this.passageService.appelURL(null);
-        //this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
+        this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
 
         let soldeLocalCP = localStorage.getItem(environment.soldeVirementCp);
         let soldeCarteLocalCP = localStorage.getItem(environment.soldeVirementCarteCp);
