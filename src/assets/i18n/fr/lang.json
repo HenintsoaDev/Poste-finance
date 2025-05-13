@@ -243,7 +243,10 @@
         "rejet_virement" : "Rejeter le virement",
         "oui_rejeter" : "Oui, rejeter",
         "update" : "Modifier virement",
-        "add" : "Ajouter un virement"
+        "add" : "Ajouter un virement",
+        "list_virement" : "Liste des virements",
+        "total_carte" : "Total carte (Ar)",
+        "total_wallet" : "Total wallet (Ar)" 
     }
 
 

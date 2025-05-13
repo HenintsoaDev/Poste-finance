@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-historique-virements',
@@ -62,6 +63,9 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     typeCompteSelectedAdd : any;
     montantCompteAdd : any;
 
+    virement_data: any = [];
+    virement_totaux: any;
+
     titleModal: string = "";
     modalRef?: BsModalRef;
 
@@ -75,11 +79,13 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         private datePipe: DatePipe, 
         private hitsoriqueVirementService : HistoriqueVirementsService,
         private modalService: BsModalService,
+        private authService: AuthService
     ) {
         super();
     }
 
     ngOnInit(): void {
+        this.authService.initAutority("GCP","ADM");
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
 
@@ -99,7 +105,6 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
                 else if(event.data.action == 'validation') this.openModalValidateVirement();
                 else if(event.data.action == 'rejeter') this.openModalRejetVirement();
                 else if(event.data.action == 'delete') this.openModalDeleteVirement();
-                //else if(event.data.state == 0 || event.data.state == 1) this.openModalToogleStateModule();
         
                 // Nettoyage immédiat de l'event
                 this.passageService.clear();  // ==> à implémenter dans ton service
@@ -325,6 +330,67 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     // Fermeture du modal
     closeModal() {
         this.modalRef?.hide();
+    }
+
+    async exportExcel(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.virement_data = result.data;
+        this.virement_totaux = result.totaux;
+        
+        this.authService.exportExcel(this.print(this.virement_data),this.__("virement.list_virement")).then(
+            (response: any)=>{
+                console.log('respons beee',response)
+                    let a = document.createElement("a"); 
+                    a.href = response.data;
+                    a.download = `${fileName}.xlsx`;
+                    a.click(); 
+            },
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.virement_data = result.data;
+        this.virement_totaux = result.totaux;
+        
+        this.authService.exportPdf(this.print(this.virement_data),this.__("virement.list_virement")).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(virements:any[]){
+        let tab = virements.map((virement: any, index: number) => {
+            let t: any = {};
+                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')] = virement.date_virement;
+                t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = virement.montant;
+                t[this.__('global.user_creation')] = virement.user_crea;
+                t[this.__('global.statut')] = (virement.statut == 0) ? "En attente de validation" : (virement.statut == 1) ? "Validé" : "Rejeté";
+                t[this.__('global.user_validation')] = virement.user_validation;
+                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')] = virement.date_validation;
+                t[this.__('suivi_compte.type_compte')] = virement.wallet_carte;
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')]: '',
+          [this.__('global.montant')+ ' (' + this.__('global.currency') + ')']: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
+          [this.__('global.user_creation')]: '',
+          [this.__('global.statut') + ' (' + this.__('global.currency') + ')']: '',
+          [this.__('global.user_validation')]: '',
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')]: this.__('virement.total_wallet') + ": " + (this.virement_totaux?.Wallet ?? 0),
+          [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
     }
 
 }
