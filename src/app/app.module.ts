@@ -50,6 +50,7 @@ import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/burea
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
 import { SuiviComptePrincipalComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte-principal/historique-virements/historique-virements.component';
+import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 
 
 registerLocaleData(localeFr);
@@ -109,7 +110,8 @@ registerLocaleData(localeFr);
     BureauComponent,
     ActionComponent,
     SuiviComptePrincipalComponent,
-    HistoriqueVirementsComponent
+    HistoriqueVirementsComponent,
+    ReleveSoldeBureauComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
