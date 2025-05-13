@@ -119,8 +119,8 @@
         "add" : "Ajouter un profil",
         "title_edit_modal" : "Modification d'un profil",
         "title_add_modal" : "Ajout d'un profil",
-        "title_affect_modal" : "Affectation de profil ",
-        "title_detail_modal" : "Information du profil",
+        "title_affect_modal" : "Affectation d'habilitation ",
+        "title_detail_modal" : "Informations du profil",
         "user_modification" : "Modifier par",   
         "le" : "le",   
         "state" : "State",
@@ -140,7 +140,7 @@
         "add" : "Ajouter un utilisateur",
         "title_edit_modal" : "Modification d'un utilisateur",
         "title_add_modal" : "Ajout d'un utilisateur",
-        "title_detail_modal" : "Information d'un utilisateur",
+        "title_detail_modal" : "Informations d'un utilisateur",
 
         "user_modification" : "Modifier par",   
         "le" : "le",   
@@ -192,7 +192,7 @@
         "url" : "Url",
         "sous_module" : "Sous module",
         "add" : "Ajouter nouvelle action",
-        "generate_route" : "Générer route"
+        "generate_route" : "Régénérer route"
     },
 
     "bureau" : {
@@ -215,8 +215,8 @@
         "solde_carte" : "Solde carte",
         "add" : "Ajouter un bureau",
         "title_edit_modal" : "Modification d'un bureau",
-        "title_add_modal" : "Ajout d'un bureau",
-        "title_detail_modal" : "Information d'un bureau",
+        "title_add_modal" : "Ajouter un bureau",
+        "title_detail_modal" : "Informations d'un bureau",
         "user_modification" : "Modifier par",   
         "le" : "le",   
         "user_creation" : "Créer par"   
@@ -234,19 +234,19 @@
         "operation" : "Opération",
         "num_transac" : "N° transaction",
         "coms" : "Commentaire",
-        "list_suivi_compte" : "Liste des suivis compte principal"
+        "list_suivi_compte" : "Suivi compte principal"
     },  
 
     "virement" : {
         "validate_virement" : "Valider le virement",
         "oui_valider" : "Oui, valider",
-        "rejet_virement" : "Rejeter le virement",
-        "oui_rejeter" : "Oui, rejeter",
-        "update" : "Modifier virement",
-        "add" : "Ajouter un virement",
         "list_virement" : "Liste des virements",
         "total_carte" : "Total carte (Ar)",
-        "total_wallet" : "Total wallet (Ar)" 
+        "total_wallet" : "Total wallet (Ar)",
+        "rejet_virement" : "Annuler le virement",
+        "oui_rejeter" : "Oui, annuler",
+        "update" : "Modifier le virement",
+        "add" : "Ajouter un virement"
     }
 
 
