@@ -1,5 +1,5 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { HistoriqueVirementsService } from 'app/services/admin/gestion-compte-principal/historique-virement.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { Auth } from 'app/shared/models/db';
@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
+import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
 
 @Component({
@@ -54,9 +55,24 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     dateFin: string = ""//new Date().toISOString().substring(0, 10);
     walletCarteProfil : string = "2";
 
+    dataVirement : any;
+    typeCompteSelectedUpdate : any;
+    montantCompteUpdate : any;
+
+    titleModal: string = "";
+    modalRef?: BsModalRef;
+
+    @ViewChild('updateVirement') updateVirement: TemplateRef<any> | undefined;
+
     userStorage: Auth;
 
-    constructor(private passageService: PassageService,private toastr: ToastrService,private datePipe: DatePipe, private hitsoriqueVirementService : HistoriqueVirementsService) {
+    constructor(
+        private passageService: PassageService,
+        private toastr: ToastrService,
+        private datePipe: DatePipe, 
+        private hitsoriqueVirementService : HistoriqueVirementsService,
+        private modalService: BsModalService,
+    ) {
         super();
     }
 
@@ -76,7 +92,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
             if(event.data){
                 this.idVirement = event.data.id;
     
-                if(event.data.action == 'edit') this.openModalDeleteVirement();
+                if(event.data.action == 'edit') this.openModalUpdateVirement();
                 else if(event.data.action == 'validation') this.openModalValidateVirement();
                 else if(event.data.action == 'rejeter') this.openModalRejetVirement();
                 else if(event.data.action == 'delete') this.openModalDeleteVirement();
@@ -84,7 +100,6 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         
                 // Nettoyage immédiat de l'event
                 this.passageService.clear();  // ==> à implémenter dans ton service
-                
             }
             
         });
@@ -221,9 +236,63 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     
     }
 
+    //Update virement
+    openModalUpdateVirement() {
+        this.recupererDonnee();
+        console.log(this.dataVirement);
+        this.titleModal = this.__('virement.update');
+        this.modalRef = this.modalService.show(this.updateVirement, {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
     // Actualisation des données
     actualisationTableau(){
         this.passageService.appelURL('');
+    }
+
+    // Récuperation des données
+    recupererDonnee(){
+        // Récupérer la liste affichée dans le tableau depuis le localStorage.
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        this.dataVirement = result.data;
+
+        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+        let res = this.dataVirement.filter(_ => _.rowid == this.idVirement);
+        if(res.length != 0){
+            this.dataVirement = res[0];
+            let montantString = this.dataVirement.montant;
+            montantString = montantString.replace(/\s/g, '');
+            montantString = montantString.replace(',', '.');
+            this.montantCompteUpdate = parseFloat(montantString);
+            this.typeCompteSelectedUpdate = (this.dataVirement.wallet_carte == 'Wallet') ? "0" : "1";
+        }
+    }
+
+    //Update virement
+    sendUpdate()
+    {
+        this.hitsoriqueVirementService.updateVirement(this.dataVirement.rowid,this.montantCompteUpdate,this.typeCompteSelectedUpdate).subscribe({
+            next: (res) => {
+                this.closeModal();
+                if(res['code'] == 201) {
+                    this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
+                }
+                else{
+                    this.toastr.error(res['msg'], this.__("global.error"));
+                }                
+            },
+            error: (err) => {}
+        });
+    }
+
+    // Fermeture du modal
+    closeModal() {
+        this.modalRef?.hide();
     }
 
 }

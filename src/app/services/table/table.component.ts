@@ -429,9 +429,6 @@ export class TableComponent extends Translatable {
         if(post[0] == "null") return '';
   
         if(post[1] == 'montant') return 'text-right';
-  
-  
-  
       
     }
 
