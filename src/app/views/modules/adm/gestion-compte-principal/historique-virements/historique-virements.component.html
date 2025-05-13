@@ -172,9 +172,13 @@
             <div class="col-6">
                 <mat-form-field appearance="fill" style="width: 100%;">
                     <mat-label>{{ __('global.montant') }} ({{ __('global.currency')}})</mat-label>
-                    <input matInput type="number" [(ngModel)]="montantCompteAdd" name="name">
+                    <input matInput type="number" [(ngModel)]="montantCompteAdd" name="name" min="0">
                 </mat-form-field>
             </div>
         </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
+        <button class="btn btn-primary" (click)="sendAdd()" [disabled]="montantCompteAdd == '' || montantCompteAdd == undefined || typeCompteSelectedAdd == undefined" >{{ __('global.save')}}</button>
     </div>
 </ng-template>

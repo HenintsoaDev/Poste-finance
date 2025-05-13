@@ -283,6 +283,25 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         }
     }
 
+    //New virement
+    sendAdd() {
+        this.hitsoriqueVirementService.addVirement(this.montantCompteAdd,this.typeCompteSelectedAdd).subscribe({
+            next: (res) => {
+                this.closeModal();
+                if(res['code'] == 201) {
+                    this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
+                    this.montantCompteAdd = undefined;
+                    this.typeCompteSelectedAdd = undefined;
+                }
+                else{
+                    this.toastr.error(res['msg'], this.__("global.error"));
+                }                
+            },
+            error: (err) => {}
+        });
+    }
+
     //Update virement
     sendUpdate()
     {
@@ -292,6 +311,8 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
                 if(res['code'] == 201) {
                     this.toastr.success(res['msg'], this.__("global.success"));
                     this.actualisationTableau();
+                    this.montantCompteUpdate = undefined;
+                    this.typeCompteSelectedUpdate = undefined;
                 }
                 else{
                     this.toastr.error(res['msg'], this.__("global.error"));

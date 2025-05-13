@@ -242,7 +242,8 @@
         "oui_valider" : "Oui, valider",
         "rejet_virement" : "Rejeter le virement",
         "oui_rejeter" : "Oui, rejeter",
-        "update" : "Modifier virement"
+        "update" : "Modifier virement",
+        "add" : "Ajouter un virement"
     }
 
 
