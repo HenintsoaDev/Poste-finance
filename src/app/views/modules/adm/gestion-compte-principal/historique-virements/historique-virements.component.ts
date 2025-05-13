@@ -59,6 +59,9 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     typeCompteSelectedUpdate : any;
     montantCompteUpdate : any;
 
+    typeCompteSelectedAdd : any;
+    montantCompteAdd : any;
+
     titleModal: string = "";
     modalRef?: BsModalRef;
 
@@ -236,10 +239,18 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     
     }
 
+    //New virement
+    openModalAddVirement(template: TemplateRef<any>) {
+        this.titleModal = this.__('virement.add');
+        this.modalRef = this.modalService.show(template, {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
     //Update virement
     openModalUpdateVirement() {
         this.recupererDonnee();
-        console.log(this.dataVirement);
         this.titleModal = this.__('virement.update');
         this.modalRef = this.modalService.show(this.updateVirement, {
             backdrop: 'static',

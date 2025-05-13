@@ -1,22 +1,24 @@
 <div class="main-content">
     <div class="container-fluid">
         <div class="row">
-            <div id="content-pm" class="content-solde" *ngIf="soldeVirementCP">
-                <div class="">
-                    <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">account_balance_wallet</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.wallet') }}
-                    </span>
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <div class="button-container">
+                            <div class="left-buttons">
+                               <!--  <button class="btn btn-secondary export-btn excel text-white">
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button> -->
+                            </div>
+                            <div class="right-button">
+                                <button class="btn btn-secondary" (click)="openModalAddVirement(addVirement)"> {{ __("virement.add")}}</button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
-                <div class="text-2xl font-bold text-blue-700">{{ __('global.currency') }} {{ soldeVirementCP }}</div>
-                
-            </div>
-            <div id="content-epkt" class="content-solde" *ngIf="soldeVirementCarteCp">
-                <div class="">
-                    <span class="text-gray-600 font-medium" style="display: flex;">
-                        <i class="material-icons">credit_card</i>&nbsp;&nbsp;&nbsp;&nbsp;{{ __('global.carte') }}
-                    </span>
-                </div>
-                <div class="text-2xl font-bold text-green-700">{{ __('global.currency') }} {{ soldeVirementCarteCp }}</div>
             </div>
         </div>
         <div class="row">
@@ -145,8 +147,34 @@
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
-        <!--<button type="submit" class="btn btn-primary" *ngIf="!sous_module.id" [disabled]="sous_moduleForm.invalid">{{ __('global.save')}}</button>
-        <button type="submit" class="btn btn-primary" *ngIf="sous_module.id" [disabled]="sous_moduleForm.invalid">{{ __('global.edit')}}</button>-->
-        <button class="btn btn-primary" (click)="sendUpdate()" >{{ __('global.save')}}</button>
+        <button class="btn btn-primary" (click)="sendUpdate()" [disabled]="montantCompteUpdate == '' || montantCompteUpdate == undefined" >{{ __('global.save')}}</button>
+    </div>
+</ng-template>
+
+<ng-template #addVirement>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-6">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>{{ __('suivi_compte.type_compte') }}</mat-label>
+                    <mat-select [(ngModel)]="typeCompteSelectedAdd" style="z-index: 2000 !important;">
+                        <mat-option value="1">{{ __('global.carte') }}</mat-option>
+                        <mat-option value="0">{{ __('global.wallet') }}</mat-option>
+                    </mat-select>
+                </mat-form-field>
+            </div>
+            <div class="col-6">
+                <mat-form-field appearance="fill" style="width: 100%;">
+                    <mat-label>{{ __('global.montant') }} ({{ __('global.currency')}})</mat-label>
+                    <input matInput type="number" [(ngModel)]="montantCompteAdd" name="name">
+                </mat-form-field>
+            </div>
+        </div>
     </div>
 </ng-template>

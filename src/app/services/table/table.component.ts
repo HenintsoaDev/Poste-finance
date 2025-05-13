@@ -222,11 +222,11 @@ export class TableComponent extends Translatable {
 
       if(res.totaux){
         //this.donneeTotal = res.totaux;
-        if(res.totaux.Carte) this.donneeTotal.Carte = res.totaux.Carte;
-        if(res.totaux.Wallet) this.donneeTotal.Wallet = res.totaux.Wallet;
+        (res.totaux.Carte) ? this.donneeTotal.Carte = res.totaux.Carte : this.donneeTotal.Carte = undefined;
+        (res.totaux.Wallet) ? this.donneeTotal.Wallet = res.totaux.Wallet : this.donneeTotal.Wallet = undefined;
 
-        if(res.totaux.DEBIT) this.donneeTotal.DEBIT = res.totaux.DEBIT;
-        if(res.totaux.CREDIT) this.donneeTotal.CREDIT = res.totaux.CREDIT;
+        (res.totaux.DEBIT) ? this.donneeTotal.DEBIT = res.totaux.DEBIT : this.donneeTotal.DEBIT = undefined;
+        (res.totaux.CREDIT) ? this.donneeTotal.CREDIT = res.totaux.CREDIT : this.donneeTotal.CREDIT = undefined;
 
       }
       
