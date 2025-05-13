@@ -74,6 +74,7 @@
                                 [listIcon]="listIcon"
                                 [searchGlobal]="searchGlobal"
                                 [formSearch] = "false"
+                                [triDescDefault] = "'datevirement'"
                                 >
                             </app-table>
                         </div>
@@ -93,48 +94,51 @@
     </div>
     <div class="modal-body">
         <div id="content-virement-info">
-            <div class="form-group">
-                <label>{{ __('global.date')}} {{ __('global.of')}} {{ __('global.virement')}}</label>
-                <input  disabled value="{{ dataVirement.date_virement }}" type="text" class="form-control" name="name">
-            </div>
-    
-            <div class="form-group">
-                <label>{{ __('global.montant')}} ({{ __('global.currency')}})</label>
-                <input disabled value="{{ dataVirement.montant }}" type="text" class="form-control" name="name">
+            <div class="alert alert-custom">
+                <label><b style="font-weight: 800;">{{ __('global.date')}} {{ __('global.of')}} {{ __('global.virement')}}</b></label>
+                <h6><b class="info-virement">{{ dataVirement.date_virement }}</b></h6>
             </div>
             
-            <div class="form-group">
-                <label>{{ __('global.user_creation')}}</label>
-                <input  disabled value="{{ dataVirement.user_crea }}" type="text" class="form-control" name="name">
+            <div class="alert alert-custom">
+                <label><b style="font-weight: 800;">{{ __('global.montant')}} ({{ __('global.currency')}})</b></label>
+                <h6><b class="info-virement">{{ dataVirement.montant }}</b></h6>
             </div>
             
-            <div class="form-group">
-                <label>{{ __('global.user_validation')}}</label>
-                <input  disabled value="{{ dataVirement.user_validation }}" type="text" class="form-control" name="name">
+            <div class="alert alert-custom">
+                <label><b style="font-weight: 800;">{{ __('global.user_creation')}}</b></label>
+                <h6><b class="info-virement">{{ dataVirement.user_crea }}</b></h6>
             </div>
-    
-            <div class="form-group">
-                <label>{{ __('global.wallet_carte')}}</label>
-                <input  disabled value="{{ dataVirement.wallet_carte }}" type="text" class="form-control" name="name">
+            
+            <div class="alert alert-custom">
+                <label><b style="font-weight: 800;">{{ __('global.user_validation')}}</b></label>
+                <h6><b class="info-virement">{{ dataVirement.user_validation }}</b></h6>
+            </div>
+            
+            <div class="alert alert-custom">
+                <label><b style="font-weight: 800;">{{ __('profil.wallet_carte')}}</b></label>
+                <h6><b class="info-virement">{{ dataVirement.wallet_carte }}</b></h6>
             </div>
         </div>
+        <hr>
         <div class="form-edit-virement">
-            <h6>Modifier</h6>
-            <div class="row">
-                <div class="col-6">
-                    <mat-form-field appearance="fill" style="width: 100%;">
-                        <mat-label>{{ __('suivi_compte.type_compte') }}</mat-label>
-                        <mat-select [(ngModel)]="typeCompteSelectedUpdate" style="z-index: 2000 !important;">
-                            <mat-option value="1">{{ __('global.carte') }}</mat-option>
-                            <mat-option value="0">{{ __('global.wallet') }}</mat-option>
-                        </mat-select>
-                    </mat-form-field>
-                </div>
-                <div class="col-6">
-                    <mat-form-field appearance="fill" style="width: 100%;">
-                        <mat-label>{{ __('global.montant') }} ({{ __('global.currency')}})</mat-label>
-                        <input matInput type="text" [(ngModel)]="montantCompteUpdate" name="name">
-                    </mat-form-field>
+            <div class="alert" style="padding: 5px 15px;">
+                <h6>{{ __('virement.update') }}</h6>
+                <div class="row">
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>{{ __('suivi_compte.type_compte') }}</mat-label>
+                            <mat-select [(ngModel)]="typeCompteSelectedUpdate" style="z-index: 2000 !important;">
+                                <mat-option value="1">{{ __('global.carte') }}</mat-option>
+                                <mat-option value="0">{{ __('global.wallet') }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </div>
+                    <div class="col-6">
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>{{ __('global.montant') }} ({{ __('global.currency')}})</mat-label>
+                            <input matInput type="text" [(ngModel)]="montantCompteUpdate" name="name">
+                        </mat-form-field>
+                    </div>
                 </div>
             </div>
         </div>
