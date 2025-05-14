@@ -154,8 +154,8 @@
         </table> 
 
         <div class="modal-footer">
-            <button type="button" *ngIf="demande_credit.etat == 0" class="btn btn-primary" (click)="autoriseDemande()">{{ __('global.autorise')}}</button>
-            <button type="button" *ngIf="demande_credit.etat == 1"  class="btn btn-primary" (click)="passerCode()">{{ __('global.valider')}}</button>
+            <button type="button" *ngIf="demande_credit.etat == 0" [disabled]="isDisabled" class="btn btn-primary" (click)="autoriseDemande()">{{ __('global.autorise')}}</button>
+            <button type="button" *ngIf="demande_credit.etat == 1"  [disabled]="isDisabled"  class="btn btn-primary" (click)="passerCode()">{{ __('global.valider')}}</button>
             <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
         </div>
     </div>
