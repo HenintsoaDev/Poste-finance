@@ -49,7 +49,9 @@ PHCO V2
 │   │   │       ├── admin-layout.component.ts
 │   │   │       ├── admin-layout.module.ts
 │   │   │       └── admin-layout.routing.ts
-│   │   ├── othersPages
+│   │   ├── services //Pour les services api
+│   │   ├── shared //Pour les éléments partagés (constant,model,...)
+│   │   ├── views //Pour les views (sous modules, login,...), Si c'est l'affichage d'un écrant, il faut le mettre dans le dossier module/nom_du_module/...
 │   ├── assets
 │   │   ├── css
 │   │   │   └── demo.css
