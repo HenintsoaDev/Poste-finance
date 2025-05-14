@@ -16,7 +16,7 @@ export class PassageService {
 
   // Créer un sujet pour notifier l'ouverture du modal
   //private passageSubject = new BehaviorSubject<PassageEvent>({ type: '', data: null });  
-  private passageSubject = new BehaviorSubject<any>({ type: 'url', data: null });
+  private passageSubject = new BehaviorSubject<any>({ type: 'url', data: null, endpoint:'' });
   constructor() { }
 
   // Méthode pour ouvrir le modal avec des données spécifiques
@@ -25,8 +25,9 @@ export class PassageService {
     
   }
 
-  appelURL(data: any){
-    this.passageSubject.next({ type: 'url', data });
+  appelURL(data: any, endpoint = ''){
+    console.log("makato ve?", data)
+    this.passageSubject.next({ type: 'url', data, endpoint : endpoint });
   }
 
   // Méthode pour récupérer l'observable qui sera écouté dans l'autre composant
