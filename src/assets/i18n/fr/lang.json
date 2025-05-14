@@ -255,6 +255,11 @@
         "oui_add" : "Oui, ajouter",
         "confirm_update_virement" : "Voulez-vous vraiement modifier ce virement",
         "oui_update" : "Oui, modifier"
+    },
+
+    "releve_solde_bureau" : {
+        "agence" : "Agence",
+        "select_bureau" : "Sélectionner le bureau"
     }
 
 

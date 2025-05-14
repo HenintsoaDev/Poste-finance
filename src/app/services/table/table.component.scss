@@ -45,6 +45,25 @@
   margin: 8px 0;
 }
 
+.th-table{
+  background: $primary;
+  color: $white;
+}
+.bold-th {
+  color: $white;
+  font-size: 14px;
+  font-weight: 800;
+}
+
+tbody{
+  font-size: 13px;
+}
+.tfoot-total{
+  color: $white;
+  font-weight: 800;
+  background-color: $primary;
+}
+
 @keyframes shimmer {
   0% {
     background-position: -200% 0;
