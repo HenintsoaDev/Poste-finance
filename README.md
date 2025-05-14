@@ -127,3 +127,106 @@ PHCO V2
      ```html
      <div class="main-content"></div>
      ```
+
+3. ## TABLE: Installation et utilisation
+  Pour utiliser la datatable, il faut suivre les étapes suivants:
+  - il faut déclarer d'abord les éléments importants du tableau:
+    ** header, objetBody,listIcon et searchGlobal : 
+      ```typescript 
+        /**
+         * header :
+           - nomColonne : le nom du colonne qu'on doit affiché sur le tableau
+           - colonneTble : le nom du colonne de la table dans la base de donnée
+           - table : c'est le nom de la table des données qu'on veut affiché
+        */
+        header = [
+          {"nomColonne" : this.__('global.date'),"colonneTable" : "datevirement","table" : "virement"},
+          {"nomColonne" : this.__('global.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "virement"},
+          {"nomColonne" : this.__('global.statut'),"colonneTable" : "statut","table" : "virement"},
+          {"nomColonne" : this.__('global.date') +" "+ this.__('global.validation'),"colonneTable" : "datevalidation","table" : "virement"},
+          {"nomColonne" : this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "virement"},
+          {"nomColonne" : this.__('global.action')}
+      ];
+
+      /**
+       * objetBody : c'est le retour de l'api (le rang de la ligne doit être le même que le header)
+         - name : le nom du colonne depuis le body
+         - type : le type du retour
+      */
+      objetBody = [
+          {'name' : 'date_virement','type' : 'text',},
+          {'name' : 'montant','type' : 'text',},
+          {'name' : 'statut','type' : 'statut',},
+          {'name' : 'date_validation','type' : 'text',},
+          {'name' : 'wallet_carte','type' : 'text',},
+          {'name' :  'state#rowid'} //Si ça retour id c'est state#id
+      ];
+
+      /**
+       * listIcon : 
+         - icon : le nom de l'icon
+         - action : l'identification de l'action utilisé pour l'évènement
+         - tooltip : pour le tooltip
+         - autority : c'est le code d'autorisation (code action) 
+       */
+      listIcon = [
+          {'icon' : 'edit','action' : 'edit','tooltip' : 'Modification','autority' : 'GCP_5',},
+          {'icon' : 'check','action' : 'validation','tooltip' : 'Valider','autority' : 'GCP_6',},
+          {'icon' : 'close','action' : 'rejeter','tooltip' : 'Rejeter','autority' : 'GCP_7',},
+          {'icon' : 'delete','action' : 'delete','tooltip' : 'Supprimer','autority' : 'GCP_8',},
+      ];
+
+      /**
+       * searchGlobal : c'est la recherche par chaque colonne
+       */
+      searchGlobal = [ 'virement.datevirement', 'virement.datevalidation', 'virement.user_crea','virement.user_validation']; 
+      ```
+  - Mise en place:
+    Il faut déclarer dans constructeur un objet "PassageService", necessair pour la récupération des données et il faut déclarer un objet "Subscription", utile pour les évènements. Voici le code suivant : 
+    ```typescript
+
+      endpoint : any; // l'endpoint pour la récupération des données
+      subscription: Subscription;
+      idVirement : any //Utile pour la récupération de l'id ou rowid de la ligne séléctionné
+
+      constructor(
+        private passageService: PassageService,
+      ) {
+          super();
+      }
+
+      ngOnInit(): void {
+        
+        this.passageService.appelURL(null);
+        this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
+
+        //Event for icon table
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+            if(event.data){
+                this.idVirement = event.data.id;
+    
+                if(event.data.action == 'edit') //Action pour edit;
+                else if(event.data.action == 'validation') //Action pour validation;
+                else if(event.data.action == 'rejeter') //Action pour l'annulation;
+                else if(event.data.action == 'delete') //Action pour suppression;
+        
+                // Nettoyage immédiat de l'event
+                this.passageService.clear();
+            }
+        });
+    }
+    ```
+  - HTML
+    ** Dans l'html, il suffit juste de copier le code suivant : 
+    ```html
+      <app-table
+          [endpoint]="endpoint"
+          [headerTable]="header"
+          [body]="objetBody"
+          [listIcon]="listIcon"
+          [searchGlobal]="searchGlobal"
+          [formSearch] = "false"
+          [triDescDefault] = "'datevirement'"
+        >
+      </app-table>
+    ```
