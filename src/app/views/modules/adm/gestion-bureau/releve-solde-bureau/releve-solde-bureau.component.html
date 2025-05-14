@@ -66,6 +66,17 @@
 
                 <div class="card" *ngIf="showDataTable">
                     <div class="card-body">
+                        <!-- PRINT PDF -->
+                        <div class="button-container">
+                            <div class="left-buttons">
+                               <button class="btn btn-secondary export-btn excel text-white">
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button>
+                            </div> 
+                        </div>
                         <!--TABLE DATA-->
                         <div class="table-responsive">
                             <app-table
