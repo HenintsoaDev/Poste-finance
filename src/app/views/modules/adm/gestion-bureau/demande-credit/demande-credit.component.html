@@ -178,7 +178,7 @@
 
         </div>
         <div class="modal-footer">
-            <button type="button" *ngIf="demande_credit.etat == 1"  class="btn btn-primary" (click)="validerDemande()">{{ __('global.oui')}}</button>
+            <button type="button" *ngIf="demande_credit.etat == 1"  [disabled]="!code_validation" class="btn btn-primary" (click)="validerDemande()">{{ __('global.oui')}}</button>
             <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.non')}}</button>
         </div>
 
