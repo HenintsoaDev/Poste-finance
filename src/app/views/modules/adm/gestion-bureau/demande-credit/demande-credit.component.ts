@@ -301,12 +301,14 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     }
 
     passerCode(){ 
-
+      this.isDisabled = true;
       this.demandeService.initierDemande(this.idDemande).subscribe({
         next: (res) => {
             if(res['code'] == 200) {
                 this.toastr.success(res['msg'], this.__("global.success"));
                 this.showCode = true; 
+                this.isDisabled = false;
+
             }
             else{
                 this.toastr.error(res['msg'], this.__("global.error"));
@@ -411,6 +413,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       this.bureauId=null;
       this.montant = "";
       this.wallet_carte = null;
+      this.isDisabled = false;
+
       this.actualisationSelectBureau();
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
@@ -468,7 +472,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
                 let wallet =0;
                 if(this.wallet_carte == 'W') wallet = 0;
                 else if(this.wallet_carte == 'C') wallet = 1;
-          
+
+                this.isDisabled = true;
                   let data = {
                     "montant": this.montant,
                     "agence_id": this.bureauId,
@@ -488,6 +493,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
                             else this.toastr.error(res['data'], this.__("global.error"));
                           }else{
                               this.toastr.error(res['msg'], this.__("global.error"));
+                              this.isDisabled = false;
                           }            
                                 
                       },

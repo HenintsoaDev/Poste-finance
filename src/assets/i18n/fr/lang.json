@@ -284,7 +284,7 @@
         "user_autorise" :  "Autorisé par",
         "wallet_carte" :  "Type de compte",
         "code_validation":"Code de validation",
-        "recharge_montant":"Vous allez recharger cette société d'un montant de",
+        "recharge_montant":"Vous allez recharger ce bureau d'un montant de",
         "title_detail_modal" : "Informations du demande",
         "list_demande_credit_en_attente" : "Liste demande de credit en attente",
         "list_demande_credit_autorise" : "Liste demande de credit autorisé",
