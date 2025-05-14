@@ -257,9 +257,9 @@
         "oui_rejeter" : "Oui, annuler",
         "update" : "Modifier le virement",
         "add" : "Ajouter un virement",
-        "confirm_add_virement" : "Voulez-vous vraiement enregistrer ce virement",
+        "confirm_add_virement" : "Souhaitez-vous vraiment enregistrer ce virement ?",
         "oui_add" : "Oui, ajouter",
-        "confirm_update_virement" : "Voulez-vous vraiement modifier ce virement",
+        "confirm_update_virement" : "Souhaitez-vous vraiment modifier ce virement ?",
         "oui_update" : "Oui, modifier"
     },
     "demande_credit" : {
@@ -292,9 +292,14 @@
         "title_add_modal" : "Ajout demande",
         "choose_wallet_carte":"Sélectionnez le type de compte souhaité.",
         "select_bureau":"Veuillez sélectionner le bureau désiré"
+    },
 
 
 
+    "releve_solde_bureau" : {
+        "agence" : "Agence",
+        "select_bureau" : "Sélectionner le bureau",
+        "list_releve" : "Liste solde relevé bureau"
     }
 
 

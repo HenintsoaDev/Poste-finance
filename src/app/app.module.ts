@@ -52,6 +52,7 @@ import { ActionComponent } from './views/modules/adm/parametrage/action/action.c
 import { SuiviComptePrincipalComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte-principal/historique-virements/historique-virements.component';
 import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
+import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 
 
 registerLocaleData(localeFr);
@@ -112,7 +113,8 @@ registerLocaleData(localeFr);
     ActionComponent,
     SuiviComptePrincipalComponent,
     HistoriqueVirementsComponent,
-    DemandeCreditComponent
+    DemandeCreditComponent,
+    ReleveSoldeBureauComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

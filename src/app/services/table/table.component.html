@@ -26,11 +26,10 @@
   </div>
 
 <div class="table-responsive dt-responsive">
-    <table class="table table-hover table-striped mb-0 shimmer-table">
+    <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
         <thead>
-        <tr>
-           
-            <th *ngFor="let header of headerTable"> <span class="bold"> {{header.nomColonne }}</span> &nbsp;
+        <tr class="th-table">
+            <th *ngFor="let header of headerTable"> <span class="bold-th"> {{header.nomColonne }}</span> &nbsp;
               <span *ngIf="header.nomColonne != 'Action'">
                 <i class="fa fa-caret-down icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')" *ngIf="tri==header.table + '.' + header.colonneTable && order=='desc'" ></i>
                 <i class="fa fa-caret-up icon-tri"  (click)="triTable(header.table + '.' + header.colonneTable,'desc')"  *ngIf="tri==header.table + '.' + header.colonneTable && order=='asc'"  ></i>
@@ -72,8 +71,6 @@
   
                     </ng-container>
                   </div>
-                 
-                 
 
                   <!-- Si on utilise font awesome ---
                     <i *ngFor="let icon of cell" class="fa {{ icon.icon }}"  style="margin-right: 15px !important;" (click)="openModal(icon)" ></i> 
@@ -82,12 +79,16 @@
 
             </tr>
         </tbody>
-        <tfoot  >
+        <tfoot class="tfoot-total" *ngIf="donneeTotal.DEBIT || donneeTotal.CREDIT || donneeTotal.Carte || donneeTotal.Wallet">
           <tr>
-            <td colspan="4" *ngIf="donneeTotal.DEBIT" class="text-center">   {{ __('global.total_debit') }} : <span class="bold"> {{donneeTotal.DEBIT }} ({{ __('global.currency') }}) </span>  </td>
-            <td colspan="4" *ngIf="donneeTotal.CREDIT" class="text-center">  {{ __('global.total_credit') }} : <span class="bold">  {{donneeTotal.CREDIT }} ({{ __('global.currency') }})</span>  </td>
-            <td colspan="4" *ngIf="donneeTotal.Carte" class="text-center">   {{ __('global.total_carte') }} : <span class="bold"> {{donneeTotal.Carte }} ({{ __('global.currency') }}) </span>  </td>
-            <td colspan="4" *ngIf="donneeTotal.Wallet" class="text-center">  {{ __('global.total_wallet') }} : <span class="bold">  {{donneeTotal.Wallet }} ({{ __('global.currency') }})</span>  </td>
+            <td [attr.colspan]="headerTable.length">
+              <div class="row">
+                <div *ngIf="donneeTotal.DEBIT" class="col-6" style="text-align: center;">{{ __('global.total_debit') }}:<span class="bold-total"> {{donneeTotal.DEBIT }} ({{ __('global.currency') }}) </span></div>
+                <div *ngIf="donneeTotal.CREDIT" class="col-6" style="text-align: center;">{{ __('global.total_credit') }}:<span class="bold-total">  {{donneeTotal.CREDIT }} ({{ __('global.currency') }})</span></div>
+                <div *ngIf="donneeTotal.Carte" class="col-6" style="text-align: center;">{{ __('global.total_carte') }}:<span class="bold-total"> {{donneeTotal.Carte }} ({{ __('global.currency') }}) </span></div>
+                <div *ngIf="donneeTotal.Wallet" class="col-6" style="text-align: center;">{{ __('global.total_wallet') }}: <span class="bold-total">  {{donneeTotal.Wallet }} ({{ __('global.currency') }})</span></div>
+              </div>
+            </td>
           </tr>
         </tfoot>
         

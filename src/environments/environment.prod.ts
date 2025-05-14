@@ -56,5 +56,8 @@ export const environment = {
   suivi_compte : "gestion_compte_principal/suivi_compte",
   historique_virement : "gestion_compte_principal/virement",
   valide_virement : "gestion_compte_principal/virement/validerVirement",
-  rejet_virement : "gestion_compte_principal/virement/rejeterVirement"
+  rejet_virement : "gestion_compte_principal/virement/rejeterVirement",
+
+  //** Relevé solde bureau */
+  releve_solde_bureau : "gestion_bureau/releve_solde_bureau"
 };

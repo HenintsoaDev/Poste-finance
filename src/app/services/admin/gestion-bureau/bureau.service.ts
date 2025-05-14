@@ -69,5 +69,16 @@ export class BureauService {
         );
     }
 
+    getAgenceBureauActive()
+    {
+        return this.httpService.get<any>(environment.liste_bureau_active + '?where=agence.idtype_agence|e|1' ).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
    
 }

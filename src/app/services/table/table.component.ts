@@ -209,6 +209,12 @@ export class TableComponent extends Translatable {
         triage = "&__order__=" + this.order + "," + this.tri;
       }
 
+      //initialisation 
+      this.donneeTotal.Carte = undefined;
+      this.donneeTotal.Wallet = undefined;
+      this.donneeTotal.DEBIT = undefined;
+      this.donneeTotal.CREDIT = undefined;
+
     // --- Appel endpopint ---->
 
       let toogle = await this.http.get<any>(url + this.where + this.searchCol + this.search    + filtre + triage  ,valuesys.httpAuthOptions()).toPromise();
@@ -270,7 +276,6 @@ export class TableComponent extends Translatable {
       );
     
       this.donneeAfficher = tableau;
-      console.log(this.donneeAfficher);
 
       this.path = this.endpoint;
       this.lastPage = this.path + "?page=" + res.last_page;
