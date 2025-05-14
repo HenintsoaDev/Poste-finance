@@ -230,3 +230,16 @@ PHCO V2
         >
       </app-table>
     ```
+4. ## Internationnalisation: 
+  Le fichier lang se trouve dans le dossier : assets/i18n/fr.
+  Pour l'utilsé il faut que la classe du template étand la classe Translatable :
+  ```typescript
+    export class HistoriqueVirementsComponent extends Translatable implements OnInit {}
+  ```
+  - Utilisation : 
+  ```typescript
+    this.__('global.currency')
+  ```
+  ```html
+    {{ __('global.cureency') }}
+  ```
