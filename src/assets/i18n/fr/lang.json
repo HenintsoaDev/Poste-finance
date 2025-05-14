@@ -259,7 +259,8 @@
 
     "releve_solde_bureau" : {
         "agence" : "Agence",
-        "select_bureau" : "Sélectionner le bureau"
+        "select_bureau" : "Sélectionner le bureau",
+        "list_releve" : "Liste solde relevé bureau"
     }
 
 

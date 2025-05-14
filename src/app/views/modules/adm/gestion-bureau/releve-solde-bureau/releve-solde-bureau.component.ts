@@ -7,6 +7,7 @@ import { environment } from 'environments/environment';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
+import { FormControl } from '@angular/forms';
 
 @Component({
   selector: 'app-releve-solde-bureau',
@@ -39,7 +40,8 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     ]
 
     listIcon = [];
-    searchGlobal = [ 'releve_des_comptes.date_transaction', 'releve_des_comptes.operation', 'releve_des_comptes.commentaire','releve_des_comptes.wallet_carte']
+    searchGlobal = [ 'releve_solde_agence.date_transaction', 'releve_solde_agence.operation', 'releve_solde_agence.commentaire','releve_solde_agence.wallet_carte']
+    
     subscription: Subscription;
 
     typeCompte: string;
@@ -52,6 +54,11 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
 
     showDataTable = false;
     loadingData = false;
+    searchControl = new FormControl('');
+    filteredBureau = []
+
+    releve_data: any = [];
+    releve_totaux: any;
 
     constructor(
         private passageService: PassageService,
@@ -69,13 +76,23 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
             next: (res) => {
                 if(res['code'] == 200) {
                     console.log(res);
-                    this.listBureauActive = res['data']
+                    this.listBureauActive = res['data'];
+                    this.filteredBureau = this.listBureauActive;
                 }
                 else{
                     this.toastr.error(res['msg'], this.__("global.error"));
                 }               
             },
             error: (err) => {}
+        });
+
+
+        
+        this.searchControl.valueChanges.subscribe(value => {
+            const lower = value?.toLowerCase() || '';
+            this.filteredBureau = this.listBureauActive.filter(bureau =>
+                bureau.name.toLowerCase().includes(lower)
+            );
         });
     }
 
@@ -105,6 +122,68 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
         this.loadingData = false;
         this.showDataTable = true;
 
+    }
+
+    async exportExcel(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.releve_data = result.data;
+        this.releve_totaux = result.totaux;
+        
+        this.authService.exportExcel(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+            (response: any)=>{
+                    let a = document.createElement("a"); 
+                    a.href = response.data;
+                    a.download = `${fileName}.xlsx`;
+                    a.click(); 
+            },
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.releve_data = result.data;
+        this.releve_totaux = result.totaux;
+        
+        this.authService.exportPdf(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(releves:any[]){
+        let tab = releves.map((releve: any, index: number) => {
+            let t: any = {};
+                t[this.__('suivi_compte.date')] = releve.date_transaction;
+                t[this.__('suivi_compte.num_transac')] = releve.num_transac;
+                t[this.__('suivi_compte.solde_avant')] = releve.solde_avant;
+                t[this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')'] = releve.montant;
+                t[this.__('suivi_compte.solde_apres')] = (releve.statut == 0) ? "En attente de validation" : releve.solde_apres;
+                t[this.__('suivi_compte.operation')] = releve.operation;
+                t[this.__('suivi_compte.coms')] = releve.commentaire;
+                t[this.__('suivi_compte.type_compte')] = releve.wallet_carte;
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+            [this.__('suivi_compte.date')]: '',
+            [this.__('suivi_compte.num_transac')]: this.__('global.total_debit') + ": " + (this.releve_totaux?.DEBIT ?? 0),
+            [this.__('suivi_compte.solde_avant')]: '',
+            [this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')']: '',
+            [this.__('suivi_compte.solde_apres')]: '',
+            [this.__('suivi_compte.operation')]: '',
+            [this.__('suivi_compte.coms')]: this.__('global.total_credit') + ": " + (this.releve_totaux?.CREDIT ?? 0),
+            [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
     }
 
 }

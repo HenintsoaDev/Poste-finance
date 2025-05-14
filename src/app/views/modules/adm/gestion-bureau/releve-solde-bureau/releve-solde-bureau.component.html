@@ -14,7 +14,10 @@
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
                                             <mat-select [(ngModel)]="agenceId"> 
-                                                <mat-option *ngFor="let agence of listBureauActive" value="{{ agence.rowid }}">{{ agence.name }}</mat-option>
+                                                <mat-option>
+                                                    <input matInput placeholder="Rechercher..." [formControl]="searchControl" (click)="$event.stopPropagation()" />
+                                                </mat-option>
+                                                <mat-option *ngFor="let agence of filteredBureau" value="{{ agence.rowid }}">{{ agence.name }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </ng-container>
@@ -69,11 +72,11 @@
                         <!-- PRINT PDF -->
                         <div class="button-container">
                             <div class="left-buttons">
-                               <button class="btn btn-secondary export-btn excel text-white">
+                               <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel('Liste des relevés solde bureau')">
                                     {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
                                 </button>
-                                <button class="btn btn-secondary export-btn pdf text-white">
-                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf('Liste des relevés solde bureau')">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon" >
                                 </button>
                             </div> 
                         </div>
