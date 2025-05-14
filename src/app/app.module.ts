@@ -43,6 +43,7 @@ import { TypeProfilComponent } from './views/modules/adm/parametrage/type-profil
 import { ProfilsComponent } from './views/modules/adm/parametrage/profils/profils.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatExpansionModule } from '@angular/material/expansion';
+import { MatTabsModule } from '@angular/material/tabs';
 import { UtilisateurComponent } from './views/modules/adm/parametrage/utilisateur/utilisateur.component';
 import localeFr from '@angular/common/locales/fr';
 import { PageNotFoundComponent } from './views/page-not-found/page-not-found.component';
@@ -50,6 +51,7 @@ import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/burea
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
 import { SuiviComptePrincipalComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte-principal/historique-virements/historique-virements.component';
+import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
 import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-bureau/solde-bureau.component';
 
@@ -75,7 +77,7 @@ registerLocaleData(localeFr);
     MatButtonModule,
     MatIconModule,
     MatTooltipModule,
-
+    MatTabsModule,
     MatExpansionModule,
     MatCheckboxModule,
     MatAutocompleteModule,
@@ -113,7 +115,8 @@ registerLocaleData(localeFr);
     SuiviComptePrincipalComponent,
     HistoriqueVirementsComponent,
     ReleveSoldeBureauComponent,
-    SoldeBureauComponent
+    SoldeBureauComponent,
+    DemandeCreditComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

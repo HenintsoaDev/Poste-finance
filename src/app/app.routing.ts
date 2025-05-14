@@ -22,6 +22,7 @@ import { BureauComponent } from './views/modules/adm/gestion-bureau/bureau/burea
 import { ActionComponent } from './views/modules/adm/parametrage/action/action.component';
 import { SuiviComptePrincipalComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-principal/suivi-compte-principal.component';
 import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte-principal/historique-virements/historique-virements.component';
+import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
 import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-bureau/solde-bureau.component';
 
@@ -46,6 +47,7 @@ const routes: Routes =[
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
     {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'Lister les bureaux' }},
+    {path : 'demande_credit',component: DemandeCreditComponent,data: { breadcrumb: 'Historique rechargements bureaux' }},
     {path : 'releve_solde_bureau',component: ReleveSoldeBureauComponent,data: { breadcrumb: 'Relevé solde bureau' }},
     {path : 'solde_bureau',component: SoldeBureauComponent,data: { breadcrumb: 'Solde des bureaux' }},
   ]}, 

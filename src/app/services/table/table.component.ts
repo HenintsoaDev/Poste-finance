@@ -88,7 +88,7 @@ export class TableComponent extends Translatable {
       
         const { type, data: filtre } = event;
 
-        console.log("xxx",type);
+        console.log("xx--evenement--xx",event);
       
         // Vérifie si c'est un événement pertinent
         if ((type === 'url' || type === '') && this.endpoint) {
@@ -103,6 +103,7 @@ export class TableComponent extends Translatable {
             else this.getUrlDatatable(url);
             
           }
+
         }
       });
 
@@ -124,7 +125,7 @@ export class TableComponent extends Translatable {
     */
     async triTable(col: any, order: any){
       this.tri = col; this.order = order;
-      this.getUrlDatatable(this.endpoint +"?page=1")
+      this.getUrlDatatable(this.endpoint +"?page=1" ,'', '', '', this.search)
 
     }
 
@@ -266,6 +267,8 @@ export class TableComponent extends Translatable {
               id: targetId,
             });
           }
+
+         // console.log("colonne",col);
       
           // Si ce n'est pas "state#id" ni "state#rowid"
           return `${row[col.name]}###${col.type}`;
@@ -360,7 +363,7 @@ export class TableComponent extends Translatable {
       if(post[0] == "null") return '';
 
       //** si le type de donnée est date */
-      if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY');
+      if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY hh:mm:ss');
       else if(post[1] == 'montant') return this.formatNumber(post[0], ' ');
       else if(post[1] == 'statut') {
         if(post[0] == 1) return this.__('global.validate');

@@ -36,7 +36,6 @@ export const environment = {
   liste_type_profil_active :'parametrage/consult/type_profil/liste_type_profil_active',
   utilisateur :'parametrage/user',
   liste_type_bureau_active :'parametrage/consult/type_bureau/type_de_bureaux_active',
-  getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   regenerer_mdp :'parametrage/user/regenerer_password',
   profilage : 'parametrage/profilage',
   action : 'parametrage/action',
@@ -44,8 +43,12 @@ export const environment = {
   generateroute : 'parametrage/settings/generateroute',
   
   //** Gestion bureau */
+  getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
   bureau : 'gestion_bureau/bureaux',
+  demande_credit : 'gestion_bureau/demande_credit',
+  autorise_demande : 'gestion_bureau/demande_credit/autoriserDemande',
+  valide_demande : 'gestion_bureau/demande_credit/validerDemande',
 
   //** Ressource */
   province : 'resource/province/liste_province',
