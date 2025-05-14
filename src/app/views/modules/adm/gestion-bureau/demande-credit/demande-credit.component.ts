@@ -83,6 +83,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   wallet_carte:string ="";
   infoBureau: any={};
   info:boolean =false;
+  code_validation: any = "";
 
 
   constructor(
@@ -97,6 +98,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   }
 
   async ngOnInit() {
+
+    console.log()
 
     this.endpoint = environment.baseUrl + '/' + environment.demande_credit;
 
@@ -151,6 +154,17 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
   filtreTableau(etat = 0) {
     console.log("ssssss", etat);
+
+
+
+    if(etat == 0) {
+      this.objetBody[0].name = 'date_demande';
+    }else if(etat == 1){
+      this.objetBody[0].name = 'date_autorisation';
+    }else if(etat == 2){
+      this.objetBody[0].name = 'date_validation';
+    }
+  
 
       let filtre_search = "" ;
       if(this.typeCompte != '2'){
@@ -338,7 +352,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
             if (result.isConfirmed) {
 
               let data =  {
-                "code_validation": "804141"
+                "code_validation": this.code_validation
               }
                 this.demandeService.valideDemande(this.idDemande, data).subscribe({
                     next: (res) => {
