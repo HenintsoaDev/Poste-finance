@@ -14,30 +14,32 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
     endpoint : any;
     
     header = [
-        {"nomColonne" : this.__('global.date'),"colonneTable" : "datevirement","table" : "virement"},
-        {"nomColonne" : this.__('global.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "virement"},
-        {"nomColonne" : this.__('global.statut'),"colonneTable" : "statut","table" : "virement"},
-        {"nomColonne" : this.__('global.date') +" "+ this.__('global.validation'),"colonneTable" : "datevalidation","table" : "virement"},
-        {"nomColonne" : this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "virement"},
-        {"nomColonne" : this.__('global.action')}
+        {"nomColonne" : this.__('solde_bureau.code'),"colonneTable" : "code","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.agence'),"colonneTable" : "agence","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.type_bureau'),"colonneTable" : "type_agence","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.adresse') +" "+ this.__('global.validation'),"colonneTable" : "adresse","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde","table" : "solde_bureau"},
+        {"nomColonne" : ""}
     ];
 
     objetBody = [
-        {'name' : 'date_virement','type' : 'text',},
-        {'name' : 'montant','type' : 'text',},
-        {'name' : 'statut','type' : 'statut',},
-        {'name' : 'date_validation','type' : 'text',},
-        {'name' : 'wallet_carte','type' : 'text',},
+        {'name' : 'code','type' : 'text',},
+        {'name' : 'agence','type' : 'text',},
+        {'name' : 'type_agence','type' : 'statut',},
+        {'name' : 'adresse','type' : 'text',},
+        {'name' : 'solde_carte','type' : 'text',},
+        {'name' : 'solde','type' : 'text',},
         {'name' :  'state#rowid'}
     ];
 
     listIcon = [
-        {'icon' : 'info','action' : 'edit','tooltip' : 'Modification','autority' : 'GCP_5',},
+        {'icon' : 'info','action' : 'edit','tooltip' : 'Détail','autority' : 'GBU_6',},
     ];
 
     subscription: Subscription;
 
-    searchGlobal = [ 'virement.datevirement', 'virement.datevalidation', 'virement.user_crea','virement.user_validation']; 
+    searchGlobal = []; 
 
     constructor(private passageService: PassageService,) {
         super();
@@ -45,7 +47,7 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
 
     ngOnInit(): void {
         this.passageService.appelURL(null);
-        this.endpoint = environment.baseUrl + '/' + environment.historique_virement;
+        this.endpoint = environment.baseUrl + '/' + environment.solde_bureau;
 
         //Event for icon table
         this.subscription = this.passageService.getObservable().subscribe(event => {
