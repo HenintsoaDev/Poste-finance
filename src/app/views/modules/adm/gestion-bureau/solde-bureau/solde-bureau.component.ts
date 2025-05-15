@@ -18,8 +18,8 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
         {"nomColonne" : this.__('solde_bureau.code'),"colonneTable" : "code","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.agence'),"colonneTable" : "agence","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.adresse') +" "+ this.__('global.validation'),"colonneTable" : "adresse","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
         {"nomColonne" : ""}
     ];
 
@@ -27,8 +27,8 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
         {'name' : 'code','type' : 'text',},
         {'name' : 'agence','type' : 'text',},
         {'name' : 'adresse','type' : 'text',},
-        {'name' : 'solde_carte','type' : 'text',},
         {'name' : 'solde','type' : 'text',},
+        {'name' : 'solde_carte','type' : 'text',},
         {'name' :  'state#rowid'}
     ];
 
