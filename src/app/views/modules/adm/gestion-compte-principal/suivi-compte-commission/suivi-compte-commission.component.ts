@@ -53,7 +53,8 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         super();
     }
 
-    ngOnInit(): void {
+   async  ngOnInit() {
+        this.endpoint = environment.baseUrl + '/' + environment.suivi_compte_commission; 
         this.passageService.clear();
     }
 
@@ -90,7 +91,6 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         }
         
         let filtreParMulti =  type_commission + filtre_search + filtreDate + "&__order__=desc,date_transaction";
-        this.endpoint = environment.baseUrl + '/' + environment.suivi_compte_commission; 
         this.passageService.appelURL(filtreParMulti);
     }
 

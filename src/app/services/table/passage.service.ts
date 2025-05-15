@@ -26,7 +26,6 @@ export class PassageService {
   }
 
   appelURL(data: any, endpoint = ''){
-    console.log("makato ve?", data)
     this.passageSubject.next({ type: 'url', data, endpoint : endpoint });
   }
 

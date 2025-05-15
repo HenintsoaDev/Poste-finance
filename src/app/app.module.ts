@@ -54,6 +54,7 @@ import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte
 import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
 import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-bureau/solde-bureau.component';
+import { DemandeRapatriementComponent } from './views/modules/adm/gestion-bureau/demande-rapatriement/demande-rapatriement.component';
 import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
 
@@ -119,6 +120,7 @@ registerLocaleData(localeFr);
     ReleveSoldeBureauComponent,
     SoldeBureauComponent,
     DemandeCreditComponent,
+    DemandeRapatriementComponent,
     SoldeDistributeurComponent,
     SuiviCompteCommissionComponent
   ],

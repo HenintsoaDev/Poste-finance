@@ -2,7 +2,6 @@ import { DatePipe, formatDate } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { MatSelectChange } from '@angular/material/select';
-import { DemandeCreditService } from 'app/services/admin/gestion-bureau/demande-credit.service';
 import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { Auth } from 'app/shared/models/db';
@@ -13,23 +12,24 @@ import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
 import formatNumber from 'number-handler'
+import { DemandeRapatriementService } from 'app/services/admin/gestion-bureau/demande-rapatriement.service';
 
 @Component({
-  selector: 'app-demande-credit',
-  templateUrl: './demande-credit.component.html',
-  styleUrls: ['./demande-credit.component.scss']
+  selector: 'app-demande-rapatriement',
+  templateUrl: './demande-rapatriement.component.html',
+  styleUrls: ['./demande-rapatriement.component.scss']
 })
-export class DemandeCreditComponent extends Translatable implements OnInit {
+export class DemandeRapatriementComponent extends Translatable implements OnInit {
 
   endpoint = "";
   header = [
-      {"nomColonne" : this.__('demande_credit.date'),"colonneTable" : "date_demande","table" : "demande_credit_bureau"},
-      {"nomColonne" :  this.__('demande_credit.num_demande'),"colonneTable" : "num_demande","table" : "demande_credit_bureau"},
-      {"nomColonne" :  this.__('demande_credit.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_credit_bureau"},
-      {"nomColonne" :  this.__('demande_credit.bureau'),"colonneTable" : "name","table" : "bureau"},
-      {"nomColonne" :  this.__('demande_credit.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_credit_bureau"},
-      {"nomColonne" :  this.__('demande_credit.demandeur'),"colonneTable" : "nom","table" : "user"},
-      {"nomColonne" :  this.__('demande_credit.wallet_carte'),"colonneTable" : "","table" : ""},
+      {"nomColonne" : this.__('demande_rapatriement.date'),"colonneTable" : "date_demande","table" : "demande_rapatriement_bureau"},
+      {"nomColonne" :  this.__('demande_rapatriement.num_demande'),"colonneTable" : "num_demande","table" : "demande_rapatriement_bureau"},
+      {"nomColonne" :  this.__('demande_rapatriement.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_rapatriement_bureau"},
+      {"nomColonne" :  this.__('demande_rapatriement.bureau'),"colonneTable" : "name","table" : "bureau"},
+      {"nomColonne" :  this.__('demande_rapatriement.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_rapatriement_bureau"},
+      {"nomColonne" :  this.__('demande_rapatriement.demandeur'),"colonneTable" : "nom","table" : "user"},
+      {"nomColonne" :  this.__('demande_rapatriement.wallet_carte'),"colonneTable" : "wallet_carte","table" : "demande_credit_bureau"},
       {"nomColonne" : this.__('global.action')}
   ];
 
@@ -37,7 +37,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       {'name' : 'date_demande','type' : 'date',},
       {'name' : 'num_demande','type' : 'text',},
       {'name' : 'ref_demande','type' : 'text',},
-      {'name' : 'agence_crediter','type' : 'text',},
+      {'name' : 'agence_debiter','type' : 'text',},
       {'name' : 'montant','type' : 'montant',},
       {'name' : 'user_demande','type' : 'montant',},
       {'name' : 'wallet_carte','type' : 'text',},
@@ -53,7 +53,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     'autority' : 'PRM_41',
 
   },];
-  searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'agence.name', 'demande_credit_bureau.montant', 'user.nom']
+  searchGlobal = [ 'demande_rapatriement_bureau.date_demande', 'demande_rapatriement_bureau.num_demande', 'demande_rapatriement_bureau.ref_demande', 'agence.name', 'demande_rapatriement_bureau.montant', 'user.nom']
   subscription: Subscription;
   
 
@@ -64,8 +64,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
   //UserStorage
   userStorage: Auth;
-  demande_credits: any = [];
-  demande_credit: any = [];
+  demande_rapatriements: any = [];
+  demande_rapatriement: any = [];
   idDemande: number;
   filtre_etat: string = '2';
   listDemandes:any [] = [];
@@ -73,7 +73,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   titleModal: string = "";
 
 
-  @ViewChild('detailDemandeCredit') detailDemandeCredit: TemplateRef<any> | undefined;
+  @ViewChild('detailDemandeRapatriement') detailDemandeRapatriement: TemplateRef<any> | undefined;
   showCode: boolean = false;
   index: any = 0;
   bureaux:any [] = [];
@@ -95,7 +95,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     private datePipe: DatePipe, 
     private authService: AuthService,
     private modalService: BsModalService,
-    private demandeService :DemandeCreditService
+    private demandeService :DemandeRapatriementService
     ) {
       super();
   }
@@ -104,7 +104,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
     console.log()
 
-    this.endpoint = environment.baseUrl + '/' + environment.demande_credit;
+    this.endpoint = environment.baseUrl + '/' + environment.demande_rapatriement;
 
     this.filtreTableau(0);
     
@@ -160,21 +160,21 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
 
 
-    if(etat == 0) {
+     if(etat == 0) {
       this.objetBody[0].name = 'date_demande';
       this.objetBody[5].name = 'user_demande';
-      this.header[5].nomColonne = this.__('demande_credit.demandeur')
+      this.header[5].nomColonne = this.__('demande_rapatriement.demandeur')
     }else if(etat == 1){
       this.objetBody[0].name = 'date_autorisation';
       this.objetBody[5].name = 'user_autorise';
-      this.header[5].nomColonne = this.__('demande_credit.user_autorise')
+      this.header[5].nomColonne = this.__('demande_rapatriement.user_autorise')
 
     }else if(etat == 2){
       this.objetBody[0].name = 'date_validation';
       this.objetBody[5].name = 'user_validation';
-      this.header[5].nomColonne = this.__('demande_credit.user_validation')
+      this.header[5].nomColonne = this.__('demande_rapatriement.user_validation')
 
-    }
+    } 
   
 
       let filtre_search = "" ;
@@ -182,7 +182,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
           filtre_search = ",demande_credit_bureau.wallet_carte|e|"+this.typeCompte;
       }
 
-      let filtre_etat = ",demande_credit_bureau.etat|e|"+etat;
+      let filtre_etat = ",demande_debit_bureau.etat|e|"+etat;
       
       let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
       let dateFin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
@@ -207,14 +207,14 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
      // Detail d'un modal
      async openModalDetailDemande() {
-      this.titleModal = this.__('demande_credit.title_detail_modal');
+      this.titleModal = this.__('demande_rapatriement.title_detail_modal');
       this.showCode = false;
       this.code_validation = "";
       this.isDisabled = false;
-      if (this.detailDemandeCredit) {
+      if (this.detailDemandeRapatriement) {
           this.recupererDonnee();
         // Ouverture de modal
-        this.modalRef = this.modalService.show(this.detailDemandeCredit, {
+        this.modalRef = this.modalService.show(this.detailDemandeRapatriement, {
           class: 'modal-xl', backdrop:"static"
         });
       }
@@ -233,7 +233,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
       let res = this.listDemandes.filter(_ => _.rowid == this.idDemande);
       if(res.length != 0){
-        this.demande_credit = res[0];
+        this.demande_rapatriement = res[0];
       }
    }
 
@@ -246,10 +246,10 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       if (storedData) result = JSON.parse(storedData);
       
   
-      this.demande_credits = result.data;
+      this.demande_rapatriements = result.data;
       
       
-      this.authService.exportExcel(this.print(this.demande_credits),this.__("demande_credit.list_demande_credit")).then(
+      this.authService.exportExcel(this.print(this.demande_rapatriements),this.__("demande_rapatriement.list_demande_rapatriement")).then(
         (response: any)=>{
           console.log('respons beee',response)
               let a = document.createElement("a"); 
@@ -270,13 +270,13 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       if (storedData) result = JSON.parse(storedData);
       
   
-      this.demande_credits = result.data;
+      this.demande_rapatriements = result.data;
       let titleExport ="";
-      if(this.index == 0)  titleExport = this.__("demande_credit.list_demande_credit_en_attente");
-      if(this.index == 1)  titleExport = this.__("demande_credit.list_demande_credit_autorise");
-      if(this.index == 2)  titleExport = this.__("demande_credit.list_demande_credit_valider");
+      if(this.index == 0)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_en_attente");
+      if(this.index == 1)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_autorise");
+      if(this.index == 2)  titleExport = this.__("demande_rapatriement.list_demande_rapatrier");
       
-      this.authService.exportPdf(this.print(this.demande_credits),titleExport).then(
+      this.authService.exportPdf(this.print(this.demande_rapatriements),titleExport).then(
         (response: any)=>{},
         (error:any)=>{
           console.log(error)
@@ -284,22 +284,22 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       );
     }
   
-    print(demande_credits:any[]){
+    print(demande_rapatriements:any[]){
 
-      let tab = demande_credits.map((demande_credit: any, index: number) => {
+      let tab = demande_rapatriements.map((demande_rapatriement: any, index: number) => {
         let t: any = {};
-          if(demande_credit.etat == 0) t[this.__('demande_credit.date')] = demande_credit.date_demande;
-          if(demande_credit.etat == 1) t[this.__('demande_credit.date')] = demande_credit.date_autorise;
-          if(demande_credit.etat == 2) t[this.__('demande_credit.date')] = demande_credit.date_validation;
-          t[this.__('demande_credit.num_demande')] = demande_credit.num_demande;
-          t[this.__('demande_credit.ref_demande')] = demande_credit.ref_demande;
-          t[this.__('demande_credit.bureau')] = demande_credit.agence_crediter;
-          t[this.__('demande_credit.montant') + ' (' + this.__('global.currency') + ')'] = demande_credit.montant;
+          if(demande_rapatriement.etat == 0) t[this.__('demande_rapatriement.date')] = demande_rapatriement.date_demande;
+          if(demande_rapatriement.etat == 1) t[this.__('demande_rapatriement.date')] = demande_rapatriement.date_autorise;
+          if(demande_rapatriement.etat == 2) t[this.__('demande_rapatriement.date')] = demande_rapatriement.date_validation;
+          t[this.__('demande_rapatriement.num_demande')] = demande_rapatriement.num_demande;
+          t[this.__('demande_rapatriement.ref_demande')] = demande_rapatriement.ref_demande;
+          t[this.__('demande_rapatriement.bureau')] = demande_rapatriement.agence_debiter;
+          t[this.__('demande_rapatriement.montant') + ' (' + this.__('global.currency') + ')'] = demande_rapatriement.montant;
 
-          if(demande_credit.etat == 0) t[this.__('demande_credit.user_demande')] = demande_credit.user_demande;
-          if(demande_credit.etat == 1) t[this.__('demande_credit.user_autorise')] = demande_credit.user_autorise;
-          if(demande_credit.etat == 2) t[this.__('demande_credit.user_validation')] = demande_credit.user_validation;
-          t[this.__('demande_credit.wallet_carte')] = demande_credit.wallet_carte;
+          if(demande_rapatriement.etat == 0) t[this.__('demande_rapatriement.user_demande')] = demande_rapatriement.user_demande;
+          if(demande_rapatriement.etat == 1) t[this.__('demande_rapatriement.user_autorise')] = demande_rapatriement.user_autorise;
+          if(demande_rapatriement.etat == 2) t[this.__('demande_rapatriement.user_validation')] = demande_rapatriement.user_validation;
+          t[this.__('demande_rapatriement.wallet_carte')] = demande_rapatriement.wallet_carte;
                 
         return t;
       });
@@ -422,7 +422,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
          // Ouverture du modal pour l'ajout
     openModalAdd(template: TemplateRef<any>) {
-      this.titleModal = this.__('demande_credit.title_add_modal');
+      this.titleModal = this.__('demande_rapatriement.title_add_modal');
       this.info =false;
 
       this.bureauId=null;
@@ -524,6 +524,5 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     
         
       }
-
 
 }

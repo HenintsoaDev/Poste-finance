@@ -25,6 +25,7 @@ import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte
 import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
 import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-bureau/solde-bureau.component';
+import { DemandeRapatriementComponent } from './views/modules/adm/gestion-bureau/demande-rapatriement/demande-rapatriement.component';
 import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
 
@@ -52,6 +53,8 @@ const routes: Routes =[
     {path : 'demande_credit',component: DemandeCreditComponent,data: { breadcrumb: 'Historique rechargements bureaux' }},
     {path : 'releve_solde_bureau',component: ReleveSoldeBureauComponent,data: { breadcrumb: 'Relevé solde bureau' }},
     {path : 'solde_bureau',component: SoldeBureauComponent,data: { breadcrumb: 'Solde des bureaux' }},
+    {path : 'demande_rapatriement',component: DemandeRapatriementComponent,data: { breadcrumb: 'Historique rapatriement bureaux' }},
+
     {path : 'solde_des_distributeur',component: SoldeDistributeurComponent,data: { breadcrumb: 'Solde des distributeurs' }},
   ]}, 
   {path : 'gestion_compte_principal',data: { breadcrumb: 'Gestion compte principal' },children : [

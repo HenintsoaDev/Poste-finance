@@ -360,7 +360,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addutilisateur, {
-          class: 'modal-lg'
+          class: 'modal-lg',backdrop:"static"
         });
       }
     }
@@ -513,7 +513,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
 
       // Ouverture de modal
       this.modalRef = this.modalService.show(this.detailUtilisateur, {
-        class: 'modal-xl'
+        class: 'modal-xl',backdrop:"static"
       });
     }
 
@@ -538,7 +538,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       this.actualisationSelectTypeBureau();
       //this.actualisationSelectBureau();
       this.modalRef = this.modalService.show(template, {
-        class: 'modal-lg'
+        class: 'modal-lg',backdrop:"static"
       });
     }
 
