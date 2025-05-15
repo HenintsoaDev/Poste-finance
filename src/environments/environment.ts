@@ -59,6 +59,7 @@ export const environment = {
 
   //** Gestion compte principal */
   suivi_compte : "gestion_compte_principal/suivi_compte",
+  suivi_compte_commission : "gestion_compte_principal/suivi_compte_commission",
   historique_virement : "gestion_compte_principal/virement",
   valide_virement : "gestion_compte_principal/virement/validerVirement",
   rejet_virement : "gestion_compte_principal/virement/rejeterVirement",
