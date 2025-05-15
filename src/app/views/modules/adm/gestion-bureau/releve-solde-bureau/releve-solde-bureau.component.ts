@@ -71,7 +71,8 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     }
 
     ngOnInit(): void {
-        this.passageService.appelURL(null);
+        this.passageService.clear();
+        
         this.bureauService.getAgenceBureauActive().subscribe({
             next: (res) => {
                 if(res['code'] == 200) {
