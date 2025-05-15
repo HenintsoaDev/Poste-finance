@@ -7,14 +7,14 @@ import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 
 @Component({
-  selector: 'app-solde-bureau',
-  templateUrl: './solde-bureau.component.html',
-  styleUrls: ['./solde-bureau.component.scss']
+  selector: 'app-solde-distributeur',
+  templateUrl: './solde-distributeur.component.html',
+  styleUrls: ['./solde-distributeur.component.scss']
 })
-export class SoldeBureauComponent extends Translatable implements OnInit {
+export class SoldeDistributeurComponent extends Translatable implements OnInit {
 
     endpoint : any;
-    
+        
     header = [
         {"nomColonne" : this.__('solde_bureau.code'),"colonneTable" : "code","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.bureau'),"colonneTable" : "agence","table" : "solde_bureau"},
@@ -61,7 +61,7 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
 
     ngOnInit(): void {
         this.passageService.appelURL(null);
-        this.endpoint = environment.baseUrl + '/' + environment.solde_bureau;
+        this.endpoint = environment.baseUrl + '/' + environment.solde_distributeur;
 
         //Event for icon table
         this.subscription = this.passageService.getObservable().subscribe(event => {
@@ -114,7 +114,7 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
         this.solde_data = result.data;
         this.solde_global = result.solde_global;
         
-        this.authService.exportExcel(this.print(this.solde_data),this.__("solde_bureau.list_solde_bureau")).then(
+        this.authService.exportExcel(this.print(this.solde_data),this.__("solde_distributeur.list_solde_distributeur")).then(
             (response: any)=>{
                 let a = document.createElement("a"); 
                 a.href = response.data;
@@ -152,11 +152,11 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
 
         // puis ajouter les totaux à la fin
         tab.push({
-          [this.__('solde_bureau.code')]: '',
-          [this.__('solde_bureau.bureau')]: '',
-          [this.__('solde_bureau.adresse')]: '',
-          [this.__('solde_bureau.solde_wallet')]: this.__('global.total_wallet') + ": " + (this.solde_global?.total_solde ?? 0) ,
-          [this.__('solde_bureau.solde_carte')]: this.__('global.total_carte') + ": " + (this.solde_global?.total_solde_carte ?? 0),
+            [this.__('solde_bureau.code')]: '',
+            [this.__('solde_bureau.bureau')]: '',
+            [this.__('solde_bureau.adresse')]: '',
+            [this.__('solde_bureau.solde_wallet')]: this.__('global.total_wallet') + ": " + (this.solde_global?.total_solde ?? 0) ,
+            [this.__('solde_bureau.solde_carte')]: this.__('global.total_carte') + ": " + (this.solde_global?.total_solde_carte ?? 0),
         });
 
         return tab;
