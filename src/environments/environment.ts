@@ -52,7 +52,11 @@ export const environment = {
   autorise_demande : 'gestion_bureau/demande_credit/autoriserDemande',
   valide_demande : 'gestion_bureau/demande_credit/validerDemande',
   initierValidation : 'gestion_bureau/demande_credit/initierValidation',
-  
+  demande_rapatriement : 'gestion_bureau/demande_rapatriement',
+  autorise_demande_rapatriement : 'gestion_bureau/demande_rapatriement/autoriserDemande',
+  valide_demande_rapatriement : 'gestion_bureau/demande_rapatriement/validerDemande',
+  initierValidation_rapatriement : 'gestion_bureau/demande_rapatriement/initierValidation',
+
   //** Ressource */
   province : 'resource/province/liste_province',
   departement : 'resource/departement/liste_departement',

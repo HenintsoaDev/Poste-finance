@@ -336,7 +336,7 @@ export class ProfilsComponent extends Translatable implements OnInit {
   
             // Ouverture de modal
             this.modalRef = this.modalService.show(this.affectationprofil, {
-              class: 'modal-xl'
+              class: 'modal-xl',backdrop:"static"
             });
           }
         }
@@ -448,7 +448,7 @@ export class ProfilsComponent extends Translatable implements OnInit {
       
             // Ouverture de modal
             this.modalRef = this.modalService.show(this.detailProfil, {
-              class: 'modal-xl'
+              class: 'modal-xl',backdrop:"static"
             });
           }
       
