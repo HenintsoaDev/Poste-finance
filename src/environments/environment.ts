@@ -67,5 +67,8 @@ export const environment = {
   releve_solde_bureau : "gestion_bureau/releve_solde_bureau",
 
   //** Solde bureau */
-  solde_bureau : "gestion_bureau/solde_bureau"
+  solde_bureau : "gestion_bureau/solde_bureau",
+
+  //** Solde distributeur */
+  solde_distributeur : "gestion_bureau/solde_des_distributeur",
 };
