@@ -294,14 +294,20 @@
         "select_bureau":"Veuillez sélectionner le bureau souhaité"
     },
 
-
-
     "releve_solde_bureau" : {
         "agence" : "Agence",
         "select_bureau" : "Sélectionner le bureau",
         "list_releve" : "Liste solde relevé bureau"
+    },
+
+    "solde_bureau" : {
+        "code" : "Code",
+        "agence" : "Agence",
+        "bureau" : "Bureau",
+        "type_bureau" : "Type de bureau",
+        "adresse": "Adresse",
+        "solde_wallet" : "Solde Paositra Money",
+        "solde_carte" : "Solde E-poketra"
     }
-
-
 
 }
