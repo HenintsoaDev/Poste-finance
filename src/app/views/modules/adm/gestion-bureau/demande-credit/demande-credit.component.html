@@ -127,8 +127,8 @@
                 <td  class="text-left">{{  demande_credit.num_demande }}</td>
             </tr>
              <tr>
-                <td  class="text-right p-3 bold">{{ __("demande_credit.montant")}} : </td>
-                <td  class="text-left">{{  demande_credit.montant }}</td>
+                <td  class="text-right p-3 bold">{{ __("demande_credit.montant")}} ({{ __("global.currency")}}) : </td>
+                <td  class="text-left">{{  formatNumber(demande_credit.montant, ' ') }}</td>
                 <td  class="text-right p-3 bold">{{ __("demande_credit.wallet_carte")}}  : </td>
                 <td  class="text-left">{{  demande_credit.wallet_carte }}</td>
             </tr>
@@ -140,15 +140,15 @@
        
             <tr>
                 <td  class="text-right p-3 bold">{{ __("demande_credit.user_demande")}} : </td>
-                <td  class="text-left">{{  demande_credit.user_demande  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_demande  }} </td>
+                <td  class="text-left">{{  demande_credit.user_demande  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_demande | date: 'dd/mm/yyyy HH:mm:ss' }} </td>
               </tr>
              <tr *ngIf="demande_credit.user_autorise != null">
                 <td  class="text-right p-3 bold">{{ __("demande_credit.user_autorise")}}  : </td>
-                <td  class="text-left">{{  demande_credit.user_autorise	 }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_autorisation }}</td>
+                <td  class="text-left">{{  demande_credit.user_autorise	 }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_autorisation | date: 'dd/mm/yyyy HH:mm:ss' }}</td>
              </tr>
              <tr *ngIf="demande_credit.user_validation != null">
                 <td  class="text-right p-3 bold">{{ __("demande_credit.user_validation")}} : </td>
-                <td  class="text-left">{{  demande_credit.user_validation  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_validation  }} </td>
+                <td  class="text-left">{{  demande_credit.user_validation  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_credit.date_validation | date: 'dd/mm/yyyy HH:mm:ss' }} </td>
              </tr>
             
         </table> 
@@ -170,7 +170,7 @@
                 <div class="form-group">
                     <mat-form-field>
                         <mat-label>{{ __('demande_credit.code_validation')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="code_validation"  placeholder="{{ __('demande_credit.code_validation')}}" >
+                        <input matInput type="text" [(ngModel)]="code_validation" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,6);" placeholder="{{ __('demande_credit.code_validation')}}" >
                     </mat-form-field>
                 </div>
             </div>

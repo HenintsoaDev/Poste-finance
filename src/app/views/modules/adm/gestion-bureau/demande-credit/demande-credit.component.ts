@@ -12,6 +12,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
+import formatNumber from 'number-handler'
 
 @Component({
   selector: 'app-demande-credit',
@@ -52,7 +53,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     'autority' : 'PRM_41',
 
   },];
-  searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'bureau.name', 'demande_credit_bureau.montant', 'user.nom']
+  searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'agence.name', 'demande_credit_bureau.montant', 'user.nom']
   subscription: Subscription;
   
 
@@ -85,6 +86,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   info:boolean =false;
   code_validation: any = "";
   isDisabled: boolean = false;
+  formatNumber : any = formatNumber;
 
 
   constructor(
@@ -160,10 +162,18 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
     if(etat == 0) {
       this.objetBody[0].name = 'date_demande';
+      this.objetBody[5].name = 'user_demande';
+      this.header[5].nomColonne = this.__('demande_credit.demandeur')
     }else if(etat == 1){
       this.objetBody[0].name = 'date_autorisation';
+      this.objetBody[5].name = 'user_autorise';
+      this.header[5].nomColonne = this.__('demande_credit.user_autorise')
+
     }else if(etat == 2){
       this.objetBody[0].name = 'date_validation';
+      this.objetBody[5].name = 'user_validation';
+      this.header[5].nomColonne = this.__('demande_credit.user_validation')
+
     }
   
 
@@ -205,7 +215,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
           this.recupererDonnee();
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.detailDemandeCredit, {
-          class: 'modal-xl'
+          class: 'modal-xl', backdrop:"static"
         });
       }
   
@@ -416,7 +426,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       this.isDisabled = false;
 
       this.actualisationSelectBureau();
-      this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
+      this.modalRef = this.modalService.show(template, { class: 'modal-lg', backdrop:"static" });
     }
 
     recupererInfoBureau(event:MatSelectChange){

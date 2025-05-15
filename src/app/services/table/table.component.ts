@@ -373,7 +373,7 @@ export class TableComponent extends Translatable {
       if(post[0] == "null") return '';
 
       //** si le type de donnée est date */
-      if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY hh:mm:ss');
+      if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY HH:mm:ss');
       else if(post[1] == 'montant') return this.formatNumber(post[0], ' ');
       else if(post[1] == 'statut') {
         if(post[0] == 1) return this.__('global.validate');
