@@ -49,7 +49,8 @@ export const environment = {
   demande_credit : 'gestion_bureau/demande_credit',
   autorise_demande : 'gestion_bureau/demande_credit/autoriserDemande',
   valide_demande : 'gestion_bureau/demande_credit/validerDemande',
-
+  initierValidation : 'gestion_bureau/demande_credit/initierValidation',
+  
   //** Ressource */
   province : 'resource/province/liste_province',
   departement : 'resource/departement/liste_departement',

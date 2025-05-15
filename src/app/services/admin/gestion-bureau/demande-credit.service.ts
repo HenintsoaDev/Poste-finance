@@ -39,6 +39,17 @@ export class DemandeCreditService {
         );
     }
 
+    initierDemande(idDemande: any): Observable<any> {
+        
+        return this.httpService.put<any>(environment.initierValidation + '/' + idDemande, '').pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
    
 
     ajoutDemande(data: any): Observable<any> {

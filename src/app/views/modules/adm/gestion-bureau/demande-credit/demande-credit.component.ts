@@ -22,7 +22,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
 
   endpoint = "";
   header = [
-      {"nomColonne" : this.__('demande_credit.date_demande'),"colonneTable" : "date_demande","table" : "demande_credit_bureau"},
+      {"nomColonne" : this.__('demande_credit.date'),"colonneTable" : "date_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.num_demande'),"colonneTable" : "num_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.bureau'),"colonneTable" : "name","table" : "bureau"},
@@ -84,6 +84,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   infoBureau: any={};
   info:boolean =false;
   code_validation: any = "";
+  isDisabled: boolean = false;
 
 
   constructor(
@@ -198,6 +199,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
      async openModalDetailDemande() {
       this.titleModal = this.__('demande_credit.title_detail_modal');
       this.showCode = false;
+      this.code_validation = "";
+      this.isDisabled = false;
       if (this.detailDemandeCredit) {
           this.recupererDonnee();
         // Ouverture de modal
@@ -297,7 +300,28 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       this.modalRef?.hide();
     }
 
-    passerCode(){ this.showCode = true; }
+    passerCode(){ 
+      this.isDisabled = true;
+      this.demandeService.initierDemande(this.idDemande).subscribe({
+        next: (res) => {
+            if(res['code'] == 200) {
+                this.toastr.success(res['msg'], this.__("global.success"));
+                this.showCode = true; 
+                this.isDisabled = false;
+
+            }
+            else{
+                this.toastr.error(res['msg'], this.__("global.error"));
+                this.isDisabled = false;
+            }                
+        },
+        error: (err) => {}
+    });
+
+      
+
+    
+    }
 
 
        //Rejet virement
@@ -316,14 +340,17 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
             },
         }).then((result) => {
             if (result.isConfirmed) {
+              this.isDisabled = true;
                 this.demandeService.autoriseDemande(this.idDemande).subscribe({
                     next: (res) => {
-                        if(res['code'] == 200) {
+                        if(res['code'] == 201) {
                             this.toastr.success(res['msg'], this.__("global.success"));
                             this.actualisationTableau();
+                            this.closeModal();
                         }
                         else{
                             this.toastr.error(res['msg'], this.__("global.error"));
+                            this.isDisabled = false;
                         }                
                     },
                     error: (err) => {}
@@ -350,18 +377,21 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
             },
         }).then((result) => {
             if (result.isConfirmed) {
-
+              this.isDisabled = true;
               let data =  {
                 "code_validation": this.code_validation
               }
                 this.demandeService.valideDemande(this.idDemande, data).subscribe({
                     next: (res) => {
-                        if(res['code'] == 200) {
+                        if(res['code'] == 201) {
                             this.toastr.success(res['msg'], this.__("global.success"));
                             this.actualisationTableau();
+                            this.closeModal();
+
                         }
                         else{
-                            this.toastr.error(res['msg'], this.__("global.error"));
+                            this.toastr.error(res.data, this.__("global.error"));
+                            this.isDisabled = false;
                         }                
                     },
                     error: (err) => {}
@@ -383,6 +413,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       this.bureauId=null;
       this.montant = "";
       this.wallet_carte = null;
+      this.isDisabled = false;
+
       this.actualisationSelectBureau();
       this.modalRef = this.modalService.show(template, { class: 'modal-lg' });
     }
@@ -440,7 +472,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
                 let wallet =0;
                 if(this.wallet_carte == 'W') wallet = 0;
                 else if(this.wallet_carte == 'C') wallet = 1;
-          
+
+                this.isDisabled = true;
                   let data = {
                     "montant": this.montant,
                     "agence_id": this.bureauId,
@@ -460,6 +493,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
                             else this.toastr.error(res['data'], this.__("global.error"));
                           }else{
                               this.toastr.error(res['msg'], this.__("global.error"));
+                              this.isDisabled = false;
                           }            
                                 
                       },
