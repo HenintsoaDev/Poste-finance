@@ -7,10 +7,10 @@
                     <div class="card-header card-header-primary">
                         <div class="button-container">
                             <div class="left-buttons">
-                               <button class="btn btn-secondary export-btn excel text-white" >
+                               <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel('Liste des soldes du bureau')">
                                     {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
                                 </button>
-                                <button class="btn btn-secondary export-btn pdf text-white" >
+                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf('Liste des soldes du bureau')">
                                     {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
                                 </button>
                             </div>

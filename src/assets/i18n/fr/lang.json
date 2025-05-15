@@ -308,7 +308,8 @@
         "adresse": "Adresse",
         "info_solde" : "Détails solde de bureau",
         "solde_wallet" : "Solde wallet",
-        "solde_carte" : "Solde carte"
+        "solde_carte" : "Solde carte",
+        "list_solde_bureau" : "Liste des soldes du bureau"
     }
 
 }

@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -16,8 +17,8 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
     
     header = [
         {"nomColonne" : this.__('solde_bureau.code'),"colonneTable" : "code","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.agence'),"colonneTable" : "agence","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.adresse') +" "+ this.__('global.validation'),"colonneTable" : "adresse","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.bureau'),"colonneTable" : "agence","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.adresse'),"colonneTable" : "adresse","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
         {"nomColonne" : ""}
@@ -45,11 +46,15 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
     titleModal: string = "";
     modalRef?: BsModalRef;
 
+    solde_data: any = [];
+    solde_global: any;
+
     @ViewChild('infoSolde') infoSolde: TemplateRef<any> | undefined;
 
     constructor(
         private passageService: PassageService,
-        private modalService: BsModalService
+        private modalService: BsModalService,
+        private authService: AuthService
     ) {
         super();
     }
@@ -101,31 +106,60 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
         this.modalRef?.hide();
     }
 
-    /*print(soldes:any[]){
+    async exportExcel(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.solde_data = result.data;
+        this.solde_global = result.solde_global;
+        
+        this.authService.exportExcel(this.print(this.solde_data),this.__("solde_bureau.list_solde_bureau")).then(
+            (response: any)=>{
+                let a = document.createElement("a"); 
+                a.href = response.data;
+                a.download = `${fileName}.xlsx`;
+                a.click(); 
+            },
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.solde_data = result.data;
+        this.solde_global = result.solde_global;
+        
+        this.authService.exportPdf(this.print(this.solde_data),this.__("solde_bureau.list_solde_bureau")).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(soldes:any[]){
         let tab = soldes.map((solde: any, index: number) => {
             let t: any = {};
-                t[this.__('global.date')] = virement.date_virement;
-                t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = virement.montant;
-                t[this.__('global.user_creation')] = virement.user_crea;
-                t[this.__('global.statut')] = (virement.statut == 0) ? "En attente de validation" : (virement.statut == 1) ? "Validé" : "Rejeté";
-                t[this.__('global.user_validation')] = virement.user_validation;
-                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')] = virement.date_validation;
-                t[this.__('suivi_compte.type_compte')] = virement.wallet_carte;
+                t[this.__('solde_bureau.code')] = solde.code;
+                t[this.__('solde_bureau.bureau')] = solde.agence;
+                t[this.__('solde_bureau.adresse')] = solde.adresse;
+                t[this.__('solde_bureau.solde_wallet')] = solde.solde;;
+                t[this.__('solde_bureau.solde_carte')] = solde.solde_carte;;
             return t;
         });
 
         // puis ajouter les totaux à la fin
         tab.push({
-          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')]: '',
-          [this.__('global.montant')+ ' (' + this.__('global.currency') + ')']: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
-          [this.__('global.user_creation')]: '',
-          [this.__('global.statut') + ' (' + this.__('global.currency') + ')']: '',
-          [this.__('global.user_validation')]: '',
-          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')]: this.__('virement.total_wallet') + ": " + (this.virement_totaux?.Wallet ?? 0),
-          [this.__('suivi_compte.type_compte')]: '',
+          [this.__('solde_bureau.code')]: '',
+          [this.__('solde_bureau.bureau')]: '',
+          [this.__('solde_bureau.adresse')]: '',
+          [this.__('solde_bureau.solde_wallet')]: this.__('global.total_wallet') + ": " + (this.solde_global?.total_solde ?? 0) ,
+          [this.__('solde_bureau.solde_carte')]: this.__('global.total_carte') + ": " + (this.solde_global?.total_solde_carte ?? 0),
         });
 
         return tab;
-    }*/
+    }
 
 }
