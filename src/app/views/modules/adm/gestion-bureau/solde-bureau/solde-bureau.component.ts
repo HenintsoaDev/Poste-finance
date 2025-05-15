@@ -17,17 +17,15 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
     header = [
         {"nomColonne" : this.__('solde_bureau.code'),"colonneTable" : "code","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.agence'),"colonneTable" : "agence","table" : "solde_bureau"},
-        //{"nomColonne" : this.__('solde_bureau.type_bureau'),"colonneTable" : "type_agence","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.adresse') +" "+ this.__('global.validation'),"colonneTable" : "adresse","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde","table" : "solde_bureau"},
-        {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde_carte","table" : "solde_bureau"},
+        {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde","table" : "solde_bureau"},
         {"nomColonne" : ""}
     ];
 
     objetBody = [
         {'name' : 'code','type' : 'text',},
         {'name' : 'agence','type' : 'text',},
-        //{'name' : 'type_agence','type' : 'statut',},
         {'name' : 'adresse','type' : 'text',},
         {'name' : 'solde_carte','type' : 'text',},
         {'name' : 'solde','type' : 'text',},
@@ -103,6 +101,31 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
         this.modalRef?.hide();
     }
 
-    
+    /*print(soldes:any[]){
+        let tab = soldes.map((solde: any, index: number) => {
+            let t: any = {};
+                t[this.__('global.date')] = virement.date_virement;
+                t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = virement.montant;
+                t[this.__('global.user_creation')] = virement.user_crea;
+                t[this.__('global.statut')] = (virement.statut == 0) ? "En attente de validation" : (virement.statut == 1) ? "Validé" : "Rejeté";
+                t[this.__('global.user_validation')] = virement.user_validation;
+                t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')] = virement.date_validation;
+                t[this.__('suivi_compte.type_compte')] = virement.wallet_carte;
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')]: '',
+          [this.__('global.montant')+ ' (' + this.__('global.currency') + ')']: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
+          [this.__('global.user_creation')]: '',
+          [this.__('global.statut') + ' (' + this.__('global.currency') + ')']: '',
+          [this.__('global.user_validation')]: '',
+          [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')]: this.__('virement.total_wallet') + ": " + (this.virement_totaux?.Wallet ?? 0),
+          [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
+    }*/
 
 }
