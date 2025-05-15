@@ -89,15 +89,21 @@ export class TableComponent extends Translatable {
         const { type, data: filtre } = event;
 
         console.log("xx--evenement--xx",event);
+        console.log("xx--evenement--xx",this.endpoint);
       
         // Vérifie si c'est un événement pertinent
         if ((type === 'url' || type === '') && this.endpoint) {
           const url = `${this.endpoint}?page=1`;
-      
+          console.log("xx--ato?--xx",event);
+
           if (filtre) {
+            console.log("xx--filtre ok?--xx",event);
+
             // Appliquer un filtre s’il existe
             this.getUrlDatatable(url, '', '', '', filtre);
           } else {
+            console.log("xx--filtre non ok?--xx",event);
+
             // Sinon appliquer un tri ou appeler l'URL brute
             if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc');
             else this.getUrlDatatable(url);
@@ -124,6 +130,8 @@ export class TableComponent extends Translatable {
     ** order : triage (asc ou desc)
     */
     async triTable(col: any, order: any){
+
+      console.log("eeeee");
       this.tri = col; this.order = order;
       this.getUrlDatatable(this.endpoint +"?page=1" ,'', '', '', this.search)
 

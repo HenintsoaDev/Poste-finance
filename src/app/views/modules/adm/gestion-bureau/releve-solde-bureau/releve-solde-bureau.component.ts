@@ -71,6 +71,7 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     }
 
     ngOnInit(): void {
+        this.endpoint = environment.baseUrl + '/' + environment.releve_solde_bureau; 
         this.passageService.clear();
         
         this.bureauService.getAgenceBureauActive().subscribe({
@@ -117,7 +118,6 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
         
         this.loadingData = true;
         this.showDataTable = false;
-        this.endpoint = environment.baseUrl + '/' + environment.releve_solde_bureau; 
         let filtreParMulti =  filtre_search + filtreDate + "&__order__=desc,date_transaction&agence=" + this.agenceId;
         await this.passageService.appelURL(filtreParMulti);
         this.loadingData = false;
