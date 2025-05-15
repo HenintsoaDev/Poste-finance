@@ -232,8 +232,8 @@ export class TableComponent extends Translatable {
        if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
        if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
        /** SET SOLDE TOTAL (SOLDE DES BUREAUX) in localstorage*/
-       if(res.solde_global.total_solde) { await localStorage.setItem(environment.soldeGlobalTotalSolde, res.solde_global.total_solde); }
-       if(res.solde_global.total_solde_carte) { await localStorage.setItem(environment.soldeGlobalTotalSoldeCarte, res.solde_global.total_solde_carte); }
+       if(res.solde_global?.total_solde) { await localStorage.setItem(environment.soldeGlobalTotalSolde, res.solde_global.total_solde); }
+       if(res.solde_global?.total_solde_carte) { await localStorage.setItem(environment.soldeGlobalTotalSoldeCarte, res.solde_global.total_solde_carte); }
 
       if(res.totaux){
         //this.donneeTotal = res.totaux;
