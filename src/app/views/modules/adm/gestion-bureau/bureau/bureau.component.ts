@@ -437,7 +437,7 @@ export class BureauComponent extends Translatable implements OnInit {
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.detailBureau, {
-          class: 'modal-xl'
+          class: 'modal-xl',backdrop:"static"
         });
       }
 
@@ -519,7 +519,7 @@ export class BureauComponent extends Translatable implements OnInit {
       this.actualisationSelectTypeBureau();
       //this.actualisationSelectDepartemennt();
       this.modalRef = this.modalService.show(template, {
-        class: 'modal-lg'
+        class: 'modal-lg',backdrop:"static"
       });
     }
 

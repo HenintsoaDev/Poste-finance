@@ -53,7 +53,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     'autority' : 'PRM_41',
 
   },];
-  searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'bureau.name', 'demande_credit_bureau.montant', 'user.nom']
+  searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'agence.name', 'demande_credit_bureau.montant', 'user.nom']
   subscription: Subscription;
   
 
