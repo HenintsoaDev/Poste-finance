@@ -54,6 +54,7 @@ import { HistoriqueVirementsComponent } from './views/modules/adm/gestion-compte
 import { DemandeCreditComponent } from './views/modules/adm/gestion-bureau/demande-credit/demande-credit.component';
 import { ReleveSoldeBureauComponent } from './views/modules/adm/gestion-bureau/releve-solde-bureau/releve-solde-bureau.component';
 import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-bureau/solde-bureau.component';
+import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 
 
 registerLocaleData(localeFr);
@@ -116,7 +117,8 @@ registerLocaleData(localeFr);
     HistoriqueVirementsComponent,
     ReleveSoldeBureauComponent,
     SoldeBureauComponent,
-    DemandeCreditComponent
+    DemandeCreditComponent,
+    SoldeDistributeurComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
