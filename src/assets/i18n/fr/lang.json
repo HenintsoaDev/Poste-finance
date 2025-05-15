@@ -274,14 +274,14 @@
         "date_demande" : "Date demande",
         "ref_demande" : "Réference",
         "bureau" : "Bureau",
-        "demandeur" : "Bureau demandeur",
+        "demandeur" : "Demander par",
         "list_demande_credit" : "Demande de crédit",
         "demande_attente" : "Demandes en attente",
         "demande_autorise" : "Demandes autorisées",
         "demande_credite" : "Demandes créditées",
-        "user_validation" :"Validé par",
-        "user_demande" : "Demandé par",
-        "user_autorise" :  "Autorisé par",
+        "user_validation" :"Valider par",
+        "user_demande" : "Demander par",
+        "user_autorise" :  "Autoriser par",
         "wallet_carte" :  "Type de compte",
         "code_validation":"Code de validation",
         "recharge_montant":"Vous allez recharger ce bureau d'un montant de",
@@ -306,8 +306,8 @@
         "bureau" : "Bureau",
         "type_bureau" : "Type de bureau",
         "adresse": "Adresse",
-        "solde_wallet" : "Solde Paositra Money",
-        "solde_carte" : "Solde E-poketra"
+        "solde_wallet" : "Solde wallet",
+        "solde_carte" : "Solde carte"
     }
 
 }
