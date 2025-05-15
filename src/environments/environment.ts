@@ -24,6 +24,8 @@ export const environment = {
   exportExcel: BASE_URL + "/export_to/excel",
   soldeVirementCp : 'soldeVirementCp',
   soldeVirementCarteCp : 'soldeVirementCarteCp',
+  soldeGlobalTotalSolde : 'soldeGlobalTotalSolde',
+  soldeGlobalTotalSoldeCarte : 'soldeGlobalTotalSoldeCarte',
 
   //** Parametrage */
   module :'parametrage/module',

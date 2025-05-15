@@ -79,7 +79,7 @@
 
             </tr>
         </tbody>
-        <tfoot class="tfoot-total" *ngIf="donneeTotal.DEBIT || donneeTotal.CREDIT || donneeTotal.Carte || donneeTotal.Wallet">
+        <tfoot class="tfoot-total" *ngIf="donneeTotal.DEBIT || donneeTotal.CREDIT || donneeTotal.Carte || donneeTotal.Wallet || donneeTotal.TotalSolde || donneeTotal.TotalSoldeCarte">
           <tr>
             <td [attr.colspan]="headerTable.length">
               <div class="row">
@@ -87,6 +87,8 @@
                 <div *ngIf="donneeTotal.CREDIT" class="col-6" style="text-align: center;">{{ __('global.total_credit') }}:<span class="bold-total">  {{donneeTotal.CREDIT }} ({{ __('global.currency') }})</span></div>
                 <div *ngIf="donneeTotal.Carte" class="col-6" style="text-align: center;">{{ __('global.total_carte') }}:<span class="bold-total"> {{donneeTotal.Carte }} ({{ __('global.currency') }}) </span></div>
                 <div *ngIf="donneeTotal.Wallet" class="col-6" style="text-align: center;">{{ __('global.total_wallet') }}: <span class="bold-total">  {{donneeTotal.Wallet }} ({{ __('global.currency') }})</span></div>
+                <div *ngIf="donneeTotal.TotalSolde" class="col-6" style="text-align: center;">{{ __('global.total_wallet') }}:<span class="bold-total"> {{donneeTotal.TotalSolde }} ({{ __('global.currency') }}) </span></div>
+                <div *ngIf="donneeTotal.TotalSoldeCarte" class="col-6" style="text-align: center;">{{ __('global.total_carte') }}: <span class="bold-total">  {{donneeTotal.TotalSoldeCarte }} ({{ __('global.currency') }})</span></div>
               </div>
             </td>
           </tr>

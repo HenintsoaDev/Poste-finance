@@ -153,6 +153,8 @@ export class AuthService {
             localStorage.removeItem(environment.soldeCarteSuiviCompte);
             localStorage.removeItem(environment.soldeVirementCp);
             localStorage.removeItem(environment.soldeVirementCarteCp);
+            localStorage.removeItem(environment.soldeGlobalTotalSolde);
+            localStorage.removeItem(environment.soldeGlobalTotalSoldeCarte);
             this.router.navigate(['/login']);
         }
         
