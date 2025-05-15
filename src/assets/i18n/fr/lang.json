@@ -302,14 +302,13 @@
 
     "solde_bureau" : {
         "code" : "Code",
-        "agence" : "Agence",
         "bureau" : "Bureau",
         "type_bureau" : "Type de bureau",
         "adresse": "Adresse",
         "info_solde" : "Détails solde de bureau",
         "solde_wallet" : "Solde wallet",
         "solde_carte" : "Solde carte",
-        "list_solde_bureau" : "Liste des soldes du bureau"
+        "list_solde_bureau" : "Solde des bureaux"
     }
 
 }
