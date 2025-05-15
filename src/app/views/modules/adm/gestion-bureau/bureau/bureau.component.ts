@@ -376,7 +376,7 @@ export class BureauComponent extends Translatable implements OnInit {
 
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.addbureau, {
-          class: 'modal-lg'
+          class: 'modal-lg',backdrop:"static"
         });
       }
     }
