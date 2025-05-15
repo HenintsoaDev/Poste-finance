@@ -94,9 +94,10 @@ export class TableComponent extends Translatable {
           const url = `${this.endpoint}?page=1`;
           if (filtre) {
             // Appliquer un filtre s’il existe
-            this.getUrlDatatable(url, '', '', '', filtre);
+            if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc', filtre);
+            else this.getUrlDatatable(url, '', '', '', filtre);
           } else {
-
+            console.log(this.triDescDefault, "xxxxxx");
             // Sinon appliquer un tri ou appeler l'URL brute
             if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc');
             else this.getUrlDatatable(url);
@@ -122,8 +123,9 @@ export class TableComponent extends Translatable {
     ** col : nom de colonne,
     ** order : triage (asc ou desc)
     */
-    async triTable(col: any, order: any){
-
+    async triTable(col: any, order: any, filtre = ''){
+      if(filtre != '') this.search = filtre;
+      
       console.log("eeeee");
       this.tri = col; this.order = order;
       this.getUrlDatatable(this.endpoint +"?page=1" ,'', '', '', this.search)

@@ -315,7 +315,7 @@
         "user_autorise" :  "Autoriser par",
         "wallet_carte" :  "Type de compte",
         "code_validation":"Code de validation",
-        "recharge_montant":"Vous allez recharger ce bureau d'un montant de",
+        "recharge_montant":"Vous allez recharger par rapatrier ce bureau d'un montant de",
         "title_detail_modal" : "Informations de la demande",
         "list_demande_rapatriement_en_attente" : "Liste des demandes de rapatriement en attente",
         "list_demande_rapatriement_autorise" : "Liste des demandes de rapatriement autorisées",

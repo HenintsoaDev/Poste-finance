@@ -87,6 +87,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   code_validation: any = "";
   isDisabled: boolean = false;
   formatNumber : any = formatNumber;
+  triDesc: any;
 
 
   constructor(
@@ -156,23 +157,24 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   }
 
   filtreTableau(etat = 0) {
-    console.log("ssssss", etat);
-
 
 
     if(etat == 0) {
       this.objetBody[0].name = 'date_demande';
       this.objetBody[5].name = 'user_demande';
-      this.header[5].nomColonne = this.__('demande_credit.demandeur')
+      this.header[5].nomColonne = this.__('demande_credit.demandeur');
+      this.triDesc = 'date_demande';
     }else if(etat == 1){
       this.objetBody[0].name = 'date_autorisation';
       this.objetBody[5].name = 'user_autorise';
       this.header[5].nomColonne = this.__('demande_credit.user_autorise')
+      this.triDesc = 'date_autorisation';
 
     }else if(etat == 2){
       this.objetBody[0].name = 'date_validation';
       this.objetBody[5].name = 'user_validation';
       this.header[5].nomColonne = this.__('demande_credit.user_validation')
+      this.triDesc = 'date_validation';
 
     }
   
@@ -199,7 +201,6 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       
       let filtreParMulti =  filtre_etat + filtre_search + filtreDate;
 
-      console.log("xxxxxx");
 
       this.passageService.appelURL(filtreParMulti);
 
