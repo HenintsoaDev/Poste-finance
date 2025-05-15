@@ -214,6 +214,8 @@ export class TableComponent extends Translatable {
       this.donneeTotal.Wallet = undefined;
       this.donneeTotal.DEBIT = undefined;
       this.donneeTotal.CREDIT = undefined;
+      this.donneeTotal.TotalSolde = undefined;
+      this.donneeTotal.TotalSoldeCarte = undefined;
 
     // --- Appel endpopint ---->
 
@@ -222,12 +224,16 @@ export class TableComponent extends Translatable {
       this.isLoading = false;
       
       await localStorage.setItem('data', JSON.stringify(res));
+
        /** SET SOLDE (SUIVI COMPTE) in localstorage*/
        if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
        if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
        /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
        if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
        if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
+       /** SET SOLDE TOTAL (SOLDE DES BUREAUX) in localstorage*/
+       if(res.solde_global.total_solde) { await localStorage.setItem(environment.soldeGlobalTotalSolde, res.solde_global.total_solde); }
+       if(res.solde_global.total_solde_carte) { await localStorage.setItem(environment.soldeGlobalTotalSoldeCarte, res.solde_global.total_solde_carte); }
 
       if(res.totaux){
         //this.donneeTotal = res.totaux;
@@ -236,7 +242,11 @@ export class TableComponent extends Translatable {
 
         (res.totaux.DEBIT) ? this.donneeTotal.DEBIT = res.totaux.DEBIT : this.donneeTotal.DEBIT = undefined;
         (res.totaux.CREDIT) ? this.donneeTotal.CREDIT = res.totaux.CREDIT : this.donneeTotal.CREDIT = undefined;
+      }
 
+      if(res.solde_global){
+        (res.solde_global.total_solde) ? this.donneeTotal.TotalSolde = res.solde_global.total_solde : this.donneeTotal.TotalSolde = undefined;
+        (res.solde_global.total_solde_carte) ? this.donneeTotal.TotalSoldeCarte = res.solde_global.total_solde_carte : this.donneeTotal.TotalSoldeCarte = undefined;
       }
       
 
