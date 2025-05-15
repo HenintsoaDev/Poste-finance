@@ -307,7 +307,8 @@
         "type_bureau" : "Type de bureau",
         "adresse": "Adresse",
         "solde_wallet" : "Solde Paositra Money",
-        "solde_carte" : "Solde E-poketra"
+        "solde_carte" : "Solde E-poketra",
+        "info_solde" : "Détails solde de bureau"
     }
 
 }
