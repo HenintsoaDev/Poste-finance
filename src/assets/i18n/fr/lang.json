@@ -263,7 +263,7 @@
         "oui_update" : "Oui, modifier"
     },
     "demande_credit" : {
-        "add" : "Nouvelle demand",
+        "add" : "Nouvelle demande",
         "type_compte" : "Type de compte",
         "all_compte" : "Tous les comptes",
         "from" : "Du",
