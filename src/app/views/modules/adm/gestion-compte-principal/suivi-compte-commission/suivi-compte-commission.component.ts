@@ -18,6 +18,8 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     dateDebut : any;
     dateFin : any;
     endpoint : string = "";
+    showTableSuivi = false;
+
     header = [
         {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_compte_commission"},
@@ -42,7 +44,16 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     ];
 
     listIcon = [];
-    searchGlobal = ['releve_compte_commission.date_transaction', 'releve_compte_commission.operation', 'releve_compte_commission.commentaire','releve_compte_commission.wallet_carte']; 
+    searchGlobal = [
+        'releve_compte_commission.date_transaction',
+        'releve_compte_commission.num_transac',  
+        'releve_compte_commission.operation', 
+        'releve_compte_commission.commentaire',
+        'releve_compte_commission.wallet_carte'
+    ]; 
+
+    soldeCarteParametrable: string;
+    soldeWalletCarteParametrable: string;
 
     constructor(
         private passageService: PassageService,
@@ -53,9 +64,16 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         super();
     }
 
-   async  ngOnInit() {
+    async  ngOnInit() {
         this.endpoint = environment.baseUrl + '/' + environment.suivi_compte_commission; 
-        this.passageService.clear();
+    }
+
+    afficheSolde(){
+        let soldeCarteParametrable = localStorage.getItem(environment.soldeCarteParametrable);
+        let soldeWalletParametrable = localStorage.getItem(environment.soldeWalletCarteParametrable);
+  
+        this.soldeCarteParametrable = (soldeCarteParametrable) ? soldeCarteParametrable : undefined;
+        this.soldeWalletCarteParametrable = (soldeWalletParametrable) ? soldeWalletParametrable : undefined;
     }
 
     searchSuiviDefault()
@@ -65,13 +83,17 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         this.typeCompte = "2";
         this.dateDebut = undefined;
         this.dateFin = undefined;
-        this.endpoint = environment.baseUrl + '/' + environment.suivi_compte_commission; 
         this.passageService.appelURL(filtreParMulti);
+        setTimeout(()=>{
+            this.afficheSolde();
+        },2000)
+        
+        this.showTableSuivi = true;
     }
 
     filtreTableau()
     {
-        let type_commission = "type_service="+this.typeCommission;
+        let type_commission = "&type_service="+this.typeCommission;
         let filtre_search = "" ;
         if(this.typeCompte != '2'){
             filtre_search = ",releve_compte_commission.wallet_carte|e|"+this.typeCompte;
@@ -90,7 +112,7 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
             }
         }
         
-        let filtreParMulti =  type_commission + filtre_search + filtreDate + "&__order__=desc,date_transaction";
+        let filtreParMulti =  filtre_search + filtreDate + "&__order__=desc,date_transaction" + type_commission;
         this.passageService.appelURL(filtreParMulti);
     }
 

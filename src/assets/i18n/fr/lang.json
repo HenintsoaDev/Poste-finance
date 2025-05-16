@@ -344,6 +344,13 @@
 
     "solde_distributeur" : {
         "list_solde_distributeur" : "Solde des distributeurs"
+    },
+
+    "suivi_commission" : {
+        "type_service" : "Type de service",
+        "type_commission" : "Sélectionner le type de service",
+        "paiement_masse" : "Commission paiement de masse",
+        "hors_paiement_masse" : "Commission hors paiement de masse"
     }
 
 }
