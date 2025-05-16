@@ -91,7 +91,9 @@
         "tooltip_detail" :"Voir les détails",
         "le" : "le",
         "valider" : "Valider",
-        "autorise" : "Autoriser"
+        "autorise" : "Autoriser",
+        "tableError" : "Erreur de récupération",
+        "tableErrorInfo" : "Erreur lors de la récupération des données"
     },
 
     "paiement" : {

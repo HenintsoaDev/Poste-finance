@@ -9,6 +9,7 @@ import { valuesys } from 'app/shared/models/options';
 import { Translatable } from 'shared/constants/Translatable';
 import { AuthService } from '../auth.service';
 import { environment } from 'environments/environment';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-table',
@@ -70,9 +71,8 @@ export class TableComponent extends Translatable {
       private http: HttpClient,
       private passageService: PassageService,
       private datePipe: DatePipe,
-      private authService : AuthService
-
-
+      private authService : AuthService,
+      private toast :ToastrService
       ) { 
         super();
         this.authService.initAutority("PRM","ADM");
@@ -225,6 +225,13 @@ export class TableComponent extends Translatable {
     // --- Appel endpopint ---->
 
       let toogle = await this.http.get<any>(url + this.where + this.searchCol + this.search    + filtre + triage  ,valuesys.httpAuthOptions()).toPromise();
+
+      if(toogle.code == 500){
+        this.isLoading = false;
+        this.toast.error(this.__('global.tableError'),this.__('global.tableErrorInfo'))
+        return;
+      }
+
       let res = toogle.data;
       this.isLoading = false;
       
