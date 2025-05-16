@@ -55,6 +55,9 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     soldeCarteParametrable: string;
     soldeWalletCarteParametrable: string;
 
+    suivi_comptes: any = [];
+    suivi_comptes_totaux: any;
+
     constructor(
         private passageService: PassageService,
         private toastr: ToastrService,
@@ -84,10 +87,7 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         this.dateDebut = undefined;
         this.dateFin = undefined;
         this.passageService.appelURL(filtreParMulti);
-        setTimeout(()=>{
-            this.afficheSolde();
-        },2000)
-        
+        setTimeout(()=>{this.afficheSolde();},2000)
         this.showTableSuivi = true;
     }
 
@@ -119,6 +119,72 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     backSelectCommission()
     {
         this.showTableSuivi = false;
+    }
+
+    async exportExcel(fileName) {
+
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        
+        this.suivi_comptes = result.data;
+        this.suivi_comptes_totaux = result.totaux;
+        
+        this.authService.exportExcel(this.print(this.suivi_comptes),this.__("suivi_commission.list_suivi_compte")).then(
+            (response: any)=>{
+                let a = document.createElement("a"); 
+                a.href = response.data;
+                a.download = `${fileName}.xlsx`;
+                a.click(); 
+            },
+            (error:any)=>{}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+
+        this.suivi_comptes = result.data;
+        this.suivi_comptes_totaux = result.totaux;
+        
+        this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_commission.list_suivi_compte")).then(
+            (response: any)=>{},
+            (error:any)=>{}
+        );
+    }
+
+    print(suivis:any[]){
+
+        let tab = suivis.map((suivi: any, index: number) => {
+            let t: any = {};
+            t[this.__('suivi_compte.date')] = suivi.date_transaction;
+            t[this.__('suivi_compte.num_transac')] = suivi.num_transac;
+            t[this.__('suivi_compte.solde_avant')] = suivi.solde_avant;
+            t[this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] = suivi.montant;
+            t[this.__('suivi_compte.solde_apres')] = suivi.solde_apres;
+            t[this.__('suivi_compte.operation')] = suivi.operation;
+            t[this.__('suivi_compte.coms')] = suivi.commentaire;
+            t[this.__('suivi_compte.type_compte')] = suivi.wallet_carte;
+                  
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+            [this.__('suivi_compte.date')]: '',
+            [this.__('suivi_compte.num_transac')]: '',
+            [this.__('suivi_compte.solde_avant')]: this.__('global.total_debit'),
+            [this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')']: this.suivi_comptes_totaux?.DEBIT ?? 0,
+            [this.__('suivi_compte.solde_apres')]: '',
+            [this.__('suivi_compte.operation')]: this.__('global.total_credit'),
+            [this.__('suivi_compte.coms')]: this.suivi_comptes_totaux?.CREDIT ?? 0,
+            [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
+    
     }
 
 }
