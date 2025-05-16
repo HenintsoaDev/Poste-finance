@@ -88,6 +88,7 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
   isDisabled: boolean = false;
   formatNumber : any = formatNumber;
   triDesc: string = '';
+  etatSelect: number = 0;
 
 
   constructor(
@@ -156,8 +157,10 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
     this.filtreTableau(this.index );
   }
 
-  filtreTableau(etat = 0) {
+  filtreTableau(etat) {
     console.log("ssssss", etat);
+
+    this.etatSelect = etat;
 
 
 

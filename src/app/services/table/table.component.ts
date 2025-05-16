@@ -88,8 +88,9 @@ export class TableComponent extends Translatable {
       
         const { type, data: filtre } = event;
 
-        console.log("EVENT : ",event);
-        console.log("ENDPOINT : ",this.endpoint);
+        console.log("xxxxx", this.triDescDefault);
+
+      
         // Vérifie si c'est un événement pertinent
         if ((type === 'url' || type === '') && this.endpoint) {
           const url = `${this.endpoint}?page=1`;
@@ -144,7 +145,7 @@ export class TableComponent extends Translatable {
     ** Recherche global par formulaire
     */
     async getSearchInput(){
-      this.getUrlDatatable(this.endpoint +"?page=1")
+      this.getUrlDatatable(this.endpoint +"?page=1", '', '', '', this.search)
     }
 
     /*

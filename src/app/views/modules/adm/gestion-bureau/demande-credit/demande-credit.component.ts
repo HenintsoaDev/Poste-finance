@@ -71,6 +71,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   listDemandes:any [] = [];
   modalRef?: BsModalRef;
   titleModal: string = "";
+  etatSelect: number = 0;
 
 
   @ViewChild('detailDemandeCredit') detailDemandeCredit: TemplateRef<any> | undefined;
@@ -156,8 +157,9 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     this.filtreTableau(this.index );
   }
 
-  filtreTableau(etat = 0) {
+  filtreTableau(etat) {
 
+    this.etatSelect = etat;
 
     if(etat == 0) {
       this.objetBody[0].name = 'date_demande';
@@ -177,7 +179,8 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       this.triDesc = 'date_validation';
 
     }
-  
+    
+    console.log(this.triDesc)
 
       let filtre_search = "" ;
       if(this.typeCompte != '2'){
