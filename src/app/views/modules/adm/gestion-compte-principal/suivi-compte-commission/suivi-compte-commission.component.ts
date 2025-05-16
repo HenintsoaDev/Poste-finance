@@ -116,4 +116,9 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         this.passageService.appelURL(filtreParMulti);
     }
 
+    backSelectCommission()
+    {
+        this.showTableSuivi = false;
+    }
+
 }

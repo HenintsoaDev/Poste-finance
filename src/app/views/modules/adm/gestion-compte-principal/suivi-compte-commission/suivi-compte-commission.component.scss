@@ -22,14 +22,17 @@
     padding: 10px;
     background: $primary;
     color: $white;
+    cursor: pointer;
+    border-radius: 5px 0px 0px 5px;
 }
 
-.left-content>a{
-    color : $white;
+.left-content:hover{
+    background-color: $secondary;
 }
 
 .right-content{
     padding: 10px;
     background: $secondary;
     color: $white;
+    border-radius: 0px 5px 5px 0px;
 }
