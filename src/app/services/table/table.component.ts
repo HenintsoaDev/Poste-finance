@@ -88,7 +88,8 @@ export class TableComponent extends Translatable {
       
         const { type, data: filtre } = event;
 
-      
+        console.log("EVENT : ",event);
+        console.log("ENDPOINT : ",this.endpoint);
         // Vérifie si c'est un événement pertinent
         if ((type === 'url' || type === '') && this.endpoint) {
           const url = `${this.endpoint}?page=1`;
@@ -228,13 +229,17 @@ export class TableComponent extends Translatable {
 
        /** SET SOLDE (SUIVI COMPTE) in localstorage*/
        if(res.solde){await localStorage.setItem(environment.soldeSuiviCompte, res.solde);} 
-       if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);} 
+       if(res.solde_carte) {await localStorage.setItem(environment.soldeCarteSuiviCompte, res.solde_carte);}
+       
+       /** SET SOLDE (SUIVI COMPTE COMMISSION) in localstorage*/
+       if(res.solde_carte_parametrable){await localStorage.setItem(environment.soldeCarteParametrable, res.solde_carte_parametrable);} 
+       if(res.solde_wallet_carte_parametrage) {await localStorage.setItem(environment.soldeWalletCarteParametrable, res.solde_wallet_carte_parametrage);} 
        /** SET SOLDE CP (HISTORIQUE VIREMENT) in localstorage*/
-       if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
-       if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
+       //if(res.solde_cp) {await localStorage.setItem(environment.soldeVirementCp, res.solde_cp);}
+       //if(res.solde_carte_cp) {await localStorage.setItem(environment.soldeVirementCarteCp, res.solde_carte_cp);}
        /** SET SOLDE TOTAL (SOLDE DES BUREAUX) in localstorage*/
-       if(res.solde_global?.total_solde) { await localStorage.setItem(environment.soldeGlobalTotalSolde, res.solde_global.total_solde); }
-       if(res.solde_global?.total_solde_carte) { await localStorage.setItem(environment.soldeGlobalTotalSoldeCarte, res.solde_global.total_solde_carte); }
+       //if(res.solde_global?.total_solde) { await localStorage.setItem(environment.soldeGlobalTotalSolde, res.solde_global.total_solde); }
+       //if(res.solde_global?.total_solde_carte) { await localStorage.setItem(environment.soldeGlobalTotalSoldeCarte, res.solde_global.total_solde_carte); }
 
       if(res.totaux){
         //this.donneeTotal = res.totaux;

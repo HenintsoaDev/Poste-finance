@@ -26,6 +26,8 @@ export const environment = {
   soldeVirementCarteCp : 'soldeVirementCarteCp',
   soldeGlobalTotalSolde : 'soldeGlobalTotalSolde',
   soldeGlobalTotalSoldeCarte : 'soldeGlobalTotalSoldeCarte',
+  soldeCarteParametrable : 'soldeCarteParametrable',
+  soldeWalletCarteParametrable : 'soldeWalletCarteParametrable',
 
   //** Parametrage */
   module :'parametrage/module',

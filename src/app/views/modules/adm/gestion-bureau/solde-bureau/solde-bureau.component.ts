@@ -39,7 +39,7 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
 
     subscription: Subscription;
 
-    searchGlobal = []; 
+    searchGlobal = ["agence.code","agence.name","agence.adresse"]; 
     dataSolde : any;
     idSolde : any;
 
