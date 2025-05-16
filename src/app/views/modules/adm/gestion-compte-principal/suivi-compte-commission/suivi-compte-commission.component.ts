@@ -35,9 +35,9 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     objetBody = [
         {'name' : 'date_transaction','type' : 'text',},
         {'name' : 'num_transac','type' : 'text',},
-        {'name' : 'solde_avant','type' : 'montant',},
+        {'name' : 'solde_avant','type' : 'text',},
         {'name' : 'montant','type' : 'text',},
-        {'name' : 'solde_apres','type' : 'montant',},
+        {'name' : 'solde_apres','type' : 'text',},
         {'name' : 'operation','type' : 'text',},
         {'name' : 'commentaire','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',}
