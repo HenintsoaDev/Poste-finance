@@ -311,13 +311,13 @@
         "list_demande_credit" : "Demande de crédit",
         "demande_attente" : "Demandes en attente",
         "demande_autorise" : "Demandes autorisées",
-        "demande_rapatrie" : "Demandes rapatriés",
+        "demande_rapatrie" : "Demandes rapatriées",
         "user_validation" :"Valider par",
         "user_demande" : "Demander par",
         "user_autorise" :  "Autoriser par",
         "wallet_carte" :  "Type de compte",
         "code_validation":"Code de validation",
-        "recharge_montant":"Vous allez recharger par rapatrier ce bureau d'un montant de",
+        "recharge_montant":"Vous allez rapatrier ce bureau d'un montant de",
         "title_detail_modal" : "Informations de la demande",
         "list_demande_rapatriement_en_attente" : "Liste des demandes de rapatriement en attente",
         "list_demande_rapatriement_autorise" : "Liste des demandes de rapatriement autorisées",
@@ -328,9 +328,9 @@
     },
 
     "releve_solde_bureau" : {
-        "agence" : "Agence",
+        "agence" : "Bureau",
         "select_bureau" : "Sélectionner le bureau",
-        "list_releve" : "Liste solde relevé bureau"
+        "list_releve" : "Relevé solde  bureau"
     },
 
     "solde_bureau" : {
@@ -354,7 +354,7 @@
         "paiement_masse" : "Commission paiement de masse",
         "hors_paiement_masse" : "Commission hors paiement de masse",
         "select_commission" : "Choisir le type de service",
-        "list_suivi_compte" : "Liste des commissions"
+        "list_suivi_compte" : "Suivi relevé compte commission"
     }
 
 }
