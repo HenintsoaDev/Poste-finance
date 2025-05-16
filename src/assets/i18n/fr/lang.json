@@ -349,11 +349,11 @@
     },
 
     "suivi_commission" : {
-        "type_service" : "Type de service",
-        "type_commission" : "Sélectionner le type de service",
+        "type_service" : "Type de commission",
+        "type_commission" : "Sélectionner le type de commission",
         "paiement_masse" : "Commission paiement de masse",
         "hors_paiement_masse" : "Commission hors paiement de masse",
-        "select_commission" : "Choisir le type de service",
+        "select_commission" : "Choisir le type de commission",
         "list_suivi_compte" : "Suivi relevé compte commission"
     }
 
