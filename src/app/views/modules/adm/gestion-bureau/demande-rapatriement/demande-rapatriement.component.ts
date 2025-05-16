@@ -50,7 +50,7 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
     'icon' : 'info',
     'action' : 'detail',
     'tooltip' : this.__('global.tooltip_detail'),
-    'autority' : 'PRM_41',
+    'autority' : 'GBU_18',
 
   },];
   searchGlobal = [ 'demande_rapatriement_bureau.date_demande', 'demande_rapatriement_bureau.num_demande', 'demande_rapatriement_bureau.ref_demande', 'agence.name', 'demande_rapatriement_bureau.montant', 'user.nom']
@@ -103,8 +103,7 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
   }
 
   async ngOnInit() {
-
-    console.log()
+    this.authService.initAutority("GBU","ADM");
 
     this.endpoint = environment.baseUrl + '/' + environment.demande_rapatriement;
 

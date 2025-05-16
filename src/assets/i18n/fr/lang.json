@@ -355,6 +355,23 @@
         "hors_paiement_masse" : "Commission hors paiement de masse",
         "select_commission" : "Choisir le type de service",
         "list_suivi_compte" : "Liste des commissions"
+    },
+    "service" : {
+        "title" : "Gestion des services",
+        "label" : "Service",
+        "code" : "Code",
+        "frais" : "Commission",
+        "montant_frais" : "Montant de commission",
+        "type_frais" : "Type de commission",
+        "distributeur" : "Dstributeur",
+        "taux_distributeur" : "Taux de commission",
+        "add" : "Ajouter un service",
+        "title_edit_modal" : "Modification d'un service",
+        "title_add_modal" : "Ajout d'un service",
+        "fixe" : "Fixe",
+        "pallier" : "Pallier",
+        "user_creation" : "Créér par"
+
     }
 
 }

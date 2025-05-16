@@ -28,6 +28,7 @@ import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-b
 import { DemandeRapatriementComponent } from './views/modules/adm/gestion-bureau/demande-rapatriement/demande-rapatriement.component';
 import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
+import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 
 const routes: Routes =[
   
@@ -46,6 +47,7 @@ const routes: Routes =[
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
     {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
+    {path : 'service',component: ServiceComponent,data: { breadcrumb: 'Lister les services' }},
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [

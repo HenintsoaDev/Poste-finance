@@ -57,6 +57,7 @@ import { SoldeBureauComponent } from './views/modules/adm/gestion-bureau/solde-b
 import { DemandeRapatriementComponent } from './views/modules/adm/gestion-bureau/demande-rapatriement/demande-rapatriement.component';
 import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
+import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 
 
 registerLocaleData(localeFr);
@@ -122,7 +123,8 @@ registerLocaleData(localeFr);
     DemandeCreditComponent,
     DemandeRapatriementComponent,
     SoldeDistributeurComponent,
-    SuiviCompteCommissionComponent
+    SuiviCompteCommissionComponent,
+    ServiceComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
