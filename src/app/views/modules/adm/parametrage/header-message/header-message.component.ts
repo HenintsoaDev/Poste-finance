@@ -29,8 +29,8 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
 
     listIcon = [
         {'icon' : 'state','autority' : '',},
-        {'icon' : 'edit','action' : 'edit','tooltip' : 'Modification','autority' : '',},
-        {'icon' : 'delete','action' : 'delete','tooltip' : 'Supprimer','autority' : '',},
+        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
+        {'icon' : 'delete','action' : 'delete','tooltip' : this.__('global.tooltip_delete'),'autority' : '',},
     ];
 
     searchGlobal = [];

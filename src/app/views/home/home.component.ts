@@ -5,6 +5,9 @@ import { Auth, module_user } from 'app/shared/models/db';
 import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { Translatable } from 'shared/constants/Translatable';
 import Swal from 'sweetalert2';
+import { HttpService } from '../../services/http.service';
+import { environment } from 'environments/environment.prod';
+import { tap } from 'rxjs';
 
 
 @Component({
@@ -19,7 +22,12 @@ export class HomeComponent extends Translatable implements OnInit {
     public user    : Auth = new Auth();
     public modules : module_user [] = [];
 
-    constructor(private auth: AuthService, private router: Router, private menuService: MenuService) {
+    constructor(
+        private auth: AuthService, 
+        private router: Router, 
+        private menuService: MenuService,
+        private httpService: HttpService
+    ) {
         super();
     }
 
@@ -34,12 +42,20 @@ export class HomeComponent extends Translatable implements OnInit {
         const parent = ROUTES.find(route => route.path === parentPath);
         return parent?.children || [];
     }
-
+ 
     goTo(module : string, pathSelected)
     {
-        this.menuService.updateMenuItems(module);
-        this.menuService.setMenuItemsModule(module);
-        this.router.navigate(['/app-module', module.replace('/','')]);
+        this.httpService.get(environment.header_message + module + "/display_message").pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    sessionStorage.setItem('message-header', response['data'][0]['txt_messenger']);
+                    this.menuService.updateMenuItems(module);
+                    this.menuService.setMenuItemsModule(module);
+                    this.router.navigate(['/app-module', module.replace('/','')]);
+                }
+            })
+        ).subscribe();
+        
     }
 
     goToLogin()

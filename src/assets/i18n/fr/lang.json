@@ -355,6 +355,13 @@
         "hors_paiement_masse" : "Commission hors paiement de masse",
         "select_commission" : "Choisir le type de commission",
         "list_suivi_compte" : "Suivi relevé compte commission"
+    },
+
+    "header_message" : {
+        "expediteur" : "Éxpediteur",
+        "message" : "Message",
+        "publie" : "Publié",
+        "module" : "Module"
     }
 
 }

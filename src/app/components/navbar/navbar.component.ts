@@ -24,6 +24,7 @@ export class NavbarComponent implements OnInit {
     @ViewChild('menuDropdownResponsive') menuDropdown!: ElementRef<HTMLElement>;
     isMenuResponsiveOpen = false;
     showNavbar = true;
+    messageHeader : string = "";
 
     // Gère les clics partout sur le document
     @HostListener('document:click', ['$event.target'])
@@ -49,6 +50,9 @@ export class NavbarComponent implements OnInit {
     }
 
     ngOnInit(){
+        let messageHeaderStorage = sessionStorage.getItem('message-header');
+        if(messageHeaderStorage){ this.messageHeader = messageHeaderStorage; }
+
         //this.listTitles = ROUTES.filter(listTitle => listTitle);
         this.listTitles = this.menuService.getCurrentMenuItems();
         const navbar: HTMLElement = this.element.nativeElement;
