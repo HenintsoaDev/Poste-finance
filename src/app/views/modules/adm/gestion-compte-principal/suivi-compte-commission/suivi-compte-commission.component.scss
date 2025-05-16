@@ -17,3 +17,19 @@
 #content-epkt{
     background-color: $secondary;
 }
+
+.left-content{
+    padding: 10px;
+    background: $primary;
+    color: $white;
+}
+
+.left-content>a{
+    color : $white;
+}
+
+.right-content{
+    padding: 10px;
+    background: $secondary;
+    color: $white;
+}

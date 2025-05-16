@@ -1,6 +1,15 @@
 <div class="main-content">
     <div class="container-fluid">
 
+        <div *ngIf="showTableSuivi" style="display: flex;font-size: 14px;font-weight: 600;">
+            <div class="left-content"><a href="#" *ngIf="showTableSuivi"><< {{ __('suivi_commission.select_commission') }}</a></div>
+            <div class="right-content">
+                <span *ngIf="typeCommission == 1">{{ __('suivi_commission.hors_paiement_masse') }}</span>
+                <span *ngIf="typeCommission == 2">{{ __('suivi_commission.paiement_masse') }}</span>
+            </div>
+        </div>
+        
+
         <div class="row" *ngIf="showTableSuivi">
             <div class="col-md-12">
                 <div class="card card-plain">
@@ -75,6 +84,7 @@
         <!-- TABLE COMMISSION -->
         <div class="row" *ngIf="showTableSuivi">
             <div class="col-md-12">
+
                 <div class="card">
                     <div class="card-body">
                         <!-- FORM FILTER -->
