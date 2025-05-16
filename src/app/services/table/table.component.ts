@@ -1,6 +1,6 @@
 import { CommonModule, DatePipe } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { Component, Input } from '@angular/core';
+import { Component, Input,OnChanges, SimpleChanges } from '@angular/core';
 //import { valuesys } from '../../../../../../options';
 import { PassageService } from './passage.service';
 import formatNumber from 'number-handler'
@@ -111,6 +111,9 @@ export class TableComponent extends Translatable {
 
       
     }
+
+   
+
 
     ngOnDestroy() {
       if (this.subscription) {

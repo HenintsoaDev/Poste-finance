@@ -158,8 +158,6 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
   }
 
   filtreTableau(etat) {
-    console.log("ssssss", etat);
-
     this.etatSelect = etat;
 
 
@@ -206,7 +204,9 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
           }
       }
       
-      let filtreParMulti =  filtre_etat + filtre_search + filtreDate;
+      let tab = "&tab="+ etat;
+      
+      let filtreParMulti =  filtre_etat + filtre_search + filtreDate + tab;
 
       console.log("xxxxxx");
 
