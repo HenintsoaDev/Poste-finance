@@ -160,17 +160,19 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   filtreTableau(etat) {
 
     this.etatSelect = etat;
-
+    
     if(etat == 0) {
       this.objetBody[0].name = 'date_demande';
       this.objetBody[5].name = 'user_demande';
       this.header[5].nomColonne = this.__('demande_credit.demandeur');
       this.triDesc = 'date_demande';
+
     }else if(etat == 1){
       this.objetBody[0].name = 'date_autorisation';
       this.objetBody[5].name = 'user_autorise';
       this.header[5].nomColonne = this.__('demande_credit.user_autorise')
       this.triDesc = 'date_autorisation';
+
 
     }else if(etat == 2){
       this.objetBody[0].name = 'date_validation';
@@ -201,8 +203,9 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
             filtreDate = "&date_debut="+date_debut +"&date_fin="+dateFin;
           }
       }
+      let tab = "&tab="+ etat;
       
-      let filtreParMulti =  filtre_etat + filtre_search + filtreDate;
+      let filtreParMulti =  filtre_etat + filtre_search + filtreDate + tab;
 
 
       this.passageService.appelURL(filtreParMulti);
