@@ -28,6 +28,7 @@ export const environment = {
   soldeGlobalTotalSoldeCarte : 'soldeGlobalTotalSoldeCarte',
   soldeCarteParametrable : 'soldeCarteParametrable',
   soldeWalletCarteParametrable : 'soldeWalletCarteParametrable',
+  header_message : 'parametrage/header_message',
 
   //** Parametrage */
   module :'parametrage/module',

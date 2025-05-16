@@ -29,6 +29,7 @@ import { DemandeRapatriementComponent } from './views/modules/adm/gestion-bureau
 import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/solde-distributeur/solde-distributeur.component';
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
 import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
+import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-message/header-message.component';
 
 const routes: Routes =[
   
@@ -48,6 +49,7 @@ const routes: Routes =[
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
     {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
     {path : 'service',component: ServiceComponent,data: { breadcrumb: 'Lister les services' }},
+    {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'Message d\'en-tête' }},
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
@@ -56,7 +58,6 @@ const routes: Routes =[
     {path : 'releve_solde_bureau',component: ReleveSoldeBureauComponent,data: { breadcrumb: 'Relevé solde bureau' }},
     {path : 'solde_bureau',component: SoldeBureauComponent,data: { breadcrumb: 'Solde des bureaux' }},
     {path : 'demande_rapatriement',component: DemandeRapatriementComponent,data: { breadcrumb: 'Historique rapatriement bureaux' }},
-
     {path : 'solde_des_distributeur',component: SoldeDistributeurComponent,data: { breadcrumb: 'Solde des distributeurs' }},
   ]}, 
   {path : 'gestion_compte_principal',data: { breadcrumb: 'Gestion compte principal' },children : [

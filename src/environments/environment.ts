@@ -47,6 +47,8 @@ export const environment = {
   generateroute : 'parametrage/settings/generateroute',
   service : 'parametrage/service',
 
+  header_message : 'parametrage/header_message',
+  
   //** Gestion bureau */
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
