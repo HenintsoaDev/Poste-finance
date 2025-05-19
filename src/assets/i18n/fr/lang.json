@@ -353,8 +353,27 @@
         "type_commission" : "Sélectionner le type de commission",
         "paiement_masse" : "Commission paiement de masse",
         "hors_paiement_masse" : "Commission hors paiement de masse",
+      
         "select_commission" : "Choisir le type de commission",
         "list_suivi_compte" : "Suivi relevé compte commission"
+    },
+    "service" : {
+        "title" : "Gestion des services",
+        "label" : "Service",
+        "code" : "Code",
+        "frais" : "Commission",
+        "montant_frais" : "Montant de commission",
+        "type_frais" : "Type de commission",
+        "distributeur" : "Distributeur",
+        "taux_distributeur" : "Taux de commission",
+        "add" : "Ajouter un service",
+        "title_edit_modal" : "Modification d'un service",
+        "title_add_modal" : "Ajout d'un service",
+        "fixe" : "Fixe",
+        "pallier" : "Pallier",
+        "user_creation" : "Créér par"
+
+       
     },
 
     "header_message" : {

@@ -50,7 +50,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
     'icon' : 'info',
     'action' : 'detail',
     'tooltip' : this.__('global.tooltip_detail'),
-    'autority' : 'PRM_41',
+    'autority' : 'GBU_11',
 
   },];
   searchGlobal = [ 'demande_credit_bureau.date_demande', 'demande_credit_bureau.num_demande', 'demande_credit_bureau.ref_demande', 'agence.name', 'demande_credit_bureau.montant', 'user.nom']
@@ -103,6 +103,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
   }
 
   async ngOnInit() {
+    this.authService.initAutority("GBU","ADM");
 
     console.log()
 

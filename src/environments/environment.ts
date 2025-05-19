@@ -45,6 +45,8 @@ export const environment = {
   action : 'parametrage/action',
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
+  service : 'parametrage/service',
+
   header_message : 'parametrage/header_message',
   
   //** Gestion bureau */

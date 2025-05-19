@@ -20,7 +20,7 @@
                                <!--   -->
                             </div>
                             <div class="right-button">
-                                <button class="btn btn-secondary" *ngIf="autority('GBU_24')" (click)="openModalAdd(addDemande)"> {{ __("demande_credit.add")}}</button>
+                                <button class="btn btn-secondary" *ngIf="autority('GBU_9')" (click)="openModalAdd(addDemande)"> {{ __("demande_credit.add")}}</button>
                             </div>
                         </div>
                     </div>
@@ -154,8 +154,8 @@
         </table> 
 
         <div class="modal-footer">
-            <button type="button" *ngIf="demande_credit.etat == 0" [disabled]="isDisabled" class="btn btn-primary" (click)="autoriseDemande()">{{ __('global.autorise')}}</button>
-            <button type="button" *ngIf="demande_credit.etat == 1"  [disabled]="isDisabled"  class="btn btn-primary" (click)="passerCode()">{{ __('global.valider')}}</button>
+            <button type="button" *ngIf="demande_credit.etat == 0 && autority('GBU_14')" [disabled]="isDisabled" class="btn btn-primary"  (click)="autoriseDemande()">{{ __('global.autorise')}}</button>
+            <button type="button" *ngIf="demande_credit.etat == 1 && autority('GBU_15')"  [disabled]="isDisabled"  class="btn btn-primary" (click)="passerCode()">{{ __('global.valider')}}</button>
             <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
         </div>
     </div>

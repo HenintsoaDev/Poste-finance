@@ -107,4 +107,26 @@ export class province {
    
 }
 
+export class service {
+    rowid : number;
+    code : string ;
+    label : string ;
+    frais : string ;
+    state : number ;
+    user_creation : number ;
+    date_creation : string ;
+    created_by : string ;
+    date_modification : string ;
+    distributeur : number ;
+    taux_distributeur : number ;
+
+    taux_sous_distributeur : number ;
+    solde : number ;
+    solde_carte : number ;
+    type_frais : number;
+    montant: string;
+   
+   
+}
+
 
