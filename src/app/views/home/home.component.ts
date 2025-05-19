@@ -47,12 +47,20 @@ export class HomeComponent extends Translatable implements OnInit {
     {
         this.httpService.get(environment.header_message + module + "/display_message").pipe(
             tap(response => {
+                console.log("response XHR", response);
                 if (response['code'] === 200) {
-                    sessionStorage.setItem('message-header', response['data'][0]['txt_messenger']);
-                    this.menuService.updateMenuItems(module);
-                    this.menuService.setMenuItemsModule(module);
-                    this.router.navigate(['/app-module', module.replace('/','')]);
+                    if(response['data'].length > 0){
+                        let message = "";
+                        for(let i = 0; i < response['data'].length; i++) {
+                            message += this.__('header_message.expediteur') + ': ' + response['data'][i]['expediteur'] + ' - ' + response['data'][i]['txt_messenger'];
+                            message += "     ****************     "
+                        }
+                        sessionStorage.setItem('message-header', message);
+                    }
                 }
+                this.menuService.updateMenuItems(module);
+                this.menuService.setMenuItemsModule(module);
+                this.router.navigate(['/app-module', module.replace('/','')]);
             })
         ).subscribe();
         
