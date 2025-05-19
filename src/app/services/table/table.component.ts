@@ -411,6 +411,11 @@ export class TableComponent extends Translatable {
                dataIcon.state === 0 ? 'toggle_off' :
                dataIcon.icon ?? '';
       }
+      if('publie_value' in dataIcon) {
+        return dataIcon.publie_value === 1 ? 'visibility' :
+               dataIcon.publie_value === 0 ? 'visibility_off' :
+               dataIcon.icon ?? ''; 
+      }
       return dataIcon.icon ?? '';
 
     }
@@ -423,6 +428,11 @@ export class TableComponent extends Translatable {
                dataIcon.state === 0 ? this.__('global.clique_pour_activer') :
                dataIcon.tooltip ?? '';
       }
+      if ('publie_value' in dataIcon) {
+        return dataIcon.publie_value === 1 ? this.__('global.clique_pour_annuler_publier') :
+               dataIcon.publie_value === 0 ? this.__('global.clique_pour_publier') :
+               dataIcon.tooltip ?? '';
+      }
       return dataIcon.tooltip ?? '';
 
     }
@@ -433,6 +443,15 @@ export class TableComponent extends Translatable {
       // Si "state" est présent
       if ('state' in dataIcon) {
         switch (dataIcon.state) {
+          case 1: return 'green'; // bleu
+          case 0: return 'red'; // orange
+          default: return dataIcon.tooltip ?? '';
+        }
+      }
+
+      // Si "publie" est présent
+      if ('publie_value' in dataIcon) {
+        switch (dataIcon.publie_value) {
           case 1: return 'green'; // bleu
           case 0: return 'red'; // orange
           default: return dataIcon.tooltip ?? '';

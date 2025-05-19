@@ -16,9 +16,15 @@ export class ModuleService {
 
     constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
-    /*getModuleActive() : Observable<any> {
-        return this.
-    }*/
+    getModuleActive() : Observable<any> {
+        return this.httpService.get<any>(environment.liste_module_active).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            }
+        ));
+    }
 
     ajoutModule(credentials: module): Observable<any> {
         
