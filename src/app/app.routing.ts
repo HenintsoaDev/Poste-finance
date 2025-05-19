@@ -30,6 +30,7 @@ import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/s
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
 import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-message/header-message.component';
+import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
 
 const routes: Routes =[
   
@@ -65,7 +66,9 @@ const routes: Routes =[
     {path : 'virement',component: HistoriqueVirementsComponent,data: { breadcrumb: 'Historique des virements' }},
     {path : 'suivi_compte_commission',component: SuiviCompteCommissionComponent,data: { breadcrumb: 'Suivi compte commission' }},
   ]}, 
-  
+  {path : 'gestion_commission_reseau_phco',data: { breadcrumb: 'Gestion commision réseau PHCO' },children : [
+    {path : 'partenaire_financier',component: PartenaireFinancierComponent,data: { breadcrumb: 'Lister les partenaires financiers' }},
+  ]}, 
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];
 
