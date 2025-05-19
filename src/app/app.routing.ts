@@ -49,7 +49,7 @@ const routes: Routes =[
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
     {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
     {path : 'service',component: ServiceComponent,data: { breadcrumb: 'Lister les services' }},
-    {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'Listrer les messages d\'entête' }},
+    {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'Lister les messages d\'entête' }},
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
