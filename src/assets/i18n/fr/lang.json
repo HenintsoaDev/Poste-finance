@@ -364,7 +364,7 @@
         "frais" : "Commission",
         "montant_frais" : "Montant de commission",
         "type_frais" : "Type de commission",
-        "distributeur" : "Dstributeur",
+        "distributeur" : "Distributeur",
         "taux_distributeur" : "Taux de commission",
         "add" : "Ajouter un service",
         "title_edit_modal" : "Modification d'un service",
