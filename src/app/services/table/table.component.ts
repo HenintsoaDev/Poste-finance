@@ -406,6 +406,8 @@ export class TableComponent extends Translatable {
     //** Verification pour icon"
     verifIcon(dataIcon){
 
+      //console.log("dataIcon", dataIcon);
+
       if ('state' in dataIcon) {
         return dataIcon.state === 1 ? 'toggle_on' :
                dataIcon.state === 0 ? 'toggle_off' :

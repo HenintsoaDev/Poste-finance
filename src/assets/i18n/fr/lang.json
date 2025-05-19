@@ -380,7 +380,9 @@
         "expediteur" : "Éxpediteur",
         "message" : "Message",
         "publie" : "Publié",
-        "module" : "Module"
+        "module" : "Module",
+        "add" : "Ajouter un message",
+        "update_info" : "Modifier les informations du message"
     }
 
 }
