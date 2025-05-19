@@ -1,6 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { Translatable } from 'shared/constants/Translatable';
 
 @Component({
@@ -35,13 +36,34 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
 
     searchGlobal = [];
 
-    constructor(private passageService: PassageService) {
+    titleModal : string = "";
+    modalRef?: BsModalRef;
+    @ViewChild('updateHeaderMessage') updateHeaderMessage: TemplateRef<any> | undefined;
+
+    constructor(
+        private passageService: PassageService,
+        private modalService: BsModalService,
+    ) {
         super();
     }
 
     ngOnInit(): void {
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.header_message;
+    }
+
+    openUpdateModal()
+    {
+        this.titleModal = this.__('solde_bureau.info_solde');
+        this.modalRef = this.modalService.show(this.updateHeaderMessage, {
+            backdrop: 'static',
+            keyboard: false
+        });
+    }
+
+    // Fermeture du modal
+    closeModal() {
+        this.modalRef?.hide();
     }
 
 }

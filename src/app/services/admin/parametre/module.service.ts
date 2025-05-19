@@ -16,6 +16,10 @@ export class ModuleService {
 
     constructor(private http: HttpClient, private httpService: HttpService,private  router: Router,private menuService: MenuService) {}
 
+    /*getModuleActive() : Observable<any> {
+        return this.
+    }*/
+
     ajoutModule(credentials: module): Observable<any> {
         
         return this.httpService.post<any>(environment.module, credentials).pipe(
