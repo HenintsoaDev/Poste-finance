@@ -54,7 +54,7 @@ export class HomeComponent extends Translatable implements OnInit {
                     if(response['data'].length > 0){
                         let message = "";
                         for(let i = 0; i < response['data'].length; i++) {
-                            message += this.__('header_message.expediteur') + ': ' + response['data'][i]['expediteur'] + ' - ' + response['data'][i]['txt_messenger'];
+                            message += response['data'][i]['expediteur'] + ' - ' + response['data'][i]['txt_messenger'];
                             message += "     ****************     "
                         }
                         sessionStorage.setItem('message-header', message);

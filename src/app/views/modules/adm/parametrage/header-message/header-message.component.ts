@@ -93,7 +93,6 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
                 if(event.data.action == 'edit'){
                     // Action pour modification
                     this.titleModal = this.__('header_message.modifier_message');
-                    this.recupererDonnee();
                     this.openUpdateModal();
                 }else if(event.data.action == 'delete'){
                     this.deleteHeaderMessage();
@@ -130,6 +129,7 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
 
     openUpdateModal()
     {
+        this.recupererDonnee();
         this.titleModal = this.__('header_message.update_info');
         this.modalRef = this.modalService.show(this.updateHeaderMessage, {
             backdrop: 'static',
@@ -170,6 +170,7 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
             id: this.idMessage,
             expediteur: this.expediteur,
             txt_messenger: this.txt_messenger,
+            module_id: this.sous_module.id,
             publie: this.publie_value
         }).subscribe({
             next: (response) => {
@@ -275,7 +276,7 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
         this.expediteur = this.message.expediteur;
         this.txt_messenger = this.message.txt_messenger;
         this.publie_value = this.message.publie_value;
-        console.log("Message à modifier", this.publie_value);
+        this.sous_module = this.listSousModules.find(mod => mod.id === this.message.module_id);
     }
 
     // Fermeture du modal
