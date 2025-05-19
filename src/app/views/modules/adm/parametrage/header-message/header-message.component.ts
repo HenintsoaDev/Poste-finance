@@ -37,7 +37,6 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
 
     listIcon = [
         {'icon' : 'state','autority' : '',},
-        {'icon' : 'publie_value','autority' : '',},
         {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
         {'icon' : 'delete','action' : 'delete','tooltip' : this.__('global.tooltip_delete'),'autority' : '',},
     ];
@@ -61,6 +60,9 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
     idMessage: number | undefined;
     expediteur: string;
     txt_messenger: string;
+    publie_value : number = 0; // 0: Non publié, 1: Publié
+
+    loadingButton: boolean = false;
 
     constructor(
         private passageService: PassageService,
@@ -111,10 +113,7 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
                 if (response.code === 200) {
                     this.listSousModules = response.data;
                     this.filteredModules = this.listSousModules;
-                    console.log("Liste des modules actifs", this.filteredModules);
-                } else {
-                    
-                }
+                } else {}
             },
             error: (error) => {}
         });
@@ -139,11 +138,13 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
     }
 
     sendNewHeaderMessage() {
+
+        this.loadingButton = true;
         this.headerMessageService.sendNewHeaderMessage({
             expediteur: this.expediteur,
             txt_messenger: this.txt_messenger,
             module_id: this.sous_module.id,
-            publie: 0
+            publie: this.publie_value
         }).subscribe({
             next: (response) => {
                 if (response.code === 201) {
@@ -155,17 +156,21 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
                 } else {
                     this.toastr.error(response.msg, this.__("global.error"));
                 }
+                this.loadingButton = false;
             },error: (error) => {
                 this.toastr.error(this.__("global.error"), this.__("global.error"));
+                this.loadingButton = false;
             }
         });
     }
 
     sendUpdateHeaderMessage() {
+        this.loadingButton = true;
         this.headerMessageService.sendUpdateHeaderMessage({
             id: this.idMessage,
             expediteur: this.expediteur,
-            txt_messenger: this.txt_messenger
+            txt_messenger: this.txt_messenger,
+            publie: this.publie_value
         }).subscribe({
             next: (response) => {
                 if (response.code === 201) {
@@ -177,9 +182,11 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
                 } else {
                     this.toastr.error(response.msg, this.__("global.error"));
                 }
+                this.loadingButton = false;
             }
             ,error: (error) => {
                 this.toastr.error(this.__("global.error"), this.__("global.error"));
+                this.loadingButton = false;
             }
         });
     }
@@ -267,11 +274,16 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
         this.message = res[0];
         this.expediteur = this.message.expediteur;
         this.txt_messenger = this.message.txt_messenger;
+        this.publie_value = this.message.publie_value;
+        console.log("Message à modifier", this.publie_value);
     }
 
     // Fermeture du modal
     closeModal() {
         this.modalRef?.hide();
+        this.expediteur = undefined;
+        this.txt_messenger = undefined;
+        this.publie_value = 0;
     }
 
 }

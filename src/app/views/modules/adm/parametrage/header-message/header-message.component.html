@@ -56,8 +56,8 @@
         
         <div class="form-group">
             <mat-form-field>
-                <mat-label>{{ __('header_message.txt_messenger')}}</mat-label>
-                <input matInput type="text" [(ngModel)]="txt_messenger" placeholder="{{ __('header_message.txt_messenger')}}">
+                <mat-label>{{ __('header_message.message')}}</mat-label>
+                <input matInput type="text" [(ngModel)]="txt_messenger" placeholder="{{ __('header_message.message')}}">
             </mat-form-field>
         </div>
 
@@ -72,12 +72,19 @@
                     <!-- Affichage des options filtrées -->
                     <mat-option *ngFor="let mod of filteredModules" [value]="mod.id"> {{ mod.name }} </mat-option>
                 </mat-select>
-                </mat-form-field>
+            </mat-form-field>
+        </div>
+
+        <div class="form-group">
+            <mat-radio-group  [(ngModel)]="publie_value">
+                <mat-radio-button class="mr-3" [value]="0">{{ __('global.no_publie')}}</mat-radio-button>
+                <mat-radio-button class="mr-3" [value]="1">{{ __('global.yes_publie')}}</mat-radio-button>
+            </mat-radio-group>
         </div>
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
-        <button type="button" class="btn btn-primary" (click)="sendNewHeaderMessage()" [disabled]="expediteur == undefined || txt_messenger == undefined || sous_module == undefined">{{ __('global.save')}}</button>
+        <button type="button" class="btn btn-primary" (click)="sendNewHeaderMessage()" [disabled]="expediteur == undefined || txt_messenger == undefined || sous_module == undefined || loadingButton">{{ __('global.save')}}</button>
     </div>
 </ng-template>
 
@@ -99,12 +106,20 @@
         <div class="form-group">
             <mat-form-field>
                 <mat-label>{{ __('header_message.message')}}</mat-label>
-                <input matInput type="text" [(ngModel)]="txt_messenger" placeholder="{{ __('header_message.txt_messenger')}}">
+                <input matInput type="text" [(ngModel)]="txt_messenger" placeholder="{{ __('header_message.message')}}">
             </mat-form-field>
         </div>
+
+        <div class="form-group">
+            <mat-radio-group  [(ngModel)]="publie_value">
+                <mat-radio-button class="mr-3" [value]="0">{{ __('global.no_publie')}}</mat-radio-button>
+                <mat-radio-button class="mr-3" [value]="1">{{ __('global.yes_publie')}}</mat-radio-button>
+            </mat-radio-group>
+        </div>
+
     </div>
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>
-        <button type="button" class="btn btn-primary" (click)="sendUpdateHeaderMessage()" [disabled]="expediteur == undefined || txt_messenger == undefined">{{ __('global.save')}}</button>
+        <button type="button" class="btn btn-primary" (click)="sendUpdateHeaderMessage()" [disabled]="expediteur == undefined || txt_messenger == undefined || loadingButton">{{ __('global.save')}}</button>
     </div>
 </ng-template>

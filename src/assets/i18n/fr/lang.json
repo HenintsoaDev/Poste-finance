@@ -93,7 +93,9 @@
         "valider" : "Valider",
         "autorise" : "Autoriser",
         "tableError" : "Erreur de récupération",
-        "tableErrorInfo" : "Erreur lors de la récupération des données"
+        "tableErrorInfo" : "Erreur lors de la récupération des données",
+        "no_publie" : "Non publié",
+        "yes_publie" : "Publié"
     },
 
     "paiement" : {
@@ -372,8 +374,6 @@
         "fixe" : "Fixe",
         "pallier" : "Pallier",
         "user_creation" : "Créér par"
-
-       
     },
 
     "header_message" : {
@@ -382,7 +382,8 @@
         "publie" : "Publié",
         "module" : "Module",
         "add" : "Ajouter un message",
-        "update_info" : "Modifier les informations du message"
+        "update_info" : "Modifier les informations du message",
+        "ajout_message" : "Ajouter un nouveau message"
     }
 
 }
