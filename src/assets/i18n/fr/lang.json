@@ -95,7 +95,8 @@
         "tableError" : "Erreur de récupération",
         "tableErrorInfo" : "Erreur lors de la récupération des données",
         "no_publie" : "Non publié",
-        "yes_publie" : "Publié"
+        "yes_publie" : "Publié",
+        "loading" : "Chargement en cours..."
     },
 
     "paiement" : {
