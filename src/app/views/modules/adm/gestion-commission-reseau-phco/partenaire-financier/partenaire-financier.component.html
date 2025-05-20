@@ -135,13 +135,14 @@
                                         <button class="btn btn-success" (click)="backList()">{{ __('global.back') }}</button>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-danger">{{ __('global.desactiver') }}</button>
+                                        <button class="btn btn-danger" *ngIf="statePartenaire == 'Activé'" (click)="activerPartenaire(0)">{{ __('global.desactiver') }}</button>
+                                        <button class="btn btn-danger" *ngIf="statePartenaire != 'Activé'" (click)="activerPartenaire(1)">{{ __('global.activer') }}</button>
                                     </div>
                                     <div class="col-3">
                                         <button class="btn btn-secondary" (click)="openModalUpdatePartenaire()">{{ __('global.update') }}</button>
                                     </div>
                                     <div class="col-3">
-                                        <button class="btn btn-primary">{{ __('partenaire.lier_partenaire') }}</button>
+                                        <button class="btn btn-primary">{{  __('partenaire.lier_partenaire') }}</button>
                                     </div>
                                 </div>
                             </div>

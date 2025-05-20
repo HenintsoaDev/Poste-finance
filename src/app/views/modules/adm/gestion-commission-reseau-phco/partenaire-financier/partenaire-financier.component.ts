@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-partenaire-financier',
@@ -57,6 +58,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
 
     solde_wallet : number;
     solde_carte : number;
+    statePartenaire : string;
 
     showListPartenaire : boolean = true;
     loading: boolean = false;
@@ -128,6 +130,8 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.passageService.appelURL(this.endpoint);
                 this.toastr.success(response.msg, this.__("global.success"));
                 this.closeModal();
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
             }
         });
     }
@@ -148,6 +152,8 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 //this.passageService.appelURL(this.endpoint);
                 this.toastr.success(response.msg, this.__("global.success"));
                 this.closeModal();
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
             }
             this.loading = false;
         });
@@ -167,10 +173,41 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.isWalletCarte = response.data.walet_carte;
                 this.solde_wallet = response.data.solde_wallet;
                 this.solde_carte = response.data.solde_carte;
+                this.statePartenaire = response.data.state;
                 this.showListPartenaire = false; 
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
             }
             this.loading = false;
         });
+    }
+
+    // Activer ou désactiver un partenaire
+    activerPartenaire(state){
+        Swal.fire({
+            title: this.__('global.confirmation'),
+            text: this.__('global.changer_state_?'),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.__('global.yes'),
+            cancelButtonText: this.__('global.no')
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loading = true;
+                this.partenaireFinancierService.activerPartenaire(this.idPartenaire, state).subscribe((response) => {
+                    if (response['code'] == 201) {
+                        (state == 0) ? this.statePartenaire = "Désactiver" : this.statePartenaire = "Activer";
+                        this.toastr.success(response.msg, this.__("global.success"));
+                    }else{
+                        this.toastr.error(response.msg, this.__("global.error"));
+                    }
+                    this.loading = false;
+                });
+            }
+        })
+        
     }
 
     backList(){
@@ -184,6 +221,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
         this.isWalletCarte = undefined;
         this.solde_wallet = undefined;
         this.solde_carte = undefined;
+        this.statePartenaire = undefined;
         this.showListPartenaire = true; 
         this.passageService.appelURL(this.endpoint);
     }

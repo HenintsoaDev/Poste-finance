@@ -50,6 +50,7 @@
         "oui_changer" : "Oui, changer",
         "oui_ajouter" : "Oui, ajouter",
         "oui_generer" : "Oui, générer",
+        "oui_activer" : "Oui, activer",
         "oui_autoriser" : "Oui, autoriser",
         "enregistrer_donnee_?" : "Voulez-vous vraiment enregistrer cette donnée ? ",
         "modifier_donnee_?" : "Voulez-vous vraiment modifier cette donnée ? ",
@@ -106,7 +107,8 @@
         "detail" : "Détails",
         "solde" :"Solde",
         "update" : "Modifier",
-        "desactiver" : "Désactiver"
+        "desactiver" : "Désactiver",
+        "activer" : "Activer"
     },
 
     "paiement" : {
