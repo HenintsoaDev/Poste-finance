@@ -50,6 +50,7 @@
         "oui_changer" : "Oui, changer",
         "oui_ajouter" : "Oui, ajouter",
         "oui_generer" : "Oui, générer",
+        "oui_activer" : "Oui, activer",
         "oui_autoriser" : "Oui, autoriser",
         "enregistrer_donnee_?" : "Voulez-vous vraiment enregistrer cette donnée ? ",
         "modifier_donnee_?" : "Voulez-vous vraiment modifier cette donnée ? ",
@@ -104,7 +105,10 @@
         "yes" : "Oui",
         "no" : "Non",
         "detail" : "Détails",
-        "solde" :"Solde"
+        "solde" :"Solde",
+        "update" : "Modifier",
+        "desactiver" : "Désactiver",
+        "activer" : "Activer"
     },
 
     "paiement" : {
@@ -407,7 +411,8 @@
         "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
         "add_new_partenaire" : "Ajouter un nouveau partenaire",
-        "suivi_compte" : "Suivi compte partenaire"
+        "suivi_compte" : "Suivi compte partenaire",
+        "lier_partenaire" : "Lier un partenaire"
     }
 
 }

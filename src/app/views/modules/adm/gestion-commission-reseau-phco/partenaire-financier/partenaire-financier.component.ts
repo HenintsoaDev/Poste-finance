@@ -6,6 +6,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
+import Swal from 'sweetalert2';
 
 @Component({
   selector: 'app-partenaire-financier',
@@ -57,11 +58,16 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
 
     solde_wallet : number;
     solde_carte : number;
+    statePartenaire : string;
 
     showListPartenaire : boolean = true;
     loading: boolean = false;
+    
+
+    idPartenaire : any;
 
     @ViewChild('newPartenaire') newPartenaire: TemplateRef<any> | undefined;
+    @ViewChild('updatePartenaire') updatePartenaire: TemplateRef<any> | undefined;
 
     constructor(
         private passageService: PassageService,
@@ -78,6 +84,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
         this.subscription = this.passageService.getObservable().subscribe(event => {
             console.log(event);
             if(event.data){
+                this.idPartenaire = event.data.id;
                 if(event.data.action == 'info')
                 {
                     //this.showListPartenaire = false;
@@ -91,6 +98,16 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     {
         this.titleModal = this.__('partenaire.add_new_partenaire');
         this.modalRef = this.modalService.show(this.newPartenaire, {
+            backdrop: 'static',
+            keyboard: false,
+            class: 'modal-xl'
+        });
+    }
+
+    openModalUpdatePartenaire()
+    {
+        this.titleModal = this.__('partenaire.update_new_partenaire');
+        this.modalRef = this.modalService.show(this.updatePartenaire, {
             backdrop: 'static',
             keyboard: false,
             class: 'modal-xl'
@@ -113,7 +130,32 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.passageService.appelURL(this.endpoint);
                 this.toastr.success(response.msg, this.__("global.success"));
                 this.closeModal();
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
             }
+        });
+    }
+
+    sendUpdatePartenaire(){
+        this.loading = true;
+        this.partenaireFinancierService.updatePartenaire(this.idPartenaire,{
+            'code' : this.code,
+            'nom' : this.namePartenaire,
+            'email' : this.mailPartenaire,
+            'taux_commission_service' : this.tauxCommissionService,
+            'taux_commission_service_carte' : this.tauxCommissionServiceCarte,
+            'taux_commission_sunupaye' : this.tauxCommissionSunupaye,
+            'taux_commission_sunupaye_carte' : this.tauxCommissionSunupayeCarte,
+            'wallet_carte' : this.isWalletCarte
+        }).subscribe((response) => {
+            if (response['code'] == 201) {
+                //this.passageService.appelURL(this.endpoint);
+                this.toastr.success(response.msg, this.__("global.success"));
+                this.closeModal();
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
+            }
+            this.loading = false;
         });
     }
 
@@ -128,13 +170,60 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.tauxCommissionSunupaye = response.data.taux_commission_sunupaye;
                 this.tauxCommissionServiceCarte = response.data.taux_commission_service_carte;
                 this.tauxCommissionSunupayeCarte = response.data.taux_commission_sunupaye_carte;
-                this.isWalletCarte = response.data.wallet_carte;
+                this.isWalletCarte = response.data.walet_carte;
                 this.solde_wallet = response.data.solde_wallet;
                 this.solde_carte = response.data.solde_carte;
-                this.showListPartenaire = false;
+                this.statePartenaire = response.data.state;
+                this.showListPartenaire = false; 
+            }else{
+                this.toastr.error(response.msg, this.__("global.error"));
             }
             this.loading = false;
         });
+    }
+
+    // Activer ou désactiver un partenaire
+    activerPartenaire(state){
+        Swal.fire({
+            title: this.__('global.confirmation'),
+            text: this.__('global.changer_state_?'),
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: this.__('global.yes'),
+            cancelButtonText: this.__('global.no')
+        }).then((result) => {
+            if (result.isConfirmed) {
+                this.loading = true;
+                this.partenaireFinancierService.activerPartenaire(this.idPartenaire, state).subscribe((response) => {
+                    if (response['code'] == 201) {
+                        (state == 0) ? this.statePartenaire = "Désactiver" : this.statePartenaire = "Activer";
+                        this.toastr.success(response.msg, this.__("global.success"));
+                    }else{
+                        this.toastr.error(response.msg, this.__("global.error"));
+                    }
+                    this.loading = false;
+                });
+            }
+        })
+        
+    }
+
+    backList(){
+        this.code = undefined;
+        this.namePartenaire = undefined;
+        this.mailPartenaire = undefined;
+        this.tauxCommissionService = undefined;
+        this.tauxCommissionSunupaye = undefined;
+        this.tauxCommissionServiceCarte = undefined;
+        this.tauxCommissionSunupayeCarte = undefined;
+        this.isWalletCarte = undefined;
+        this.solde_wallet = undefined;
+        this.solde_carte = undefined;
+        this.statePartenaire = undefined;
+        this.showListPartenaire = true; 
+        this.passageService.appelURL(this.endpoint);
     }
 
     // Fermeture du modal
