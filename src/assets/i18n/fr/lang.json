@@ -404,7 +404,7 @@
 
     "partenaire" : {
         "new_partenaire" : "Nouveau partenaire",
-        "taux_commission_paiment_hors_masse" : "Taux de commission paiement hors masse",
+        "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
         "add_new_partenaire" : "Ajouter un nouveau partenaire",
         "suivi_compte" : "Suivi compte partenaire"
