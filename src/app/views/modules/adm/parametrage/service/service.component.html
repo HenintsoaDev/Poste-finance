@@ -199,7 +199,7 @@
     
                     <div class="row justify-content-center">
                         <button type="button" class="btn btn-secondary" (click)="cacheForm()">{{ __('global.cancel')}}</button>
-                        <button type="submit" class="btn btn-primary"  [disabled]="!montant || !tva || !montant_min || !montant_max" (click)="ajoutPalier()">{{ __('global.save')}}</button>
+                        <button type="submit" class="btn btn-primary" [disabled]="montant == null || montant_min == null || montant_max == null || tva == null" (click)="ajoutPalier()">{{ __('global.save')}}</button>
                     </div>
                 </div>
                 <div class="col-lg-6"></div>
@@ -234,7 +234,7 @@
                                     <td>{{ formatNumber(palier.valeur, ' ')}}</td>
                                     <td>{{ formatNumber(palier.tva, ' ')}}</td>
                                     <td>{{ formatNumber(palier.ht, ' ')}}</td>
-                                    <td><i class="material-icons" style="cursor: pointer;" *ngIf="last" mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
+                                    <td class="text-center"><i class="material-icons" style="cursor: pointer;" *ngIf="last" mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
                                 </tr>
                 
                             </tbody>
