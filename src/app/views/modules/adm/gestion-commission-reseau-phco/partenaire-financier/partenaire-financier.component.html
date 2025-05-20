@@ -67,10 +67,21 @@
                                                 </div>
                                             </div>
                                             
-                                            <div class="alert alert-custom">
-                                                <label><b style="font-weight: 800;">{{ __('utilisateur.email')}}</b></label>
-                                                <h6><b class="info-virement">{{ mailPartenaire }}</b></h6>
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="alert alert-custom">
+                                                        <label><b style="font-weight: 800;">{{ __('utilisateur.email')}}</b></label>
+                                                        <h6><b class="info-virement">{{ mailPartenaire }}</b></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="alert alert-custom">
+                                                        <label><b style="font-weight: 800;">{{ __('global.wallet_carte_label')}}</b></label>
+                                                        <h6><b class="info-virement">{{ (isWalletCarte == 0) ? 'Oui' : 'Non' }}</b></h6>
+                                                    </div>
+                                                </div>
                                             </div>
+                                            
                                         </fieldset>
                                     </div>
                                     <div class="col-6">
@@ -119,6 +130,20 @@
                                         </fieldset>
                                     </div>
                                 </div>
+                                <div class="row">
+                                    <div class="col-3">
+                                        <button class="btn btn-success" (click)="backList()">{{ __('global.back') }}</button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-danger">{{ __('global.desactiver') }}</button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-secondary" (click)="openModalUpdatePartenaire()">{{ __('global.update') }}</button>
+                                    </div>
+                                    <div class="col-3">
+                                        <button class="btn btn-primary">{{ __('partenaire.lier_partenaire') }}</button>
+                                    </div>
+                                </div>
                             </div>
                         </mat-tab>
                         <mat-tab label="{{ __('partenaire.suivi_compte') }}"> Content 2 </mat-tab>
@@ -130,7 +155,9 @@
 </div>
 
 <div class="overlay" *ngIf="loading">
-    <p>{{ __('global.loading') }}</p>
+    <div class="loading-content">
+        {{ __('global.loading') }}
+    </div>
 </div>
 
 <ng-template #newPartenaire>
@@ -215,6 +242,103 @@
     <div class="modal-footer">
         <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
         <button type="button" class="btn btn-primary" (click)="sendNewPartenaire()" 
+            [disabled]="code == undefined || 
+                        namePartenaire == undefined || 
+                        mailPartenaire == undefined ||
+                        tauxCommissionService == undefined || 
+                        tauxCommissionSunupaye == undefined ||
+                        tauxCommissionServiceCarte == undefined || 
+                        tauxCommissionSunupayeCarte == undefined ||
+                        isWalletCarte == undefined"
+        >
+            {{ __('global.save')}}
+        </button>
+    </div>
+</ng-template>
+
+<ng-template #updatePartenaire>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+
+        <div class="row">
+            <div class="col-3 form-group">
+                <mat-form-field>
+                    <mat-label>{{ __('global.code')}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="code" placeholder="{{ __('global.code')}}">
+                </mat-form-field>
+            </div>
+
+            <div class="col-3 form-group">
+                <mat-form-field>
+                    <mat-label>{{ __('global.name')}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="namePartenaire" placeholder="{{ __('global.name')}}">
+                </mat-form-field>
+            </div>
+
+            <div class="col-3 form-group">
+                <mat-form-field>
+                    <mat-label>{{ __('utilisateur.email')}}</mat-label>
+                    <input matInput type="text" [(ngModel)]="mailPartenaire" placeholder="{{ __('utilisateur.email')}}">
+                </mat-form-field>
+            </div>
+
+            <div class="col-3 form-group">
+                <label>{{ __('global.wallet_carte_label')}}</label><br>
+                <mat-radio-group  [(ngModel)]="isWalletCarte">
+                    <mat-radio-button class="mr-3" [value]="0">{{ __('global.yes')}}</mat-radio-button>
+                    <mat-radio-button class="mr-3" [value]="1">{{ __('global.no')}}</mat-radio-button>
+                </mat-radio-group>
+            </div>
+            
+        </div>
+        
+        <div class="row">
+            <div class="col-6">
+                <fieldset class="border p-2">
+                    <legend class="w-auto legend">{{ __('global.wallet')}}</legend>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)(*)</mat-label>
+                            <input matInput type="number" [(ngModel)]="tauxCommissionService" placeholder="{{ __('partenaire.taux_commission_paiment_hors_masse')}}">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>{{ __('partenaire.taux_commission_paiment_masse')}}(%)(*)</mat-label>
+                            <input matInput type="number" [(ngModel)]="tauxCommissionSunupaye" placeholder="{{ __('partenaire.taux_commission_paiment_masse')}}">
+                        </mat-form-field>
+                    </div>
+                </fieldset>
+            </div>
+            <div class="col-6">
+                <fieldset class="border p-2">
+                    <legend class="w-auto legend">{{ __('global.carte')}}</legend>
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)(*)</mat-label>
+                            <input matInput type="number" [(ngModel)]="tauxCommissionServiceCarte" placeholder="{{ __('partenaire.taux_commission_paiment_hors_masse')}}">
+                        </mat-form-field>
+                    </div>
+
+                    <div class="form-group">
+                        <mat-form-field>
+                            <mat-label>{{ __('partenaire.taux_commission_paiment_masse')}}(%)(*)</mat-label>
+                            <input matInput type="number" [(ngModel)]="tauxCommissionSunupayeCarte" placeholder="{{ __('partenaire.taux_commission_paiment_masse')}}">
+                        </mat-form-field>
+                    </div>
+                </fieldset>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
+        <button type="button" class="btn btn-primary" (click)="sendUpdatePartenaire()" 
             [disabled]="code == undefined || 
                         namePartenaire == undefined || 
                         mailPartenaire == undefined ||
