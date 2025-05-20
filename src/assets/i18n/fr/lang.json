@@ -412,7 +412,10 @@
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
         "add_new_partenaire" : "Ajouter un nouveau partenaire",
         "suivi_compte" : "Suivi compte partenaire",
-        "lier_partenaire" : "Lier un partenaire"
+        "lier_partenaire" : "Lier un partenaire",
+        "all_type" : "Tous les types de services",
+        "hors_paiement_masse" : "Hors paiement de masse",
+        "paiement_masse" : "Paiement de masse"
     }
 
 }

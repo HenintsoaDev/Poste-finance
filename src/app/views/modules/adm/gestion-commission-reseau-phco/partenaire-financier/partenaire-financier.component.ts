@@ -1,5 +1,7 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { PartenaireFinancierService } from 'app/services/admin/gestion-commission/partenaire-financier.service';
+import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -20,8 +22,8 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     header = [
         {"nomColonne" : this.__('global.name'),"colonneTable" : "nom","table" : "partenaire_financier"},
         {"nomColonne" : this.__('utilisateur.email'),"colonneTable" : "email","table" : "partenaire_financier"},
-        {"nomColonne" : this.__('global.wallet'),"colonneTable" : "solde","table" : "partenaire_financier"},
-        {"nomColonne" : this.__('global.carte'),"colonneTable" : "solde_carte","table" : "partenaire_financier"},
+        {"nomColonne" : this.__('global.solde_wallet'),"colonneTable" : "solde","table" : "partenaire_financier"},
+        {"nomColonne" : this.__('global.solde_carte'),"colonneTable" : "solde_carte","table" : "partenaire_financier"},
         {"nomColonne" : this.__('global.state'),"colonneTable" : "etat","table" : "partenaire_financier"},
         {"nomColonne" : ""}
     ];
@@ -36,7 +38,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     ];
 
     listIcon = [
-        {'icon' : 'info','action' : 'info','tooltip' : 'Détail','autority' : '',},
+        {'icon' : 'info','action' : 'info','tooltip' : 'Détail','autority' : 'GCR_4',},
     ];
 
     subscription: Subscription;
@@ -63,24 +65,65 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     showListPartenaire : boolean = true;
     loading: boolean = false;
     
-
     idPartenaire : any;
+
+    //Filtre data
+    typeCompte: string = "2";
+    dateDebut: string = "" //new Date().toISOString().substring(0, 10);
+    dateFin: string = ""//new Date().toISOString().substring(0, 10);
+    typeService : string = "2";
 
     @ViewChild('newPartenaire') newPartenaire: TemplateRef<any> | undefined;
     @ViewChild('updatePartenaire') updatePartenaire: TemplateRef<any> | undefined;
+
+    /** DATA TABLE POUR L'HISTORIQUE MOUVEMENT COMPTE */
+    endpointMouvementCompte = "";
+    headerMouvementCompte = [
+        {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.operation'),"colonneTable" : "operation","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.coms'),"colonneTable" : "commentaire","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "releve_compte_commission"}
+    ];
+    objetBodyMouvementCompte = [
+        {'name' : 'date_transaction','type' : 'text',},
+        {'name' : 'num_transac','type' : 'text',},
+        {'name' : 'solde_avant','type' : 'text',},
+        {'name' : 'montant','type' : 'text',},
+        {'name' : 'solde_apres','type' : 'text',},
+        {'name' : 'operation','type' : 'text',},
+        {'name' : 'commentaire','type' : 'text',},
+        {'name' : 'wallet_carte','type' : 'text',}
+    ];
+
+    listIconMouvementCompte = [];
+    searchGlobalMouvementCompte = [
+        'releve_compte_commission.date_transaction',
+        'releve_compte_commission.num_transac',  
+        'releve_compte_commission.operation', 
+        'releve_compte_commission.commentaire',
+        'releve_compte_commission.wallet_carte'
+    ]; 
 
     constructor(
         private passageService: PassageService,
         private modalService: BsModalService,
         private partenaireFinancierService: PartenaireFinancierService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private datePipe: DatePipe,
+        private authService: AuthService
     ) {
         super()
     }
 
     ngOnInit(): void {
+        this.authService.initAutority('GCR','ADM');
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.partenaire_financier;
+        this.endpointMouvementCompte = environment.baseUrl + '/' + environment.suivi_mouvement_partenaire_financier; 
         this.subscription = this.passageService.getObservable().subscribe(event => {
             console.log(event);
             if(event.data){
@@ -92,6 +135,35 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 } 
             }
         });
+    }
+
+    filtreTableau()
+    {
+        let filtre_search = "" ; 
+        if(this.typeCompte != '2'){
+            filtre_search = ",releve_compte_partenaire.wallet_carte|e|"+this.typeCompte;
+        }
+
+        let filtre_service = "" ;
+        if(this.typeService != '2'){
+            filtre_service = ",releve_compte_partenaire.type_service|e|"+this.typeService;
+        }
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        let date_fin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+      
+        let filtreDate = "" ;
+        if(date_debut && date_fin){
+            if( date_debut > date_fin ){
+                this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
+                return;
+            }else{
+                filtreDate = "&date_debut="+date_debut +"&date_fin="+date_fin;
+            }
+        }
+        
+        let filtreParMulti =  filtre_search + filtre_service + filtreDate + "&_order_=desc,date_transaction";
+        this.passageService.appelURL(filtreParMulti);
     }
 
     openModalAddPartenaire()
