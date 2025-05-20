@@ -108,6 +108,9 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
         'releve_compte_commission.wallet_carte'
     ]; 
 
+    releve_data: any = [];
+    releve_totaux: any;
+
     constructor(
         private passageService: PassageService,
         private modalService: BsModalService,
@@ -252,6 +255,69 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
             }
             this.loading = false;
         });
+    }
+
+    exportExcel(fileName)
+    {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.releve_data = result.data;
+        this.releve_totaux = result.totaux;
+        
+        this.authService.exportExcel(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+            (response: any)=>{
+                    let a = document.createElement("a"); 
+                    a.href = response.data;
+                    a.download = `${fileName}.xlsx`;
+                    a.click(); 
+            },
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    async exportPdf(fileName) {
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+    
+        this.releve_data = result.data;
+        this.releve_totaux = result.totaux;
+        
+        this.authService.exportPdf(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(releves:any[]){
+        let tab = releves.map((releve: any, index: number) => {
+            let t: any = {};
+                t[this.__('suivi_compte.date')] = releve.date_transaction;
+                t[this.__('suivi_compte.num_transac')] = releve.num_transac;
+                t[this.__('suivi_compte.solde_avant')] = releve.solde_avant;
+                t[this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')'] = releve.montant;
+                t[this.__('suivi_compte.solde_apres')] = (releve.statut == 0) ? "En attente de validation" : releve.solde_apres;
+                t[this.__('suivi_compte.operation')] = releve.operation;
+                t[this.__('suivi_compte.coms')] = releve.commentaire;
+                t[this.__('suivi_compte.type_compte')] = releve.wallet_carte;
+            return t;
+        });
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+            [this.__('suivi_compte.date')]: '',
+            [this.__('suivi_compte.num_transac')]: this.__('global.total_debit') + ": " + (this.releve_totaux?.DEBIT ?? 0),
+            [this.__('suivi_compte.solde_avant')]: '',
+            [this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')']: '',
+            [this.__('suivi_compte.solde_apres')]: '',
+            [this.__('suivi_compte.operation')]: '',
+            [this.__('suivi_compte.coms')]: this.__('global.total_credit') + ": " + (this.releve_totaux?.CREDIT ?? 0),
+            [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
     }
 
     // Activer ou désactiver un partenaire

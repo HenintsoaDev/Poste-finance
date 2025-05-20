@@ -130,26 +130,22 @@
                                         </fieldset>
                                     </div>
                                 </div>
-                                <div class="row">
-                                    <div class="col-3">
-                                        <button class="btn btn-success" (click)="backList()">{{ __('global.back') }}</button>
-                                    </div>
-                                    <div class="col-3">
-                                        <button class="btn btn-danger" *ngIf="statePartenaire == 'Activé' && autority('GCR_5')" (click)="activerPartenaire(0)">{{ __('global.desactiver') }}</button>
-                                        <button class="btn btn-danger" *ngIf="statePartenaire != 'Activé' && autority('GCR_5')" (click)="activerPartenaire(1)">{{ __('global.activer') }}</button>
-                                    </div>
-                                    <div class="col-3">
-                                        <button class="btn btn-secondary" (click)="openModalUpdatePartenaire()" *ngIf="autority('GCR_3')">{{ __('global.update') }}</button>
-                                    </div>
-                                    <div class="col-3">
-                                        <button class="btn btn-primary" >{{  __('partenaire.lier_partenaire') }}</button>
-                                    </div>
-                                </div>
                             </div>
                         </mat-tab>
                         <mat-tab label="{{ __('partenaire.suivi_compte') }}" *ngIf="autority('GCR_6')">
                             <div class="card">
                                 <div class="card-body">
+                                    <!-- PRINT PDF -->
+                                    <div class="button-container">
+                                        <div class="left-buttons">
+                                        <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel('Liste des mouvements de compte')">
+                                                {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                            </button>
+                                            <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf('Liste des mouvements de compte')">
+                                                {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon" >
+                                            </button>
+                                        </div> 
+                                    </div>
                                     <!-- FORM FILTER -->
                                     <div class="bg-white">
                                         <form class="form-inline">
@@ -224,6 +220,21 @@
                             </div>
                         </mat-tab>
                     </mat-tab-group>
+                    <div class="row">
+                        <div class="col-3">
+                            <button class="btn btn-success" (click)="backList()">{{ __('global.back') }}</button>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-danger" *ngIf="statePartenaire == 'Activé' && autority('GCR_5')" (click)="activerPartenaire(0)">{{ __('global.desactiver') }}</button>
+                            <button class="btn btn-danger" *ngIf="statePartenaire != 'Activé' && autority('GCR_5')" (click)="activerPartenaire(1)">{{ __('global.activer') }}</button>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-secondary" (click)="openModalUpdatePartenaire()" *ngIf="autority('GCR_3')">{{ __('global.update') }}</button>
+                        </div>
+                        <div class="col-3">
+                            <button class="btn btn-primary" >{{  __('partenaire.lier_partenaire') }}</button>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
