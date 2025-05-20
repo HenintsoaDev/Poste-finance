@@ -55,6 +55,12 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     tauxCommissionSunupayeCarte : number;
     tauxCommissionServiceCarte : number;
 
+    solde_wallet : number;
+    solde_carte : number;
+
+    showListPartenaire : boolean = true;
+    loading: boolean = false;
+
     @ViewChild('newPartenaire') newPartenaire: TemplateRef<any> | undefined;
 
     constructor(
@@ -69,11 +75,16 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     ngOnInit(): void {
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.partenaire_financier;
-        /*this.subscription = this.passageService.getData().subscribe((data) => {
-            if (data) {
-                this.dataSolde = data;
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+            console.log(event);
+            if(event.data){
+                if(event.data.action == 'info')
+                {
+                    //this.showListPartenaire = false;
+                    this.getDetailPartenaire(event.data.id);
+                } 
             }
-        });*/
+        });
     }
 
     openModalAddPartenaire()
@@ -103,6 +114,26 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.toastr.success(response.msg, this.__("global.success"));
                 this.closeModal();
             }
+        });
+    }
+
+    getDetailPartenaire(id){
+        this.loading = true;
+        this.partenaireFinancierService.getDetailPartenaire(id).subscribe((response) => {
+            if (response['code'] == 200) {
+                this.code = response.data.code;
+                this.namePartenaire = response.data.nom;
+                this.mailPartenaire = response.data.email;
+                this.tauxCommissionService = response.data.taux_commission_service;
+                this.tauxCommissionSunupaye = response.data.taux_commission_sunupaye;
+                this.tauxCommissionServiceCarte = response.data.taux_commission_service_carte;
+                this.tauxCommissionSunupayeCarte = response.data.taux_commission_sunupaye_carte;
+                this.isWalletCarte = response.data.wallet_carte;
+                this.solde_wallet = response.data.solde_wallet;
+                this.solde_carte = response.data.solde_carte;
+                this.showListPartenaire = false;
+            }
+            this.loading = false;
         });
     }
 

@@ -22,7 +22,7 @@
             </div>
         </div>
 
-        <div class="row">
+        <div class="row" *ngIf="showListPartenaire">
             <div class="col-12">
                 <div class="card">
                     <div class="card-body">
@@ -40,7 +40,97 @@
                 </div>
             </div>
         </div>
+
+        <div class="row" *ngIf="!showListPartenaire">
+            <div class="card">
+                <div class="card-body">
+                    <mat-tab-group>
+                        <mat-tab label="{{ __('partenaire.detail') }}">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-6">
+                                        <fieldset class="border p-2">
+                                            <legend class="w-auto legend">{{ __('global.detail')}}</legend>
+
+                                            <div class="row">
+                                                <div class="col-6">
+                                                    <div class="alert alert-custom">
+                                                        <label><b style="font-weight: 800;">{{ __('global.code')}}</b></label>
+                                                        <h6><b class="info-virement">CODE</b></h6>
+                                                    </div>
+                                                </div>
+                                                <div class="col-6">
+                                                    <div class="alert alert-custom">
+                                                        <label><b style="font-weight: 800;">{{ __('global.name')}}</b></label>
+                                                        <h6><b class="info-virement">NAME</b></h6>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('global.email')}}</b></label>
+                                                <h6><b class="info-virement">EMAIL</b></h6>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6">
+                                        <fieldset class="border p-2">
+                                            <legend class="w-auto legend">{{ __('global.solde')}}</legend>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('global.solde_wallet')}}</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('global.solde_carte')}}</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6">
+                                        <fieldset class="border p-2">
+                                            <legend class="w-auto legend">{{ __('global.wallet')}}</legend>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_masse')}}(%)</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                    <div class="col-6">
+                                        <fieldset class="border p-2">
+                                            <legend class="w-auto legend">{{ __('global.carte')}}</legend>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                            
+                                            <div class="alert alert-custom">
+                                                <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_masse')}}(%)</b></label>
+                                                <h6><b class="info-virement">10</b></h6>
+                                            </div>
+                                        </fieldset>
+                                    </div>
+                                </div>
+                            </div>
+                        </mat-tab>
+                        <mat-tab label="{{ __('partenaire.suivi_compte') }}"> Content 2 </mat-tab>
+                    </mat-tab-group>
+                </div>
+            </div>
+        </div>
     </div>
+</div>
+
+<div class="overlay" *ngIf="loading">
+    <p>{{ __('global.loading') }}</p>
 </div>
 
 <ng-template #newPartenaire>

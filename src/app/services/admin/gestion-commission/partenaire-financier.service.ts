@@ -21,4 +21,14 @@ export class PartenaireFinancierService {
         );
     }
 
+    getDetailPartenaire(id): Observable<any> {
+        return this.httpService.get<any>(environment.partenaire_financier + '/' + id).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response);
+                }
+            })
+        );
+    }
+
 }

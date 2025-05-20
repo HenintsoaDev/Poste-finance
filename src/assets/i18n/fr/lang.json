@@ -102,7 +102,9 @@
         "code" : "Code",
         "wallet_carte_label" : "Wallet / Carte",
         "yes" : "Oui",
-        "no" : "Non"
+        "no" : "Non",
+        "detail" : "Détails",
+        "solde" :"Solde"
     },
 
     "paiement" : {

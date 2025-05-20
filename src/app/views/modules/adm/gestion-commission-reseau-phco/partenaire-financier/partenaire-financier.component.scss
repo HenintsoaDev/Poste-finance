@@ -1,4 +1,34 @@
+@import "../../../../../../assets/scss/core/variables/_colors.scss";
 .legend{
     font-size: 16px;
     font-weight: 600;
+}
+
+.wrapper {
+    margin-bottom: 20px;
+}
+
+.alert-custom{
+    background:#f2f2f2;
+    padding: 5px 15px;
+}
+
+.info-virement{
+    font-weight: 800;
+    color: $primary;
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color:rgba(0, 0, 0, 0.078);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 9999;
+    font-size: 1.5rem;
+    font-weight: bold;
 }
