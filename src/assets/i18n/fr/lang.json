@@ -23,6 +23,7 @@
         "search" : "Rechercher",
         "next": "Suivant",
         "action": "Action",
+        "name" : "Nom",
         "export_pdf" : "Exporter en PDF",
         "export_excel" : "Exporter en Excel",
         "export_csv" : "Exporter en CSV",
@@ -96,7 +97,14 @@
         "tableErrorInfo" : "Erreur lors de la récupération des données",
         "no_publie" : "Non publié",
         "yes_publie" : "Publié",
-        "loading" : "Chargement en cours..."
+        "loading" : "Chargement en cours...",
+        "state" : "State",
+        "code" : "Code",
+        "wallet_carte_label" : "Wallet / Carte",
+        "yes" : "Oui",
+        "no" : "Non",
+        "detail" : "Détails",
+        "solde" :"Solde"
     },
 
     "paiement" : {
@@ -373,7 +381,7 @@
         "title_edit_modal" : "Modification d'un service",
         "title_add_modal" : "Ajout d'un service",
         "fixe" : "Fixe",
-        "pallier" : "Pallier",
+        "pallier" : "Palier",
         "user_creation" : "Créér par",
         "montant_min" : "Montant Min.",
         "montant_max" : "Montant Max.",
@@ -385,13 +393,20 @@
     },
 
     "header_message" : {
-        "expediteur" : "Éxpediteur",
+        "expediteur" : "Expéditeur",
         "message" : "Message",
         "publie" : "Publié",
         "module" : "Module",
         "add" : "Ajouter un message",
         "update_info" : "Modifier les informations du message",
         "ajout_message" : "Ajouter un nouveau message"
+    },
+
+    "partenaire" : {
+        "new_partenaire" : "Nouveau partenaire",
+        "taux_commission_paiment_hors_masse" : "Taux de commission paiement hors masse",
+        "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
+        "add_new_partenaire" : "Ajouter un nouveau partenaire"
     }
 
 }

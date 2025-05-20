@@ -59,6 +59,7 @@ import { SoldeDistributeurComponent } from './views/modules/adm/gestion-bureau/s
 import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-compte-principal/suivi-compte-commission/suivi-compte-commission.component';
 import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-message/header-message.component';
+import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
 
 
 registerLocaleData(localeFr);
@@ -126,7 +127,8 @@ registerLocaleData(localeFr);
     SoldeDistributeurComponent,
     SuiviCompteCommissionComponent,
     ServiceComponent,
-    HeaderMessageComponent
+    HeaderMessageComponent,
+    PartenaireFinancierComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

@@ -271,8 +271,8 @@ export class TableComponent extends Translatable {
 
       let tableau = res.data.map((row: any) =>
         this.body.map((col: any) => {
-          if (col.name === "state#id" || col.name === "state#rowid") {
-            const targetId = col.name === "state#id" ? row.id : row.rowid;
+          if (col.name === "state#id" || col.name === "state#rowid" || col.name === "id" || col.name === "rowid") {
+            const targetId = (col.name === "state#id" || col.name === "id") ? row.id : row.rowid;
             
             // 1. Trouver l'icône "home"
             const stateIcon = this.listIcon.find(i => i.icon === 'state');
@@ -288,13 +288,19 @@ export class TableComponent extends Translatable {
                 id: targetId,
               }));
 
+              //3. Si col.name !== "id", alors on concatene avec l'icône "state" 
+              if(col.name != "id" && col.name != "rowid"){
+                icons.push({
+                statut: row.statut,
+                state: row.state,
+                autority: stateIcon?.autority,
+                id: targetId,
+              });
+              }
+              
+
             // 3. Ajouter un objet via concat, utilisant l'autorité de l'icône "state"
-            return icons.concat({
-              statut: row.statut,
-              state: row.state,
-              autority: stateIcon?.autority,
-              id: targetId,
-            });
+            return icons;
           }
 
          // console.log("colonne",col);
