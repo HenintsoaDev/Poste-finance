@@ -373,12 +373,12 @@
         "title_edit_modal" : "Modification d'un service",
         "title_add_modal" : "Ajout d'un service",
         "fixe" : "Fixe",
-        "pallier" : "Pallier",
+        "pallier" : "Palier",
         "user_creation" : "Créér par"
     },
 
     "header_message" : {
-        "expediteur" : "Éxpediteur",
+        "expediteur" : "Expéditeur",
         "message" : "Message",
         "publie" : "Publié",
         "module" : "Module",
