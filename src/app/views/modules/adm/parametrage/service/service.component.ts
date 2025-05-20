@@ -339,6 +339,11 @@ export class ServiceComponent extends Translatable implements OnInit {
       }
   
     }
+
+    async actuTableauPalier(){
+      let result = await this.authService.getSelectList(environment.service+ '/'+  this.idService);
+      this.service = result;
+    }
      // SUppression d'un modal
      openModalDeleteService() {
   
@@ -507,8 +512,9 @@ export class ServiceComponent extends Translatable implements OnInit {
                   next: (res) => {
                       if(res['code'] == 201) {
                         this.toastr.success(res['msg'], this.__("global.success"));
-                        this.actualisationTableau();
-                        this.closeModal();
+                        this.actuTableauPalier();
+                        this.addFormpalier = false;
+                        
                       }
                       else if(res['code'] == 400){
                         if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
@@ -567,8 +573,7 @@ export class ServiceComponent extends Translatable implements OnInit {
               next: (res) => {
                   if(res['code'] == 204) {
                     this.toastr.success(res['msg'], this.__("global.success"));
-                    this.actualisationTableau();
-                    this.closeModal();
+                    this.actuTableauPalier();
                   }
                   else{
                       this.toastr.error(res['msg'], this.__("global.error"));
