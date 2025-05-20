@@ -45,7 +45,7 @@
             <div class="card">
                 <div class="card-body">
                     <mat-tab-group>
-                        <mat-tab label="{{ __('partenaire.detail') }}">
+                        <mat-tab label="{{ __('global.detail') }}">
                             <div class="container-fluid">
                                 <div class="row">
                                     <div class="col-6">
@@ -56,20 +56,20 @@
                                                 <div class="col-6">
                                                     <div class="alert alert-custom">
                                                         <label><b style="font-weight: 800;">{{ __('global.code')}}</b></label>
-                                                        <h6><b class="info-virement">CODE</b></h6>
+                                                        <h6><b class="info-virement">{{ code }}</b></h6>
                                                     </div>
                                                 </div>
                                                 <div class="col-6">
                                                     <div class="alert alert-custom">
                                                         <label><b style="font-weight: 800;">{{ __('global.name')}}</b></label>
-                                                        <h6><b class="info-virement">NAME</b></h6>
+                                                        <h6><b class="info-virement">{{ namePartenaire }}</b></h6>
                                                     </div>
                                                 </div>
                                             </div>
                                             
                                             <div class="alert alert-custom">
-                                                <label><b style="font-weight: 800;">{{ __('global.email')}}</b></label>
-                                                <h6><b class="info-virement">EMAIL</b></h6>
+                                                <label><b style="font-weight: 800;">{{ __('utilisateur.email')}}</b></label>
+                                                <h6><b class="info-virement">{{ mailPartenaire }}</b></h6>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -79,12 +79,12 @@
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('global.solde_wallet')}}</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ solde_wallet }}</b></h6>
                                             </div>
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('global.solde_carte')}}</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ solde_carte }}</b></h6>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -94,12 +94,12 @@
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ tauxCommissionService }}</b></h6>
                                             </div>
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_masse')}}(%)</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ tauxCommissionSunupaye }}</b></h6>
                                             </div>
                                         </fieldset>
                                     </div>
@@ -109,12 +109,12 @@
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_hors_masse')}}(%)</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ tauxCommissionServiceCarte }}</b></h6>
                                             </div>
                                             
                                             <div class="alert alert-custom">
                                                 <label><b style="font-weight: 800;">{{ __('partenaire.taux_commission_paiment_masse')}}(%)</b></label>
-                                                <h6><b class="info-virement">10</b></h6>
+                                                <h6><b class="info-virement">{{ tauxCommissionSunupayeCarte }}</b></h6>
                                             </div>
                                         </fieldset>
                                     </div>
