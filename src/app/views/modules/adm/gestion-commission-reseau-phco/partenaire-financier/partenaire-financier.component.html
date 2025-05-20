@@ -14,7 +14,7 @@
                                 </button>-->
                             </div>
                             <div class="right-button">
-                                <button class="btn btn-secondary"  (click)="openModalAddPartenaire()" *ngIf="autority('GCR_2')"> {{ __("partenaire.new_partenaire")}}</button>
+                                <button class="btn btn-secondary"  (click)="openModalAddPartenaire()" *ngIf="autority('GCR_2')" [disabled]="!showListPartenaire"> {{ __("partenaire.new_partenaire")}}</button>
                             </div>
                         </div>
                     </div>
