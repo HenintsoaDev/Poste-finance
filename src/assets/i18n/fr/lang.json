@@ -374,7 +374,14 @@
         "title_add_modal" : "Ajout d'un service",
         "fixe" : "Fixe",
         "pallier" : "Pallier",
-        "user_creation" : "Créér par"
+        "user_creation" : "Créér par",
+        "montant_min" : "Montant Min.",
+        "montant_max" : "Montant Max.",
+        "montant" :"Montant",
+        "tva" : "Frais TVA",
+        "add_palier" : "Ajouter une palier",
+        "add_form_palier" : "Ajout palier"
+
     },
 
     "header_message" : {

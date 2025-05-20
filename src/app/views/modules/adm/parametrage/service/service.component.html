@@ -76,7 +76,7 @@
 
                     <mat-radio-group  [(ngModel)]="type_frais" formControlName="type_frais">
                         <mat-radio-button class="mr-3" value="F">{{ __('service.fixe')}}</mat-radio-button>
-                        <mat-radio-button class="mr-3" value="P">{{ __('service.pallier')}}</mat-radio-button>
+                        <mat-radio-button class="mr-3" value="P">{{ __('service.palier')}}</mat-radio-button>
                       </mat-radio-group>
                 </div>
 
@@ -146,6 +146,116 @@
             </tr>
             
         </table>
+
+        <div *ngIf="service.type_frais == 1">
+            <hr>
+
+            <div class="row" *ngIf="addFormpalier && service.type_frais == 1">
+                <div class="col-lg-3"></div>
+                <div class="col-lg-6">
+                    <div class="text-center" style="width: 100%;"> <h4 class="bold">{{ __("service.add_form_palier")}} </h4> </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+    
+                                <mat-form-field>
+                                    <mat-label>{{ __('service.montant_min')}}</mat-label>
+                                    <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" [(ngModel)]="montant_min" placeholder="{{ __('service.montant_min')}}" name="montant_min">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+    
+                                <mat-form-field>
+                                    <mat-label>{{ __('service.montant_max')}}</mat-label>
+                                    <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" [(ngModel)]="montant_max" placeholder="{{ __('service.montant_max')}}"  name="montant_max">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-lg-6">
+                            <div class="form-group">
+    
+                                <mat-form-field>
+                                    <mat-label>{{ __('service.montant')}}</mat-label>
+                                    <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '')" [(ngModel)]="montant" placeholder="{{ __('service.montant')}}"  name="montant">
+                                </mat-form-field>
+                            </div>
+                        </div>
+                        <div class="col-lg-6">
+                            <div class="form-group">
+    
+                                <mat-form-field appearance="fill">
+                                    <mat-label>{{ __('service.tva')}}</mat-label>
+                                    <mat-select [(ngModel)]="tva" name="pageSize">
+                                    <mat-option *ngFor="let n of pageSizes" [value]="n">{{ n }} %</mat-option>
+                                    </mat-select>
+                                </mat-form-field>
+                            </div>
+                        </div>
+                    </div>
+    
+                    <div class="row text-center">
+                        <button type="button" class="btn btn-secondary" (click)="cacheForm()">{{ __('global.cancel')}}</button>
+                        <button type="submit" class="btn btn-primary"  [disabled]="!montant || !tva || !montant_min || !montant_max" (click)="ajoutPalier()">{{ __('global.save')}}</button>
+                    </div>
+                </div>
+                <div class="col-lg-6"></div>
+            </div>
+           
+    
+    
+            <div class="row" >
+                <div class="col-lg-2"></div>
+                <div class="col-lg-8">
+                    <div>
+                        <div class="text-right" style="width: 100%;">  
+                            <button mat-icon-button color="primary" (click)="afficheForm()" matTooltip="{{ __('service.add_palier') }}">
+                            <mat-icon>add</mat-icon>
+                          </button>
+                        </div>
+                        <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
+                            <thead>
+                                <tr class="th-table">
+                                    <td>{{ __("service.montant_min")}}</td>
+                                    <td>{{ __("service.montant_max")}}</td>
+                                    <td>{{ __("service.montant")}}</td>
+                                    <td>{{ __("service.tva")}}</td>
+                                    <td>{{ __("service.frais")}}</td>
+                                    <td>{{ __("global.action")}}</td>
+                                </tr>
+                            </thead>
+                            <tbody *ngIf="service.paliers.length != 0">
+                                <tr class="ng-star-inserted" *ngFor="let palier of service.paliers let last = last">
+                                    <td>{{ formatNumber(palier.montant_deb, ' ')}}</td>
+                                    <td>{{ formatNumber(palier.montant_fin, ' ')}}</td>
+                                    <td>{{ formatNumber(palier.valeur, ' ')}}</td>
+                                    <td>{{ formatNumber(palier.tva, ' ')}}</td>
+                                    <td>{{ formatNumber(palier.ht, ' ')}}</td>
+                                    <td><i class="material-icons" style="cursor: pointer;" *ngIf="last" mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
+                                </tr>
+                
+                            </tbody>
+                            <tbody *ngIf="service.paliers.length == 0">
+                                <tr class="ng-star-inserted" >
+                                    <td colspan="5">Pas de données pour le moment.</td>
+                                   
+                                </tr>
+                            </tbody>
+                          
+                        </table>
+                    </div>
+                </div>
+                <div class="col-lg-2"></div>
+            </div>
+        </div>
+        
+
+       
+        <br><br>
+       
 
         <div class="modal-footer">
             <button type="button" class="btn btn-secondary" (click)="closeModal()">{{ __('global.cancel')}}</button>

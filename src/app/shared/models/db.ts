@@ -125,6 +125,7 @@ export class service {
     solde_carte : number ;
     type_frais : number;
     montant: string;
+    paliers: any;
    
    
 }

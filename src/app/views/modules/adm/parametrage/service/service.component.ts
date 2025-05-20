@@ -10,7 +10,8 @@ import Swal from 'sweetalert2';
 import { BsModalService, BsModalRef } from 'ngx-bootstrap/modal';
 import { AuthService } from 'app/services/auth.service';
 import { ServiceService } from 'app/services/admin/parametre/service.service';
-declare var bootstrap: any;
+import formatNumber from 'number-handler'
+
 @Component({
   selector: 'app-service',
   templateUrl: './service.component.html',
@@ -18,7 +19,9 @@ declare var bootstrap: any;
 })
 export class ServiceComponent extends Translatable implements OnInit {
 
-  modalRef?: BsModalRef;
+  modalRef?: BsModalRef;    
+  formatNumber : any = formatNumber;
+
   
   /***************************************** */
   endpoint = "";
@@ -36,6 +39,11 @@ export class ServiceComponent extends Translatable implements OnInit {
     },
     {
       "nomColonne" : this.__('service.frais'),
+      "colonneTable" : "frais",
+      "table" : "service"
+    },
+    {
+      "nomColonne" : this.__('service.type_frais'),
       "colonneTable" : "frais",
       "table" : "service"
     },
@@ -60,6 +68,10 @@ export class ServiceComponent extends Translatable implements OnInit {
         
           {
             'name' : 'frais',
+            'type' : 'text',
+          },
+          {
+            'name' : 'label_type_frais',
             'type' : 'text',
           },
         
@@ -109,6 +121,11 @@ export class ServiceComponent extends Translatable implements OnInit {
     titleModal: string = "";
     type_frais: string = "";
     distributeur: string = "";
+    montant :number ;
+    montant_min:number;
+    montant_max:number;
+    tva : number;
+    addFormpalier: boolean = false;
   
   
     constructor(private fb: FormBuilder,  
@@ -299,7 +316,9 @@ export class ServiceComponent extends Translatable implements OnInit {
         this.modalRef = this.modalService.show(this.addService, { backdrop: 'static',keyboard: false });
       }
     }
-  
+
+
+    pageSizes: number[] = [];
     async openModalDetailService() {
   
   
@@ -307,8 +326,12 @@ export class ServiceComponent extends Translatable implements OnInit {
   
       if (this.detailService) {
   
-       this.recupererDonnee();
-  
+        let result = await this.authService.getSelectList(environment.service+ '/'+  this.idService);
+        this.service = result;
+
+        this.pageSizes = Array.from({ length: 101 }, (_, i) => i);       
+        this.addFormpalier = false;
+
         // Ouverture de modal
         this.modalRef = this.modalService.show(this.detailService, {
           class: 'modal-xl',backdrop:"static"
@@ -438,6 +461,131 @@ export class ServiceComponent extends Translatable implements OnInit {
   
    // Fermeture du modal
     closeModal() {
+
       this.modalRef?.hide();
     }
+
+    cacheForm(){
+      this.montant = null;
+      this.montant_max = null;
+      this.montant_min = null;
+      this.addFormpalier = false;
+    }
+
+
+
+    // Quand on faire l'ajout palier
+    ajoutPalier() {
+
+          let msg = this.__("global.enregistrer_donnee_?");
+          let msg_btn = this.__("global.oui_enregistrer");
+        
+  
+          Swal.fire({
+            title: this.__("global.confirmation"),
+            text: msg,
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: msg_btn,
+            cancelButtonText: this.__("global.cancel"),
+            allowOutsideClick: false,
+            customClass: {
+                confirmButton: 'swal-button--confirm-custom',
+                cancelButton: 'swal-button--cancel-custom'
+            },
+            }).then((result) => {
+            if (result.isConfirmed) {
+  
+                let data = {
+                  "montant_min": this.montant_min,
+                  "montant_max": this.montant_max,
+                  "montant": this.montant,
+                  "taux_tva": this.tva
+                }
+                
+                  this.serviceService.ajoutPalier(this.idService, data).subscribe({
+                  next: (res) => {
+                      if(res['code'] == 201) {
+                        this.toastr.success(res['msg'], this.__("global.success"));
+                        this.actualisationTableau();
+                        this.closeModal();
+                      }
+                      else if(res['code'] == 400){
+                        if(res['data'].code) this.toastr.error(res['data'].code[0], this.__("global.error"));
+                        else this.toastr.error(res['data'], this.__("global.error"));
+                      }else{
+                          this.toastr.error(res['msg'], this.__("global.error"));
+                      }                
+                    },
+                    error: (err) => {
+                    }
+                }); 
+  
+              
+              
+  
+  
+              
+              }
+          });
+  
+    }
+
+    afficheForm(){
+      this.montant = null;
+      this.montant_max = null;
+      this.montant_min = null;
+      this.tva = null;
+      let last_montant_max = this.service.paliers.length
+      ? this.service.paliers[this.service.paliers.length - 1].montant_fin
+      : null;
+      this.montant_min = last_montant_max + 1;
+
+      this.addFormpalier = true;
+    }
+
+
+     // SUppression d'un modal
+     deletePalier(idPalier) {
+  
+      Swal.fire({
+        title: this.__("global.confirmation"),
+        text: this.__("global.supprimer_donnee_?"),
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: this.__("global.oui_supprimer"),
+        cancelButtonText: this.__("global.cancel"),
+        allowOutsideClick: false,
+        customClass: {
+            confirmButton: 'swal-button--confirm-custom',
+            cancelButton: 'swal-button--cancel-custom'
+        },
+        }).then((result) => {
+        if (result.isConfirmed) {
+  
+             this.serviceService.supprimerPalier(this.idService, idPalier).subscribe({
+              next: (res) => {
+                  if(res['code'] == 204) {
+                    this.toastr.success(res['msg'], this.__("global.success"));
+                    this.actualisationTableau();
+                    this.closeModal();
+                  }
+                  else{
+                      this.toastr.error(res['msg'], this.__("global.error"));
+                  }                
+                },
+                error: (err) => {
+                }
+            }); 
+  
+        
+  
+  
+          
+          }
+      });
+  
+    }
+
+
 }

@@ -37,7 +37,10 @@ export class HttpService {
     delete<T>(endpoint: string): Observable<T> {
         return this.http.delete<T>(`${environment.baseUrl}/${endpoint}`, valuesys.httpAuthOptions() );
     }
-
+    
+    patch<T>(endpoint: string, data : any): Observable<T> {
+        return this.http.patch<T>(`${environment.baseUrl}/${endpoint}`, data, valuesys.httpAuthOptions() );
+    }
 
   
 }

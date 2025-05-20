@@ -59,5 +59,27 @@ export class ServiceService {
         );
     }
 
+    ajoutPalier(idService, credentials: any): Observable<any> {
+        
+        return this.httpService.patch<any>(environment.service + "/" +idService + "/addPallier", credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+    supprimerPalier(idService, idPalier): Observable<any> {
+
+        return this.httpService.delete<any>(environment.service + '/' +idService + "/pallier/" + idPalier + "/deletePalier",).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
    
 }
