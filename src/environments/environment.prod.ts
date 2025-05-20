@@ -71,4 +71,7 @@ export const environment = {
 
   //** Solde distributeur */
   solde_distributeur : "gestion_bureau/solde_des_distributeur",
+
+  //** Partenaire financier */
+  partenaire_financier : "gestion_commission_reseau_phco/partenaire_financier",
 };
