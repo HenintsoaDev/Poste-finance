@@ -99,7 +99,7 @@
                 <div class="form-group" *ngIf="distributeur == 'O'">
                     <mat-form-field>
                         <mat-label>{{ __('service.taux_distributeur')}}</mat-label>
-                        <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0,1)" [(ngModel)]="service.taux_distributeur" placeholder="{{ __('service.taux_distributeur')}}" formControlName="taux_distributeur" name="taux_distributeur">
+                        <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9.]/g, '').slice(0,4)" [(ngModel)]="service.taux_distributeur" placeholder="{{ __('service.taux_distributeur')}}" formControlName="taux_distributeur" name="taux_distributeur">
                     </mat-form-field>
                 </div>
                 
@@ -221,9 +221,9 @@
                                 <tr class="th-table">
                                     <td>{{ __("service.montant_min")}}</td>
                                     <td>{{ __("service.montant_max")}}</td>
-                                    <td>{{ __("service.frais")}}</td>
+                                    <td>{{ __("service.frais_ht")}}</td>
                                     <td>{{ __("service.tva")}}</td>
-                                    <td>{{ __("service.montant")}}</td>
+                                    <td>{{ __("service.frais_ttc")}}</td>
                                     <td>{{ __("global.action")}}</td>
                                 </tr>
                             </thead>
