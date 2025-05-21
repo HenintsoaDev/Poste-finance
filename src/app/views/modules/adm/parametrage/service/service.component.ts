@@ -83,24 +83,24 @@ export class ServiceComponent extends Translatable implements OnInit {
       'icon' : 'info',
       'action' : 'detail',
       'tooltip' : this.__('global.tooltip_detail'),
-      'autority' : 'PRM_36',
+      'autority' : 'PRM_49',
   
     },
     {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : this.__('global.tooltip_edit'),
-      'autority' : 'PRM_10'
+      'autority' : 'PRM_48'
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : this.__('global.tooltip_delete'),
-      'autority' : 'PRM_12'
+      'autority' : 'PRM_50'
     },
     {
       'icon' : 'state',
-      'autority' : 'PRM_13',
+      'autority' : 'PRM_51',
     },
   ]
   

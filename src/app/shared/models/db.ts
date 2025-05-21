@@ -16,6 +16,16 @@ export class utilisateur {
     wallet_carte: number;
 }
 
+export class utilisateurApiNumherit {
+    id: number;
+    firstname: string;
+    lastname: string;
+    phonenumber: string;
+    username: string;
+    state: number;
+    email: string;
+}
+
 export class Auth {
     info : utilisateur|null;
     modules: module_user[] | []

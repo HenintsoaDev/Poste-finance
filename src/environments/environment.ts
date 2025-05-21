@@ -46,6 +46,9 @@ export const environment = {
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
   service : 'parametrage/service',
+  utilisateur_api_numherit :'parametrage/user_api_numherit',
+
+  regenerer_mdp_user_api :'parametrage/user_api_numherit/regenerer_password',
 
   header_message : 'parametrage/header_message',
   

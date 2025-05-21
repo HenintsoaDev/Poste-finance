@@ -31,6 +31,7 @@ import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-comp
 import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-message/header-message.component';
 import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
+import { UtilisateurApiNumheritComponent } from './views/modules/adm/parametrage/utilisateur-api-numherit/utilisateur-api-numherit.component';
 
 const routes: Routes =[
   
@@ -51,6 +52,8 @@ const routes: Routes =[
     {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
     {path : 'service',component: ServiceComponent,data: { breadcrumb: 'Lister les services' }},
     {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'Lister les messages d\'entête' }},
+    {path : 'user_api_numherit',component: UtilisateurApiNumheritComponent,data: { breadcrumb: 'Lister les utilisateurs API Numherit' }},
+
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
