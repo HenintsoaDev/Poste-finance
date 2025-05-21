@@ -137,6 +137,7 @@
         "add_list" : "Ajouter un utilisateur"
     },
     "profil" : {
+        "my_profile" : "Mon profil",
         "modification_mdp" : "Modification du mot de passe",
         "actuel_mdp" : "Actuel mot de passe",
         "votre_mdp_actu" : "Votre mot de passe actuel",
@@ -234,6 +235,7 @@
 
     "bureau" : {
         "title" : "Gestion des bureaux",
+        "lister_bureau" : "Lister les bureaux",
         "code" : "Code",
         "name" : "Bureau",
         "responsable" : "Responsable",
@@ -294,6 +296,7 @@
     },
     "demande_credit" : {
         "add" : "Nouvelle demande",
+        "historique_rechargement_bureau" : "Historique rechargements bureaux",
         "type_compte" : "Type de compte",
         "all_compte" : "Tous les comptes",
         "from" : "Du",
@@ -324,6 +327,7 @@
         "select_bureau":"Veuillez sélectionner le bureau souhaité"
     },
     "demande_rapatriement" : {
+        "title" : "Historique rapatriement bureaux",
         "add" : "Nouvelle demande",
         "type_compte" : "Type de compte",
         "all_compte" : "Tous les comptes",
@@ -356,12 +360,14 @@
     },
 
     "releve_solde_bureau" : {
+        "title" : "Relevé solde bureau",
         "agence" : "Bureau",
         "select_bureau" : "Sélectionner le bureau",
         "list_releve" : "Relevé solde  bureau"
     },
 
     "solde_bureau" : {
+        "title" : "Solde des bureaux",
         "code" : "Code",
         "bureau" : "Bureau",
         "type_bureau" : "Type de bureau",
@@ -373,6 +379,7 @@
     },
 
     "solde_distributeur" : {
+        "title" : "Solde des distributeurs",
         "list_solde_distributeur" : "Solde des distributeurs"
     },
 
