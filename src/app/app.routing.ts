@@ -38,7 +38,7 @@ const routes: Routes =[
   { path: 'login', component: LoginComponent }, 
   { path: '',redirectTo: 'login',pathMatch: 'full'}, 
   { path: 'home', component: HomeComponent ,pathMatch: 'full'}, 
-  { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'Mon profil' } }, 
+  { path: 'my-profil', component: ProfilComponent,data: { breadcrumb: 'profil.my_profile' } }, 
   { path: 'app-module/:module', component: WelcomeModuleComponent},
   
   //Module Administration : ADM
@@ -56,13 +56,13 @@ const routes: Routes =[
 
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
-  {path : 'gestion_bureau',data: { breadcrumb: 'Gestion bureaux' },children : [
-    {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'Lister les bureaux' }},
-    {path : 'demande_credit',component: DemandeCreditComponent,data: { breadcrumb: 'Historique rechargements bureaux' }},
-    {path : 'releve_solde_bureau',component: ReleveSoldeBureauComponent,data: { breadcrumb: 'Relevé solde bureau' }},
-    {path : 'solde_bureau',component: SoldeBureauComponent,data: { breadcrumb: 'Solde des bureaux' }},
-    {path : 'demande_rapatriement',component: DemandeRapatriementComponent,data: { breadcrumb: 'Historique rapatriement bureaux' }},
-    {path : 'solde_des_distributeur',component: SoldeDistributeurComponent,data: { breadcrumb: 'Solde des distributeurs' }},
+  {path : 'gestion_bureau',data: { breadcrumb: 'bureau.title' },children : [
+    {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'bureau.lister_bureau' }},
+    {path : 'demande_credit',component: DemandeCreditComponent,data: { breadcrumb: 'demande_credit.historique_rechargement_bureau' }},
+    {path : 'releve_solde_bureau',component: ReleveSoldeBureauComponent,data: { breadcrumb: 'releve_solde_bureau.title' }},
+    {path : 'solde_bureau',component: SoldeBureauComponent,data: { breadcrumb: 'solde_bureau.title' }},
+    {path : 'demande_rapatriement',component: DemandeRapatriementComponent,data: { breadcrumb: 'demande_rapatriement.title' }},
+    {path : 'solde_des_distributeur',component: SoldeDistributeurComponent,data: { breadcrumb: 'solde_distributeur.title' }},
   ]}, 
   {path : 'gestion_compte_principal',data: { breadcrumb: 'virement.title_sous_module' },children : [
     {path : 'suivi_compte',component: SuiviComptePrincipalComponent,data: { breadcrumb: 'suivi_compte.title' }},
