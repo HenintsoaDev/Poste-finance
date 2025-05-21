@@ -60,6 +60,7 @@ import { SuiviCompteCommissionComponent } from './views/modules/adm/gestion-comp
 import { ServiceComponent } from './views/modules/adm/parametrage/service/service.component';
 import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-message/header-message.component';
 import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
+import { UtilisateurApiNumheritComponent } from './views/modules/adm/parametrage/utilisateur-api-numherit/utilisateur-api-numherit.component';
 
 
 registerLocaleData(localeFr);
@@ -128,7 +129,8 @@ registerLocaleData(localeFr);
     SuiviCompteCommissionComponent,
     ServiceComponent,
     HeaderMessageComponent,
-    PartenaireFinancierComponent
+    PartenaireFinancierComponent,
+    UtilisateurApiNumheritComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

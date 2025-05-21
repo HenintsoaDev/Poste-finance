@@ -168,7 +168,8 @@
         "title_edit_modal" : "Modification d'un utilisateur",
         "title_add_modal" : "Ajout d'un utilisateur",
         "title_detail_modal" : "Informations d'un utilisateur",
-
+        "title_detail_modal_api_numherit" : "Informations d'un utilisateur API Numherit",
+        
         "user_modification" : "Modifier par",   
         "le" : "le",   
         "state" : "State",
