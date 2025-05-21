@@ -2,7 +2,7 @@
 
     <div class="container mt-4">
         <div class="title-page-profil">
-            <h5 class="text-primary"><b>Profil</b></h5>
+            <h5 class="text-primary"><b>{{ __('profile.title') }}</b></h5>
         </div>
         
 
@@ -12,7 +12,7 @@
             <div class="col-md-6 d-flex">
                 <div class="card shadow-sm w-100 h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">Information profil utilisateur</h5>
+                        <h5 class="card-title text-primary">{{ __('profil.profil_user_info') }}</h5>
                         <p><strong>{{ __('utilisateur.nom') }} :</strong> {{ user.info?.nom }} </p>
                         <p><strong>{{ __('utilisateur.prenom') }} :</strong> {{ user.info?.prenom }} </p>
                         <p><strong>{{ __('utilisateur.email') }} :</strong>  {{ user.info?.email }} </p>

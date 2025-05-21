@@ -20,7 +20,7 @@
                 <a class="nav-link" data-toggle="collapse" href="#collapseExample"  aria-expanded="true" style="color: white;">
                     <i class="material-icons">person</i>
                     <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;font-size: 12px;">
-                        <span style="width: 11.5rem;display: inline-flex;text-overflow: ellipsis;white-space: initial;">{{ user.info?.nom }} {{ user.info?.prenom }} </span>
+                        <span style="width: 11.5rem;display: inline-flex;text-overflow: ellipsis;white-space: initial;line-height: 15px;">{{ user.info?.nom }} {{ user.info?.prenom }} </span>
                     <b class="caret"></b></p>
                     <span style="font-size: 10px;margin-left: 40px;">{{ user.info?.name }}</span>
                 </a>
@@ -49,7 +49,7 @@
                     <a class="nav-link" data-toggle="collapse" [href]="'#collapse' + i"  aria-expanded="true" style="color: white;">
                         <i class="material-icons">{{menuItem.icon}}</i>
                         <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;font-size:12px">
-                            <span style="width: 11.5rem;display: inline-flex;text-overflow: ellipsis;white-space: initial;">{{menuItem.title }}</span>
+                            <span style="width: 11.5rem;display: inline-flex;text-overflow: ellipsis;white-space: initial;line-height: 15px;">{{menuItem.title }}</span>
                         <b class="caret"></b></p>
                     </a>
                 </li>
