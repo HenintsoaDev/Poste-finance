@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { ActivatedRoute, NavigationEnd, Router } from '@angular/router';
 import { filter } from 'rxjs/operators';
+import { Translatable } from 'shared/constants/Translatable';
 
 interface Breadcrumb {
   label: string;
@@ -10,10 +11,11 @@ interface Breadcrumb {
 @Injectable({
   providedIn: 'root'
 })
-export class BreadcrumbService {
+export class BreadcrumbService extends Translatable {
   breadcrumbs: Breadcrumb[] = [];
 
   constructor(private router: Router, private activatedRoute: ActivatedRoute) {
+    super();
     this.router.events
       .pipe(filter(event => event instanceof NavigationEnd))
       .subscribe(() => {
@@ -26,7 +28,7 @@ export class BreadcrumbService {
       const path = route.routeConfig.path || '';
       url += `/${path}`;
       breadcrumbs.push({
-        label: route.routeConfig.data['breadcrumb'],
+        label: this.__(route.routeConfig.data['breadcrumb']),
         url: url
       });
     }

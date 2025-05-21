@@ -260,6 +260,7 @@
     },
 
     "suivi_compte" : {
+        "title" : "Suivi compte principal",
         "type_compte" : "Type de compte",
         "all_compte" : "Tous les comptes",
         "from" : "Du",
@@ -275,6 +276,8 @@
     },  
 
     "virement" : {
+        "title_sous_module" : "Gestion compte principal",
+        "title" : "Historique des virements",
         "validate_virement" : "Valider le virement",
         "oui_valider" : "Oui, valider",
         "list_virement" : "Liste des virements",
@@ -374,11 +377,11 @@
     },
 
     "suivi_commission" : {
+        "title" : "Suivi des commissions",
         "type_service" : "Type de commission",
         "type_commission" : "Sélectionner le type de commission",
         "paiement_masse" : "Commission paiement de masse",
         "hors_paiement_masse" : "Commission hors paiement de masse",
-      
         "select_commission" : "Choisir le type de commission",
         "list_suivi_compte" : "Suivi relevé compte commission"
     },
@@ -420,6 +423,8 @@
     },
 
     "partenaire" : {
+        "title" : "Liste des partenaires",
+        "title_sous_module" : "Gestion commision réseau PHCO",
         "new_partenaire" : "Nouveau partenaire",
         "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",

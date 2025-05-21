@@ -64,13 +64,13 @@ const routes: Routes =[
     {path : 'demande_rapatriement',component: DemandeRapatriementComponent,data: { breadcrumb: 'Historique rapatriement bureaux' }},
     {path : 'solde_des_distributeur',component: SoldeDistributeurComponent,data: { breadcrumb: 'Solde des distributeurs' }},
   ]}, 
-  {path : 'gestion_compte_principal',data: { breadcrumb: 'Gestion compte principal' },children : [
-    {path : 'suivi_compte',component: SuiviComptePrincipalComponent,data: { breadcrumb: 'Suivi compte principal' }},
-    {path : 'virement',component: HistoriqueVirementsComponent,data: { breadcrumb: 'Historique des virements' }},
-    {path : 'suivi_compte_commission',component: SuiviCompteCommissionComponent,data: { breadcrumb: 'Suivi compte commission' }},
+  {path : 'gestion_compte_principal',data: { breadcrumb: 'virement.title_sous_module' },children : [
+    {path : 'suivi_compte',component: SuiviComptePrincipalComponent,data: { breadcrumb: 'suivi_compte.title' }},
+    {path : 'virement',component: HistoriqueVirementsComponent,data: { breadcrumb: 'virement.title' }},
+    {path : 'suivi_compte_commission',component: SuiviCompteCommissionComponent,data: { breadcrumb: 'suivi_commission.title' }},
   ]}, 
-  {path : 'gestion_commission_reseau_phco',data: { breadcrumb: 'Gestion commision réseau PHCO' },children : [
-    {path : 'partenaire_financier',component: PartenaireFinancierComponent,data: { breadcrumb: 'Lister les partenaires financiers' }},
+  {path : 'gestion_commission_reseau_phco',data: { breadcrumb: 'partenaire.title_sous_module' },children : [
+    {path : 'partenaire_financier',component: PartenaireFinancierComponent,data: { breadcrumb: 'partenaire.title' }},
   ]}, 
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];
