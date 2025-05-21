@@ -322,7 +322,7 @@ export class ServiceComponent extends Translatable implements OnInit {
     async openModalDetailService() {
   
   
-      this.titleModal = this.__('profil.title_detail_modal');
+      this.titleModal = this.__('service.title_detail_modal');
   
       if (this.detailService) {
   
@@ -440,6 +440,9 @@ export class ServiceComponent extends Translatable implements OnInit {
     openModalAdd(template: TemplateRef<any>) {
       this.titleModal = this.__('service.title_add_modal');
       this.service = new service();
+
+      this.type_frais = '';
+      this.distributeur = '';
   
       this.modalRef = this.modalService.show(template, {
         backdrop: 'static',
