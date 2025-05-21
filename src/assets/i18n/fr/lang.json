@@ -9,6 +9,15 @@
         "about" : "A propos",
         "contact" : "Contact"
     },
+
+    "login" : {
+        "my_profile" : "Mon profil"
+    },
+
+    "profile" : {
+        "title" : "Profil",
+        "profil_user_info" : "Information profil utilisateur"
+    },
   
 
     "global" : {
