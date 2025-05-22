@@ -21,7 +21,7 @@ export class SoldeDistributeurComponent extends Translatable implements OnInit {
         {"nomColonne" : this.__('solde_bureau.adresse'),"colonneTable" : "adresse","table" : "solde_bureau"},
         {"nomColonne" : this.__('solde_bureau.solde_wallet'),"colonneTable" : "solde","table" : "solde_bureau", "align": "right"},
         {"nomColonne" : this.__('solde_bureau.solde_carte'),"colonneTable" : "solde_carte","table" : "solde_bureau", "align": "right"},
-        {"nomColonne" : ""}
+        {"nomColonne" : this.__('global.action')}
     ];
 
     objetBody = [
