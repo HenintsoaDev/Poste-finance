@@ -28,7 +28,6 @@ export const environment = {
   soldeGlobalTotalSoldeCarte : 'soldeGlobalTotalSoldeCarte',
   soldeCarteParametrable : 'soldeCarteParametrable',
   soldeWalletCarteParametrable : 'soldeWalletCarteParametrable',
-  header_message : 'parametrage/header_message',
 
   //** Parametrage */
   module :'parametrage/module',
@@ -46,12 +45,25 @@ export const environment = {
   action : 'parametrage/action',
   appendroute : 'parametrage/settings/appendroute',
   generateroute : 'parametrage/settings/generateroute',
-  
+  service : 'parametrage/service',
+  utilisateur_api_numherit :'parametrage/user_api_numherit',
+
+  regenerer_mdp_user_api :'parametrage/user_api_numherit/regenerer_password',
+
+  header_message : 'parametrage/header_message',
+
   //** Gestion bureau */
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
   bureau : 'gestion_bureau/bureaux',
   demande_credit : 'gestion_bureau/demande_credit',
+  autorise_demande : 'gestion_bureau/demande_credit/autoriserDemande',
+  valide_demande : 'gestion_bureau/demande_credit/validerDemande',
+  initierValidation : 'gestion_bureau/demande_credit/initierValidation',
+  demande_rapatriement : 'gestion_bureau/demande_rapatriement',
+  autorise_demande_rapatriement : 'gestion_bureau/demande_rapatriement/autoriserDemande',
+  valide_demande_rapatriement : 'gestion_bureau/demande_rapatriement/validerDemande',
+  initierValidation_rapatriement : 'gestion_bureau/demande_rapatriement/initierValidation',
 
   //** Ressource */
   province : 'resource/province/liste_province',
@@ -59,6 +71,7 @@ export const environment = {
 
   //** Gestion compte principal */
   suivi_compte : "gestion_compte_principal/suivi_compte",
+  suivi_compte_commission : "gestion_compte_principal/suivi_compte_commission",
   historique_virement : "gestion_compte_principal/virement",
   valide_virement : "gestion_compte_principal/virement/validerVirement",
   rejet_virement : "gestion_compte_principal/virement/rejeterVirement",
