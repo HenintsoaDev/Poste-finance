@@ -310,59 +310,129 @@
 
         <table style="width: 100%;">
             <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.code")}} : </td>
-                <td  class="text-left">{{  bureau.code }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.name")}}  : </td>
-                <td  class="text-left">{{  bureau.name }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.code")}}</b></label>
+                        <h6><b class="bold">{{  bureau.code }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.name")}}</b></label>
+                        <h6><b class="bold">{{  bureau.name }}</b></h6>
+                     </div>
+                </td>
             </tr>
             <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.type_bureau")}} : </td>
-                <td  class="text-left">{{  bureau.type_agence }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.responsable")}}  : </td>
-                <td  class="text-left">{{  bureau.responsable }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.type_bureau")}}</b></label>
+                        <h6><b class="bold">{{  bureau.type_agence }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.responsable")}}</b></label>
+                        <h6><b class="bold">{{  bureau.responsable }}</b></h6>
+                     </div>
+                </td>
             </tr>
             <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.email")}} : </td>
-                <td  class="text-left">{{  bureau.email }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.email_dr")}}  : </td>
-                <td  class="text-left">{{  bureau.email_dr }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.email")}}</b></label>
+                        <h6><b class="bold">{{  bureau.email }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.email_dr")}}</b></label>
+                        <h6><b class="bold">{{  bureau.email_dr }}</b></h6>
+                     </div>
+                </td>
             </tr>
             <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.telephone")}} : </td>
-                <td  class="text-left">{{  bureau.tel }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.telephone_dr")}}  : </td>
-                <td  class="text-left">{{  bureau.telephone_dr }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.telephone")}}</b></label>
+                        <h6><b class="bold">{{  bureau.tel }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.telephone_dr")}}</b></label>
+                        <h6><b class="bold">{{  bureau.telephone_dr }}</b></h6>
+                     </div>
+                </td>
             </tr>
             <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.adresse")}}</b></label>
+                        <h6><b class="bold">{{  bureau.adresse }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.province")}}</b></label>
+                        <h6><b class="bold">{{  bureau.province }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.solde")}}</b></label>
+                        <h6><b class="bold">{{  bureau.solde }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.solde_carte")}}</b></label>
+                        <h6><b class="bold">{{  bureau.solde_carte }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.rapatrie_auto")}}</b></label>
+                        <h6><b class="bold">{{  bureau.rapatrie_auto == 0 ? __("global.non") : __("global.oui") }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.solde_max_rapatrie")}}</b></label>
+                        <h6><b class="bold">{{  bureau.solde_max_rapatrie }}</b></h6>
+                     </div>
+                </td>
+            </tr>
 
-                <td  class="text-right p-3 bold">{{ __("bureau.adresse")}}  : </td>
-                <td  class="text-left">{{  bureau.adresse }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.province")}} : </td>
-                <td  class="text-left">{{  bureau.province }}</td>
+
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.user_creation")}}</b></label>
+                        <h6><b class="bold">{{  bureau.user_creation }} <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_creation  }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.user_modification")}}</b></label>
+                        <h6><b class="bold">{{  bureau.user_modification }}  <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_modification	 }}</b></h6>
+                     </div>
+                </td>
             </tr>
             <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.solde")}} : </td>
-                <td  class="text-left">{{  bureau.solde }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.solde_carte")}}  : </td>
-                <td  class="text-left">{{  bureau.solde_carte }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("bureau.state")}}</b></label>
+                        <h6><b class="bold">{{  bureau.state }}</b></h6>
+                     </div>
+                </td>
+                
             </tr>
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.rapatrie_auto")}} : </td>
-                <td  class="text-left">{{  bureau.rapatrie_auto == 0 ? __("global.non") : __("global.oui") }}</td>
-                <td  class="text-right p-3 bold">{{ __("bureau.solde_max_rapatrie")}}  : </td>
-                <td  class="text-left">{{  bureau.solde_max_rapatrie }}</td>
-            </tr>
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.user_creation")}} : </td>
-                <td  class="text-left">{{  bureau.user_creation  }} <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_creation  }} </td>
-                <td  class="text-right p-3 bold">{{ __("bureau.user_modification")}}  : </td>
-                <td  class="text-left">{{  bureau.user_modification	 }} <span class="bold">{{ __("bureau.le")}}</span>   {{  bureau.date_modification	 }}</td>
-            </tr>
-            
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("bureau.state")}} : </td>
-                <td  class="text-left">{{  bureau.state }}</td>
-            </tr>
+           
         </table>
 
         <div class="modal-footer">

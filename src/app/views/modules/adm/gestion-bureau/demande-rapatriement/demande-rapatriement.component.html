@@ -120,36 +120,75 @@
 
     <div *ngIf="!showCode">
         <table style="width: 100%;">
+
+
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.ref_demande")}} : </td>
-                <td  class="text-left">{{  demande_rapatriement.ref_demande }}</td>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.num_demande")}}  : </td>
-                <td  class="text-left">{{  demande_rapatriement.num_demande }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.ref_demande")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.ref_demande }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.num_demande")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.num_demande }}</b></h6>
+                     </div>
+                </td>
             </tr>
-             <tr>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.montant")}} ({{ __("global.currency")}}) : </td>
-                <td  class="text-left">{{  formatNumber(demande_rapatriement.montant, ' ') }}</td>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.wallet_carte")}}  : </td>
-                <td  class="text-left">{{  demande_rapatriement.wallet_carte }}</td>
-            </tr>
-           
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.bureau")}} : </td>
-                <td  class="text-left" colspan=3>{{  demande_rapatriement.agence_debiter }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.montant")}} ({{ __("global.currency")}}) :</b></label>
+                        <h6><b class="bold">{{  formatNumber(demande_rapatriement.montant, ' ') }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.wallet_carte")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.wallet_carte }}</b></h6>
+                     </div>
+                </td>
             </tr>
-       
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.user_demande")}} : </td>
-                <td  class="text-left">{{  demande_rapatriement.user_demande  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_demande | date: 'dd/mm/yyyy HH:mm:ss' }} </td>
-              </tr>
-             <tr *ngIf="demande_rapatriement.user_autorise != null">
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.user_autorise")}}  : </td>
-                <td  class="text-left">{{  demande_rapatriement.user_autorise	 }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_autorisation | date: 'dd/mm/yyyy HH:mm:ss' }}</td>
-             </tr>
-             <tr *ngIf="demande_rapatriement.user_validation != null">
-                <td  class="text-right p-3 bold">{{ __("demande_rapatriement.user_validation")}} : </td>
-                <td  class="text-left">{{  demande_rapatriement.user_validation  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_validation | date: 'dd/mm/yyyy HH:mm:ss' }} </td>
-             </tr>
+                <td colspan="2">
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.bureau")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.agence_debiter }}</b></h6>
+                     </div>
+                </td>
+               
+            </tr>
+
+            <tr>
+                <td colspan="2" >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.user_demande")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.user_demande }}   <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_demande | date: 'dd/mm/yyyy HH:mm:ss' }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+
+            <tr *ngIf="demande_rapatriement.user_autorise != null"> 
+                <td colspan="2" >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.user_autorise")}}</b></label>
+                        <h6><b class="bold">{{  demande_rapatriement.user_autorise }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_autorisation | date: 'dd/mm/yyyy HH:mm:ss' }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+
+            <tr *ngIf="demande_rapatriement.user_validation != null">
+                <td colspan="2" >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("demande_rapatriement.user_validation")}}</b></label>
+                        <h6 nowrap><b class="bold">{{  demande_rapatriement.user_validation  }} <span class="bold">{{ __("global.le")}}</span>   {{  demande_rapatriement.date_validation | date: 'dd/mm/yyyy HH:mm:ss' }}</b></h6>
+                     </div>
+                </td>
+            </tr>
             
         </table> 
 
@@ -235,22 +274,48 @@
     
                         <div class="col-lg-12">
                             <table style="width: 100%;">
+
                                 <tr>
-                                    <td  class="text-right p-3 bold">{{ __("bureau.code")}} : </td>
-                                    <td  class="text-left">{{  infoBureau.code }}</td>
-                                    <td  class="text-right p-3 bold">{{ __("bureau.name")}} : </td>
-                                    <td  class="text-left">{{  infoBureau.name }}</td>
+                                    <td >
+                                        <div class="alert alert-custom">
+                                            <label><b class="fw-800">{{ __("bureau.code")}}</b></label>
+                                            <h6><b class="bold">{{  infoBureau.code }}</b></h6>
+                                         </div>
+                                    </td>
+                                    <td >
+                                        <div class="alert alert-custom">
+                                            <label><b class="fw-800">{{ __("bureau.name")}}</b></label>
+                                            <h6><b class="bold">{{  infoBureau.name }}</b></h6>
+                                         </div>
+                                    </td>
                                 </tr>
-                                 <tr>
-                                    <td  class="text-right p-3 bold">{{ __("bureau.email")}}  : </td>
-                                    <td  class="text-left">{{  infoBureau.email }}</td>
-                                    <td  class="text-right p-3 bold">{{ __("bureau.telephone")}}  : </td>
-                                    <td  class="text-left">{{  infoBureau.tel }}</td>
-                                </tr>
+
                                 <tr>
-                                    <td  class="text-right p-3 bold">{{ __("bureau.adresse")}}  : </td>
-                                    <td  class="text-left" colspan='3'>{{  infoBureau.adresse }}</td>
+                                    <td >
+                                        <div class="alert alert-custom">
+                                            <label><b class="fw-800">{{ __("bureau.email")}}</b></label>
+                                            <h6><b class="bold">{{  infoBureau.email }}</b></h6>
+                                         </div>
+                                    </td>
+                                    <td >
+                                        <div class="alert alert-custom">
+                                            <label><b class="fw-800">{{ __("bureau.telephone")}}</b></label>
+                                            <h6><b class="bold">{{  infoBureau.tel }}</b></h6>
+                                         </div>
+                                    </td>
                                 </tr>
+
+                                <tr>
+                                    <td >
+                                        <div class="alert alert-custom">
+                                            <label><b class="fw-800">{{ __("bureau.adresse")}}</b></label>
+                                            <h6><b class="bold">{{  infoBureau.adresse }}</b></h6>
+                                         </div>
+                                    </td>
+                                </tr>
+                              
+                                
+                                
                             </table>
                         </div>
                     </div>

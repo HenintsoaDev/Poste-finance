@@ -174,32 +174,63 @@
 
 
         <table style="width: 100%;">
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.nom")}} : </td>
-                <td  class="text-left">{{  utilisateur.firstname }}</td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.prenom")}}  : </td>
-                <td  class="text-left">{{  utilisateur.lastname }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.nom")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.firstname }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.prenom")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.lastname }}</b></h6>
+                     </div>
+                </td>
             </tr>
-           
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.email")}} : </td>
-                <td  class="text-left">{{  utilisateur.email }}</td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.telephone")}}  : </td>
-                <td  class="text-left">{{  utilisateur.phonenumber }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.email")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.email }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.telephone")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.phonenumber }}</b></h6>
+                     </div>
+                </td>
             </tr>
-          
-       
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.user_creation")}} : </td>
-                <td  class="text-left">{{  utilisateur.user_created  }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.created  }} </td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.user_modification")}}  : </td>
-                <td  class="text-left">{{  utilisateur.user_modified	 }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.modified	 }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.user_creation")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.user_created  }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.created  }} </b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.user_modification")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.user_modified	 }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.modified	 }}</b></h6>
+                     </div>
+                </td>
             </tr>
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.state")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.state == 1 ? __("global.activer") : __("global.desactiver") }}</b></h6>
+                     </div>
+                </td>
+             
+            </tr>
+
+
             
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.state")}} : </td>
-                <td  class="text-left">{{  utilisateur.state }}</td>
-            </tr>
         </table>
 
         <div class="modal-footer">

@@ -72,7 +72,7 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
 
     ngOnInit(): void {
         this.endpoint = environment.baseUrl + '/' + environment.releve_solde_bureau; 
-        this.passageService.clear();
+        //this.passageService.clear();
         
         this.bureauService.getAgenceBureauActive().subscribe({
             next: (res) => {

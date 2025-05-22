@@ -28,8 +28,8 @@ export class SoldeDistributeurComponent extends Translatable implements OnInit {
         {'name' : 'code','type' : 'text',},
         {'name' : 'agence','type' : 'text',},
         {'name' : 'adresse','type' : 'text',},
-        {'name' : 'solde','type' : 'text',},
-        {'name' : 'solde_carte','type' : 'text',},
+        {'name' : 'solde','type' : 'montant',},
+        {'name' : 'solde_carte','type' : 'montant',},
         {'name' :  'state#rowid'}
     ];
 

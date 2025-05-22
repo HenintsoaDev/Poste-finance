@@ -182,28 +182,53 @@
 
 
         <table style="width: 100%;">
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("profil.code")}} : </td>
-                <td  class="text-left">{{  profil.code }}</td>
-                <td  class="text-right p-3 bold">{{ __("profil.name")}}  : </td>
-                <td  class="text-left">{{  profil.name }}</td>
-            </tr>
-           
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("profil.type")}} : </td>
-                <td  class="text-left">{{  profil.type_profil_name	 }}</td>
 
-                <td  class="text-right p-3 bold">{{ __("profil.state")}} : </td>
-                <td  class="text-left">{{  profil.state }}</td>
-            </tr>
             <tr>
-       
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("profil.user_creation")}} : </td>
-                <td  class="text-left">{{  profil.user_creation  }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_creation  }} </td>
-                <td  class="text-right p-3 bold">{{ __("profil.user_modification")}}  : </td>
-                <td  class="text-left">{{  profil.user_modification	 }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_modification	 }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.code")}}</b></label>
+                        <h6><b class="bold">{{  profil.code }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.name")}}</b></label>
+                        <h6><b class="bold">{{  profil.name }}</b></h6>
+                     </div>
+                </td>
             </tr>
+
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.type")}}</b></label>
+                        <h6><b class="bold">{{  profil.type_profil_name }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.state")}}</b></label>
+                        <h6><b class="bold">{{  profil.state }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+
+            <tr>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.user_creation")}}</b></label>
+                        <h6><b class="bold">{{  profil.user_creation  }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_creation  }} </b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("profil.user_modification")}}</b></label>
+                        <h6><b class="bold">{{  profil.user_modification	 }} <span class="bold">{{ __("profil.le")}}</span>   {{  profil.date_modification	 }}</b></h6>
+                     </div>
+                </td>
+            </tr>
+
+
             
         </table>
 

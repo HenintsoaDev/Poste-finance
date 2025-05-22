@@ -42,10 +42,10 @@ const routes: Routes =[
   { path: 'app-module/:module', component: WelcomeModuleComponent},
   
   //Module Administration : ADM
-  {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
+  {path : 'parametrage',data: { breadcrumb: 'module.title_module_breadcrumb'  },children : [
     {path : 'module',component: ModuleComponent,data: { breadcrumb: 'module.title_breadcrumb' }},
     {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'sous_module.title_breadcrumb' }},
-    {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'profils.title_breadcrumb' }},
+    {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'profil.title_breadcrumb' }},
     {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'type_bureau.title_breadcrumb' }},
     {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'type_profil.title_breadcrumb' }},
     {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'utilisateur.title_breadcrumb' }},
@@ -54,7 +54,7 @@ const routes: Routes =[
     {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'header_message.title_breadcrumb' }},
     {path : 'user_api_numherit',component: UtilisateurApiNumheritComponent,data: { breadcrumb: 'utilisateur.title_breadcrumb_api_numherit'  }},
 
-    {path: '**', component: PageNotFoundComponent, data: { is404: true } }
+    // {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 
   {path : 'gestion_bureau',data: { breadcrumb: 'bureau.title' },children : [
     {path : 'bureaux',component: BureauComponent,data: { breadcrumb: 'bureau.lister_bureau' }},

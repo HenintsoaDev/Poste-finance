@@ -189,6 +189,7 @@
         "user_creation" : "Créer par"  
     },
     "module" : {
+        "title_module_breadcrumb" : "Parametrage & configuration",
         "title_breadcrumb" : "Lister les modules",
         "title" : "Gestion des modules",
         "name" : "Libelle",

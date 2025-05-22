@@ -89,6 +89,7 @@ export class TableComponent extends Translatable {
         const { type, data: filtre } = event;
 
         console.log("xxxxx", this.triDescDefault);
+        console.log("xxeventxx", event);
 
       
         // Vérifie si c'est un événement pertinent
@@ -399,7 +400,12 @@ export class TableComponent extends Translatable {
 
       //** si le type de donnée est date */
       if(post[1] == 'date') return this.datePipe.transform(post[0], 'dd/MM/YYYY HH:mm:ss');
-      else if(post[1] == 'montant') return this.formatNumber(post[0], ' ');
+      else if(post[1] == 'montant') {
+
+        let valeur = post[0].replace(/\s/g, '').replace(',', '.');
+        
+        return this.formatNumber(valeur, ' ');
+      }
       else if(post[1] == 'statut') {
         if(post[0] == 1) return this.__('global.validate');
         else if(post[0] == 0) return this.__('global.en_attente');
@@ -480,18 +486,16 @@ export class TableComponent extends Translatable {
             
     }
 
-
-    verifAlignText(dataText: any){
-        console.log(dataText)
-        let post = dataText.split('###');
-  
-        console.log("xxxxx", post[1])
-
-        //** si la donnée est null */
-        if(post[0] == "null") return '';
-  
-        if(post[1] == 'montant') return 'text-right';
-      
+    verifAlignText(dataText: any) {
+      if (dataText == null) return '';
+    
+      const text = String(dataText); // conversion explicite en chaîne
+      const post = text.split('###');
+    
+      if (post[0] === 'null') return '';
+      if (post[1] && post[1] === 'montant') return 'right';
+    
+      return ''; // optionnel : ajouter un retour par défaut
     }
 
 

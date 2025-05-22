@@ -223,37 +223,79 @@
 
 
         <table style="width: 100%;">
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.nom")}} : </td>
-                <td  class="text-left">{{  utilisateur.nom }}</td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.prenom")}}  : </td>
-                <td  class="text-left">{{  utilisateur.prenom }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.nom")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.nom }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.prenom")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.prenom }}</b></h6>
+                     </div>
+                </td>
             </tr>
-           
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.email")}} : </td>
-                <td  class="text-left">{{  utilisateur.email }}</td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.telephone")}}  : </td>
-                <td  class="text-left">{{  utilisateur.telephone }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.email")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.email }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.telephone")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.telephone }}</b></h6>
+                     </div>
+                </td>
             </tr>
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.profil")}} : </td>
-                <td  class="text-left">{{  utilisateur.profil }}</td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.bureau")}}  : </td>
-                <td  class="text-left">{{  utilisateur.agence }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.profil")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.profil }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.bureau")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.agence }}</b></h6>
+                     </div>
+                </td>
             </tr>
-       
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.user_creation")}} : </td>
-                <td  class="text-left">{{  utilisateur.user_creation  }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_creation  }} </td>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.user_modification")}}  : </td>
-                <td  class="text-left">{{  utilisateur.user_modification	 }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_modification	 }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.user_creation")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.user_creation  }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_creation  }} </b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.user_modification")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.user_modification	 }} <span class="bold">{{ __("utilisateur.le")}}</span>   {{  utilisateur.date_modification	 }}</b></h6>
+                     </div>
+                </td>
             </tr>
-            
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("utilisateur.state")}} : </td>
-                <td  class="text-left">{{  utilisateur.state }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("utilisateur.state")}}</b></label>
+                        <h6><b class="bold">{{  utilisateur.state }}</b></h6>
+                     </div>
+                </td>
+               
             </tr>
+
+
+     
         </table>
 
         <div class="modal-footer">

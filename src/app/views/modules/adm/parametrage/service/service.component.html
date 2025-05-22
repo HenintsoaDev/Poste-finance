@@ -130,20 +130,33 @@
 
 
         <table style="width: 100%;">
+
             <tr>
-                <td  class="text-right p-3 bold">{{ __("service.code")}} : </td>
-                <td  class="text-left">{{  service.code }}</td>
-                <td  class="text-right p-3 bold">{{ __("service.label")}}  : </td>
-                <td  class="text-left">{{  service.label }}</td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("service.code")}}</b></label>
+                        <h6><b class="bold">{{  service.code }}</b></h6>
+                     </div>
+                </td>
+                <td >
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("service.label")}}</b></label>
+                        <h6><b class="bold">{{  service.label }}</b></h6>
+                     </div>
+                </td>
             </tr>
+
+            <tr>
+                <td colspan="2">
+                    <div class="alert alert-custom">
+                        <label><b class="fw-800">{{ __("service.user_creation")}}</b></label>
+                        <h6><b class="bold">{{  service.created_by  }} <span class="bold">{{ __("global.le")}}</span>   {{  service.date_creation  }}</b></h6>
+                     </div>
+                </td>
+             
+            </tr>
+
           
-            <tr>
-       
-            <tr>
-                <td  class="text-right p-3 bold">{{ __("service.user_creation")}} : </td>
-                <td  class="text-left">{{  service.created_by  }} <span class="bold">{{ __("global.le")}}</span>   {{  service.date_creation  }} </td>
-                
-            </tr>
             
         </table>
 
@@ -219,21 +232,21 @@
                         <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
                             <thead>
                                 <tr class="th-table">
-                                    <td>{{ __("service.montant_min")}}</td>
-                                    <td>{{ __("service.montant_max")}}</td>
-                                    <td>{{ __("service.frais_ht")}}</td>
-                                    <td>{{ __("service.tva")}}</td>
-                                    <td>{{ __("service.frais_ttc")}}</td>
-                                    <td>{{ __("global.action")}}</td>
+                                    <td  class="bold f-13">{{ __("service.montant_min")}}</td>
+                                    <td class="bold f-13">{{ __("service.montant_max")}}</td>
+                                    <td class="bold f-13">{{ __("service.frais_ht")}}</td>
+                                    <td class="bold f-13">{{ __("service.tva")}}</td>
+                                    <td class="bold f-13">{{ __("service.frais_ttc")}}</td>
+                                    <td  class="bold f-13">{{ __("global.action")}}</td>
                                 </tr>
                             </thead>
                             <tbody *ngIf="service.paliers.length != 0">
                                 <tr class="ng-star-inserted" *ngFor="let palier of service.paliers let last = last">
-                                    <td>{{ formatNumber(palier.montant_deb, ' ')}}</td>
-                                    <td>{{ formatNumber(palier.montant_fin, ' ')}}</td>
-                                    <td>{{ formatNumber(palier.ht, ' ')}}</td>
-                                    <td>{{ formatNumber(palier.tva, ' ')}}</td>
-                                    <td>{{ formatNumber(palier.valeur, ' ')}}</td>
+                                    <td class="text-right">{{ formatNumber(palier.montant_deb, ' ')}}</td>
+                                    <td class="text-right">{{ formatNumber(palier.montant_fin, ' ')}}</td>
+                                    <td class="text-right">{{ formatNumber(palier.ht, ' ')}}</td>
+                                    <td class="text-right">{{ formatNumber(palier.tva, ' ')}}</td>
+                                    <td class="text-right">{{ formatNumber(palier.valeur, ' ')}}</td>
                                     <td class="text-center"><i class="material-icons" style="cursor: pointer;" *ngIf="last && autority('PRM_53') " mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
                                 </tr>
                 
