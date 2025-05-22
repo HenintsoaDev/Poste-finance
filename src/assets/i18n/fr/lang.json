@@ -440,7 +440,7 @@
     },
 
     "partenaire" : {
-        "title" : "Liste des partenaires",
+        "title" : "Lister les partenaires financiers",
         "title_sous_module" : "Gestion commision réseau PHCO",
         "new_partenaire" : "Nouveau partenaire",
         "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
