@@ -22,8 +22,8 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     header = [
         {"nomColonne" : this.__('global.name'),"colonneTable" : "nom","table" : "partenaire_financier"},
         {"nomColonne" : this.__('utilisateur.email'),"colonneTable" : "email","table" : "partenaire_financier"},
-        {"nomColonne" : this.__('global.solde_wallet'),"colonneTable" : "solde","table" : "partenaire_financier"},
-        {"nomColonne" : this.__('global.solde_carte'),"colonneTable" : "solde_carte","table" : "partenaire_financier"},
+        {"nomColonne" : this.__('global.solde_wallet'),"colonneTable" : "solde","table" : "partenaire_financier", "align": "right"},
+        {"nomColonne" : this.__('global.solde_carte'),"colonneTable" : "solde_carte","table" : "partenaire_financier", "align": "right"},
         {"nomColonne" : this.__('global.state'),"colonneTable" : "etat","table" : "partenaire_financier"},
         {"nomColonne" : ""}
     ];
@@ -31,8 +31,8 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     objetBody = [
         {'name' : 'nom','type' : 'text',},
         {'name' : 'email','type' : 'text',},
-        {'name' : 'solde','type' : 'text',},
-        {'name' : 'solde_carte','type' : 'text',},
+        {'name' : 'solde','type' : 'montant',},
+        {'name' : 'solde_carte','type' : 'montant',},
         {'name' : 'state_label','type' : 'text',},
         {'name' : 'id'}
     ];

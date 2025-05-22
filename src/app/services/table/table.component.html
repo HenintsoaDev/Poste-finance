@@ -29,7 +29,7 @@
     <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
         <thead>
         <tr class="th-table">
-            <th *ngFor="let header of headerTable"> <span class="bold-th"> {{header.nomColonne }}</span> &nbsp;
+            <th *ngFor="let header of headerTable"  [ngStyle]="{'text-align' : header.align == 'right' ? 'right' : 'left'}" > <span class="bold-th"> {{header.nomColonne }}</span> &nbsp;
               <span *ngIf="header.nomColonne != 'Action'">
                 <i class="fa fa-caret-down icon-tri" (click)="triTable(header.table + '.' + header.colonneTable,'asc')" *ngIf="tri==header.table + '.' + header.colonneTable && order=='desc'" ></i>
                 <i class="fa fa-caret-up icon-tri"  (click)="triTable(header.table + '.' + header.colonneTable,'desc')"  *ngIf="tri==header.table + '.' + header.colonneTable && order=='asc'"  ></i>

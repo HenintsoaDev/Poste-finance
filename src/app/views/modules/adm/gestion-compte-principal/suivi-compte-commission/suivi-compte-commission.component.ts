@@ -23,9 +23,9 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     header = [
         {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_compte_commission"},
-        {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_compte_commission"},
-        {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_compte_commission"},
-        {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_compte_commission"},
+        {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_compte_commission", "align": "right"},
+        {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_compte_commission", "align": "right"},
+        {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_compte_commission", "align": "right"},
         {"nomColonne" :  this.__('suivi_compte.operation'),"colonneTable" : "operation","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.coms'),"colonneTable" : "commentaire","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "releve_compte_commission"}
@@ -35,9 +35,9 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
     objetBody = [
         {'name' : 'date_transaction','type' : 'text',},
         {'name' : 'num_transac','type' : 'text',},
-        {'name' : 'solde_avant','type' : 'text',},
-        {'name' : 'montant','type' : 'text',},
-        {'name' : 'solde_apres','type' : 'text',},
+        {'name' : 'solde_avant','type' : 'montant',},
+        {'name' : 'montant','type' : 'montant',},
+        {'name' : 'solde_apres','type' : 'montant',},
         {'name' : 'operation','type' : 'text',},
         {'name' : 'commentaire','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',}

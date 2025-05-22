@@ -21,7 +21,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     endpoint = "";
     header = [
         {"nomColonne" : this.__('global.date'),"colonneTable" : "datevirement","table" : "virement"},
-        {"nomColonne" : this.__('global.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "virement"},
+        {"nomColonne" : this.__('global.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "virement", "align": "right"},
         {"nomColonne" : this.__('global.statut'),"colonneTable" : "statut","table" : "virement"},
         {"nomColonne" : this.__('global.date') +" "+ this.__('global.validation'),"colonneTable" : "datevalidation","table" : "virement"},
         {"nomColonne" : this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "virement"},
@@ -30,7 +30,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
 
     objetBody = [
         {'name' : 'date_virement','type' : 'text',},
-        {'name' : 'montant','type' : 'text',},
+        {'name' : 'montant','type' : 'montant',},
         {'name' : 'statut','type' : 'statut',},
         {'name' : 'date_validation','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',},

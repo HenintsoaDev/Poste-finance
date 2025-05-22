@@ -27,7 +27,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       {"nomColonne" :  this.__('demande_credit.num_demande'),"colonneTable" : "num_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.bureau'),"colonneTable" : "name","table" : "bureau"},
-      {"nomColonne" :  this.__('demande_credit.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_credit_bureau"},
+      {"nomColonne" :  this.__('demande_credit.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_credit_bureau", "align": "right"},
       {"nomColonne" :  this.__('demande_credit.demandeur'),"colonneTable" : "nom","table" : "user"},
       {"nomColonne" :  this.__('demande_credit.wallet_carte'),"colonneTable" : "","table" : ""},
       {"nomColonne" : this.__('global.action')}
