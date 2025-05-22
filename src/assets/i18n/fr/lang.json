@@ -137,6 +137,7 @@
         "add_list" : "Ajouter un utilisateur"
     },
     "profil" : {
+        "title_breadcrumb" : "Lister les profils",
         "my_profile" : "Mon profil",
         "modification_mdp" : "Modification du mot de passe",
         "actuel_mdp" : "Actuel mot de passe",
@@ -164,6 +165,8 @@
         "affect" : "Affectation "  
     },
     "utilisateur" : {
+        "title_breadcrumb_api_numherit" : "Lister les utilisateurs API Numherit",
+        "title_breadcrumb" : "Lister les utilisateurs",
         "title" : "Gestion des utilisateurs",
         "nom" : "Nom",
         "prenom" : "Prénom(s)",
@@ -186,6 +189,7 @@
         "user_creation" : "Créer par"  
     },
     "module" : {
+        "title_breadcrumb" : "Lister les modules",
         "title" : "Gestion des modules",
         "name" : "Libelle",
         "code" : "Code",
@@ -195,6 +199,7 @@
         "title_add_modal" : "Ajout d'un module"
     },
     "sous_module" : {
+        "title_breadcrumb" : "Lister les sous modules",
         "title" : "Gestion des sous modules",
         "name" : "Libelle",
         "code" : "Code",
@@ -205,6 +210,7 @@
         "title_add_modal" : "Ajout d'un sous module"
     },
     "type_bureau" : {
+        "title_breadcrumb" : "Lister les types de bureaux",
         "title" : "Gestion des types de bureaux",
         "name" : "Libelle",
         "module" : "Module",
@@ -213,6 +219,7 @@
         "title_add_modal" : "Ajout d'un type de bureau"
     },
     "type_profil" : {
+        "title_breadcrumb" : "Lister les types de profils",
         "title" : "Gestion des types profils",
         "code" : "Code",
         "name" : "Libelle",
@@ -222,6 +229,7 @@
         "title_add_modal" : "Ajout d'un type profil"
     },
     "action" : {
+        "title_breadcrumb" : "Lister les actions",
         "title" : "Gestion des actons",
         "code" : "Code",
         "name" : "Libelle",
@@ -393,6 +401,7 @@
         "list_suivi_compte" : "Suivi relevé compte commission"
     },
     "service" : {
+        "title_breadcrumb" : "Lister les services",
         "title" : "Gestion des services",
         "label" : "Service",
         "code" : "Code",
@@ -420,6 +429,7 @@
     },
 
     "header_message" : {
+        "title_breadcrumb" : "Lister les messages d'entête",
         "expediteur" : "Expéditeur",
         "message" : "Message",
         "publie" : "Publié",

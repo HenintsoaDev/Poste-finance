@@ -43,16 +43,16 @@ const routes: Routes =[
   
   //Module Administration : ADM
   {path : 'parametrage',data: { breadcrumb: 'Parametrage & configuration' },children : [
-    {path : 'module',component: ModuleComponent,data: { breadcrumb: 'Lister les modules' }},
-    {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'Lister les Sous module' }},
-    {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'Lister les profils' }},
-    {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'Lister les types de bureaux' }},
-    {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'Lister les types de profil' }},
-    {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'Lister les utilisateurs' }},
-    {path : 'action',component: ActionComponent,data: { breadcrumb: 'Lister les actions' }},
-    {path : 'service',component: ServiceComponent,data: { breadcrumb: 'Lister les services' }},
-    {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'Lister les messages d\'entête' }},
-    {path : 'user_api_numherit',component: UtilisateurApiNumheritComponent,data: { breadcrumb: 'Lister les utilisateurs API Numherit' }},
+    {path : 'module',component: ModuleComponent,data: { breadcrumb: 'module.title_breadcrumb' }},
+    {path : 'sousmodule',component: SousModuleComponent,data: { breadcrumb: 'sous_module.title_breadcrumb' }},
+    {path : 'profil',component: ProfilsComponent,data: { breadcrumb: 'profils.title_breadcrumb' }},
+    {path : 'type_bureau',component: TypeBureauxComponent,data: { breadcrumb: 'type_bureau.title_breadcrumb' }},
+    {path : 'type_profil',component: TypeProfilComponent,data: { breadcrumb: 'type_profil.title_breadcrumb' }},
+    {path : 'user',component: UtilisateurComponent,data: { breadcrumb: 'utilisateur.title_breadcrumb' }},
+    {path : 'action',component: ActionComponent,data: { breadcrumb: 'action.title_breadcrumb' }},
+    {path : 'service',component: ServiceComponent,data: { breadcrumb: 'service.title_breadcrumb'}},
+    {path : 'header_message',component : HeaderMessageComponent, data: { breadcrumb: 'header_message.title_breadcrumb' }},
+    {path : 'user_api_numherit',component: UtilisateurApiNumheritComponent,data: { breadcrumb: 'utilisateur.title_breadcrumb_api_numherit'  }},
 
     {path: '**', component: PageNotFoundComponent, data: { is404: true } }
   ]}, 

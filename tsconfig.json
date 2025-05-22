@@ -3,6 +3,7 @@
   "compilerOptions": {
     "outDir": "./dist/out-tsc",
     "baseUrl": "src",
+    "resolveJsonModule": true,
     "sourceMap": true,
     "declaration": false,
     "module": "es2020",
