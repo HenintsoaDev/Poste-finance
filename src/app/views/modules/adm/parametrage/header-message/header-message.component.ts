@@ -2,6 +2,7 @@ import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { HeaderMessageService } from 'app/services/admin/parametre/header_message.service';
 import { ModuleService } from 'app/services/admin/parametre/module.service';
+import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { sous_module } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
@@ -36,9 +37,9 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
     ];
 
     listIcon = [
-        {'icon' : 'state','autority' : '',},
-        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
-        {'icon' : 'delete','action' : 'delete','tooltip' : this.__('global.tooltip_delete'),'autority' : '',},
+        {'icon' : 'state','autority' : 'PRM_56',},
+        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : 'PRM_55',},
+        {'icon' : 'delete','action' : 'delete','tooltip' : this.__('global.tooltip_delete'),'autority' : 'PRM_57',},
     ];
 
     searchGlobal = [];
@@ -69,12 +70,14 @@ export class HeaderMessageComponent extends Translatable implements OnInit {
         private modalService: BsModalService,
         private moduleService: ModuleService,
         private headerMessageService : HeaderMessageService,
-        private toastr: ToastrService
+        private toastr: ToastrService,
+        private authService : AuthService
     ) {
         super();
     }
 
     async ngOnInit(): Promise<void> {
+        this.authService.initAutority("PRM","ADM");
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.header_message;
         await this.getModuleActive();
