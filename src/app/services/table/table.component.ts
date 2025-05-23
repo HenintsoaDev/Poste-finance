@@ -88,7 +88,6 @@ export class TableComponent extends Translatable {
       
         const { type, data: filtre } = event;
 
-        console.log("xxxxx", this.triDescDefault);
         console.log("xxeventxx", event);
 
       
@@ -100,7 +99,6 @@ export class TableComponent extends Translatable {
             if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc', filtre);
             else this.getUrlDatatable(url, '', '', '', filtre);
           } else {
-            console.log(this.triDescDefault, "xxxxxx");
             // Sinon appliquer un tri ou appeler l'URL brute
             if (this.triDescDefault) this.triTable(this.triDescDefault, 'desc');
             else this.getUrlDatatable(url);

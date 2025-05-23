@@ -68,14 +68,22 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
             if(event.data){
                 this.idSolde = event.data.id;
                 if(event.data.action == 'info')
-                {this.openModalInfoSolde();} 
+                {
+                    this.openModalInfoSolde();
+                    this.passageService.clear();
+                } 
         
                 // Nettoyage immédiat de l'event
-                this.passageService.clear();
+                
             }
         });
     }
-
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
+    
     openModalInfoSolde()
     {
         this.recupererDonnee();

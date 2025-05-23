@@ -128,18 +128,24 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
         this.endpoint = environment.baseUrl + '/' + environment.partenaire_financier;
         this.endpointMouvementCompte = environment.baseUrl + '/' + environment.suivi_mouvement_partenaire_financier; 
         this.subscription = this.passageService.getObservable().subscribe(event => {
-            console.log(event);
             if(event.data){
                 this.idPartenaire = event.data.id;
                 if(event.data.action == 'info')
                 {
                     //this.showListPartenaire = false;
                     this.getDetailPartenaire(event.data.id);
+                    this.passageService.clear();
+
                 } 
             }
         });
     }
-
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
+    
     filtreTableau()
     {
         let filtre_search = "" ; 

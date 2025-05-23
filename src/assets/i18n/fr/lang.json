@@ -117,7 +117,8 @@
         "solde" :"Solde",
         "update" : "Modifier",
         "desactiver" : "Désactiver",
-        "activer" : "Activer"
+        "activer" : "Activer",
+        "numherit" : "Numherit"
     },
 
     "paiement" : {
@@ -447,12 +448,23 @@
         "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
         "add_new_partenaire" : "Ajouter un nouveau partenaire",
+        "update_new_partenaire" : "Modification d'un partenaire",
         "suivi_compte" : "Suivi compte partenaire",
         "lier_partenaire" : "Lier un partenaire",
         "all_type" : "Tous les types de services",
         "hors_paiement_masse" : "Hors paiement de masse",
         "paiement_masse" : "Paiement de masse",
         "service" : "Type de service"
+    },
+    "table" : {
+        "affiche" : "Afficher  :",
+        "element" : "éléments",
+        "rechercher" : "Rechercher",
+        "aucun_donnee" : "Pas de données pour le moment.",
+        "premier" : "Premier",
+        "precedent" : "Précedent",
+        "suivant" : "Suivant",
+        "dernier" : "Dernier"
     }
 
 }

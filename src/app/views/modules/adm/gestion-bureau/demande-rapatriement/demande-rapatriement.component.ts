@@ -139,7 +139,6 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
         });
         /***************************************** */
     
-      
 
   }
 

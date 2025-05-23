@@ -75,7 +75,12 @@ export class SoldeDistributeurComponent extends Translatable implements OnInit {
             }
         });
     }
-
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+      }
+    
     openModalInfoSolde()
     {
         this.recupererDonnee();

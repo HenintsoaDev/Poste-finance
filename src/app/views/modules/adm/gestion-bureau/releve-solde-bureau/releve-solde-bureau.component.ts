@@ -97,7 +97,12 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
             );
         });
     }
-
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+    }
+    
     async filtreTableau() {
  
         let filtre_search = "" ;

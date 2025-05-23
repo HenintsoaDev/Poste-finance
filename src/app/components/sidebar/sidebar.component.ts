@@ -7,6 +7,7 @@ import { MenuService, RouteInfo, ROUTES } from 'app/shared/models/route-info';
 import { AuthService } from 'app/services/auth.service';
 import { Auth, utilisateur } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
+import { Translatable } from 'shared/constants/Translatable';
 
 declare const $: any;
 
@@ -31,7 +32,7 @@ declare const $: any;
         ])
     ]
 })
-export class SidebarComponent implements OnInit {
+export class SidebarComponent extends Translatable implements OnInit {
     activeMenu: string | null = null;
     currentRoute: string = '';
     userMenuUserActive: boolean = false;
@@ -61,6 +62,7 @@ export class SidebarComponent implements OnInit {
     }
 
     constructor(private authService: AuthService, private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService) {
+        super();
         this.router.events.subscribe(() => {
             this.currentRoute = this.router.url;
             this.userMenuUserActive = (this.currentRoute === '/my-profil' );
