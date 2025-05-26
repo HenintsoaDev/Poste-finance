@@ -596,4 +596,12 @@ export class ServiceComponent extends Translatable implements OnInit {
     }
 
 
+    getFormat(montant){
+
+      let valeur =montant.replace(/\s/g, '').replace(',', '.');
+        
+      return this.formatNumber(valeur, ' ');
+    }
+
+
 }
