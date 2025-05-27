@@ -118,7 +118,8 @@
         "update" : "Modifier",
         "desactiver" : "Désactiver",
         "activer" : "Activer",
-        "numherit" : "Numherit"
+        "numherit" : "Numherit",
+        "agence" : "Agence"
     },
 
     "paiement" : {
