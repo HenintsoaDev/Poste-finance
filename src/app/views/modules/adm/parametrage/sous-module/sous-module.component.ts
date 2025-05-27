@@ -78,20 +78,14 @@ export class SousModuleComponent extends Translatable implements OnInit {
     {
       'icon' : 'edit',
       'action' : 'edit',
-      'tooltip' : this.__('global.tooltip_edit'),
+      'tooltip' : 'Modification',
       'autority' : 'PRM_15',
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
-      'tooltip' : this.__('global.tooltip_delete'),
-      'autority' : 'PRM_17',
-
-  
-    },
-    {
-      'icon' : 'state',
-      'autority' : 'PRM_18',
+      'tooltip' : 'Supression',
+      'autority' : 'PRM_17',  
     },
   ]
   
@@ -123,6 +117,7 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
       ) {
       super();
+      this.authService.initAutority("PRM","ADM");
         //console.log(this.autority('PRM_20'));
     }
   
@@ -131,8 +126,6 @@ export class SousModuleComponent extends Translatable implements OnInit {
   
   
     async ngOnInit() {
-      this.authService.initAutority("PRM","ADM");
-
       this.titleModal = this.__('sous_module.title_add_modal');
   
       this.passageService.appelURL(null);
@@ -172,7 +165,6 @@ export class SousModuleComponent extends Translatable implements OnInit {
 
    
    
-  
     ngOnDestroy() {
       if (this.subscription) {
         this.subscription.unsubscribe();

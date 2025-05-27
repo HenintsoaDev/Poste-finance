@@ -47,6 +47,7 @@ export class HomeComponent extends Translatable implements OnInit {
     goTo(module : string, pathSelected)
     {
         this.loading = true;
+        sessionStorage.removeItem('message-header');
         this.httpService.get(environment.header_message + module + "/display_message").pipe(
             tap(response => {
                 console.log("response XHR", response);
