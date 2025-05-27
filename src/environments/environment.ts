@@ -91,4 +91,7 @@ export const environment = {
   
   //** Beneficiaire */
   beneficiaire: "gestion_compte/beneficiaire",
+
+  //** Operation compte */
+  cherche_compte:  "operation_compte/find_compte"
 };

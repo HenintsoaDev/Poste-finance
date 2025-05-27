@@ -33,6 +33,7 @@ import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-m
 import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
 import { UtilisateurApiNumheritComponent } from './views/modules/adm/parametrage/utilisateur-api-numherit/utilisateur-api-numherit.component';
 import { BeneficiareComponent } from './views/modules/gestion-compte/beneficiare/beneficiare.component';
+import { ChercherCompteComponent } from './views/modules/gestion-compte/chercher-compte/chercher-compte.component';
 
 const routes: Routes =[
   
@@ -79,6 +80,10 @@ const routes: Routes =[
   {
     path: 'gestion_compte', data: { breadcrumb: 'gestion_des_comptes.title_module' }, children: [
       {path : 'beneficiaire',component: BeneficiareComponent,data: { breadcrumb: 'beneficiaire.title_beneficiaire' }},
+  ]},
+  {
+    path: 'operation_compte', data: { breadcrumb: 'gestion_des_comptes.title_module' }, children: [
+      {path : 'find_compte',component: ChercherCompteComponent,data: { breadcrumb: 'operation_compte.title_breadcrumb' }},
   ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

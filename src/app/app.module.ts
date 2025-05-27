@@ -62,6 +62,7 @@ import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-m
 import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
 import { UtilisateurApiNumheritComponent } from './views/modules/adm/parametrage/utilisateur-api-numherit/utilisateur-api-numherit.component';
 import { BeneficiareComponent } from './views/modules/gestion-compte/beneficiare/beneficiare.component';
+import { ChercherCompteComponent } from './views/modules/gestion-compte/chercher-compte/chercher-compte.component';
 
 
 registerLocaleData(localeFr);
@@ -132,7 +133,8 @@ registerLocaleData(localeFr);
     HeaderMessageComponent,
     PartenaireFinancierComponent,
     UtilisateurApiNumheritComponent,
-    BeneficiareComponent
+    BeneficiareComponent,
+    ChercherCompteComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
