@@ -75,6 +75,8 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
           if(res['code'] == 200) {
             this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
+            this.telephone =  this.infoCompte['telephone'];
+
             
           }
           else {
