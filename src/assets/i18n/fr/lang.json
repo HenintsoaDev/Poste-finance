@@ -33,6 +33,8 @@
         "next": "Suivant",
         "action": "Action",
         "name" : "Nom",
+        "lastname" : "Prénom",
+        "sex" : "Sexe",
         "export_pdf" : "Exporter en PDF",
         "export_excel" : "Exporter en Excel",
         "export_csv" : "Exporter en CSV",
@@ -88,6 +90,8 @@
         "date" : "Date",
         "of" : "de",
         "virement" : "Virement",
+        "date_nais" : "Date de naissance",
+        "date_creation" : "Date de création",
         "retrait" : "Retrait",
         "transfert" : "Transfert",
         "validation" : "Validation",
@@ -123,7 +127,14 @@
         "desactiver" : "Désactiver",
         "activer" : "Activer",
         "numherit" : "Numherit",
-        "agence" : "Agence"
+        "agence" : "Agence",
+        "cni" : "CIN",
+        "man" : "Homme",
+        "woman" : "Femme",
+        "form_required" : "Veuillez remplir tous les champs correctement.",
+        "matricule" : "Matricule",
+        "type_cni" : "Type de carte d'identité",
+        "date_delivrance" : "Date de délivrance"
     },
 
     "paiement" : {
@@ -471,9 +482,19 @@
         "suivant" : "Suivant",
         "dernier" : "Dernier"
     },
+    "gestion_des_comptes" : {
+        "title_module" : "Gestion des bénéficiaires"
+    },
+    "beneficiaire" : {
+        "geston_compte_beneficiare" : "Gestion des comptes",
+        "title_beneficiaire" : "Lister les bénéficiaires",
+        "detail_beneficiaire" : "Détails du bénéficiaire",
+        "update_beneficiaire" : "Modifier le bénéficiaire",
+        "creer_compte" : "Créer un compte"
+    },
     "operation_compte" : {
-        "title_breadcrumb" : "Operation compte",
-        "title_search_breadcrumb" : "Chercher un compte",
+        "title_breadcrumb" : "Opérations compte",
+        "title_search_breadcrumb" : "Rechercher un compte",
         "title_activate_breadcrumb" : "Activer un compte",
         "title_desactivate_breadcrumb" : "Desactiver un compte",
         "title_solde_breadcrumb" : "Solde compte",
@@ -484,16 +505,15 @@
         "email" : "Adresse email",
         "adresse" : "Adresse",
         "type_recherche" : "Type de recherche",
-        "num_compte" : "N°compte",
+        "num_compte" : "N° compte",
         "date_expiration" : "Date d'expiration",
-        "num_serie" : "N°de serie",
+        "num_serie" : "N° de serie",
         "type_compte" : "Type de compte",
-        "info_beneficiaire" :"Information du bénéficiaire",
-        "search_beneficiaire" : "Recherche du bénéficiaire",
+        "info_beneficiaire" :"Informations du bénéficiaire",
+        "search_beneficiaire" : "Recherche par",
         "statut":"Statut",
         "cin" : "CIN",
         "solde" : "Solde"
     }
    
-
 }
