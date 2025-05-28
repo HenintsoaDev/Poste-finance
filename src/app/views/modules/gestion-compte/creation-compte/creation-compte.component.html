@@ -105,7 +105,7 @@
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('global.type_cni') }}</mat-label>
                                             <mat-select [(ngModel)]="fk_typecni" formControlName="fk_typecni"> 
-                                                <mat-option *ngFor="let typecarte of listtypecarte" value="{{ typecarte.id_type }}">{{ typecarte.lib_type }}</mat-option>
+                                                <mat-option *ngFor="let typecarte of listtypecarte" [value]="typecarte.id_type">{{ typecarte.lib_type }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </ng-container>

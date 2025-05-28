@@ -284,7 +284,8 @@
         "title_detail_modal" : "Informations d'un bureau",
         "user_modification" : "Modifier par",   
         "le" : "le",   
-        "user_creation" : "Créer par"   
+        "user_creation" : "Créer par",
+        "all_bureau" : "Tous les bureaux"   
     },
 
     "suivi_compte" : {
@@ -496,7 +497,7 @@
         "title_breadcrumb" : "Opérations compte",
         "title_search_breadcrumb" : "Rechercher un compte",
         "title_activate_breadcrumb" : "Activer un compte",
-        "title_desactivate_breadcrumb" : "Desactiver un compte",
+        "title_desactivate_breadcrumb" : "Désactiver un compte",
         "title_solde_breadcrumb" : "Solde compte",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
