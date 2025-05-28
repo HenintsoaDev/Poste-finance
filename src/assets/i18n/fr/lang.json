@@ -481,7 +481,9 @@
     },
     "beneficiaire" : {
         "geston_compte_beneficiare" : "Gestion des comptes",
-        "title_beneficiaire" : "Lister les bénéficiaires"
+        "title_beneficiaire" : "Lister les bénéficiaires",
+        "detail_beneficiaire" : "Détails du bénéficiaire",
+        "update_beneficiaire" : "Modifier le bénéficiaire"
     },
     "operation_compte" : {
         "title_breadcrumb" : "Opérations compte",

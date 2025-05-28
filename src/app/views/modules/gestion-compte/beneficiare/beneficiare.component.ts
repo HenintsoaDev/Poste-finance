@@ -11,6 +11,7 @@ import { PassageService } from 'app/services/table/passage.service';
 import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { BeneficiaireService } from 'app/services/gestion-compte/beneficiaire.service';
 import Swal from 'sweetalert2';
+import { bureau } from '../../../../shared/models/db';
 
 @Component({
   selector: 'app-beneficiare',
@@ -19,7 +20,8 @@ import Swal from 'sweetalert2';
 })
 export class BeneficiareComponent extends Translatable implements OnInit {
 
-    @ViewChild('modalBeneficiaire') modalBeneficiaire: TemplateRef<any> | undefined;
+    @ViewChild('modalBeneficiaire') modalBeneficiaire: TemplateRef<any> | undefined; 
+    @ViewChild('detailBeneficiaire') detailBeneficiaire: TemplateRef<any> | undefined;
     
     endpoint = "";
     header = [
@@ -47,8 +49,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     ];
 
     listIcon = [
-        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
         {'icon' : 'info','action' : 'info','tooltip' : this.__('global.tooltip_detail'),'autority' : '',},
+        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
     ];
 
     idBeneficiaire: any;
@@ -68,6 +70,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     fk_typecni: number;
     type_carte: number = 0;
     beneficiaireSelected: any;
+    bureauLabel: string;
 
     beneficiareForm: FormGroup;
 
@@ -141,8 +144,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
   
                 if (event.data.action == 'edit') {
                     this.openModalBeneficiare();
-                } else if (event.data.action == 'detail') {
-                    
+                } else if (event.data.action == 'info') {
+                    this.openModalDetailBeneficiare();
                 }
                 this.passageService.clear();  // ==> à implémenter dans ton service
             }
@@ -211,8 +214,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             this.wallet_carte = beneficiaireSelected.wallet_carte;
             this.date_nais = beneficiaireSelected.date_nais;
             this.agence = beneficiaireSelected.fk_agence;
+            this.bureauLabel = this.listBureauActive.find(bureau => bureau.rowid === beneficiaireSelected.fk_agence)?.name || '';
             this.telephone = beneficiaireSelected.telephone;
-
             this.state_value = beneficiaireSelected.state_value;
             this.rowid = beneficiaireSelected.rowid;
             this.sexe = beneficiaireSelected.sexe;
@@ -236,8 +239,24 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             this.modalRef.hide();
         }
 
-        this.titleModal = this.__('beneficiare.update_beneficiaire');
+        this.titleModal = this.__('beneficiaire.update_beneficiaire');
         this.modalRef = this.modalService.show(this.modalBeneficiaire, {
+            backdrop: 'static',
+            keyboard: false,
+            class: 'modal-lg'
+        });
+    }
+
+    openModalDetailBeneficiare()
+    {
+        this.recupererDonnee();
+
+        if (this.modalRef) {
+            this.modalRef.hide();
+        }
+
+        this.titleModal = this.__('beneficiaire.detail_beneficiaire');
+        this.modalRef = this.modalService.show(this.detailBeneficiaire, {
             backdrop: 'static',
             keyboard: false,
             class: 'modal-lg'
