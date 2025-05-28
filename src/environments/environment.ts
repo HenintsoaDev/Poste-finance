@@ -101,4 +101,5 @@ export const environment = {
   activer_compte:  "operation_compte/activer_compte",
   desactiver_compte:  "operation_compte/desactiver_compte",
   solde_compte:"operation_compte/solde_compte",
+  releve_compte:"operation_compte/releve_compte",
 };

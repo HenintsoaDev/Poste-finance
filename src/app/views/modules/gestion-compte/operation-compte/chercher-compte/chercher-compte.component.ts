@@ -59,7 +59,10 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
     else if(this.type_recherche == "T") type = 0;
 
 
-    let telephone = this.telephone.replace('+', "00");
+    let telephone = "";
+    if(this.telephone){
+      telephone = this.telephone.replace('+', "00");
+    }
 
     
 
