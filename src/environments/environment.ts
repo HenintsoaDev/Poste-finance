@@ -91,4 +91,7 @@ export const environment = {
   
   //** Beneficiaire */
   beneficiaire: "gestion_compte/beneficiaire",
+
+  //** Ressource */
+  listetype : "resource/typepiece/listetype"
 };

@@ -1,22 +1,6 @@
 <div class="main-content">
     <div class="container-fluid">
 
-        <!--<div class="row">
-            <div class="col-md-12">
-                <div class="card card-plain">
-                    <div class="card-header card-header-primary">
-                        <div class="button-container">
-                            <div class="left-buttons">
-                            </div>
-                            <div class="right-button">
-                                <button class="btn btn-secondary" *ngIf="autority('PRM_54')" (click)="openNewMessageModal()"> {{ __("header_message.add")}}</button>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>-->
-
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
@@ -38,3 +22,166 @@
         </div>
     </div>
 </div>
+
+<ng-template #modalBeneficiaire>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <form #f="ngForm" [formGroup]="beneficiareForm" (ngSubmit)="onSubmit()">
+        <div class="modal-body">
+
+            <div class="row">
+                <div class="col-6 form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('global.name')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="nom" formControlName="nom" placeholder="{{ __('global.code')}}">
+                    </mat-form-field>
+                </div>
+    
+                <div class="col-6 form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('global.lastname')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="prenom" formControlName="prenom" placeholder="{{ __('global.name')}}">
+                    </mat-form-field>
+                </div>
+    
+                <div class="col-6 form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('utilisateur.email')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="email" formControlName="email" placeholder="{{ __('utilisateur.email')}}">
+                    </mat-form-field>
+                </div>
+    
+                <div class="col-6 form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('utilisateur.adresse')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="adresse" formControlName="adresse" placeholder="{{ __('utilisateur.email')}}">
+                    </mat-form-field>
+                </div>
+    
+                <div class="form-group col-6">
+                    <label for="dateFonction">{{ __('global.sex') }}</label><br><br>
+                    <mat-radio-group  [(ngModel)]="sexe" formControlName="sexe">
+                        <mat-radio-button class="mr-3" value="M">{{ __('global.man')}}</mat-radio-button>
+                        <mat-radio-button class="mr-3" value="F">{{ __('global.woman')}}</mat-radio-button>
+                    </mat-radio-group>
+                </div>
+            
+                <div class="form-group col-6">
+                    <label for="dateFonction">{{ __('global.date_nais') }}</label>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <input matInput [matDatepicker]="pickerDateNaissance" [(ngModel)]="date_nais" formControlName="date_nais" placeholder="{{ __('global.date_nais') }}" (focus)="pickerDateNaissance.open()">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDateNaissance"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDateNaissance></mat-datepicker>
+                    </mat-form-field>
+                </div>
+    
+                <!--<div class="col-6">
+                    <div class="form-group">
+                        <label for="dateFonction">{{ __('utilisateur.telephone')}}</label>
+                        <input type="text"
+                            name="phone_client" 
+                            placeholder="3X XX XXX XX"
+                            autocomplete="off"
+                            class="form-control form-icon-input"
+                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"
+                            ng2TelInput
+                            [ng2TelInputOptions]="{
+                                allowDropdown: true,
+                                autoHideDialCode: false,
+                                autoPlaceholder: 'on',
+                                formatOnDisplay: true,
+                                hiddenInput: 'full_number',
+                                initialCountry: currenCode,
+                                nationalMode: false,
+                                preferredCountries: ['mg', 'sn'],
+                                separateDialCode: true,
+                                utilsScript: '../../assets/js/tel-utils.js' 
+                            }"
+                            formControlName="telephone" #phone
+                            (hasError)="onError($event)"
+                            (ng2TelOutput)="getNumber($event)"
+                            (intlTelInputObject)="telInputObject($event)"
+                            (countryChange)="onCountryChange($event)"
+                        >
+                    </div>
+                </div>-->
+    
+                <div class="col-6 form-group">
+                    <label for="dateFonction">{{ __('global.cni')}}</label>
+                    <mat-form-field>
+                        <mat-label>{{ __('global.cni')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="cni" formControlName="cni" placeholder="{{ __('global.cni')}}">
+                    </mat-form-field>
+                </div>
+    
+                <!--<div class="form-group col-6">
+                    <label for="dateFonction">{{ __('global.date_delivrance') }}</label>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <input matInput [matDatepicker]="pickerDelivrance" [(ngModel)]="date_delivrance" placeholder="{{ __('global.date_delivrance') }}" (focus)="pickerDelivrance.open()">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDelivrance"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDelivrance></mat-datepicker>
+                    </mat-form-field>
+                </div>-->
+    
+                <!--<div class="form-group col-6">
+                    <label for="account-type-1">{{ __('global.type_cni') }}(*)</label>
+                    <ng-container >
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>{{ __('global.type_cni') }}</mat-label>
+                            <mat-select [(ngModel)]="fk_typecni"> 
+                                <mat-option *ngFor="let typecarte of listtypecarte" value="{{ typecarte.id_type }}">{{ typecarte.lib_type }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-container>
+                </div>-->
+       
+                <!--<div class="col-6 form-group">
+                    <label for="dateFonction">{{ __('global.matricule')}}</label>
+                    <mat-form-field>
+                        <mat-label>{{ __('global.matricule')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="matricule" placeholder="{{ __('global.matricule')}}">
+                    </mat-form-field>
+                </div>-->
+    
+                <div class="form-group col-6">
+                    <label for="account-type-1">{{ __('releve_solde_bureau.agence') }}(*)</label>
+                    <!-- POUR ADMIN -->
+                    <ng-container >
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
+                            <mat-select [(ngModel)]="agence" formControlName="agence" name="agence"> 
+                                <mat-option>
+                                    <input matInput placeholder="Rechercher..." [formControl]="searchControl" (click)="$event.stopPropagation()" />
+                                </mat-option>
+                                <mat-option *ngFor="let agenceF of filteredBureau" [value]="agenceF.rowid">{{ agenceF.name }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+    
+                <!--<div class="col-6 form-group"> 
+                    <label for="dateFonction">{{ __('globla.type_compte')}}</label>
+                    <mat-form-field appearance="fill">
+                        <mat-label>{{ __('globla.type_compte')}}</mat-label>
+                        <mat-select [(ngModel)]="swallet_carte">
+                            <mat-option  [value]="0"> {{ __('global.wallet') }} </mat-option>
+                            <mat-option  [value]="1"> {{ __('global.carte') }} </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>-->
+            </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
+            <button type="submit" class="btn btn-primary" [disabled]="beneficiareForm.invalid">
+                {{ __('global.save')}}
+            </button>
+        </div>
+    </form>
+    
+</ng-template>
