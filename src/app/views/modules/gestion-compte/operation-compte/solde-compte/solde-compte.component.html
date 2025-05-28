@@ -3,8 +3,8 @@
         
         <div class="row">
             <div class="col-md-12">
-                <div class="card">
-                    <div class="card-body" *ngIf="infoCompte.length ==0">
+                <div class="card" *ngIf="infoCompte.length ==0">
+                    <div class="card-body">
                         
                         <div class="text-center bg-primary titre-search" >
                             <h4>  {{ __('operation_compte.search_beneficiaire')}} </h4>
@@ -93,7 +93,7 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.date_expiration")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.date_delivrance }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.date_delivrance }}</b></h6>
                                                  </div>
                                             </td>
                                            
@@ -103,13 +103,13 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.nom")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.nom }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.nom }}</b></h6>
                                                  </div>
                                             </td>
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.prenom")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.prenom }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.prenom }}</b></h6>
                                                  </div>
                                             </td>
                                            
@@ -119,13 +119,13 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.email")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.email }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.email }}</b></h6>
                                                  </div>
                                             </td>
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.telephone")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.telephone }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.carte?.telephone }}</b></h6>
                                                  </div>
                                             </td>
                                         </tr>
@@ -134,13 +134,13 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.cin")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.cni }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.cni }}</b></h6>
                                                  </div>
                                             </td>
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.date_naissance")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.date_nais }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.date_nais }}</b></h6>
                                                  </div>
                                             </td>
                                         </tr>
@@ -156,7 +156,7 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.statut")}}</b></label>
-                                                    <h6><b [ngClass]="infoCompte?.statut_carte == 0 ? 'text-red' : 'bold'">{{  infoCompte?.statut }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.statut }}</b></h6>
                                                  </div>
                                             </td>
                                           
@@ -167,23 +167,26 @@
                                             <td >
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.adresse")}}</b></label>
-                                                    <h6><b class="bold">{{  infoCompte?.beneficiaire?.adresse }}</b></h6>
+                                                    <h6><b class="bold">{{  infoCompte?.adresse }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="bold " style="font-weight: bold;">{{ __("operation_compte.solde")}}</b></label>
+                                                    <h6><b class="bold" style="font-weight: bold; font-size: 17px;">{{  soldeCompte }}</b></h6>
                                                  </div>
                                             </td>
                                         </tr>
-
-                                      
         
                                      
                                         
                                         
                                     </table>
-
-                                    <div class="text-center">
-                                        <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.back')}}</button>
-                                        <button type="submit" class="btn btn-primary" *ngIf="infoCompte?.statut_carte != 0" (click)="desactiverCompte()">{{ __('global.desactiver')}}</button>
-                                    </div>
                                 </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.back')}}</button>
                             </div>
             
                     </div>
