@@ -60,6 +60,7 @@
         "oui_ajouter" : "Oui, ajouter",
         "oui_generer" : "Oui, générer",
         "oui_activer" : "Oui, activer",
+        "oui_desactiver" : "Oui, desactiver",
         "oui_autoriser" : "Oui, autoriser",
         "enregistrer_donnee_?" : "Souhaitez-vous vraiment enregistrer cette donnée  ? ",
         "modifier_donnee_?" : "Souhaitez-vous vraiment modifier cette donnée ? ",
@@ -73,6 +74,7 @@
         "clique_pour_activer" : "Cliquez pour activer",
         "clique_pour_desactiver" : "Cliquez pour désactiver",
         "activer_compte_?" : "Souhaitez-vous vraiment activer ce compte ? ",
+        "desactiver_compte_?" : "Souhaitez-vous vraiment desactiver ce compte ? ",
 
         "oui" : "Oui",
         "non"  : "Non",
@@ -474,6 +476,7 @@
         "title_search_breadcrumb" : "Chercher un compte",
         "title_activate_breadcrumb" : "Activer un compte",
         "title_desactivate_breadcrumb" : "Desactiver un compte",
+        "title_solde_breadcrumb" : "Solde compte",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -488,7 +491,8 @@
         "info_beneficiaire" :"Information du bénéficiaire",
         "search_beneficiaire" : "Recherche du bénéficiaire",
         "statut":"Statut",
-        "cin" : "CIN"
+        "cin" : "CIN",
+        "solde" : "Solde"
     }
    
 

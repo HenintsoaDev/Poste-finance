@@ -3,15 +3,15 @@ import { Component, OnInit } from '@angular/core';
 import { Translatable } from 'shared/constants/Translatable';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
-import Swal from 'sweetalert2';
-
+import formatNumber from 'number-handler'
 
 @Component({
-  selector: 'app-activer-compte',
-  templateUrl: './activer-compte.component.html',
-  styleUrls: ['./activer-compte.component.scss']
+  selector: 'app-solde-compte',
+  templateUrl: './solde-compte.component.html',
+  styleUrls: ['./solde-compte.component.scss']
 })
-export class ActiverCompteComponent extends Translatable implements OnInit {
+export class SoldeCompteComponent extends Translatable implements OnInit {
+  formatNumber : any = formatNumber;
 
   num_compte: any;
   type_recherche: any;
@@ -33,6 +33,7 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
   dialCode: any = '261';
   infoCompte: any[] = [];
   isDisabled :boolean = false;
+  soldeCompte: string ="";
 
   constructor(private operationService: OperationCompteService,private toastr: ToastrService, 
 
@@ -70,12 +71,13 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
       ...(type === 0 ? { telephone: telephone } : { num_compte: this.num_compte })
     };
 
-    this.operationService.infoCompte(data).subscribe({
+    this.operationService.chercheCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
+            this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
-            this.telephone =  this.infoCompte['telephone'];
 
+            this.recupererSolde();
             
           }
           else {
@@ -91,55 +93,32 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
 
   }
 
+  recupererSolde(){
 
-   // Ouverture de modal pour modification
-   activerCompte() {
     let telephone = this.telephone.replace('+', "00");
-
     let data = {
-      'telephone' : telephone
+      "telephone": telephone 
     };
-    
-
-    Swal.fire({
-      title: this.__("global.confirmation"),
-      text: this.__("global.activer_compte_?"),
-      icon: 'warning',
-      showCancelButton: true,
-      confirmButtonText: this.__("global.oui_activer"),
-      cancelButtonText: this.__("global.cancel"),
-      allowOutsideClick: false,
-      customClass: {
-          confirmButton: 'swal-button--confirm-custom',
-          cancelButton: 'swal-button--cancel-custom'
-      },
-      }).then((result) => {
-      if (result.isConfirmed) {
-     
-
-           this.operationService.activerCompte(data).subscribe({
-            next: (res) => {
-                if(res['code'] == 201) {
-                  this.toastr.success(res['data'], this.__("global.success"));
-                  this.videForm();
-                }
-                else{
-                    this.toastr.error(res['msg'], this.__("global.error"));
-                }                
-              },
-              error: (err) => {
-              }
-          }); 
-
-      
 
 
-        
+    this.operationService.soldeCompte(data).subscribe({
+      next: (res) => {
+          if(res['code'] == 200) {
+            this.toastr.success(res['msg'], this.__("global.success"));
+            this.soldeCompte = this.formatNumber(res['data'].Balance , " ") + " " + res['data'].CurrencyCode	
+            
+          }
+          else {
+            this.isDisabled=false;
+            this.toastr.error(res['msg'], this.__("global.error"));
+          }
+          
+                        
+        },
+        error: (err) => {
         }
-    });
-
+    }); 
   }
-
 
 
   changePreferredCountries() {
@@ -167,5 +146,4 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
   getNumber(obj : any) {
     this.telephone = obj;
   }
-
 }

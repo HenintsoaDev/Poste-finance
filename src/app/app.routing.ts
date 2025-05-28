@@ -36,6 +36,7 @@ import { BeneficiareComponent } from './views/modules/gestion-compte/beneficiare
 import { ChercherCompteComponent } from './views/modules/gestion-compte/operation-compte/chercher-compte/chercher-compte.component';
 import { ActiverCompteComponent } from './views/modules/gestion-compte/operation-compte/activer-compte/activer-compte.component';
 import { DesactiverCompteComponent } from './views/modules/gestion-compte/operation-compte/desactiver-compte/desactiver-compte.component';
+import { SoldeCompteComponent } from './views/modules/gestion-compte/operation-compte/solde-compte/solde-compte.component';
 
 const routes: Routes =[
   
@@ -88,6 +89,7 @@ const routes: Routes =[
       {path : 'find_compte',component: ChercherCompteComponent,data: { breadcrumb: 'operation_compte.title_search_breadcrumb' }},
       {path : 'activer_compte',component: ActiverCompteComponent,data: { breadcrumb: 'operation_compte.title_activate_breadcrumb' }},
       {path : 'desactiver_compte',component: DesactiverCompteComponent,data: { breadcrumb: 'operation_compte.title_desactivate_breadcrumb' }},
+      {path : 'solde_compte',component: SoldeCompteComponent,data: { breadcrumb: 'operation_compte.title_solde_breadcrumb' }},
   ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

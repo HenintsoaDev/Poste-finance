@@ -95,5 +95,7 @@ export const environment = {
   //** Operation compte */
   cherche_compte:  "operation_compte/find_compte",
   infos_compte:  "operation_compte/infos_compte",
-  activer_compte:  "operation_compte/activer_compte"
+  activer_compte:  "operation_compte/activer_compte",
+  desactiver_compte:  "operation_compte/desactiver_compte",
+  solde_compte:"operation_compte/solde_compte",
 };
