@@ -1,0 +1,193 @@
+<div class="main-content">
+    <div class="container-fluid">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card" *ngIf="infoCompte.length ==0">
+                    <div class="card-body">
+                        
+                        <div class="text-center bg-primary titre-search" >
+                            <h4>  {{ __('operation_compte.search_beneficiaire')}} </h4>
+                        </div>
+
+                        <div class="row">
+                            
+                            <div class="col-lg-4"></div>
+                            <div class="col-lg-4">
+                                <br>
+                                    <div class="form-group text-center">
+                                        <mat-radio-group [(ngModel)]="type_recherche" >
+                                            <mat-radio-button class="mr-3" style="margin-right: 70px !important;" value="T">{{ __('operation_compte.telephone')}}</mat-radio-button>
+                                            <mat-radio-button class="mr-3" value="N">{{ __('operation_compte.num_compte')}}</mat-radio-button>
+                                          </mat-radio-group>
+                                    </div>
+
+                                    <div class="form-group" *ngIf="type_recherche == 'N'">
+                                        <mat-form-field>
+                                            <mat-label>{{ __('operation_compte.num_compte')}}</mat-label>
+                                            <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" [(ngModel)]="num_compte" placeholder="{{ __('operation_compte.num_compte')}}"  name="num_compte">
+                                        </mat-form-field>
+                                    </div>
+
+
+                                    <div class="form-group" *ngIf="type_recherche == 'T'">
+                                        <label for="dateFonction">{{ __('operation_compte.telephone')}}</label>
+                                        <input type="text"
+                                            name="telephone" 
+                                            [(ngModel)]="telephone"
+                                            placeholder="3X XX XXX XX"
+                                            autocomplete="off"
+                                            class="form-control form-icon-input"
+                                            oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"
+                                            ng2TelInput
+                                            [ng2TelInputOptions]="{
+                                                allowDropdown: true,
+                                                autoHideDialCode: false,
+                                                autoPlaceholder: 'on',
+                                                formatOnDisplay: true,
+                                                hiddenInput: 'full_number',
+                                                initialCountry: currenCode,
+                                                nationalMode: false,
+                                                preferredCountries: ['mg', 'sn'],
+                                                separateDialCode: true,
+                                                utilsScript: '../../assets/js/tel-utils.js' 
+                                            }"
+                                            #phone
+                                            (hasError)="onError($event)"
+                                            (ng2TelOutput)="getNumber($event)"
+                                            (intlTelInputObject)="telInputObject($event)"
+                                            (countryChange)="onCountryChange($event)"
+                                        >
+                                    </div>
+                                    <hr>
+                                    <div class="text-center">
+                                        <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.cancel')}}</button>
+                                        <button type="submit" class="btn btn-primary" [disabled]="!type_recherche || isDisabled==true" (click)="rechercheBeneficiaire()">{{ __('global.search')}}</button>
+                                    </div>
+
+
+                            </div>
+                            <div class="col-lg-4"></div>
+        
+                          
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" *ngIf="infoCompte.length !=0">
+                    <div class="card-body">
+        
+                            <div class="row" >
+                                <div class="text-center" style="width: 100%;"><h4 class="bold"> {{ __('operation_compte.info_beneficiaire')}} </h4></div>
+            
+                                <div class="col-lg-12">
+                                    <table style="width: 100%;">
+        
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.num_serie")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.carte?.numero_serie }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.date_expiration")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.date_delivrance }}</b></h6>
+                                                 </div>
+                                            </td>
+                                           
+                                        </tr>
+                                       
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.nom")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.nom }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.prenom")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.prenom }}</b></h6>
+                                                 </div>
+                                            </td>
+                                           
+                                           
+                                        </tr>
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.email")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.email }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.telephone")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.carte?.telephone }}</b></h6>
+                                                 </div>
+                                            </td>
+                                        </tr>
+
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.cin")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.cni }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.date_naissance")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.date_nais }}</b></h6>
+                                                 </div>
+                                            </td>
+                                        </tr>
+
+
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.type_compte")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.wallet_carte }}</b></h6>
+                                                 </div>
+                                            </td>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.statut")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.statut }}</b></h6>
+                                                 </div>
+                                            </td>
+                                          
+                                           
+                                        </tr>
+
+                                        <tr>
+                                            <td >
+                                                <div class="alert alert-custom">
+                                                    <label><b class="fw-800">{{ __("operation_compte.adresse")}}</b></label>
+                                                    <h6><b class="bold">{{  infoCompte?.adresse }}</b></h6>
+                                                 </div>
+                                            </td>
+                                        </tr>
+        
+                                     
+                                        
+                                        
+                                    </table>
+                                </div>
+                            </div>
+
+                            <div class="text-center">
+                                <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.back')}}</button>
+                            </div>
+            
+                    </div>
+                </div>
+                       
+                   
+            </div>
+        </div>
+    </div>
+</div>
