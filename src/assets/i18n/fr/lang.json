@@ -468,7 +468,7 @@
         "dernier" : "Dernier"
     },
     "operation_compte" : {
-        "title_breadcrumb" : "Chercher un compte",
+        "title_breadcrumb" : "Rechercher un compte",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -476,12 +476,12 @@
         "email" : "Adresse email",
         "adresse" : "Adresse",
         "type_recherche" : "Type de recherche",
-        "num_compte" : "N°compte",
+        "num_compte" : "N° compte",
         "date_expiration" : "Date d'expiration",
-        "num_serie" : "N°de serie",
+        "num_serie" : "N° de serie",
         "type_compte" : "Type de compte",
-        "info_beneficiaire" :"Information du bénéficiaire",
-        "search_beneficiaire" : "Recherche du bénéficiaire par ",
+        "info_beneficiaire" :"Informations du bénéficiaire",
+        "search_beneficiaire" : "Rechercher bénéficiaire par ",
         "statut":"Statut",
         "cin" : "CIN"
     }
