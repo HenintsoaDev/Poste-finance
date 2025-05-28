@@ -36,6 +36,7 @@ import { BeneficiareComponent } from './views/modules/gestion-compte/beneficiare
 import { ChercherCompteComponent } from './views/modules/gestion-compte/operation-compte/chercher-compte/chercher-compte.component';
 import { ActiverCompteComponent } from './views/modules/gestion-compte/operation-compte/activer-compte/activer-compte.component';
 import { DesactiverCompteComponent } from './views/modules/gestion-compte/operation-compte/desactiver-compte/desactiver-compte.component';
+import { CreationCompteComponent } from './views/modules/gestion-compte/creation-compte/creation-compte.component';
 
 const routes: Routes =[
   
@@ -81,7 +82,8 @@ const routes: Routes =[
   //MODULE Gestion de comptes
   {
     path: 'gestion_compte', data: { breadcrumb: 'gestion_des_comptes.title_module' }, children: [
-      {path : 'beneficiaire',component: BeneficiareComponent,data: { breadcrumb: 'beneficiaire.title_beneficiaire' }},
+      { path: 'beneficiaire', component: BeneficiareComponent, data: { breadcrumb: 'beneficiaire.title_beneficiaire' } },
+      {path : 'creer_compte',component: CreationCompteComponent,data: { breadcrumb: 'beneficiaire.creer_compte' }}
   ]},
   {
     path: 'operation_compte', data: { breadcrumb: 'operation_compte.title_breadcrumb' }, children: [
