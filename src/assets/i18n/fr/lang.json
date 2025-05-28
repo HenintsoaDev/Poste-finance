@@ -481,7 +481,7 @@
         "num_serie" : "N° de serie",
         "type_compte" : "Type de compte",
         "info_beneficiaire" :"Informations du bénéficiaire",
-        "search_beneficiaire" : "Rechercher bénéficiaire par ",
+        "search_beneficiaire" : "Rechercher par ",
         "statut":"Statut",
         "cin" : "CIN"
     }
