@@ -470,10 +470,10 @@
         "dernier" : "Dernier"
     },
     "operation_compte" : {
-        "title_breadcrumb" : "Operation compte",
-        "title_search_breadcrumb" : "Chercher un compte",
+        "title_breadcrumb" : "Opérations compte",
+        "title_search_breadcrumb" : "Rechercher un compte",
         "title_activate_breadcrumb" : "Activer un compte",
-        "title_desactivate_breadcrumb" : "Desactiver un compte",
+        "title_desactivate_breadcrumb" : "Désactiver un compte",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -481,12 +481,12 @@
         "email" : "Adresse email",
         "adresse" : "Adresse",
         "type_recherche" : "Type de recherche",
-        "num_compte" : "N°compte",
+        "num_compte" : "N° compte",
         "date_expiration" : "Date d'expiration",
-        "num_serie" : "N°de serie",
+        "num_serie" : "N° de serie",
         "type_compte" : "Type de compte",
-        "info_beneficiaire" :"Information du bénéficiaire",
-        "search_beneficiaire" : "Recherche du bénéficiaire",
+        "info_beneficiaire" :"Informations du bénéficiaire",
+        "search_beneficiaire" : "Recherche par",
         "statut":"Statut",
         "cin" : "CIN"
     }
