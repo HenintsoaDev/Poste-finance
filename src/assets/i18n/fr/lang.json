@@ -72,6 +72,8 @@
         "valider_demande_?" : "Souhaitez-vous vraiment valider cette demande ? ",
         "clique_pour_activer" : "Cliquez pour activer",
         "clique_pour_desactiver" : "Cliquez pour désactiver",
+        "activer_compte_?" : "Souhaitez-vous vraiment activerce compte ? ",
+
         "oui" : "Oui",
         "non"  : "Non",
         "wallet"  : "Wallet",
@@ -468,7 +470,10 @@
         "dernier" : "Dernier"
     },
     "operation_compte" : {
-        "title_breadcrumb" : "Chercher un compte",
+        "title_breadcrumb" : "Operation compte",
+        "title_search_breadcrumb" : "Chercher un compte",
+        "title_activate_breadcrumb" : "Activer un compte",
+        "title_desactivate_breadcrumb" : "Desactiver un compte",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -481,9 +486,10 @@
         "num_serie" : "N°de serie",
         "type_compte" : "Type de compte",
         "info_beneficiaire" :"Information du bénéficiaire",
-        "search_beneficiaire" : "Recherche du bénéficiaire par ",
+        "search_beneficiaire" : "Recherche du bénéficiaire",
         "statut":"Statut",
         "cin" : "CIN"
     }
+   
 
 }

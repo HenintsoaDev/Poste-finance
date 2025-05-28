@@ -33,7 +33,9 @@ import { HeaderMessageComponent } from './views/modules/adm/parametrage/header-m
 import { PartenaireFinancierComponent } from './views/modules/adm/gestion-commission-reseau-phco/partenaire-financier/partenaire-financier.component';
 import { UtilisateurApiNumheritComponent } from './views/modules/adm/parametrage/utilisateur-api-numherit/utilisateur-api-numherit.component';
 import { BeneficiareComponent } from './views/modules/gestion-compte/beneficiare/beneficiare.component';
-import { ChercherCompteComponent } from './views/modules/gestion-compte/chercher-compte/chercher-compte.component';
+import { ChercherCompteComponent } from './views/modules/gestion-compte/operation-compte/chercher-compte/chercher-compte.component';
+import { ActiverCompteComponent } from './views/modules/gestion-compte/operation-compte/activer-compte/activer-compte.component';
+import { DesactiverCompteComponent } from './views/modules/gestion-compte/operation-compte/desactiver-compte/desactiver-compte.component';
 
 const routes: Routes =[
   
@@ -82,8 +84,10 @@ const routes: Routes =[
       {path : 'beneficiaire',component: BeneficiareComponent,data: { breadcrumb: 'beneficiaire.title_beneficiaire' }},
   ]},
   {
-    path: 'operation_compte', data: { breadcrumb: 'gestion_des_comptes.title_module' }, children: [
-      {path : 'find_compte',component: ChercherCompteComponent,data: { breadcrumb: 'operation_compte.title_breadcrumb' }},
+    path: 'operation_compte', data: { breadcrumb: 'operation_compte.title_breadcrumb' }, children: [
+      {path : 'find_compte',component: ChercherCompteComponent,data: { breadcrumb: 'operation_compte.title_search_breadcrumb' }},
+      {path : 'activer_compte',component: ActiverCompteComponent,data: { breadcrumb: 'operation_compte.title_activate_breadcrumb' }},
+      {path : 'desactiver_compte',component: DesactiverCompteComponent,data: { breadcrumb: 'operation_compte.title_desactivate_breadcrumb' }},
   ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

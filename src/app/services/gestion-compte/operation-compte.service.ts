@@ -26,6 +26,27 @@ export class OperationCompteService {
         );
     }
 
+    infoCompte(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.infos_compte, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+
+    activerCompte(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.activer_compte, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
  
 
    

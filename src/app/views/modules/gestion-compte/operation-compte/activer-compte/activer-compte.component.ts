@@ -1,15 +1,17 @@
-import { OperationCompteService } from './../../../../services/gestion-compte/operation-compte.service';
+import { OperationCompteService } from '../../../../../services/gestion-compte/operation-compte.service';
 import { Component, OnInit } from '@angular/core';
 import { Translatable } from 'shared/constants/Translatable';
 import { CountryISO, PhoneNumberFormat, SearchCountryField } from 'ngx-intl-tel-input';
 import { ToastrService } from 'ngx-toastr';
+import Swal from 'sweetalert2';
+
 
 @Component({
-  selector: 'app-chercher-compte',
-  templateUrl: './chercher-compte.component.html',
-  styleUrls: ['./chercher-compte.component.scss']
+  selector: 'app-activer-compte',
+  templateUrl: './activer-compte.component.html',
+  styleUrls: ['./activer-compte.component.scss']
 })
-export class ChercherCompteComponent extends Translatable implements OnInit {
+export class ActiverCompteComponent extends Translatable implements OnInit {
 
   num_compte: any;
   type_recherche: any;
@@ -68,7 +70,7 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
       ...(type === 0 ? { telephone: telephone } : { num_compte: this.num_compte })
     };
 
-    this.operationService.chercheCompte(data).subscribe({
+    this.operationService.infoCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
             this.toastr.success(res['msg'], this.__("global.success"));
@@ -87,6 +89,56 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
     }); 
 
   }
+
+
+   // Ouverture de modal pour modification
+   activerCompte() {
+    let telephone = this.telephone.replace('+', "00");
+
+    let data = {
+      'telephone' : telephone
+    };
+    
+
+    Swal.fire({
+      title: this.__("global.confirmation"),
+      text: this.__("global.activer_compte_?"),
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: this.__("global.oui_activer"),
+      cancelButtonText: this.__("global.cancel"),
+      allowOutsideClick: false,
+      customClass: {
+          confirmButton: 'swal-button--confirm-custom',
+          cancelButton: 'swal-button--cancel-custom'
+      },
+      }).then((result) => {
+      if (result.isConfirmed) {
+     
+
+           this.operationService.activerCompte(data).subscribe({
+            next: (res) => {
+                if(res['code'] == 200) {
+                  this.toastr.success(res['msg'], this.__("global.success"));
+                  this.infoCompte=[];
+                }
+                else{
+                    this.toastr.error(res['msg'], this.__("global.error"));
+                }                
+              },
+              error: (err) => {
+              }
+          }); 
+
+      
+
+
+        
+        }
+    });
+
+  }
+
 
 
   changePreferredCountries() {
@@ -114,6 +166,5 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
   getNumber(obj : any) {
     this.telephone = obj;
   }
-
 
 }
