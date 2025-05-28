@@ -115,7 +115,6 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         private bureauService: BureauService,
         private passageService: PassageService,
         private toastr: ToastrService,
-        private ressourceService: RessourceService,
         private beneficiaireService : BeneficiaireService
     ) {
         super();
@@ -174,17 +173,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             );
         });
 
-        this.ressourceService.getListType().subscribe({
-            next: (res) => {
-                if(res['code'] == 200) {
-                    this.listtypecarte = res['data'];
-                }
-                else{
-                    this.toastr.error(res['msg'], this.__("global.error"));
-                }               
-            }
-            , error: (err) => {}
-        });
+        
     }
 
     ngOnDestroy() {
@@ -304,6 +293,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                     }); 
                 }          
             });
+        }else {
+            this.toastr.error(this.__("global.form_required"));
         }
     }
 
