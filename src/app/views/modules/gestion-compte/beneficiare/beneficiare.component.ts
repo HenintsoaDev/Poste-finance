@@ -12,6 +12,7 @@ import { FormBuilder, FormControl, FormGroup,Validators } from '@angular/forms';
 import { BeneficiaireService } from 'app/services/gestion-compte/beneficiaire.service';
 import Swal from 'sweetalert2';
 import { bureau } from '../../../../shared/models/db';
+import { DatePipe } from '@angular/common';
 
 @Component({
   selector: 'app-beneficiare',
@@ -108,6 +109,14 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     listtypecarte = [];
 
     listBeneficiaire = [];
+
+    typeCompte: string = "2";
+    dateDebut: string = "" //new Date().toISOString().substring(0, 10);
+    dateFin: string = ""//new Date().toISOString().substring(0, 10);
+    bureauFiltred: any;
+    agenceSearchData: any;
+    filteredBureauSearchData = [];
+    searchControlFiltredBureau = new FormControl('');
     
     constructor(
         private fb: FormBuilder, 
@@ -115,6 +124,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         private bureauService: BureauService,
         private passageService: PassageService,
         private toastr: ToastrService,
+        private datePipe: DatePipe,
         private beneficiaireService : BeneficiaireService
     ) {
         super();
@@ -158,6 +168,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                     console.log(res);
                     this.listBureauActive = res['data'];
                     this.filteredBureau = this.listBureauActive;
+                    this.filteredBureauSearchData = this.listBureauActive;
                 }
                 else{
                     this.toastr.error(res['msg'], this.__("global.error"));
@@ -173,7 +184,42 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             );
         });
 
+        this.searchControlFiltredBureau.valueChanges.subscribe(value => {
+            const lower = value?.toLowerCase() || '';
+            this.filteredBureauSearchData = this.listBureauActive.filter(bureau =>
+                bureau.name.toLowerCase().includes(lower)
+            );
+        });
+
+    }
+
+    filtreTableau()
+    {
+        let filtre_search = "" ; 
+        if(this.typeCompte != '2'){
+            filtre_search = ",beneficiaire.wallet_carte|e|"+this.typeCompte;
+        }
+
+        let filtre_bureau = "" ;
+        if(this.agenceSearchData != undefined && this.agenceSearchData != "-1"){
+            filtre_bureau = ",beneficiaire.fk_agence|e|"+this.agenceSearchData;
+        }
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        let date_fin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+      
+        let filtreDate = "" ;
+        if(date_debut && date_fin){
+            if( date_debut > date_fin ){
+                this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
+                return;
+            }else{
+                filtreDate = "&date_debut="+date_debut +"&date_fin="+date_fin;
+            }
+        }
         
+        let filtreParMulti =  filtre_search + filtre_bureau + filtreDate + "&_order_=desc,date_creation";
+        this.passageService.appelURL(filtreParMulti);
     }
 
     ngOnDestroy() {
