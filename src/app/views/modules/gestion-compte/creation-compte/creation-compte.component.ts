@@ -82,14 +82,14 @@ export class CreationCompteComponent extends Translatable implements OnInit {
             adresse: ['', [Validators.required]],
             email: ['', [Validators.required]],
             telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
-            agence: ['', [Validators.required]],
+            //agence: ['', [Validators.required]],
             cni: ['', [Validators.required]], 
             sexe: ['', [Validators.required]],
             date_nais: ['', [Validators.required]],
             date_delivrance: ['', [Validators.required]],
             fk_typecni: ['', [Validators.required]],
-            matricule: ['', [Validators.required]],
-            wallet_carte: ['', [Validators.required]],
+            matricule: [''],
+            //wallet_carte: ['', [Validators.required]], 
         });
 
         this.bureauService.getAgenceBureauActive().subscribe({
