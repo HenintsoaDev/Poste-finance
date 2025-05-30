@@ -31,7 +31,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         {"nomColonne" :  this.__('utilisateur.email'),"colonneTable" : "email","table" : "beneficiaire"},
         {"nomColonne" :  this.__('utilisateur.adresse'),"colonneTable" : "adresse","table" : "beneficiaire"},
         {"nomColonne" : this.__('suivi_compte.type_compte'), "colonneTable": "wallet_carte", "table": "beneficiaire" },
-        {"nomColonne" :  this.__('global.date'),"colonneTable" : "date_creation","table" : "beneficiaire"},
+        {"nomColonne" :  this.__('global.date_creation'),"colonneTable" : "date_creation","table" : "beneficiaire"},
         {"nomColonne" :  this.__('global.agence'),"colonneTable" : "agence","table" : "beneficiaire"},
         {"nomColonne" :  this.__('global.statut'),"colonneTable" : "state_value","table" : "beneficiaire"},
         {"nomColonne" : this.__('global.action')}
@@ -72,10 +72,12 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     type_carte: number = 0;
     beneficiaireSelected: any;
     bureauLabel: string;
+    user_creation: string;
+    date_creation: string;
 
     beneficiareForm: FormGroup;
 
-    searchGlobal = [];
+    searchGlobal = ['beneficiaire.nom', 'beneficiaire.prenom', 'beneficiaire.email', 'beneficiaire.adresse'];
 
     subscription: Subscription;
 
@@ -117,9 +119,12 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     agenceSearchData: any;
     filteredBureauSearchData = [];
     searchControlFiltredBureau = new FormControl('');
+
+    loading : boolean = false;
     
     constructor(
         private fb: FormBuilder, 
+        private ressourceService: RessourceService,
         private modalService: BsModalService,
         private bureauService: BureauService,
         private passageService: PassageService,
@@ -140,10 +145,12 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             adresse: ['', [Validators.required]],
             email: ['', [Validators.required]],
             //telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
-            agence: ['', [Validators.required]],
+            //agence: ['', [Validators.required]],
             cni: ['', [Validators.required]], 
             sexe: ['', [Validators.required]],
             date_nais: ['', [Validators.required]],
+            date_delivrance: ['', [Validators.required]],
+            fk_typecni: ['', [Validators.required]],
         });
 
         this.subscription = this.passageService.getObservable().subscribe(event => {
@@ -158,8 +165,6 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                 }
                 this.passageService.clear();  // ==> à implémenter dans ton service
             }
-           
-          
         });
 
         this.bureauService.getAgenceBureauActive().subscribe({
@@ -189,6 +194,18 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             this.filteredBureauSearchData = this.listBureauActive.filter(bureau =>
                 bureau.name.toLowerCase().includes(lower)
             );
+        });
+
+        this.ressourceService.getListType().subscribe({
+            next: (res) => {
+                if(res['code'] == 200) {
+                    this.listtypecarte = res['data'];
+                }
+                else{
+                    this.toastr.error(res['msg'], this.__("global.error"));
+                }               
+            }
+            , error: (err) => {}
         });
 
     }
@@ -241,7 +258,6 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         if(res.length != 0){
             let beneficiaireSelected = res[0];
             this.beneficiaireSelected = beneficiaireSelected;
-
             this.nom = beneficiaireSelected.nom;
             this.prenom = beneficiaireSelected.prenom;
             this.email = beneficiaireSelected.email;
@@ -259,6 +275,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
             this.date_delivrance = beneficiaireSelected.date_delivrance;
             this.fk_typecni = beneficiaireSelected.fk_typecni;
             this.type_carte = beneficiaireSelected.type_carte ? beneficiaireSelected.type_carte : 0;
+            this.user_creation = beneficiaireSelected.user_creation;
+            this.date_creation = beneficiaireSelected.date_creation;
             /*this.telephone = beneficiaireSelected.telephone;
             this.objetPhone = beneficiaireSelected.telephone;
             this.element = beneficiaireSelected;*/
@@ -323,6 +341,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                 },
             }).then((result) => {
                 if (result.isConfirmed) {
+                    this.loading = true;
                     this.beneficiaireService.updateBeneficiaire(this.beneficiaireSelected).subscribe({
                         next: (res) => {
                             if(res['code'] == 201) {
@@ -332,9 +351,11 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                             }
                             else{
                                 this.toastr.error(res['msg'], this.__("global.error"));
-                            }                
+                            } 
+                            this.loading = false;
                         },
                         error: (err) => {
+                            this.loading = false;
                         }
                     }); 
                 }          

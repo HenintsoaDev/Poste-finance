@@ -9,14 +9,14 @@
                                 <div class="col-6 form-group">
                                     <mat-form-field>
                                         <mat-label>{{ __('global.name')}}</mat-label>
-                                        <input matInput type="text" [(ngModel)]="nom" formControlName="nom" placeholder="{{ __('global.code')}}">
+                                        <input matInput type="text" [(ngModel)]="nom" formControlName="nom" placeholder="{{ __('global.name')}}">
                                     </mat-form-field>
                                 </div>
                     
                                 <div class="col-6 form-group">
                                     <mat-form-field>
-                                        <mat-label>{{ __('global.lastname')}} *</mat-label>
-                                        <input matInput type="text" [(ngModel)]="prenom" formControlName="prenom" placeholder="{{ __('global.name')}}">
+                                        <mat-label>{{ __('global.lastname')}}</mat-label>
+                                        <input matInput type="text" [(ngModel)]="prenom" formControlName="prenom" placeholder="{{ __('global.lastname')}}">
                                     </mat-form-field>
                                 </div>
                     
@@ -30,7 +30,7 @@
                                 <div class="col-6 form-group">
                                     <mat-form-field>
                                         <mat-label>{{ __('utilisateur.adresse')}}</mat-label>
-                                        <input matInput type="text" [(ngModel)]="adresse" formControlName="adresse" placeholder="{{ __('utilisateur.email')}}">
+                                        <input matInput type="text" [(ngModel)]="adresse" formControlName="adresse" placeholder="{{ __('utilisateur.adresse')}}">
                                     </mat-form-field>
                                 </div>
                     
@@ -53,7 +53,7 @@
                     
                                 <div class="col-6">
                                     <div class="form-group">
-                                        <label for="dateFonction">{{ __('utilisateur.telephone')}}</label>
+                                        <label for="dateFonction">{{ __('utilisateur.telephone')}} *</label>
                                         <input type="text"
                                             name="phone_client" 
                                             placeholder="3X XX XXX XX"
@@ -83,7 +83,7 @@
                                 </div>
 
                                 <div class="form-group col-6">
-                                    <label for="account-type-1">{{ __('global.type_cni') }}(*)</label>
+                                    <label for="account-type-1">{{ __('global.type_cni') }} *</label>
                                     <ng-container >
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('global.type_cni') }}</mat-label>
@@ -103,7 +103,7 @@
                                 </div>
                     
                                 <div class="form-group col-6">
-                                    <label for="dateFonction">{{ __('global.date_delivrance') }}</label>
+                                    <label for="dateFonction">{{ __('global.date_delivrance') }} *</label>
                                     <mat-form-field appearance="fill" style="width: 100%;">
                                         <input matInput [matDatepicker]="pickerDelivrance" formControlName="date_delivrance" [(ngModel)]="date_delivrance" placeholder="{{ __('global.date_delivrance') }}" (focus)="pickerDelivrance.open()">
                                         <mat-datepicker-toggle matSuffix [for]="pickerDelivrance"></mat-datepicker-toggle>
@@ -147,7 +147,7 @@
                                 </div>-->
                             </div>
                             <div class="row">
-                                <div class="col-12 d-flex">
+                                <div class="col-12 d-flex justify-content-end">
                                   <button class="btn btn-primary ms-auto" type="submit" [disabled]="beneficiareForm.invalid">
                                     {{ __('global.save') }}
                                   </button>
@@ -158,5 +158,11 @@
                 </div>
             </div>
         </div>
+    </div>
+</div>
+
+<div class="overlay" *ngIf="loading">
+    <div class="loading-content">
+        {{ __('global.loading') }}
     </div>
 </div>

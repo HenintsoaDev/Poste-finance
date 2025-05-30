@@ -194,7 +194,7 @@ export class TableComponent extends Translatable {
                 const element = this.searchGlobal[i];
 
                 //**  ,table.nom_colonne|l|*/
-                searchGlobal += sep + element + "|l|%" + this.searchInput + "%" ;
+                searchGlobal += sep + element + "|l|" + this.searchInput + "" ;
                 sep = ",";
               }
               this.searchCol = "&where_or=" + searchGlobal;
