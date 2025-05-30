@@ -31,7 +31,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         {"nomColonne" :  this.__('utilisateur.email'),"colonneTable" : "email","table" : "beneficiaire"},
         {"nomColonne" :  this.__('utilisateur.adresse'),"colonneTable" : "adresse","table" : "beneficiaire"},
         {"nomColonne" : this.__('suivi_compte.type_compte'), "colonneTable": "wallet_carte", "table": "beneficiaire" },
-        {"nomColonne" :  this.__('global.date'),"colonneTable" : "date_creation","table" : "beneficiaire"},
+        {"nomColonne" :  this.__('global.date_creation'),"colonneTable" : "date_creation","table" : "beneficiaire"},
         {"nomColonne" :  this.__('global.agence'),"colonneTable" : "agence","table" : "beneficiaire"},
         {"nomColonne" :  this.__('global.statut'),"colonneTable" : "state_value","table" : "beneficiaire"},
         {"nomColonne" : this.__('global.action')}
