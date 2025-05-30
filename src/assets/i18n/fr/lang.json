@@ -128,12 +128,12 @@
         "activer" : "Activer",
         "numherit" : "Numherit",
         "agence" : "Bureau",
-        "cni" : "CIN",
+        "cni" : "N° piéce d'identité",
         "man" : "Homme",
         "woman" : "Femme",
         "form_required" : "Veuillez remplir tous les champs correctement.",
         "matricule" : "Matricule",
-        "type_cni" : "Type de carte d'identité",
+        "type_cni" : "Type de piéce d'identité",
         "date_delivrance" : "Date de délivrance"
     },
 
@@ -514,7 +514,9 @@
         "search_beneficiaire" : "Recherche par",
         "statut":"Statut",
         "cin" : "CIN",
-        "solde" : "Solde"
+        "solde" : "Solde",
+        "filtre_tableau":"Filtrer les données du tableau",
+        "list_releve_compte" : "Relevés de compte"
     }
    
 }
