@@ -81,6 +81,18 @@
                                         >
                                     </div>
                                 </div>
+
+                                <div class="form-group col-6">
+                                    <label for="account-type-1">{{ __('global.type_cni') }}(*)</label>
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>{{ __('global.type_cni') }}</mat-label>
+                                            <mat-select [(ngModel)]="fk_typecni" formControlName="fk_typecni"> 
+                                                <mat-option *ngFor="let typecarte of listtypecarte" [value]="typecarte.id_type">{{ typecarte.lib_type }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
                     
                                 <div class="col-6 form-group">
                                     <label for="dateFonction">{{ __('global.cni')}}</label>
@@ -99,29 +111,17 @@
                                     </mat-form-field>
                                 </div>
                     
-                                <div class="form-group col-6">
-                                    <label for="account-type-1">{{ __('global.type_cni') }}(*)</label>
-                                    <ng-container >
-                                        <mat-form-field appearance="fill" style="width: 100%;">
-                                            <mat-label>{{ __('global.type_cni') }}</mat-label>
-                                            <mat-select [(ngModel)]="fk_typecni" formControlName="fk_typecni"> 
-                                                <mat-option *ngFor="let typecarte of listtypecarte" [value]="typecarte.id_type">{{ typecarte.lib_type }}</mat-option>
-                                            </mat-select>
-                                        </mat-form-field>
-                                    </ng-container>
-                                </div>
                         
-                                <div class="col-6 form-group">
+                                <!--<div class="col-6 form-group">
                                     <label for="dateFonction">{{ __('global.matricule')}}</label>
                                     <mat-form-field>
                                         <mat-label>{{ __('global.matricule')}}</mat-label>
                                         <input matInput type="text" [(ngModel)]="matricule" formControlName="matricule" placeholder="{{ __('global.matricule')}}">
                                     </mat-form-field>
-                                </div>
+                                </div>-->
                     
-                                <div class="form-group col-6">
+                                <!--<div class="form-group col-6">
                                     <label for="account-type-1">{{ __('releve_solde_bureau.agence') }}(*)</label>
-                                    <!-- POUR ADMIN -->
                                     <ng-container >
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
@@ -133,9 +133,9 @@
                                             </mat-select>
                                         </mat-form-field>
                                     </ng-container>
-                                </div>
+                                </div>-->
                     
-                                <div class="col-6 form-group"> 
+                                <!--<div class="col-6 form-group"> 
                                     <label for="dateFonction">{{ __('suivi_compte.type_compte')}} *</label>
                                     <mat-form-field appearance="fill">
                                         <mat-label>{{ __('suivi_compte.type_compte')}}</mat-label>
@@ -144,7 +144,7 @@
                                             <mat-option  [value]="1"> {{ __('global.carte') }} </mat-option>
                                         </mat-select>
                                     </mat-form-field>
-                                </div>
+                                </div>-->
                             </div>
                             <div class="row">
                                 <div class="col-12 d-flex">
