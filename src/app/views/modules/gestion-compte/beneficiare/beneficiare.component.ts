@@ -77,7 +77,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
 
     beneficiareForm: FormGroup;
 
-    searchGlobal = [];
+    searchGlobal = ['beneficiaire.nom', 'beneficiaire.prenom', 'beneficiaire.email', 'beneficiaire.adresse'];
 
     subscription: Subscription;
 
