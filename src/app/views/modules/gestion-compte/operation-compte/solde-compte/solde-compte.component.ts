@@ -31,7 +31,7 @@ export class SoldeCompteComponent extends Translatable implements OnInit {
   selectedCountryISO = 'mg';
   phoneNumber = '';
   dialCode: any = '261';
-  infoCompte: any[] = [];
+  infoCompte: any = [];
   isDisabled :boolean = false;
   soldeCompte: string ="";
 
@@ -60,9 +60,11 @@ export class SoldeCompteComponent extends Translatable implements OnInit {
     let type = null;
     if(this.type_recherche == "N") type = 1;
     else if(this.type_recherche == "T") type = 0;
-
-
-    let telephone = this.telephone.replace('+', "00");
+    
+    let telephone = "";
+    if(this.telephone){
+      telephone = this.telephone.replace('+', "00");
+    }
 
     
 
@@ -74,8 +76,9 @@ export class SoldeCompteComponent extends Translatable implements OnInit {
     this.operationService.chercheCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
-            this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
+            console.log(this.infoCompte);
+            this.telephone =  this.infoCompte.carte.telephone;
 
             this.recupererSolde();
             
@@ -104,7 +107,6 @@ export class SoldeCompteComponent extends Translatable implements OnInit {
     this.operationService.soldeCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
-            this.toastr.success(res['msg'], this.__("global.success"));
             this.soldeCompte = this.formatNumber(res['data'].Balance , " ") + " " + res['data'].CurrencyCode	
             
           }

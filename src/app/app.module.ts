@@ -67,6 +67,7 @@ import { ActiverCompteComponent } from './views/modules/gestion-compte/operation
 import { DesactiverCompteComponent } from './views/modules/gestion-compte/operation-compte/desactiver-compte/desactiver-compte.component';
 import { SoldeCompteComponent } from './views/modules/gestion-compte/operation-compte/solde-compte/solde-compte.component';
 import { CreationCompteComponent } from './views/modules/gestion-compte/creation-compte/creation-compte.component';
+import { ReleveCompteComponent } from './views/modules/gestion-compte/operation-compte/releve-compte/releve-compte.component';
 
 
 registerLocaleData(localeFr);
@@ -142,7 +143,8 @@ registerLocaleData(localeFr);
     ActiverCompteComponent,
     DesactiverCompteComponent,
     SoldeCompteComponent,
-    CreationCompteComponent
+    CreationCompteComponent,
+    ReleveCompteComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

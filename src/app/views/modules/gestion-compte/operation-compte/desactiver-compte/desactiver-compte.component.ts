@@ -60,9 +60,11 @@ export class DesactiverCompteComponent extends Translatable implements OnInit {
     else if(this.type_recherche == "T") type = 0;
 
 
-    let telephone = this.telephone.replace('+', "00");
+    let telephone = "";
+    if(this.telephone){
+      telephone = this.telephone.replace('+', "00");
+    }
 
-    
 
     let data = {
       type_recherche: type,
@@ -94,7 +96,12 @@ export class DesactiverCompteComponent extends Translatable implements OnInit {
 
    // Ouverture de modal pour modification
    desactiverCompte() {
-    let telephone = this.telephone.replace('+', "00");
+    
+    let telephone = "";
+    if(this.telephone){
+      telephone = this.telephone.replace('+', "00");
+    }
+
 
     let data = {
       'telephone' : telephone
