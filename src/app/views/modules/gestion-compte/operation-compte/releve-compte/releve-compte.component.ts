@@ -223,9 +223,11 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
     let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
     let title = this.__("operation_compte.list_releve_compte") + ' ' ;
-    title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
-    title  += this.__("suivi_compte.from") + ' ' + date_debut  + ' '
-    title  += this.__("suivi_compte.to") + ' ' + date_fin
+    title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+    title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+    title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
+    
+    
 
     this.authService.exportExcel(this.print(this.releve_comptes),title).then(
         (response: any)=>{

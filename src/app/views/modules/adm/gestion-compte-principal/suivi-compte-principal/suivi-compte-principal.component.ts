@@ -116,7 +116,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     }
 
 
-    async exportExcel(fileName) {
+    async exportExcel() {
 
         const storedData = localStorage.getItem('data');
         let result : any;
@@ -126,13 +126,28 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         this.suivi_comptes = result.data;
         this.suivi_comptes_totaux = result.totaux;
         
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("suivi_compte.list_suivi_compte") + ' ' ;
+
+        const mapTypeCompte: { [key: string]: string } = {
+            '0': this.__("global.wallet"),
+            '1': this.__("global.carte"),
+          };
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title  += " " + this.__("suivi_compte.from") + ' ' + date_debut  + ' '
+        title  += this.__("suivi_compte.to") + ' ' + date_fin
         
-        this.authService.exportExcel(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
+
+        this.authService.exportExcel(this.print(this.suivi_comptes), title).then(
           (response: any)=>{
             console.log('respons beee',response)
                 let a = document.createElement("a"); 
                 a.href = response.data;
-                a.download = `${fileName}.xlsx`;
+                a.download = `${title}.xlsx`;
                 a.click(); 
           },
           (error:any)=>{
@@ -141,7 +156,7 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
         );
       }
 
-      async exportPdf(fileName) {
+      async exportPdf() {
 
         const storedData = localStorage.getItem('data');
         let result : any;
@@ -150,8 +165,26 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     
         this.suivi_comptes = result.data;
         this.suivi_comptes_totaux = result.totaux;
+
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("suivi_compte.list_suivi_compte") + ' ' ;
+
+        const mapTypeCompte: { [key: string]: string } = {
+            '0': this.__("global.wallet"),
+            '1': this.__("global.carte"),
+          };
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
         
-        this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_compte.list_suivi_compte")).then(
+        
+        
+        this.authService.exportPdf(this.print(this.suivi_comptes),title).then(
           (response: any)=>{},
           (error:any)=>{
             console.log(error)

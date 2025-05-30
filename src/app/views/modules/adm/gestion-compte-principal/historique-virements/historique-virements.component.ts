@@ -371,35 +371,73 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         this.modalRef?.hide();
     }
 
-    async exportExcel(fileName) {
+    async exportExcel() {
         const storedData = localStorage.getItem('data');
         let result : any;
         if (storedData) result = JSON.parse(storedData);
     
         this.virement_data = result.data;
         this.virement_totaux = result.totaux;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("virement.list_virement") + ' ' ;
+
+        const mapTypeCompte: { [key: string]: string } = {
+            '0': this.__("global.wallet"),
+            '1': this.__("global.carte"),
+          };
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
         
-        this.authService.exportExcel(this.print(this.virement_data),this.__("virement.list_virement")).then(
+        
+        console.log(title);
+        
+        
+        this.authService.exportExcel(this.print(this.virement_data), title).then(
             (response: any)=>{
                 console.log('respons beee',response)
                     let a = document.createElement("a"); 
                     a.href = response.data;
-                    a.download = `${fileName}.xlsx`;
+                    a.download = `${title}.xlsx`;
                     a.click(); 
             },
             (error:any)=>{console.log(error)}
         );
     }
 
-    async exportPdf(fileName) {
+    async exportPdf() {
         const storedData = localStorage.getItem('data');
         let result : any;
         if (storedData) result = JSON.parse(storedData);
     
         this.virement_data = result.data;
         this.virement_totaux = result.totaux;
+
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("virement.list_virement") + ' ' ;
+
+        const mapTypeCompte: { [key: string]: string } = {
+            '0': this.__("global.wallet"),
+            '1': this.__("global.carte"),
+          };
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
         
-        this.authService.exportPdf(this.print(this.virement_data),this.__("virement.list_virement")).then(
+        
+        
+        
+        this.authService.exportPdf(this.print(this.virement_data), title).then(
             (response: any)=>{},
             (error:any)=>{console.log(error)}
         );
