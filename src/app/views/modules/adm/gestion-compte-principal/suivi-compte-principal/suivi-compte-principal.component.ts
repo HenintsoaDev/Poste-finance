@@ -131,10 +131,8 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     
         let title = this.__("suivi_compte.list_suivi_compte") + ' ' ;
 
-        const mapTypeCompte: { [key: string]: string } = {
-            '0': this.__("global.wallet"),
-            '1': this.__("global.carte"),
-          };
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+
           
         title += mapTypeCompte[this.typeCompte] || '';
 
@@ -172,15 +170,13 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
     
         let title = this.__("suivi_compte.list_suivi_compte") + ' ' ;
 
-        const mapTypeCompte: { [key: string]: string } = {
-            '0': this.__("global.wallet"),
-            '1': this.__("global.carte"),
-          };
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+
           
         title += mapTypeCompte[this.typeCompte] || '';
 
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
-        title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
         
         
         

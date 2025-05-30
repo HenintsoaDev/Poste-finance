@@ -166,12 +166,10 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
 
         let resultat = this.listBureauActive.filter(_ => _.rowid == this.agenceId);
         let agenceName = resultat[0].name;
-
-        title += " du " + agenceName + " " ;
-
         
-        const mapTypeCompte: { [key: string]: string } = { '0': this.__("global.wallet"), '1': this.__("global.carte"), };
-          
+        title += " : " + agenceName + " " ;
+
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
         title += mapTypeCompte[this.typeCompte] || '';
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
         title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
@@ -204,9 +202,9 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
         let resultat = this.listBureauActive.filter(_ => _.rowid == this.agenceId);
         let agenceName = resultat[0].name;
 
-        title += " du " + agenceName + " " ;
+        title += " : " + agenceName + " " ;
 
-        const mapTypeCompte: { [key: string]: string } = { '0': this.__("global.wallet"), '1': this.__("global.carte"),};
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
           
         title += mapTypeCompte[this.typeCompte] || '';
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
