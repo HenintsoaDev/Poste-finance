@@ -62,6 +62,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
     /**INPUT PHONE */
     
     listtypecarte = [];
+    loading : boolean = false;
 
     constructor(
         private fb: FormBuilder, 
@@ -79,12 +80,12 @@ export class CreationCompteComponent extends Translatable implements OnInit {
         this.beneficiareForm = this.fb.group({
             nom: ['', Validators.required],
             prenom: [''],
-            adresse: ['', [Validators.required]],
+            adresse: ['', Validators.required],
             email: ['', [Validators.required]],
             telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
             //agence: ['', [Validators.required]],
-            cni: ['', [Validators.required]], 
-            sexe: ['', [Validators.required]],
+            cni: ['', Validators.required], 
+            sexe: ['',Validators.required],
             date_nais: ['', [Validators.required]],
             date_delivrance: ['', [Validators.required]],
             fk_typecni: ['', [Validators.required]],
@@ -155,7 +156,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
                 ...this.beneficiaireSelected,
                 ...this.beneficiareForm.value
             };
-            this.beneficiaireSelected.telephone = this.dialCode + this.beneficiaireSelected.telephone;
+            this.beneficiaireSelected.telephone = "00"+ this.dialCode + this.beneficiaireSelected.telephone;
             this.beneficiaireSelected.date_nais = this.datePipe.transform(this.beneficiaireSelected.date_nais, 'yyyy-MM-dd');
             this.beneficiaireSelected.date_delivrance = this.datePipe.transform(this.beneficiaireSelected.date_delivrance, 'yyyy-MM-dd');
 
@@ -173,7 +174,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
                 },
             }).then((result) => {
                 if (result.isConfirmed) {
-                    
+                    this.loading = true;
                     this.beneficiaireService.addNewBeneficiaire(this.beneficiaireSelected).subscribe({
                         next: (res) => {
                             if(res['code'] == 201) {
@@ -183,9 +184,11 @@ export class CreationCompteComponent extends Translatable implements OnInit {
                             }
                             else{
                                 this.toastr.error(res['msg'], this.__("global.error"));
-                            }                
+                            }   
+                            this.loading = false;
                         },
                         error: (err) => {
+                            this.loading = false;
                         }
                     }); 
                 }          

@@ -108,21 +108,7 @@
                         <input matInput type="text" [(ngModel)]="prenom" formControlName="prenom" placeholder="{{ __('global.name')}}">
                     </mat-form-field>
                 </div>
-    
-                <div class="col-6 form-group">
-                    <mat-form-field>
-                        <mat-label>{{ __('utilisateur.email')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="email" formControlName="email" placeholder="{{ __('utilisateur.email')}}">
-                    </mat-form-field>
-                </div>
-    
-                <div class="col-6 form-group">
-                    <mat-form-field>
-                        <mat-label>{{ __('utilisateur.adresse')}}</mat-label>
-                        <input matInput type="text" [(ngModel)]="adresse" formControlName="adresse" placeholder="{{ __('utilisateur.email')}}">
-                    </mat-form-field>
-                </div>
-    
+
                 <div class="form-group col-6">
                     <label for="dateFonction">{{ __('global.sex') }} *</label><br><br>
                     <mat-radio-group  [(ngModel)]="sexe" formControlName="sexe">
@@ -141,16 +127,50 @@
                 </div>
     
                 <div class="col-6 form-group">
-                    <label for="dateFonction">{{ __('global.cni')}}</label>
+                    <mat-form-field>
+                        <mat-label>{{ __('utilisateur.email')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="email" formControlName="email" placeholder="{{ __('utilisateur.email')}}">
+                    </mat-form-field>
+                </div>
+    
+                <div class="col-6 form-group">
+                    <mat-form-field>
+                        <mat-label>{{ __('utilisateur.adresse')}}</mat-label>
+                        <input matInput type="text" [(ngModel)]="adresse" formControlName="adresse" placeholder="{{ __('utilisateur.email')}}">
+                    </mat-form-field>
+                </div>
+
+                <div class="form-group col-6">
+                    <label for="account-type-1">{{ __('global.type_cni') }}(*)</label>
+                    <ng-container >
+                        <mat-form-field appearance="fill" style="width: 100%;">
+                            <mat-label>{{ __('global.type_cni') }}</mat-label>
+                            <mat-select [(ngModel)]="fk_typecni" formControlName="fk_typecni"> 
+                                <mat-option *ngFor="let typecarte of listtypecarte" [value]="typecarte.id_type">{{ typecarte.lib_type }}</mat-option>
+                            </mat-select>
+                        </mat-form-field>
+                    </ng-container>
+                </div>
+    
+                <div class="col-6 form-group">
+                    <label for="dateFonction">{{ __('global.cni')}}(*)</label>
                     <mat-form-field>
                         <mat-label>{{ __('global.cni')}}</mat-label>
                         <input matInput type="text" [(ngModel)]="cni" formControlName="cni" placeholder="{{ __('global.cni')}}">
                     </mat-form-field>
                 </div>
-    
+
                 <div class="form-group col-6">
+                    <label for="dateFonction">{{ __('global.date_delivrance') }}(*)</label>
+                    <mat-form-field appearance="fill" style="width: 100%;">
+                        <input matInput [matDatepicker]="pickerDelivrance" formControlName="date_delivrance" [(ngModel)]="date_delivrance" placeholder="{{ __('global.date_delivrance') }}" (focus)="pickerDelivrance.open()">
+                        <mat-datepicker-toggle matSuffix [for]="pickerDelivrance"></mat-datepicker-toggle>
+                        <mat-datepicker #pickerDelivrance></mat-datepicker>
+                    </mat-form-field>
+                </div>
+    
+                <!--<div class="form-group col-6">
                     <label for="account-type-1">{{ __('releve_solde_bureau.agence') }}(*)</label>
-                    <!-- POUR ADMIN -->
                     <ng-container >
                         <mat-form-field appearance="fill" style="width: 100%;">
                             <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
@@ -162,7 +182,7 @@
                             </mat-select>
                         </mat-form-field>
                     </ng-container>
-                </div>
+                </div>-->
     
             </div>
             
@@ -200,18 +220,6 @@
             </div>
             <div class="col-6">
                 <div class="alert alert-custom">
-                    <label><b style="font-weight: 800;">{{ __('utilisateur.email')}}</b></label>
-                    <h6><b class="info-virement">{{ email }}</b></h6>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="alert alert-custom">
-                    <label><b style="font-weight: 800;">{{ __('utilisateur.adress')}}</b></label>
-                    <h6><b class="info-virement">{{ adresse }}</b></h6>
-                </div>
-            </div>
-            <div class="col-6">
-                <div class="alert alert-custom">
                     <label><b style="font-weight: 800;">{{ __('global.sex')}}</b></label>
                     <h6><b class="info-virement">{{ (sexe == "F") ? __('global.woman') : __('global.man') }}</b></h6>
                 </div>
@@ -224,8 +232,49 @@
             </div>
             <div class="col-6">
                 <div class="alert alert-custom">
-                    <label><b style="font-weight: 800;">{{ __('releve_solde_bureau.agence')}}</b></label>
-                    <h6><b class="info-virement">{{ bureauLabel }}</b></h6>
+                    <label><b style="font-weight: 800;">{{ __('utilisateur.email')}}</b></label>
+                    <h6><b class="info-virement">{{ email }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('utilisateur.adresse')}}</b></label>
+                    <h6><b class="info-virement">{{ adresse }}</b></h6>
+                </div>
+            </div>
+            
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.cni')}}</b></label>
+                    <h6><b class="info-virement">{{ cni }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.user_creation')}}</b></label>
+                    <h6><b class="info-virement">{{ user_creation }}</b></h6>
+                </div>
+            </div>
+            
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.date_creation')}}</b></label>
+                    <h6><b class="info-virement">{{ date_creation }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.statut')}}</b></label>
+                    <h6><b class="info-virement">{{ state_value }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.wallet_carte')}}</b></label>
+                    <h6><b class="info-virement">{{ wallet_carte }}</b></h6>
                 </div>
             </div>
         </div>
@@ -234,3 +283,9 @@
         <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
     </div>
 </ng-template>
+
+<div class="overlay" *ngIf="loading">
+    <div class="loading-content">
+        {{ __('global.loading') }}
+    </div>
+</div>
