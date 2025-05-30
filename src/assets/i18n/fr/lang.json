@@ -514,7 +514,8 @@
         "search_beneficiaire" : "Recherche par",
         "statut":"Statut",
         "cin" : "CIN",
-        "solde" : "Solde"
+        "solde" : "Solde",
+        "filtre_tableau":"Filtrer les données du tableau"
     }
    
 }

@@ -1,5 +1,6 @@
 import { DatePipe } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
@@ -74,6 +75,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
   phoneNumber = '';
   dialCode: any = '261';
   listShow: boolean = false;
+  @ViewChild('panel') panel!: MatExpansionPanel;
   
   constructor( private toastr: ToastrService, 
     private passageService: PassageService,
@@ -118,6 +120,10 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
       this.subscription.unsubscribe();
     }
 }
+
+  fermerPannel() {
+    this.panel.close();
+  }
   videForm(){
     this.type_recherche = null;
     this.num_compte = "";
@@ -128,7 +134,6 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
 
   filtreTableau()
   {
-     this.listShow = true;
      
       let type = null;
       if(this.type_recherche == "N") type = 1;
@@ -141,11 +146,15 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
       let filtre_wallet_carte = '';
       if(this.typeCompte != null) filtre_wallet_carte = "&wallet_carte="+this.typeCompte;
       
-      let telephone = this.telephone.replace('+', "00");
 
 
       let filtre_telephone = '';
-      if(this.telephone != null) filtre_telephone = "&telephone="+telephone;
+      if(this.telephone != null) {
+        let telephone = this.telephone.replace('+', "00");
+        filtre_telephone = "&telephone="+telephone;
+
+      }
+      
       
 
       let filtre_numcompte = '';
@@ -167,6 +176,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
       
       let filtreParMulti =  filtre_telephone  +  filtre_wallet_carte + filtre_numcompte + filtre_type_recherche + filtreDate;
       this.passageService.appelURL(filtreParMulti);
+      this.fermerPannel();
   }
 
 

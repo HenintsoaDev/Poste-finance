@@ -98,7 +98,12 @@ export class SoldeCompteComponent extends Translatable implements OnInit {
 
   recupererSolde(){
 
-    let telephone = this.telephone.replace('+', "00");
+
+    let telephone = "";
+    if(this.telephone){
+      telephone = this.telephone.replace('+', "00");
+    }
+    
     let data = {
       "telephone": telephone 
     };
