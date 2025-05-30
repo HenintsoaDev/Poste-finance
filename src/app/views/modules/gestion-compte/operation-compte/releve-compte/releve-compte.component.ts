@@ -134,6 +134,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
 
   filtreTableau()
   {
+     this.listShow = true;
      
       let type = null;
       if(this.type_recherche == "N") type = 1;

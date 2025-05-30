@@ -67,7 +67,7 @@
                     </div>
                 </div>
 
-                <div class="card" *ngIf="showDataTable">
+                <div class="card"  [ngStyle]="{'display': showDataTable ? 'block' : 'none'}" >
                     <div class="card-body">
                         <!-- PRINT PDF -->
                         <div class="button-container">

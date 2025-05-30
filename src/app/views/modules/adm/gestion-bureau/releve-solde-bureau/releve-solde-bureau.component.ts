@@ -89,6 +89,26 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
         });
 
 
+        this.passageService.clear();
+
+        /***************************************** */
+           // Écouter les changements de modal à travers le service si il y a des actions
+           this.subscription = this.passageService.getObservable().subscribe(event => {
+   
+             if( event.data){
+   
+               // Nettoyage immédiat de l'event
+               this.passageService.clear();  // ==> à implémenter dans ton service
+         
+             }
+            
+           
+       });
+       /***************************************** */
+
+
+
+
         
         this.searchControl.valueChanges.subscribe(value => {
             const lower = value?.toLowerCase() || '';
