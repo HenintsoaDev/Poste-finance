@@ -516,7 +516,7 @@
         "cin" : "CIN",
         "solde" : "Solde",
         "filtre_tableau":"Filtrer les données du tableau",
-        "list_releve_compte" : "Historique des relevés de compte"
+        "list_releve_compte" : "Relevés de compte"
     }
    
 }

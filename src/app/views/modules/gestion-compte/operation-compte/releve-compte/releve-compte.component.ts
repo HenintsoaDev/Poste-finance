@@ -129,6 +129,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
     this.type_recherche = null;
     this.num_compte = "";
     this.telephone = "";
+    this.typeCompte = "";
   }
 
 
@@ -222,6 +223,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
     let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
     let title = this.__("operation_compte.list_releve_compte") + ' ' ;
+    title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
     title  += this.__("suivi_compte.from") + ' ' + date_debut  + ' '
     title  += this.__("suivi_compte.to") + ' ' + date_fin
 
@@ -248,7 +250,8 @@ async exportPdf() {
     let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
     let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
-    let title = this.__("operation_compte.list_releve_compte") + ' ' ;
+    let title = this.__("operation_compte.list_releve_compte") + ' : ' ;
+    title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
     title  += this.__("suivi_compte.from") + ' ' + date_debut  + ' '
     title  += this.__("suivi_compte.to") + ' ' + date_fin
     
