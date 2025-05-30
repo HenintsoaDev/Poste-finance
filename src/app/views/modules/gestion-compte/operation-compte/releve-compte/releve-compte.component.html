@@ -6,12 +6,15 @@
                     <div class="card-header card-header-primary">
                         <div class="button-container">
                             <div class="left-buttons">
-                                 <button class="btn btn-secondary export-btn excel text-white">
+
+                                <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel()" *ngIf="listShow">
                                     {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
                                 </button>
-                                <button class="btn btn-secondary export-btn pdf text-white">
+                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf()" *ngIf="listShow">
                                     {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
-                                </button> 
+                                </button>
+
+                           
                             </div>
                             <div class="right-button">
                                 <button class="btn btn-secondary" *ngIf="autority('GBU_24')" (click)="openModalAdd(addbureau)"> {{ __("bureau.add")}}</button>
@@ -131,7 +134,7 @@
                                     <hr>
                                     <div class="text-center justify-content" >
                                         <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.cancel')}}</button>
-                                        <button type="submit" class="btn btn-primary" [disabled]="!type_recherche " (click)="filtreTableau()">{{ __('global.search')}}</button>
+                                        <button type="submit" class="btn btn-primary" [disabled]="!type_recherche || !typeCompte  " (click)="filtreTableau()">{{ __('global.search')}}</button>
                                     </div>
 
 
@@ -154,7 +157,9 @@
                                 [headerTable]="header"
                                 [body]="objetBody"
                                 [listIcon]="listIcon"
-                                [searchGlobal]="searchGlobal">
+                                [searchGlobal]="searchGlobal"
+                                [triDescDefault] = "'date_transaction'"
+                                >
                             </app-table>
                         </div>
                     </div>

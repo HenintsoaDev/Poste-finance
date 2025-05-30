@@ -53,8 +53,8 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
     type_recherche: any;
     telephone: any;
     typeCompte: any;
-    dateDebut: string = "" //new Date().toISOString().substring(0, 10);
-    dateFin: string = ""//new Date().toISOString().substring(0, 10);
+    dateDebut: string = new Date().toISOString().substring(0, 10);
+    dateFin: string = new Date().toISOString().substring(0, 10);
     
       /***************************************** */
   
@@ -76,6 +76,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
   dialCode: any = '261';
   listShow: boolean = false;
   @ViewChild('panel') panel!: MatExpansionPanel;
+  releve_comptes: any;
   
   constructor( private toastr: ToastrService, 
     private passageService: PassageService,
@@ -209,5 +210,70 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
   }
 
 
+
+  async exportExcel() {
+    const storedData = localStorage.getItem('data');
+    let result : any;
+    if (storedData) result = JSON.parse(storedData);
+
+    this.releve_comptes = result.data;
+
+    let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+    let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+    let title = this.__("operation_compte.list_releve_compte") + ' ' ;
+    title  += this.__("suivi_compte.from") + ' ' + date_debut  + ' '
+    title  += this.__("suivi_compte.to") + ' ' + date_fin
+
+    this.authService.exportExcel(this.print(this.releve_comptes),title).then(
+        (response: any)=>{
+            console.log('respons beee',response)
+                let a = document.createElement("a"); 
+                a.href = response.data;
+                a.download = `${title}.xlsx`;
+                a.click(); 
+        },
+        (error:any)=>{console.log(error)}
+    );
+}
+
+async exportPdf() {
+    const storedData = localStorage.getItem('data');
+    let result : any;
+    if (storedData) result = JSON.parse(storedData);
+
+    this.releve_comptes = result.data;
+    console.log(this.releve_comptes);
+
+    let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+    let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+    let title = this.__("operation_compte.list_releve_compte") + ' ' ;
+    title  += this.__("suivi_compte.from") + ' ' + date_debut  + ' '
+    title  += this.__("suivi_compte.to") + ' ' + date_fin
+    
+    this.authService.exportPdf(this.print(this.releve_comptes), title ).then(
+        (response: any)=>{},
+        (error:any)=>{console.log(error)}
+    );
+}
+
+print(releve_comptes:any[]){
+    let tab = releve_comptes.map((releve_compte: any, index: number) => {
+        let t: any = {};
+            t[this.__('suivi_compte.date')] = releve_compte.date_transaction;
+            t[this.__('suivi_compte.num_transac')] = releve_compte.num_transac;
+            t[this.__('suivi_compte.solde_avant')+ ' (' + this.__('global.currency') + ')'] = releve_compte.solde_avant;
+            t[this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')'] = releve_compte.montant;
+            t[this.__('suivi_compte.solde_apres')+ ' (' + this.__('global.currency') + ')'] = releve_compte.solde_apres;
+            t[this.__('suivi_compte.operation')] = releve_compte.operation;
+            t[this.__('suivi_compte.coms')] = releve_compte.commentaire;
+
+            t[this.__('suivi_compte.type_compte')] = releve_compte.wallet_carte;
+        return t;
+    });
+
+    return tab;
+  }
 
 }

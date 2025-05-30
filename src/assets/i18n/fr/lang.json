@@ -515,7 +515,8 @@
         "statut":"Statut",
         "cin" : "CIN",
         "solde" : "Solde",
-        "filtre_tableau":"Filtrer les données du tableau"
+        "filtre_tableau":"Filtrer les données du tableau",
+        "list_releve_compte" : "Historique des relevés de compte"
     }
    
 }
