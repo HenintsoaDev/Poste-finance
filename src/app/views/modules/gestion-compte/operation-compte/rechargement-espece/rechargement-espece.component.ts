@@ -6,6 +6,8 @@ import { ToastrService } from 'ngx-toastr';
 import formatNumber from 'number-handler'
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import Swal from 'sweetalert2';
+import { SoldeService } from 'app/services/solde.service';
+import { WalletService } from 'app/services/changementSolde.service';
 
 @Component({
   selector: 'app-rechargement-espece',
@@ -45,8 +47,9 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
   titleModal: string ="";
   code_validation: any = "";
   attente: boolean = false;
+  showPrint: boolean = false;
 
-  constructor(private operationService: OperationCompteService,private toastr: ToastrService, private modalService: BsModalService, ) {
+  constructor(private operationService: OperationCompteService,private toastr: ToastrService, private modalService: BsModalService, private soldeService: SoldeService, private walletService: WalletService ) {
     super();
    }
 
@@ -63,7 +66,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
 
   rechercheBeneficiaire(){
-
+    
     this.isDisabled = true;
     
     let type = null;
@@ -200,6 +203,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
                       if(res['code'] == 200) {
                         this.isDisabled=false;
                         this.openModalDetailDemande();
+                        this.code_validation = "";
                       }
                       else {
                         this.isDisabled=false;
@@ -223,6 +227,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
     // Detail d'un modal
     async openModalDetailDemande() {
       this.titleModal = this.__('operation_compte.entry_code_validation');
+      this.showPrint = false;
   
       this.isDisabled = false;
       if (this.codeValidation) {
@@ -271,7 +276,19 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
         if(res['code'] == 201) {
             this.toastr.success(res['msg'], this.__("global.success"));
             this.isDisabled=false;
-            this.fermerModal();
+            this.showPrint = true;
+
+            this.soldeService.getSoldeUser().subscribe({
+              next: (res) => {
+
+                let montant = {
+                  "walletSolde" : res.data.solde,
+                  "carteSolde" : res.data.solde_carte	
+                }
+                this.walletService.setWalletCarte(montant);
+              }
+          });
+
           }
           else if(res['code'] == 404){
             this.isDisabled=false;

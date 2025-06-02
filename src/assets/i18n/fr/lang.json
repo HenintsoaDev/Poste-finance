@@ -21,6 +21,7 @@
   
 
     "global" : {
+        "print":"Imprimer",
         "save" : "Enregistrer",
         "cancel" : "Annuler",
         "edit" : "Modifier",
@@ -535,7 +536,8 @@
         "code_validation":"Code de validation",
         "entry_code_validation": "Saisissez le code de validation envoi par email ou sms",
         "rechargement_compte" :"Rechargement du compte",
-        "patiente":"Veuillez patienter pendant le rechargement..."
+        "patiente":"Veuillez patienter pendant le rechargement...",
+        "succes_recharge":"Le rechargement par espèces est effectué avec succès. Merci"
 
     }
    

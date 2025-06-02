@@ -252,7 +252,7 @@
 
   
 
-    <div *ngIf="!attente">
+    <div *ngIf="!attente && !showPrint">
 
 
         <div class="row">
@@ -286,6 +286,27 @@
             </div>
         </div>
         <div class="col-lg-2"></div>
+
+    </div>
+
+    <div class="row" *ngIf="showPrint">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="form-group text-center" >
+
+                <div class="alert alert-custom">
+                    <i class="material-icons" style="color: green;"> check </i> <br> <span >{{ __('operation_compte.succes_recharge')}}</span>
+                 </div>
+
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+
+        <div class="text-center" style="width: 100%;">
+            <button type="button" class="btn btn-secondary" [disabled]="isDisabled" (click)="fermerModal()" >{{ __('global.back')}}</button>
+            <button type="submit" class="btn btn-primary" >{{ __('global.print')}}</button>
+
+        </div>
 
     </div>
        
