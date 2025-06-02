@@ -39,6 +39,7 @@ import { DesactiverCompteComponent } from './views/modules/gestion-compte/operat
 import { SoldeCompteComponent } from './views/modules/gestion-compte/operation-compte/solde-compte/solde-compte.component';
 import { CreationCompteComponent } from './views/modules/gestion-compte/creation-compte/creation-compte.component';
 import { ReleveCompteComponent } from './views/modules/gestion-compte/operation-compte/releve-compte/releve-compte.component';
+import { TransactionJourComponent } from './views/modules/reporting/suivi-transaction/transaction-jour/transaction-jour.component';
 
 const routes: Routes =[
   
@@ -95,7 +96,14 @@ const routes: Routes =[
       {path : 'solde_compte',component: SoldeCompteComponent,data :{ breadcrumb: 'operation_compte.title_solde_breadcrumb' }},
 
       {path : 'releve_compte',component: ReleveCompteComponent,data :{ breadcrumb: 'operation_compte.title_releve_compte_breadcrumb' }},
-    ]},
+    ]
+  },
+    
+  //MODULE REPORTING
+  {
+    path: 'reporting', data: { breadcrumb: 'reporting.title_module' }, children: [
+      { path: 'transaction_du_jour', component: TransactionJourComponent, data: { breadcrumb: 'transaction_jour.title' } },
+  ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];
 

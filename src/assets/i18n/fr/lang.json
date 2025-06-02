@@ -134,7 +134,12 @@
         "form_required" : "Veuillez remplir tous les champs correctement.",
         "matricule" : "Matricule",
         "type_cni" : "Type de piéce d'identité",
-        "date_delivrance" : "Date de délivrance"
+        "date_delivrance" : "Date de délivrance",
+        "num_transac" : "N° transaction",
+        "montant_brut" : "Montant brut",
+        "effectue_par" : "Éffectué par",
+        "nom_client" : "Nom du client",
+        "service" : "Service"
     },
 
     "paiement" : {
@@ -518,6 +523,14 @@
         "solde" : "Solde",
         "filtre_tableau":"Filtrer les données du tableau",
         "list_releve_compte" : "Relevés de compte"
+    },
+    
+    "reporting" : {
+        "title_module" : "Reporting"
+    },
+
+    "transaction_jour" : {
+        "title" : "Transactions du jour"
     }
    
 }
