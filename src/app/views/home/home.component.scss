@@ -59,6 +59,13 @@
     height: 50px;
 }
 
+@media (min-width: 1200px) {
+    .col-xl-3 {
+        flex: 0 0 25%;
+        max-width: inherit;
+    }
+}
+
 @media (min-width: 1386px) and (max-width: 1399.98px) {
     .custom-col {
         flex: 0 0 auto;
