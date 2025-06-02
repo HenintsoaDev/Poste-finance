@@ -143,6 +143,8 @@
 
 
                             <div class="row" >
+                                <div class="text-center" style="width: 100%;"><h4 class="bold"> {{ __('operation_compte.rechargement_compte')}} </h4></div>
+
                                 <div class="col-lg-2"></div>
         
                                 <div class="col-lg-8 text-center">
@@ -220,7 +222,7 @@
 
 
                             <div class="text-center">
-                                <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.back')}}</button>
+                                <button type="button" class="btn btn-secondary" [disabled]="isDisabled" (click)="videForm()" >{{ __('global.back')}}</button>
                                 <button type="submit" class="btn btn-primary" [disabled]="!montant ||!motifs || isDisabled" (click)="envoiCodeRechargement()">{{ __('global.valider')}}</button>
 
                             </div>
@@ -250,7 +252,7 @@
 
   
 
-    <div>
+    <div *ngIf="!attente">
 
 
         <div class="row">
@@ -266,13 +268,26 @@
             <div class="col-lg-4"></div>
 
         </div>
+
+        
+
         <div class="modal-footer">
-            <button type="button"  [disabled]="!code_validation" class="btn btn-primary" (click)="rechargeEspece()" >{{ __('global.oui')}}</button>
+            <button type="button"  [disabled]="!code_validation || isDisabled" class="btn btn-primary" (click)="rechargeEspece()" >{{ __('global.oui')}}</button>
             <button type="button" class="btn btn-secondary" (click)="fermerModal()" >{{ __('global.non')}}</button>
         </div>
 
     </div>
-        
+
+    <div class="row" *ngIf="attente">
+        <div class="col-lg-2"></div>
+        <div class="col-lg-8">
+            <div class="form-group text-center">
+             <span >{{ __('operation_compte.patiente')}}</span>
+            </div>
+        </div>
+        <div class="col-lg-2"></div>
+
+    </div>
        
     </div>
 </ng-template>

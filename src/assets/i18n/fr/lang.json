@@ -74,11 +74,13 @@
         "generer_action_?" : "Souhaitez-vous vraiment générer l'action ? ",
         "autorise_demande_?" : "Souhaitez-vous vraiment autoriser cette demande ? ",
         "valider_demande_?" : "Souhaitez-vous vraiment valider cette demande ? ",
+        "valider_?" : "Souhaitez-vous vraiment valider ? ",
         "clique_pour_activer" : "Cliquez pour activer",
         "clique_pour_desactiver" : "Cliquez pour désactiver",
         "activer_compte_?" : "Souhaitez-vous vraiment activer ce compte ? ",
         "desactiver_compte_?" : "Souhaitez-vous vraiment desactiver ce compte ? ",
         "envoie_code_rechargement_?"  : "Souhaitez-vous vraiment envoier le code de rechargement? ",
+        "oui_valider" : "Oui, valider",
 
         "oui" : "Oui",
         "non"  : "Non",
@@ -531,7 +533,9 @@
         "montant_total" : "Montant total",
         "frais" : "Comission",
         "code_validation":"Code de validation",
-        "entry_code_validation": "Saisissez le code de validation envoi par email ou sms"
+        "entry_code_validation": "Saisissez le code de validation envoi par email ou sms",
+        "rechargement_compte" :"Rechargement du compte",
+        "patiente":"Veuillez patienter pendant le rechargement..."
 
     }
    

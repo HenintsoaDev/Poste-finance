@@ -205,6 +205,7 @@ export class ServiceComponent extends Translatable implements OnInit {
 
       this.service.type_frais = (this.type_frais == 'F') ? 0 : 1;
       this.service.distributeur = (this.distributeur == 'O') ? 1 : 0;
+      if(this.service.distributeur == 0) this.service.taux_distributeur = 0;
 
       if (this.serviceForm.valid) {
   

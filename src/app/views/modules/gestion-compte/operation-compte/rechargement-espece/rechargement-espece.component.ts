@@ -44,6 +44,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
   type_frais: any;
   titleModal: string ="";
   code_validation: any = "";
+  attente: boolean = false;
 
   constructor(private operationService: OperationCompteService,private toastr: ToastrService, private modalService: BsModalService, ) {
     super();
@@ -88,6 +89,10 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
             this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
             this.telephone =  this.infoCompte.carte.telephone;
+            this.calcul = [];
+            this.montant = '';
+            this.motifs = '';
+            this.type_frais = '';
            
 
             
@@ -176,10 +181,10 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
             Swal.fire({
               title: this.__("global.confirmation"),
-              text: this.__("global.envoie_code_rechargement_?"),
+              text: this.__("global.valider_?"),
               icon: 'warning',
               showCancelButton: true,
-              confirmButtonText: this.__("global.oui_envoyer"),
+              confirmButtonText: this.__("global.oui_valider"),
               cancelButtonText: this.__("global.cancel"),
               allowOutsideClick: false,
               customClass: {
@@ -188,10 +193,12 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
               },
           }).then((result) => {
               if (result.isConfirmed) {
+                this.isDisabled=true;
 
                 this.operationService.envoieCodeRecharge(data).subscribe({
                   next: (res) => {
                       if(res['code'] == 200) {
+                        this.isDisabled=false;
                         this.openModalDetailDemande();
                       }
                       else {
@@ -247,23 +254,30 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
       }
       
     let data = {
-      "montant": this.calcul?.montant_total,
+      "montant": this.montant,
       "code": this.code_validation,
       "type_frais": this.type_frais,
       "motifs": this.motifs,
       "telephone": telephone,
     };
   
-  
+    this.isDisabled=true;
+    this.attente = true;
     console.log("xxx", data);
     this.operationService.rechargeCompte(data).subscribe({
       next: (res) => {
-        console.log(res, "xxxxxxxxxxx-x-x--x-x-x")
-          if(res['code'] == 201) {
+        this.attente = false;
+
+        if(res['code'] == 201) {
             this.toastr.success(res['msg'], this.__("global.success"));
+            this.isDisabled=false;
             this.fermerModal();
           }
-          else {
+          else if(res['code'] == 404){
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"));
+
+          }else {
             this.isDisabled=false;
             this.toastr.error(res['msg'], this.__("global.error"));
           }
