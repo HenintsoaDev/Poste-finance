@@ -129,8 +129,23 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         
         this.suivi_comptes = result.data;
         this.suivi_comptes_totaux = result.totaux;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("suivi_compte.title_export") + ' ' ;
+        title  += this.typeCommission == 1 ?  " " + this.__("suivi_commission.hors_paiement_masse") :  " " + this.__("operation_compte.paiement_masse")
+
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title  += " " + this.__("suivi_compte.from") + ' ' + date_debut  + ' '
+        title  += this.__("suivi_compte.to") + ' ' + date_fin
         
-        this.authService.exportExcel(this.print(this.suivi_comptes),this.__("suivi_commission.list_suivi_compte")).then(
+        
+        this.authService.exportExcel(this.print(this.suivi_comptes),title).then(
             (response: any)=>{
                 let a = document.createElement("a"); 
                 a.href = response.data;
@@ -148,8 +163,22 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
 
         this.suivi_comptes = result.data;
         this.suivi_comptes_totaux = result.totaux;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("suivi_compte.title_export") + ' ' ;
+        title  += this.typeCommission == 1 ?  " " + this.__("suivi_commission.hors_paiement_masse") :  " " + this.__("operation_compte.paiement_masse")
+
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+
+        title += mapTypeCompte[this.typeCompte] || '';
+
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
         
-        this.authService.exportPdf(this.print(this.suivi_comptes),this.__("suivi_commission.list_suivi_compte")).then(
+        
+        this.authService.exportPdf(this.print(this.suivi_comptes), title).then(
             (response: any)=>{},
             (error:any)=>{}
         );

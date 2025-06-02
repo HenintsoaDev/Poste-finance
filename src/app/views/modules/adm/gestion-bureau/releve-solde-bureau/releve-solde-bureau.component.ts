@@ -157,12 +157,30 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     
         this.releve_data = result.data;
         this.releve_totaux = result.totaux;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("releve_solde_bureau.list_releve") + ' ' ;
+
+
+        let resultat = this.listBureauActive.filter(_ => _.rowid == this.agenceId);
+        let agenceName = resultat[0].name;
         
-        this.authService.exportExcel(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+        title += " : " + agenceName + " " ;
+
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+        title += mapTypeCompte[this.typeCompte] || '';
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
+        
+
+        
+        this.authService.exportExcel(this.print(this.releve_data), title).then(
             (response: any)=>{
                     let a = document.createElement("a"); 
                     a.href = response.data;
-                    a.download = `${fileName}.xlsx`;
+                    a.download = `${title}.xlsx`;
                     a.click(); 
             },
             (error:any)=>{console.log(error)}
@@ -176,8 +194,24 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     
         this.releve_data = result.data;
         this.releve_totaux = result.totaux;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+    
+        let title = this.__("releve_solde_bureau.list_releve") + ' ' ;
+        let resultat = this.listBureauActive.filter(_ => _.rowid == this.agenceId);
+        let agenceName = resultat[0].name;
+
+        title += " : " + agenceName + " " ;
+
+        const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+          
+        title += mapTypeCompte[this.typeCompte] || '';
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
         
-        this.authService.exportPdf(this.print(this.releve_data),this.__("releve_solde_bureau.list_releve")).then(
+        
+        this.authService.exportPdf(this.print(this.releve_data), title).then(
             (response: any)=>{},
             (error:any)=>{console.log(error)}
         );

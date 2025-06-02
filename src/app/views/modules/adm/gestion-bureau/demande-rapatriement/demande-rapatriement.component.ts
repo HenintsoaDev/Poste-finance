@@ -184,7 +184,7 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
 
       let filtre_search = "" ;
       if(this.typeCompte != '2'){
-          filtre_search = ",demande_credit_bureau.wallet_carte|e|"+this.typeCompte;
+          filtre_search = ",demande_debit_bureau.wallet_carte|e|"+this.typeCompte;
       }
 
       let filtre_etat = ",demande_debit_bureau.etat|e|"+etat;
@@ -254,14 +254,30 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
       
   
       this.demande_rapatriements = result.data;
+
+      let titleExport ="";
+      if(this.index == 0)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_en_attente");
+      if(this.index == 1)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_autorise");
+      if(this.index == 2)  titleExport = this.__("demande_rapatriement.list_demande_rapatrier");
+
+      let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+  
+      let title = titleExport + ' ' ;
+
+      const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+        
+      title += mapTypeCompte[this.typeCompte] || '';
+      title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+      title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
       
       
-      this.authService.exportExcel(this.print(this.demande_rapatriements),this.__("demande_rapatriement.list_demande_rapatriement")).then(
+      this.authService.exportExcel(this.print(this.demande_rapatriements),title).then(
         (response: any)=>{
           console.log('respons beee',response)
               let a = document.createElement("a"); 
               a.href = response.data;
-              a.download = `${fileName}.xlsx`;
+              a.download = `${title}.xlsx`;
               a.click(); 
         },
         (error:any)=>{
@@ -282,8 +298,22 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
       if(this.index == 0)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_en_attente");
       if(this.index == 1)  titleExport = this.__("demande_rapatriement.list_demande_rapatriement_autorise");
       if(this.index == 2)  titleExport = this.__("demande_rapatriement.list_demande_rapatrier");
+
+
+      let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+  
+      let title = titleExport + ' ' ;
+
+      const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+        
+      title += mapTypeCompte[this.typeCompte] || '';
+      title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+      title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
       
-      this.authService.exportPdf(this.print(this.demande_rapatriements),titleExport).then(
+      
+      
+      this.authService.exportPdf(this.print(this.demande_rapatriements),title).then(
         (response: any)=>{},
         (error:any)=>{
           console.log(error)

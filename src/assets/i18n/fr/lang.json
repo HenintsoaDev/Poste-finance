@@ -301,7 +301,8 @@
         "operation" : "Opération",
         "num_transac" : "N° transaction",
         "coms" : "Commentaire",
-        "list_suivi_compte" : "Suivi compte principal"
+        "list_suivi_compte" : "Suivi compte principal",
+        "title_export" :"Suivi compte comission"
     },  
 
     "virement" : {

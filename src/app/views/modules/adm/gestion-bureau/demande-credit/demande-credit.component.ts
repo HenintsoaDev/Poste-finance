@@ -255,9 +255,27 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       
   
       this.demande_credits = result.data;
+
+      let titleExport ="";
+      if(this.index == 0)  titleExport = this.__("demande_credit.list_demande_credit_en_attente");
+      if(this.index == 1)  titleExport = this.__("demande_credit.list_demande_credit_autorise");
+      if(this.index == 2)  titleExport = this.__("demande_credit.list_demande_credit_valider");
+
+      let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+  
+      let title = titleExport + ' ' ;
+
+      const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+        
+      title += mapTypeCompte[this.typeCompte] || '';
+      title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+      title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
       
       
-      this.authService.exportExcel(this.print(this.demande_credits),this.__("demande_credit.list_demande_credit")).then(
+      
+      
+      this.authService.exportExcel(this.print(this.demande_credits),title).then(
         (response: any)=>{
           console.log('respons beee',response)
               let a = document.createElement("a"); 
@@ -283,8 +301,21 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       if(this.index == 0)  titleExport = this.__("demande_credit.list_demande_credit_en_attente");
       if(this.index == 1)  titleExport = this.__("demande_credit.list_demande_credit_autorise");
       if(this.index == 2)  titleExport = this.__("demande_credit.list_demande_credit_valider");
+
+      let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+  
+      let title = titleExport + ' ' ;
+
+      const mapTypeCompte: { [key: string]: string } = { '0': "("+this.__("global.wallet") + ")", '1': "("+this.__("global.carte")+ ")",};
+        
+      title += mapTypeCompte[this.typeCompte] || '';
+      title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+      title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
       
-      this.authService.exportPdf(this.print(this.demande_credits),titleExport).then(
+
+      
+      this.authService.exportPdf(this.print(this.demande_credits),title).then(
         (response: any)=>{},
         (error:any)=>{
           console.log(error)
