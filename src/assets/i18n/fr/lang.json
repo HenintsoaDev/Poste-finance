@@ -531,7 +531,7 @@
         "montant_total" : "Montant total",
         "frais" : "Commission",
         "code_validation":"Code de validation",
-        "entry_code_validation": "Saisissez le code de validation reçu par email ou sms"
+        "entry_code_validation": "Saisissez le code de validation reçu par e-mail ou SMS."
 
     }
    
