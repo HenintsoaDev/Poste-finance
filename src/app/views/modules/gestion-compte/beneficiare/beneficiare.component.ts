@@ -360,7 +360,7 @@ export class BeneficiareComponent extends Translatable implements OnInit {
                                 if (res['data']['dateNaissance'] != undefined) {
                                     dataMessage += "- <b>" + res['data']['dateNaissance'][0] + "</b><br/>";
                                 }
-                                this.toastr.error(res['msg'] + ":<br/>" + dataMessage, this.__("global.error"),{enableHtml : true});
+                                this.toastr.error(dataMessage, this.__("global.error"),{enableHtml : true});
                             } 
                             this.loading = false;
                         },
