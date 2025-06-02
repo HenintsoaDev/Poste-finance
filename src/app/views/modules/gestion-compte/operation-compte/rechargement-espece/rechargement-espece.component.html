@@ -150,8 +150,8 @@
                                         <label for="xx">{{ __('operation_compte.calcul_frais') }}</label><br>
                                         <mat-radio-group  [(ngModel)]="type_frais">
                                             
-                                            <mat-radio-button class="mr-3" style="margin-right: 70px !important;" value="1">{{ __('operation_compte.don_frais')}}</mat-radio-button>
-                                            <mat-radio-button class="mr-3" value="0">{{ __('operation_compte.frais_sus')}}</mat-radio-button>
+                                            <mat-radio-button class="mr-3" style="margin-right: 70px !important;" (click)="calculRecharge()" value="1">{{ __('operation_compte.don_frais')}}</mat-radio-button>
+                                            <mat-radio-button class="mr-3" value="0" (click)="calculRecharge()">{{ __('operation_compte.frais_sus')}}</mat-radio-button>
                                           </mat-radio-group>
                                     </div>
                                 </div>

@@ -135,20 +135,26 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
   calculRecharge() {
 
-    let data = {
-      "type_frais" : this.type_frais,
-      "montant" : this.montant,
-      "service_id" : 5
-    };
 
-    this.operationService.calculeRecharge(data).subscribe({
-      next: (res) => {
-        this.calcul = res;
-        this.isDisabled = false;
-      },
-      error: (err) => {}
-  });
+    if(this.type_frais && this.montant){
 
+        let data = {
+          "type_frais" : this.type_frais,
+          "montant" : this.montant,
+          "service_id" : 5
+        };
+        
+    
+        this.operationService.calculeRecharge(data).subscribe({
+          next: (res) => {
+            this.calcul = res;
+            this.isDisabled = false;
+          },
+          error: (err) => {}
+      });
+  
+    }
+    
   }
 
   envoiCodeRechargement(){
