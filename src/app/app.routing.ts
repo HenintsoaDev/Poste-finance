@@ -39,6 +39,7 @@ import { DesactiverCompteComponent } from './views/modules/gestion-compte/operat
 import { SoldeCompteComponent } from './views/modules/gestion-compte/operation-compte/solde-compte/solde-compte.component';
 import { CreationCompteComponent } from './views/modules/gestion-compte/creation-compte/creation-compte.component';
 import { ReleveCompteComponent } from './views/modules/gestion-compte/operation-compte/releve-compte/releve-compte.component';
+import { RechargementEspeceComponent } from './views/modules/gestion-compte/operation-compte/rechargement-espece/rechargement-espece.component';
 
 const routes: Routes =[
   
@@ -93,6 +94,7 @@ const routes: Routes =[
       {path : 'activer_compte',component: ActiverCompteComponent,data: { breadcrumb: 'operation_compte.title_activate_breadcrumb' }},
       {path : 'desactiver_compte',component: DesactiverCompteComponent,data: { breadcrumb: 'operation_compte.title_desactivate_breadcrumb' }},
       {path : 'solde_compte',component: SoldeCompteComponent,data :{ breadcrumb: 'operation_compte.title_solde_breadcrumb' }},
+      {path : 'rechargement_espece',component: RechargementEspeceComponent,data :{ breadcrumb: 'operation_compte.title_rechargement_espece_breadcrumb' }},
 
       {path : 'releve_compte',component: ReleveCompteComponent,data :{ breadcrumb: 'operation_compte.title_releve_compte_breadcrumb' }},
     ]},

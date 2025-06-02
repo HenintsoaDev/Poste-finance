@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { tap } from 'rxjs/operators';
-import { Observable } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
+import { Observable, throwError } from 'rxjs';
 import { environment } from 'environments/environment';
 import { valuesys } from 'app/shared/models/options';
 import { Auth, bureau } from 'app/shared/models/db';
@@ -65,6 +65,43 @@ export class OperationCompteService {
                 }
             })
         );
+    }
+
+
+    calculeRecharge(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.calcul_recharge, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+    envoieCodeRecharge(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.init_rechargement_espece, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+  
+    rechargeCompte(credentials: any): Observable<any> {
+
+        return this.httpService.post<any>("operation_compte/cashin", credentials).pipe(
+            tap(response => {
+              if (response.code === 200) {
+                console.log("response XHR", response);
+              }
+            }),
+            catchError(error => {
+              console.error("Erreur lors de la requête :", error);
+              return throwError(() => error);
+            })
+          );
     }
 
 

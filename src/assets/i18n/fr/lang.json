@@ -64,6 +64,7 @@
         "oui_activer" : "Oui, activer",
         "oui_desactiver" : "Oui, desactiver",
         "oui_autoriser" : "Oui, autoriser",
+        "oui_envoyer" : "Oui, envoyer",
         "enregistrer_donnee_?" : "Souhaitez-vous vraiment enregistrer cette donnée  ? ",
         "modifier_donnee_?" : "Souhaitez-vous vraiment modifier cette donnée ? ",
         "supprimer_donnee_?" : "Souhaitez-vous vraiment supprimer cette donnée ? ",
@@ -77,6 +78,7 @@
         "clique_pour_desactiver" : "Cliquez pour désactiver",
         "activer_compte_?" : "Souhaitez-vous vraiment activer ce compte ? ",
         "desactiver_compte_?" : "Souhaitez-vous vraiment desactiver ce compte ? ",
+        "envoie_code_rechargement_?"  : "Souhaitez-vous vraiment envoier le code de rechargement? ",
 
         "oui" : "Oui",
         "non"  : "Non",
@@ -134,7 +136,8 @@
         "form_required" : "Veuillez remplir tous les champs correctement.",
         "matricule" : "Matricule",
         "type_cni" : "Type de piéce d'identité",
-        "date_delivrance" : "Date de délivrance"
+        "date_delivrance" : "Date de délivrance",
+        "envoi_code" : "Envoyer code"
     },
 
     "paiement" : {
@@ -500,6 +503,7 @@
         "title_activate_breadcrumb" : "Activer un compte",
         "title_desactivate_breadcrumb" : "Désactiver un compte",
         "title_solde_breadcrumb" : "Solde compte",
+        "title_rechargement_espece_breadcrumb" : "Rechargement espèce",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -517,7 +521,18 @@
         "cin" : "CIN",
         "solde" : "Solde",
         "filtre_tableau":"Filtrer les données du tableau",
-        "list_releve_compte" : "Relevés de compte"
+        "list_releve_compte" : "Relevés de compte",
+        "calcul_frais" : "Calcul de frais",
+        "don_frais":"Dont frais",
+        "frais_sus":"Frais en sus",
+        "motif" : "Motifs",
+        "montant" :"Montant",
+        "montant_a_recharger" : "Montant à recharger",
+        "montant_total" : "Montant total",
+        "frais" : "Comission",
+        "code_validation":"Code de validation",
+        "entry_code_validation": "Saisissez le code de validation envoi par email ou sms"
+
     }
    
 }
