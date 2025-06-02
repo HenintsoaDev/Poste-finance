@@ -101,8 +101,11 @@ export const environment = {
   activer_compte:  "operation_compte/activer_compte",
   desactiver_compte:  "operation_compte/desactiver_compte",
   solde_compte:"operation_compte/solde_compte",
-  releve_compte: "operation_compte/releve_compte",
-  
+  releve_compte:"operation_compte/releve_compte",
+  calcul_recharge : "operation_compte/details_recharge",
+  init_rechargement_espece : "operation_compte/init_rechargement_espece",
+  cashin: "operation_compte/cashin",
+
   //** Reporting TRANSACTION JOUR */
   reporting_transaction : "reporting/transaction_du_jour"
 };

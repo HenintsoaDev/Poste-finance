@@ -98,5 +98,8 @@ export const environment = {
   //** Operation compte */
   cherche_compte:  "operation_compte/find_compte",
   infos_compte:  "operation_compte/infos_compte",
-  activer_compte:  "operation_compte/activer_compte"
+  activer_compte: "operation_compte/activer_compte",
+  
+  //** Reporting TRANSACTION JOUR */
+  reporting_transaction : "reporting/transaction_du_jour",
 };
