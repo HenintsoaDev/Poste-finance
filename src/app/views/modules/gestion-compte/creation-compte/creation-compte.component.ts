@@ -182,8 +182,18 @@ export class CreationCompteComponent extends Translatable implements OnInit {
                                 this.beneficiareForm.reset();
                                 this.router.navigate(['gestion_compte/beneficiaire']);
                             }
-                            else{
-                                this.toastr.error(res['msg'], this.__("global.error"));
+                            else {
+                                let dataMessage = "";
+                                if (res['data']['email'] != undefined) {
+                                    dataMessage += "- <b>" + res['data']['email'][0] + "</b><br/>";
+                                }
+                                if (res['data']['telephone'] != undefined) {
+                                    dataMessage += "- <b>" + res['data']['telephone'][0] + "</b><br/>";
+                                }
+                                if (res['data']['dateNaissance'] != undefined) {
+                                    dataMessage += "- <b>" + res['data']['dateNaissance'][0] + "</b><br/>";
+                                }
+                                this.toastr.error(dataMessage, this.__("global.error"),{enableHtml : true});
                             }   
                             this.loading = false;
                         },
