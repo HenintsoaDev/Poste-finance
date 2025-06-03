@@ -51,7 +51,12 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
   soldeCompteClient: string;
   frais: any;
   num_identification:any;
-  
+  formCINInvalid: boolean = false;
+  msgCINInvalid: any = "";
+
+  formCodeInvalid: boolean = false;
+  msgCodeInvalid: any = "";
+
   constructor(private operationService: OperationCompteService,private toastr: ToastrService, private modalService: BsModalService, private soldeService: SoldeService, private walletService: WalletService ) {
     super();
    }
@@ -92,14 +97,13 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
     this.operationService.chercheCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
-            this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
             this.telephone =  this.infoCompte.carte.telephone;
             this.calcul = [];
             this.montant = '';
             this.motifs = '';
             this.type_frais = '';
-            this.recupererSolde();
+          
             this.isDisabled = false;
 
             
@@ -191,9 +195,10 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
             if(res['code'] == 200){
               this.frais = res.data.frais
               this.isDisabled = false;
-
+              this.recupererSolde();
             }else if(res['code'] == 400){
               this.toastr.error(res['data'], this.__("global.error"));
+              this.frais = null;
             }
           },
           error: (err) => {}
@@ -244,6 +249,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
                           this.isDisabled=false;
                           this.openModalDetailDemande();
                           this.code_validation = "";
+                          this.num_compte = "";
                         }
                         else {
                           this.isDisabled=false;
@@ -341,5 +347,75 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
   
   
     }
+
+
+
+    verifieCIN() {
+
+      if(this.num_identification){
+        let telephone = "";
+        if(this.telephone){
+          telephone = this.telephone.replace('+', "00");
+        }
+
+         let data = {
+           "telephone" : telephone,
+           "cni" : this.num_identification,
+         };
+         
+     
+         this.operationService.verifieCIN(data).subscribe({
+           next: (res) => {
+             if(res['code'] == 200){
+              this.formCINInvalid = false;
+
+             
+             }else if(res['code'] == 500){
+              this.formCINInvalid = true;
+               this.msgCINInvalid = res['data'];
+              
+             }
+           },
+           error: (err) => {}
+       });
+   
+      }
+        
+   
+   }
+
+   verifieCode() {
+
+    if(this.code_validation){
+      let telephone = "";
+      if(this.telephone){
+        telephone = this.telephone.replace('+', "00");
+      }
+      
+       let data = {
+         "telephone" : telephone,
+         "code_retrait" : this.code_validation,
+       };
+       
+   
+       this.operationService.verifieCode(data).subscribe({
+         next: (res) => {
+           if(res['code'] == 200){
+          
+           
+           }else if(res.code == 500){
+            this.formCodeInvalid = true;
+             this.msgCodeInvalid = res['msg'];
+           }
+         },
+         error: (err) => {}
+     });
+  
+  
+    }
+
+   
+}
+
   
 }
