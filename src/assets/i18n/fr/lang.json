@@ -515,6 +515,7 @@
         "title_desactivate_breadcrumb" : "Désactiver un compte",
         "title_solde_breadcrumb" : "Solde compte",
         "title_rechargement_espece_breadcrumb" : "Rechargement espèce",
+        "title_retrait_espece_breadcrumb" : "Retrait espèce",
         "nom" :"Nom",
         "prenom" : "Prénom(s)",
         "date_naissance"  : "Date de naissance",
@@ -545,7 +546,13 @@
         "entry_code_validation": "Saisissez le code de validation reçu par e-mail ou SMS.",
         "rechargement_compte" :"Rechargement du compte",
         "patiente":"Veuillez patienter pendant le rechargement...",
-        "succes_recharge":"Le rechargement par espèces est effectué avec succès. Merci"
+        "succes_recharge":"Le rechargement par espèces est effectué avec succès. Merci!",
+        "succes_retrait":"Le retrait par espèces est effectué avec succès. Merci!",
+        "retrait_compte" :"Retrait du compte",
+        "solde_client_insuffisant" : "Le solde du compte client est insuffisant.",
+        "solde_bureau_insuffisant" : "Solde bureau insuffisant pour effectuer cette transaction!",
+        "num_identification" : "N° d'identification"
+        
     },
     
     "reporting" : {

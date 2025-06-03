@@ -48,6 +48,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
   code_validation: any = "";
   attente: boolean = false;
   showPrint: boolean = false;
+  walletSolde: String;
 
   constructor(private operationService: OperationCompteService,private toastr: ToastrService, private modalService: BsModalService, private soldeService: SoldeService, private walletService: WalletService ) {
     super();
@@ -167,57 +168,71 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
   envoiCodeRechargement(){
 
-    let telephone = "";
-    if(this.telephone){
-      telephone = this.telephone.replace('+', "00");
+    let solde = this.soldeService.getWalletSolde();
+
+    const cleaned = solde.replace(/\s/g, '').replace(',', '.');
+    const walletSolde = Math.floor(parseFloat(cleaned));
+
+
+    if(walletSolde< this.calcul?.montant_total){
+      this.toastr.error(this.__('operation_compte.solde_bureau_insuffisant'), this.__("global.error"));
+    }else{
+
+      let telephone = "";
+      if(this.telephone){
+        telephone = this.telephone.replace('+', "00");
+      }
+      
+    let data = {
+      montant: this.calcul?.montant_total,
+      montant_recharge: this.calcul?.montant_recharge,
+      type_rechargement: this.type_frais,
+      motifs: this.motifs,
+      telephone: telephone,
+    };
+  
+  
+  
+              Swal.fire({
+                title: this.__("global.confirmation"),
+                text: this.__("global.valider_?"),
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: this.__("global.oui_valider"),
+                cancelButtonText: this.__("global.cancel"),
+                allowOutsideClick: false,
+                customClass: {
+                    confirmButton: 'swal-button--confirm-custom',
+                    cancelButton: 'swal-button--cancel-custom'
+                },
+            }).then((result) => {
+                if (result.isConfirmed) {
+                  this.isDisabled=true;
+  
+                  this.operationService.envoieCodeRecharge(data).subscribe({
+                    next: (res) => {
+                        if(res['code'] == 200) {
+                          this.isDisabled=false;
+                          this.openModalDetailDemande();
+                          this.code_validation = "";
+                        }
+                        else {
+                          this.isDisabled=false;
+                          this.toastr.error(res['msg'], this.__("global.error"));
+                        }
+                        
+                                      
+                      },
+                      error: (err) => {
+                      }
+                  }); 
+              
+                }
+            });
+
     }
-    
-  let data = {
-    montant: this.calcul?.montant_total,
-    montant_recharge: this.calcul?.montant_recharge,
-    type_rechargement: this.type_frais,
-    motifs: this.motifs,
-    telephone: telephone,
-  };
 
-
-
-            Swal.fire({
-              title: this.__("global.confirmation"),
-              text: this.__("global.valider_?"),
-              icon: 'warning',
-              showCancelButton: true,
-              confirmButtonText: this.__("global.oui_valider"),
-              cancelButtonText: this.__("global.cancel"),
-              allowOutsideClick: false,
-              customClass: {
-                  confirmButton: 'swal-button--confirm-custom',
-                  cancelButton: 'swal-button--cancel-custom'
-              },
-          }).then((result) => {
-              if (result.isConfirmed) {
-                this.isDisabled=true;
-
-                this.operationService.envoieCodeRecharge(data).subscribe({
-                  next: (res) => {
-                      if(res['code'] == 200) {
-                        this.isDisabled=false;
-                        this.openModalDetailDemande();
-                        this.code_validation = "";
-                      }
-                      else {
-                        this.isDisabled=false;
-                        this.toastr.error(res['msg'], this.__("global.error"));
-                      }
-                      
-                                    
-                    },
-                    error: (err) => {
-                    }
-                }); 
-            
-              }
-          });
+   
 
 
   }

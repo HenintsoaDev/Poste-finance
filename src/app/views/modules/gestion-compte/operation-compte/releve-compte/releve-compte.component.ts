@@ -225,7 +225,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
     let title = this.__("operation_compte.list_releve_compte") + ' ' ;
     title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
     title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
-    title += (date_fin != null ? " " + this.__("suivi_compte.TO") + ' ' + date_fin + ' ' : '');    
+    title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');    
     
     
 

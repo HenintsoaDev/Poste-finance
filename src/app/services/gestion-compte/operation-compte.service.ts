@@ -91,7 +91,7 @@ export class OperationCompteService {
   
     rechargeCompte(credentials: any): Observable<any> {
 
-        return this.httpService.post<any>("operation_compte/cashin", credentials).pipe(
+        return this.httpService.post<any>(environment.cashin, credentials).pipe(
             tap(response => {
               if (response.code === 200) {
                 console.log("response XHR", response);
@@ -105,7 +105,41 @@ export class OperationCompteService {
     }
 
 
+    retraitCompte(credentials: any): Observable<any> {
 
+        return this.httpService.post<any>(environment.executeCashOUT, credentials).pipe(
+            tap(response => {
+              if (response.code === 200) {
+                console.log("response XHR", response);
+              }
+            }),
+            catchError(error => {
+              console.error("Erreur lors de la requête :", error);
+              return throwError(() => error);
+            })
+          );
+    }
+
+    envoieCodeRetrait(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.init_cashout, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+
+
+    calculeRetrait(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.calcul_retrait, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
     
 
  
