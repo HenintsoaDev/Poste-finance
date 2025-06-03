@@ -79,7 +79,7 @@
 
             </tr>
         </tbody>
-        <tfoot class="tfoot-total" *ngIf="donneeTotal.DEBIT || donneeTotal.CREDIT || donneeTotal.Carte || donneeTotal.Wallet || donneeTotal.TotalSolde || donneeTotal.TotalSoldeCarte">
+        <tfoot class="tfoot-total" >
           <tr>
             <td [attr.colspan]="headerTable.length">
               <div class="row">
@@ -89,6 +89,10 @@
                 <div *ngIf="donneeTotal.Wallet" class="col-6" style="text-align: center;">{{ __('global.total_wallet') }}: <span class="bold-total">  {{donneeTotal.Wallet }} ({{ __('global.currency') }})</span></div>
                 <div *ngIf="donneeTotal.TotalSolde" class="col-6" style="text-align: center;">{{ __('global.total_wallet') }}:<span class="bold-total"> {{donneeTotal.TotalSolde }} ({{ __('global.currency') }}) </span></div>
                 <div *ngIf="donneeTotal.TotalSoldeCarte" class="col-6" style="text-align: center;">{{ __('global.total_carte') }}: <span class="bold-total">  {{donneeTotal.TotalSoldeCarte }} ({{ __('global.currency') }})</span></div>
+                
+                <div *ngIf="donneeTotal.TotalMontant" class="col-4" style="text-align: center;">{{ __('global.total_montant') }}: <span class="bold-total">  {{ formatNumberMontant(donneeTotal.TotalMontant) }} ({{ __('global.currency') }})</span></div>
+                <div *ngIf="donneeTotal.TotalCommission" class="col-4" style="text-align: center;">{{ __('global.total_commission') }}: <span class="bold-total">  {{ formatNumberMontant(donneeTotal.TotalCommission) }} ({{ __('global.currency') }})</span></div>
+                <div *ngIf="donneeTotal.TotalTTC" class="col-4" style="text-align: center;">{{ __('global.total_ttc') }}: <span class="bold-total">  {{ formatNumberMontant(donneeTotal.TotalTTC) }} ({{ __('global.currency') }})</span></div>
               </div>
             </td>
           </tr>

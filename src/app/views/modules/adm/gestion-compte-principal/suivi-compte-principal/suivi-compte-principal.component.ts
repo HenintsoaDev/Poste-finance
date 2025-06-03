@@ -142,7 +142,6 @@ export class SuiviComptePrincipalComponent extends Translatable implements OnIni
 
         this.authService.exportExcel(this.print(this.suivi_comptes), title).then(
           (response: any)=>{
-            console.log('respons beee',response)
                 let a = document.createElement("a"); 
                 a.href = response.data;
                 a.download = `${title}.xlsx`;

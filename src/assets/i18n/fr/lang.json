@@ -141,11 +141,14 @@
         "type_cni" : "Type de piéce d'identité",
         "date_delivrance" : "Date de délivrance",
         "num_transac" : "N° transaction",
-        "montant_brut" : "Montant brut",
+        "montant_brut" : "Montant TTC",
         "effectue_par" : "Éffectué par",
         "nom_client" : "Nom du client",
         "service" : "Service",
-        "envoi_code" : "Envoyer code"
+        "envoi_code" : "Envoyer code",
+        "total_montant" : "Total montant",
+        "total_commission" : "Total commision",
+        "total_ttc" : "Total TTC"
     },
 
     "paiement" : {
@@ -557,7 +560,8 @@
     },
 
     "transaction_jour" : {
-        "title" : "Transactions du jour"
+        "title" : "Transactions du jour",
+        "detail" : "Détails du transaction"
     }
    
 }

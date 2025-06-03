@@ -223,6 +223,9 @@ export class TableComponent extends Translatable {
       this.donneeTotal.CREDIT = undefined;
       this.donneeTotal.TotalSolde = undefined;
       this.donneeTotal.TotalSoldeCarte = undefined;
+      this.donneeTotal.TotalMontant = undefined;
+      this.donneeTotal.TotalCommission = undefined;
+      this.donneeTotal.TotalTTC = undefined;
 
     // --- Appel endpopint ---->
 
@@ -267,6 +270,9 @@ export class TableComponent extends Translatable {
         (res.solde_global.total_solde_carte) ? this.donneeTotal.TotalSoldeCarte = res.solde_global.total_solde_carte : this.donneeTotal.TotalSoldeCarte = undefined;
       }
       
+      (res.total_montant) ? this.donneeTotal.TotalMontant = res.total_montant : this.donneeTotal.TotalMontant = undefined;
+      (res.total_commission) ? this.donneeTotal.TotalCommission = res.total_commission : this.donneeTotal.TotalCommission = undefined;
+      (res.total_ttc) ? this.donneeTotal.TotalTTC = res.total_ttc : this.donneeTotal.TotalTTC = undefined;
 
       let tableau = res.data.map((row: any) =>
         this.body.map((col: any) => {
@@ -411,6 +417,12 @@ export class TableComponent extends Translatable {
       }
       else return post[0]
 
+    }
+  
+    formatNumberMontant(valeur)
+    {
+      valeur = valeur.replace(/\s/g, '').replace(',', '.');
+      return this.formatNumber(valeur, ' ');
     }
 
     //** Verification pour icon"
