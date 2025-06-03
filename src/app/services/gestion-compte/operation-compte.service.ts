@@ -140,6 +140,31 @@ export class OperationCompteService {
             })
         );
     }
+
+    verifieCIN(credentials: any): Observable<any> {
+        return this.httpService.post<any>(environment.verifie_cin, credentials).pipe(
+            tap(response => {
+                if (response['code'] === 200) {
+                    console.log("response XHR", response)
+                }
+            })
+        );
+    }
+    verifieCode(credentials: any): Observable<any> {
+       
+
+        return this.httpService.post<any>(environment.verifie_code, credentials).pipe(
+            tap(response => {
+              if (response.code === 200) {
+                console.log("response XHR", response);
+              }
+            }),
+            catchError(error => {
+              console.error("Erreur lors de la requête :", error);
+              return throwError(() => error);
+            })
+          );
+    }
     
 
  

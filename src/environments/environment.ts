@@ -108,6 +108,8 @@ export const environment = {
   init_cashout : "operation_compte/init_cashout",
   executeCashOUT : "operation_compte/executeCashOUT",
   calcul_retrait : "operation_compte/calculFraisForCashOut",
+  verifie_cin : "operation_compte/verifCNI",
+  verifie_code : "operation_compte/verifCodeRetrait",
 
   //** Reporting TRANSACTION JOUR */
   reporting_transaction: "reporting/transaction_du_jour",

@@ -90,7 +90,6 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
     this.operationService.chercheCompte(data).subscribe({
       next: (res) => {
           if(res['code'] == 200) {
-            this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
             this.telephone =  this.infoCompte.carte.telephone;
             this.calcul = [];
@@ -142,13 +141,15 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
   }
 
 
-  calculRecharge() {
+  calculRecharge(typeFrais = null) {
 
+    this.type_frais = typeFrais
+    console.log(typeFrais);
 
-    if(this.type_frais && this.montant){
+    if(typeFrais != null && this.montant){
 
         let data = {
-          "type_frais" : this.type_frais,
+          "type_frais" : typeFrais,
           "montant" : this.montant,
           "service_id" : 5
         };
