@@ -276,7 +276,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
         if(res['code'] == 201) {
             this.toastr.success(res['msg'], this.__("global.success"));
             this.isDisabled=false;
-            this.showPrint = true;
+            
 
             this.soldeService.getSoldeUser().subscribe({
               next: (res) => {
@@ -288,6 +288,8 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
                 this.walletService.setWalletCarte(montant);
               }
           });
+          this.closeModal();
+          this.showPrint = true;
 
           }
           else if(res['code'] == 404){

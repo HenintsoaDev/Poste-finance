@@ -70,6 +70,7 @@ import { CreationCompteComponent } from './views/modules/gestion-compte/creation
 import { ReleveCompteComponent } from './views/modules/gestion-compte/operation-compte/releve-compte/releve-compte.component';
 import { TransactionJourComponent } from './views/modules/reporting/suivi-transaction/transaction-jour/transaction-jour.component';
 import { RechargementEspeceComponent } from './views/modules/gestion-compte/operation-compte/rechargement-espece/rechargement-espece.component';
+import { RetraitEspeceComponent } from './views/modules/gestion-compte/operation-compte/retrait-espece/retrait-espece.component';
 
 
 registerLocaleData(localeFr);
@@ -147,6 +148,8 @@ registerLocaleData(localeFr);
     SoldeCompteComponent,
     CreationCompteComponent,
     ReleveCompteComponent,
+    RechargementEspeceComponent,
+    RetraitEspeceComponent,
     TransactionJourComponent,
     RechargementEspeceComponent
   ],
