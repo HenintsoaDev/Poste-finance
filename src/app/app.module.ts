@@ -69,6 +69,7 @@ import { SoldeCompteComponent } from './views/modules/gestion-compte/operation-c
 import { CreationCompteComponent } from './views/modules/gestion-compte/creation-compte/creation-compte.component';
 import { ReleveCompteComponent } from './views/modules/gestion-compte/operation-compte/releve-compte/releve-compte.component';
 import { RechargementEspeceComponent } from './views/modules/gestion-compte/operation-compte/rechargement-espece/rechargement-espece.component';
+import { RetraitEspeceComponent } from './views/modules/gestion-compte/operation-compte/retrait-espece/retrait-espece.component';
 
 
 registerLocaleData(localeFr);
@@ -146,7 +147,8 @@ registerLocaleData(localeFr);
     SoldeCompteComponent,
     CreationCompteComponent,
     ReleveCompteComponent,
-    RechargementEspeceComponent
+    RechargementEspeceComponent,
+    RetraitEspeceComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
