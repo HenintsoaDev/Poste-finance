@@ -1,17 +1,21 @@
+import { DatePipe } from '@angular/common';
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { MatExpansionPanel } from '@angular/material/expansion';
 import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { CountryISO,SearchCountryField } from 'ngx-intl-tel-input';
+import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 
 @Component({
-  selector: 'app-transaction-jour',
-  templateUrl: './transaction-jour.component.html',
-  styleUrls: ['./transaction-jour.component.scss']
+  selector: 'app-historique-transaction',
+  templateUrl: './historique-transaction.component.html',
+  styleUrls: ['./historique-transaction.component.scss']
 })
-export class TransactionJourComponent extends Translatable implements OnInit {
+export class HistoriqueTransactionComponent extends Translatable implements OnInit {
 
     @ViewChild('detailTransaction') detailTransaction: TemplateRef<any> | undefined; 
 
@@ -29,8 +33,8 @@ export class TransactionJourComponent extends Translatable implements OnInit {
         {"nomColonne" :  this.__('global.agence'),"colonneTable" : "agence","table" : "transaction"},
         {"nomColonne" :  this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "transaction"},
         {"nomColonne" : this.__('global.action')}
-    ];
-
+    ]
+    
     objetBody = [
         {'name' : 'date_transaction', 'type': 'text', },
         {'name' : 'num_transac','type' : 'text',},
@@ -44,19 +48,15 @@ export class TransactionJourComponent extends Translatable implements OnInit {
         {'name' : 'agence','type' : 'text',},
         {'name' : 'wallet_carte','type' : 'text',},
         {'name' : 'id',},
-    ];
+    ]
+    
+    listIcon = [{'icon' : 'info','action' : 'info','tooltip' : this.__('global.tooltip_detail'),'autority' : '',},]
+    searchGlobal = ['transaction.num_transac']
 
-    listIcon = [
-        {'icon' : 'info','action' : 'info','tooltip' : this.__('global.tooltip_detail'),'autority' : '',},
-    ];
-
-    searchGlobal = ['transaction.num_transac'];
-    subscription: Subscription;
     listTransactions = [];
     date_transaction: string;
     num_transac: string;
     client: string;
-    telephone: string;
     service: string;
     montant: string;
     commission: string;
@@ -71,18 +71,56 @@ export class TransactionJourComponent extends Translatable implements OnInit {
     transactions: any = [];
     list_transactions_totaux: any;
 
+    num_compte: any;
+    type_recherche: any;
+    telephone: any;
+    typeCompte: string = "2";
+    dateDebut: string = new Date().toISOString().substring(0, 10);
+    dateFin: string = new Date().toISOString().substring(0, 10);
+
+    /**INPUT PHONE */
+    objetPhone : any;
+    element : any;
+    currenCode :string ="mg";
+    tel!: string;
+    /**INPUT PHONE */
+
+    separateDialCode = false;
+    SearchCountryField = SearchCountryField;
+    CountryISO = CountryISO;
+    preferredCountries: CountryISO[] = [CountryISO.Madagascar];
+    selectedCountryISO = 'mg';
+    phoneNumber = '';
+    dialCode: any = '261';
+    listShow: boolean = false;
+    @ViewChild('panel') panel!: MatExpansionPanel;
+    subscription: Subscription;
+
     constructor(
+        private toastr: ToastrService, 
         private passageService: PassageService,
+        private datePipe: DatePipe, 
+        private authService: AuthService,
         private modalService: BsModalService,
-        private authService: AuthService
     ) {
         super();
     }
 
     ngOnInit(): void {
+
         this.authService.initAutority("SUT","REP");
-        this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction;
-        this.passageService.appelURL(null);
+
+        this.passageService.clear();
+        /***************************************** */
+        // Écouter les changements de modal à travers le service si il y a des actions
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+            if( event.data){
+                // Nettoyage immédiat de l'event
+                this.passageService.clear();  // ==> à implémenter dans ton service
+            }
+        });
+        this.endpoint = environment.baseUrl + '/' + environment.reporting_historique_transaction;
+        /***************************************** */
 
         this.subscription = this.passageService.getObservable().subscribe(event => {
   
@@ -95,6 +133,65 @@ export class TransactionJourComponent extends Translatable implements OnInit {
                 this.passageService.clear();  // ==> à implémenter dans ton service
             }
         });
+
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+    }
+
+    filtreTableau()
+    {
+        this.listShow = true;
+        
+        let type = null;
+        if(this.type_recherche == "N") type = 1;
+        else if(this.type_recherche == "T") type = 0;
+
+        let filtre_type_recherche = '';
+        if(this.type_recherche != undefined) filtre_type_recherche = "&type_recherche="+type;
+        
+        let filtre_wallet_carte = '';
+        if(this.typeCompte != "2") filtre_wallet_carte = "&where=transaction.wallet_carte|e|"+this.typeCompte;
+        
+        let filtre_telephone = '';
+        if(this.telephone != undefined) {
+            let telephone = this.telephone.replace('+', "00");
+            filtre_telephone = "&telephone="+telephone;
+        }
+        
+        let filtre_numcompte = '';
+        if(this.num_compte != undefined) filtre_numcompte = "&num_compte="+this.num_compte;
+        
+        let date_debut = this.datePipe.transform(this.dateDebut, 'yyyy-MM-dd');
+        let date_fin = this.datePipe.transform(this.dateFin, 'yyyy-MM-dd');
+        
+        let filtreDate = "" ;
+        if(date_debut && date_fin){
+            if( date_debut > date_fin ){
+                this.toastr.warning(this.__('msg.dateDebut_dateFin_error'),this.__("msg.warning"));
+                return;
+            }else{
+                filtreDate = "&date_debut="+date_debut +"&date_fin="+date_fin;
+            }
+        }
+        
+        let filtreParMulti =  filtre_telephone  +  filtre_wallet_carte + filtre_numcompte + filtre_type_recherche + filtreDate;
+        this.passageService.appelURL(filtreParMulti);
+        this.fermerPannel();
+    }
+
+    videForm(){
+        this.type_recherche = undefined;
+        this.num_compte = "";
+        this.telephone = "";
+        this.typeCompte = "";
+    }
+
+    fermerPannel() {
+        this.panel.close();
     }
 
     openModalTransaction()
@@ -141,12 +238,26 @@ export class TransactionJourComponent extends Translatable implements OnInit {
 
     }
 
-    ngOnDestroy() {
-        if (this.subscription) {
-          this.subscription.unsubscribe();
-        }
+    /** PHONE NUMBER */
+    telInputObject(m:any){
+        this.objetPhone = m.s
     }
- 
+    
+    onCountryChange(event: any) {
+        this.dialCode = event.dialCode; // ← ici tu obtiens '261' ou '221'
+    }
+    
+    controle(element:any){}
+    
+    hasError: boolean = false;
+    onError(obj : any) {
+        this.hasError = obj;
+    }
+    
+    getNumber(obj : any) {
+        this.telephone = obj;
+    }
+
     closeModal() {
         this.modalRef?.hide();
     }
