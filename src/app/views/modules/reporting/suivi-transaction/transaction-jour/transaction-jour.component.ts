@@ -1,4 +1,5 @@
 import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
+import { AuthService } from 'app/services/auth.service';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
@@ -67,10 +68,13 @@ export class TransactionJourComponent extends Translatable implements OnInit {
     titleModal: string = "";
     modalRef?: BsModalRef;
     idTransaction: number;
+    transactions: any = [];
+    list_transactions_totaux: any;
 
     constructor(
         private passageService: PassageService,
         private modalService: BsModalService,
+        private authService: AuthService
     ) {
         super();
     }
@@ -141,9 +145,87 @@ export class TransactionJourComponent extends Translatable implements OnInit {
           this.subscription.unsubscribe();
         }
     }
-
+ 
     closeModal() {
         this.modalRef?.hide();
+    }
+
+    exportExcel() {
+        const storedData = localStorage.getItem('data');
+        let result: any;
+        
+        if (storedData) result = JSON.parse(storedData);
+        this.transactions = result.data;
+        this.list_transactions_totaux = result;
+
+        this.authService.exportExcel(this.print(this.transactions), this.__('transaction_jour.title')).then(
+            (response: any)=>{
+                  let a = document.createElement("a"); 
+                  a.href = response.data;
+                  a.download = `${this.__('transaction_jour.title')}.xlsx`;
+                  a.click(); 
+            },
+            (error:any)=>{
+              console.log(error)
+            }
+        );
+    }
+    
+    exportPdf() {
+        const storedData = localStorage.getItem('data');
+        let result: any;
+        
+        if (storedData) result = JSON.parse(storedData);
+        this.transactions = result.data;
+        this.list_transactions_totaux = result;
+
+        this.authService.exportPdf(this.print(this.transactions),this.__('transaction_jour.title')).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+
+    print(transactions:any[]){
+
+        let tab = transactions.map((transac: any, index: number) => {
+          let t: any = {};
+            t[this.__('global.date')] = transac.date_transaction;
+            t[this.__('global.num_transac')] = transac.num_transac;
+            t[this.__('global.nom_client')] = transac.client;
+            t[this.__('utilisateur.telephone')] = transac.telephone;
+            t[this.__('global.service')] = transac.service;
+            t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = transac.montant;
+            t[this.__('service.frais')+ ' (' + this.__('global.currency') + ')'] = transac.commission;
+            t[this.__('global.montant_brut')+ ' (' + this.__('global.currency') + ')'] = transac.montant_ttc;
+            t[this.__('global.effectue_par')] = transac.effectue_par;
+            t[this.__('global.agence')] = transac.agence;
+            t[this.__('suivi_compte.type_compte')] = transac.wallet_carte;
+                  
+            return t;
+        });
+
+
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+            [this.__('global.date')]: '',
+            [this.__('global.num_transac')]: this.__('global.total_montant'),
+            [this.__('global.nom_client')]: this.list_transactions_totaux?.total_montant ?? 0,
+            [this.__('utilisateur.telephone') ]: '',
+            
+            [this.__('global.service')]: this.__('global.total_commission'),
+            [this.__('global.montant') + ' (' + this.__('global.currency') + ')']: this.list_transactions_totaux?.total_commission ?? 0,
+            
+            [this.__('service.frais') + ' (' + this.__('global.currency') + ')']: '',
+            [this.__('global.montant_brut') + ' (' + this.__('global.currency') + ')']: '',
+            
+            [this.__('global.effectue_par')]: this.__('global.total_ttc'),
+            [this.__('global.agence')]: this.list_transactions_totaux?.total_ttc ?? 0,
+            [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
+    
     }
 
 }
