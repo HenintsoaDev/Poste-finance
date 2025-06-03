@@ -192,7 +192,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <mat-label>{{ __('operation_compte.montant')}}</mat-label>
+                                                    <mat-label>{{ __('operation_compte.montant')}} ({{ __('global.currency')}})</mat-label>
                                                     <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '');" [(ngModel)]="montant"  (blur)="calculRecharge()"  placeholder="{{ __('operation_compte.montant')}}"  name="montant">
                                                 </mat-form-field>
                                             </div>
@@ -220,18 +220,18 @@
                                             <div class="row">
                                                 <div class="col-lg-4">
                                                     <div class="alert alert-custom">
-                                                        <label><b class="fw-800">{{ __("operation_compte.montant_a_recharger")}}</b></label>
+                                                        <label><b class="fw-800">{{ __("operation_compte.montant_a_recharger")}} ({{ __('global.currency')}})</b></label>
                                                         <h6><b class="bold">{{ calcul?.montant_recharge ?  formatNumber(calcul?.montant_recharge, ' ') : '' }}</b></h6>
                                                      </div>
                                                 </div>
                                                 <div class="col-lg-4"> 
                                                     <div class="alert alert-custom">
-                                                    <label><b class="fw-800">{{ __("operation_compte.frais")}}</b></label>
+                                                    <label><b class="fw-800">{{ __("operation_compte.frais")}} ({{ __('global.currency')}})</b></label>
                                                     <h6><b class="bold">{{ calcul?.frais ?  formatNumber(calcul?.frais, ' ') : '' }}</b></h6>
                                                  </div></div>
                                                 <div class="col-lg-4"> 
                                                     <div class="alert alert-custom">
-                                                    <label><b class="fw-800">{{ __("operation_compte.montant_total")}}</b></label>
+                                                    <label><b class="fw-800">{{ __("operation_compte.montant_total")}} ({{ __('global.currency')}})</b></label>
                                                     <h6><b class="bold">{{ calcul?.montant_total ? formatNumber(calcul?.montant_total, ' '): ''}}</b></h6>
                                                  </div>
                                                 </div>

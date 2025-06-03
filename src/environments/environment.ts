@@ -105,6 +105,9 @@ export const environment = {
   calcul_recharge : "operation_compte/details_recharge",
   init_rechargement_espece : "operation_compte/init_rechargement_espece",
   cashin: "operation_compte/cashin",
+  init_cashout : "operation_compte/init_cashout",
+  executeCashOUT : "operation_compte/executeCashOUT",
+  calcul_retrait : "operation_compte/calculFraisForCashOut",
 
   //** Reporting TRANSACTION JOUR */
   reporting_transaction : "reporting/transaction_du_jour"
