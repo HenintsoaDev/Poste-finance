@@ -192,11 +192,11 @@ export class TransactionJourComponent extends Translatable implements OnInit {
             t[this.__('global.date')] = transac.date_transaction;
             t[this.__('global.num_transac')] = transac.num_transac;
             t[this.__('global.nom_client')] = transac.client;
-            t[this.__('utilisateur.telephone')] = transac.telephone;
+            //t[this.__('utilisateur.telephone')] = transac.telephone;
             t[this.__('global.service')] = transac.service;
-            t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = transac.montant;
-            t[this.__('service.frais')+ ' (' + this.__('global.currency') + ')'] = transac.commission;
-            t[this.__('global.montant_brut')+ ' (' + this.__('global.currency') + ')'] = transac.montant_ttc;
+            t[this.__('global.montant')] = transac.montant;
+            t[this.__('service.frais')] = transac.commission;
+            t[this.__('global.montant_brut')] = transac.montant_ttc;
             t[this.__('global.effectue_par')] = transac.effectue_par;
             t[this.__('global.agence')] = transac.agence;
             t[this.__('suivi_compte.type_compte')] = transac.wallet_carte;
@@ -211,13 +211,12 @@ export class TransactionJourComponent extends Translatable implements OnInit {
             [this.__('global.date')]: '',
             [this.__('global.num_transac')]: this.__('global.total_montant'),
             [this.__('global.nom_client')]: this.list_transactions_totaux?.total_montant ?? 0,
-            [this.__('utilisateur.telephone') ]: '',
+            //[this.__('utilisateur.telephone') ]: '',
             
-            [this.__('global.service')]: this.__('global.total_commission'),
-            [this.__('global.montant') + ' (' + this.__('global.currency') + ')']: this.list_transactions_totaux?.total_commission ?? 0,
-            
-            [this.__('service.frais') + ' (' + this.__('global.currency') + ')']: '',
-            [this.__('global.montant_brut') + ' (' + this.__('global.currency') + ')']: '',
+            [this.__('global.service')]: '',
+            [this.__('global.montant') ]: this.__('global.total_commission'),
+            [this.__('service.frais') ]: this.list_transactions_totaux?.total_commission ?? 0,
+            [this.__('global.montant_brut') ]: '',
             
             [this.__('global.effectue_par')]: this.__('global.total_ttc'),
             [this.__('global.agence')]: this.list_transactions_totaux?.total_ttc ?? 0,
