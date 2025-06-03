@@ -141,7 +141,7 @@
         "type_cni" : "Type de piéce d'identité",
         "date_delivrance" : "Date de délivrance",
         "num_transac" : "N° transaction",
-        "montant_brut" : "Montant brut",
+        "montant_brut" : "Montant TTC",
         "effectue_par" : "Éffectué par",
         "nom_client" : "Nom du client",
         "service" : "Service",
