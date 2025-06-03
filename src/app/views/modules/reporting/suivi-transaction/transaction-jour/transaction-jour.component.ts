@@ -80,6 +80,7 @@ export class TransactionJourComponent extends Translatable implements OnInit {
     }
 
     ngOnInit(): void {
+        this.authService.initAutority("SUT","REP");
         this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction;
         this.passageService.appelURL(null);
 
