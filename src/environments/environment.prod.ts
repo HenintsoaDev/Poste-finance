@@ -101,5 +101,6 @@ export const environment = {
   activer_compte: "operation_compte/activer_compte",
   
   //** Reporting TRANSACTION JOUR */
-  reporting_transaction : "reporting/transaction_du_jour",
+  reporting_transaction: "reporting/transaction_du_jour",
+  reporting_historique_transaction : "reporting/historique_transaction"
 };

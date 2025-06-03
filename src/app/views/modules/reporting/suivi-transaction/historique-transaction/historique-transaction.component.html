@@ -1,0 +1,147 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+
+                            <mat-accordion>
+                            <mat-expansion-panel #panel [expanded]="true">
+                                <mat-expansion-panel-header class="bg-primary ">
+                                    <div class="text-center titre-search" >
+                                        <h4>  {{ __('operation_compte.search_beneficiaire')}} </h4>
+                                    </div>
+    
+                                </mat-expansion-panel-header>
+
+                                
+                                <div class="row">
+                                    
+                                    <div class="col-lg-4">
+                                    
+                                    </div>
+                                    <div class="col-lg-4">
+                                        <br>
+
+                                        <div class="form-group text-center">
+                                            <mat-radio-group [(ngModel)]="type_recherche" >
+                                                <mat-radio-button class="mr-3" style="margin-right: 70px !important;" value="T">{{ __('operation_compte.telephone')}}</mat-radio-button>
+                                                <mat-radio-button class="mr-3" value="N">{{ __('operation_compte.num_compte')}}</mat-radio-button>
+                                            </mat-radio-group>
+                                        </div>
+
+                                        <div class="form-group" *ngIf="type_recherche == 'N'">
+                                            <mat-form-field>
+                                                <mat-label>{{ __('operation_compte.num_compte')}}</mat-label>
+                                                <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 11);" [(ngModel)]="num_compte" placeholder="{{ __('operation_compte.num_compte')}}"  name="num_compte">
+                                            </mat-form-field>
+                                        </div>
+
+
+                                        <div class="form-group" *ngIf="type_recherche == 'T'">
+                                            <label for="dateFonction">{{ __('operation_compte.telephone')}}</label>
+                                            <input type="text"
+                                                name="telephone" 
+                                                [(ngModel)]="telephone"
+                                                placeholder="3X XX XXX XX"
+                                                autocomplete="off"
+                                                class="form-control form-icon-input"
+                                                oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 9);"
+                                                ng2TelInput
+                                                [ng2TelInputOptions]="{
+                                                    allowDropdown: true,
+                                                    autoHideDialCode: false,
+                                                    autoPlaceholder: 'on',
+                                                    formatOnDisplay: true,
+                                                    hiddenInput: 'full_number',
+                                                    initialCountry: currenCode,
+                                                    nationalMode: false,
+                                                    preferredCountries: ['mg', 'sn'],
+                                                    separateDialCode: true,
+                                                    utilsScript: '../../assets/js/tel-utils.js' 
+                                                }"
+                                                #phone
+                                                (hasError)="onError($event)"
+                                                (ng2TelOutput)="getNumber($event)"
+                                                (intlTelInputObject)="telInputObject($event)"
+                                                (countryChange)="onCountryChange($event)"
+                                            >
+                                        </div>
+                                        <br>
+                                        
+
+
+                                    </div>
+                                    <div class="col-lg-4"></div>
+
+                                    <div class="form-inline justify-content">
+                                        <div class="form-group col-3">
+                                            <label for="">{{ __('suivi_compte.type_compte') }}</label>
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <mat-select [(ngModel)]="typeCompte" name="typeCompte" id="typeCompte">
+                                                    <mat-option value="2">{{ __('suivi_compte.all_compte') }}</mat-option>
+                                                    <mat-option value="1">{{ __('global.carte') }}</mat-option>
+                                                    <mat-option value="0">{{ __('global.wallet') }}</mat-option>
+                                                </mat-select>
+                                            </mat-form-field>
+                                        </div>
+
+                                        <div class="form-group col-3">
+                                            <label for="dateFonction">{{ __('suivi_compte.from') }}</label>
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="{{ __('global.select_date') }}" (focus)="pickerDebut.open()">
+                                                <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+                                                <mat-datepicker #pickerDebut></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        
+                                        <div class="form-group col-3">
+                                            <label for="dateFonction">{{ __('suivi_compte.to') }}</label>
+                                            <mat-form-field appearance="fill" style="width: 100%;">
+                                                <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="{{ __('global.select_date') }}" (focus)="pickerFin.open()">
+                                                <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                                                <mat-datepicker #pickerFin></mat-datepicker>
+                                            </mat-form-field>
+                                        </div>
+                                        
+                                    </div>
+                                    
+                                    <hr>
+                                    <div class="text-center justify-content" >
+                                        <button type="button" class="btn btn-secondary" (click)="videForm()" >{{ __('global.cancel')}}</button>
+                                        <button type="submit" class="btn btn-primary" [disabled]="!typeCompte" (click)="filtreTableau()">{{ __('global.search')}}</button>
+                                    </div>
+
+
+                                
+                                </div>
+                            </mat-expansion-panel>
+                            </mat-accordion>
+
+                        
+                      
+                    </div>
+                </div>
+
+
+                <div class="card" [ngStyle]="{'display': listShow ? 'block' : 'none'}" >
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <app-table
+                                [endpoint]="endpoint"
+                                [headerTable]="header"
+                                [body]="objetBody"
+                                [listIcon]="listIcon"
+                                [searchGlobal]="searchGlobal"
+                                [formSearch] = "false"
+                                [triDescDefault] = "'date_transaction'"
+                                >
+                            </app-table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

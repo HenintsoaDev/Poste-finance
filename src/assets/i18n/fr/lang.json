@@ -555,6 +555,10 @@
     "transaction_jour" : {
         "title" : "Transactions du jour",
         "detail" : "Détails du transaction"
+    },
+
+    "historique_transaction" : {
+        "title" : "Historique des transactions"
     }
    
 }
