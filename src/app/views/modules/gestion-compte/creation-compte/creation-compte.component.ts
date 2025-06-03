@@ -93,7 +93,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
             //wallet_carte: ['', [Validators.required]], 
         });
 
-        this.bureauService.getAgenceBureauActive().subscribe({
+        /*this.bureauService.getAgenceBureauActive().subscribe({
             next: (res) => {
                 if(res['code'] == 200) {
                     console.log(res);
@@ -105,7 +105,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
                 }               
             },
             error: (err) => {}
-        });
+        });*/
 
         this.ressourceService.getListType().subscribe({
             next: (res) => {

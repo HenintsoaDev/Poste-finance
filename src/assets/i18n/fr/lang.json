@@ -550,7 +550,8 @@
     },
 
     "transaction_jour" : {
-        "title" : "Transactions du jour"
+        "title" : "Transactions du jour",
+        "detail" : "Détails du transaction"
     }
    
 }

@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, TemplateRef, ViewChild } from '@angular/core';
 import { PassageService } from 'app/services/table/passage.service';
 import { environment } from 'environments/environment';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
+import { Subscription } from 'rxjs';
 import { Translatable } from 'shared/constants/Translatable';
 
 @Component({
@@ -9,6 +11,8 @@ import { Translatable } from 'shared/constants/Translatable';
   styleUrls: ['./transaction-jour.component.scss']
 })
 export class TransactionJourComponent extends Translatable implements OnInit {
+
+    @ViewChild('detailTransaction') detailTransaction: TemplateRef<any> | undefined; 
 
     endpoint = "";
     header = [
@@ -46,9 +50,27 @@ export class TransactionJourComponent extends Translatable implements OnInit {
     ];
 
     searchGlobal = ['transaction.num_transac'];
+    subscription: Subscription;
+    listTransactions = [];
+    date_transaction: string;
+    num_transac: string;
+    client: string;
+    telephone: string;
+    service: string;
+    montant: string;
+    commission: string;
+    montant_ttc: string;
+    effectue_par: string;
+    agence: string;
+    wallet_carte: string;
+
+    titleModal: string = "";
+    modalRef?: BsModalRef;
+    idTransaction: number;
 
     constructor(
         private passageService: PassageService,
+        private modalService: BsModalService,
     ) {
         super();
     }
@@ -56,6 +78,72 @@ export class TransactionJourComponent extends Translatable implements OnInit {
     ngOnInit(): void {
         this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction;
         this.passageService.appelURL(null);
+
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+  
+            if( event.data){
+                this.idTransaction = event.data.id;
+  
+                if (event.data.action == 'info') {
+                    this.openModalTransaction();
+                }
+                this.passageService.clear();  // ==> à implémenter dans ton service
+            }
+        });
+    }
+
+    openModalTransaction()
+    {
+        this.recupererDonnee();
+
+        if (this.modalRef) {
+            this.modalRef.hide();
+        }
+
+        this.titleModal = this.__('transaction_jour.detail');
+        this.modalRef = this.modalService.show(this.detailTransaction, {
+            backdrop: 'static',
+            keyboard: false,
+            class: 'modal-lg'
+        });
+    }
+
+    recupererDonnee()
+    {
+        // Récupérer la liste affichée dans le tableau depuis le localStorage.
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        this.listTransactions = result.data;
+
+        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+        let res = this.listTransactions.filter(_ => _.id == this.idTransaction);
+
+        if (res.length != 0) { 
+            let transactionSelected = res[0];
+            this.date_transaction = transactionSelected.date_transaction;
+            this.num_transac = transactionSelected.num_transac;
+            this.client = transactionSelected.client;
+            this.telephone = transactionSelected.telephone;
+            this.service = transactionSelected.service;
+            this.montant = transactionSelected.montant;
+            this.commission = transactionSelected.commission;
+            this.montant_ttc = transactionSelected.montant_ttc;
+            this.effectue_par = transactionSelected.effectue_par;
+            this.agence = transactionSelected.agence;
+            this.wallet_carte = transactionSelected.wallet_carte;
+        }
+
+    }
+
+    ngOnDestroy() {
+        if (this.subscription) {
+          this.subscription.unsubscribe();
+        }
+    }
+
+    closeModal() {
+        this.modalRef?.hide();
     }
 
 }
