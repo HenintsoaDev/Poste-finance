@@ -145,7 +145,10 @@
         "effectue_par" : "Éffectué par",
         "nom_client" : "Nom du client",
         "service" : "Service",
-        "envoi_code" : "Envoyer code"
+        "envoi_code" : "Envoyer code",
+        "total_montant" : "Total montant",
+        "total_commission" : "Total commision",
+        "total_ttc" : "Total TTC"
     },
 
     "paiement" : {
