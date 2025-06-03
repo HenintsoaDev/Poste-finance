@@ -270,11 +270,19 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         this.transactions = result.data;
         this.list_transactions_totaux = result;
 
-        this.authService.exportExcel(this.print(this.transactions), this.__('transaction_jour.title')).then(
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+        let title = this.__("historique_transaction.title") + ' ' ;
+        title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');   
+
+        this.authService.exportExcel(this.print(this.transactions), title).then(
             (response: any)=>{
                   let a = document.createElement("a"); 
                   a.href = response.data;
-                  a.download = `${this.__('transaction_jour.title')}.xlsx`;
+                  a.download = `${title}.xlsx`;
                   a.click(); 
             },
             (error:any)=>{
@@ -291,7 +299,15 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         this.transactions = result.data;
         this.list_transactions_totaux = result;
 
-        this.authService.exportPdf(this.print(this.transactions),this.__('transaction_jour.title')).then(
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+        let title = this.__("historique_transaction.title") + ' ' ;
+        title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');  
+
+        this.authService.exportPdf(this.print(this.transactions),title).then(
             (response: any)=>{},
             (error:any)=>{console.log(error)}
         );
