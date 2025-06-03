@@ -140,6 +140,11 @@
         "matricule" : "Matricule",
         "type_cni" : "Type de piéce d'identité",
         "date_delivrance" : "Date de délivrance",
+        "num_transac" : "N° transaction",
+        "montant_brut" : "Montant brut",
+        "effectue_par" : "Éffectué par",
+        "nom_client" : "Nom du client",
+        "service" : "Service",
         "envoi_code" : "Envoyer code"
     },
 
@@ -538,7 +543,14 @@
         "rechargement_compte" :"Rechargement du compte",
         "patiente":"Veuillez patienter pendant le rechargement...",
         "succes_recharge":"Le rechargement par espèces est effectué avec succès. Merci"
+    },
+    
+    "reporting" : {
+        "title_module" : "Reporting"
+    },
 
+    "transaction_jour" : {
+        "title" : "Transactions du jour"
     }
    
 }

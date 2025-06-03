@@ -104,5 +104,8 @@ export const environment = {
   releve_compte:"operation_compte/releve_compte",
   calcul_recharge : "operation_compte/details_recharge",
   init_rechargement_espece : "operation_compte/init_rechargement_espece",
-  cashin: "operation_compte/cashin"
+  cashin: "operation_compte/cashin",
+
+  //** Reporting TRANSACTION JOUR */
+  reporting_transaction : "reporting/transaction_du_jour"
 };
