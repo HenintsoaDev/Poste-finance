@@ -73,7 +73,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
 
     num_compte: any;
     type_recherche: any;
-    telephone: any;
+    telephoneSearch: any;
     typeCompte: string = "2";
     dateDebut: string = new Date().toISOString().substring(0, 10);
     dateFin: string = new Date().toISOString().substring(0, 10);
@@ -157,8 +157,9 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         if(this.typeCompte != "2") filtre_wallet_carte = "&where=transaction.wallet_carte|e|"+this.typeCompte;
         
         let filtre_telephone = '';
-        if(this.telephone != undefined) {
-            let telephone = this.telephone.replace('+', "00");
+        if(this.telephoneSearch != undefined) {
+            var telephone = this.telephoneSearch;
+            telephone = telephone.replace('+', "00");
             filtre_telephone = "&telephone="+telephone;
         }
         
@@ -186,7 +187,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
     videForm(){
         this.type_recherche = undefined;
         this.num_compte = "";
-        this.telephone = "";
+        this.telephoneSearch = "";
         this.typeCompte = "";
     }
 
@@ -226,7 +227,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
             this.date_transaction = transactionSelected.date_transaction;
             this.num_transac = transactionSelected.num_transac;
             this.client = transactionSelected.client;
-            this.telephone = transactionSelected.telephone;
+            //this.telephone = transactionSelected.telephone;
             this.service = transactionSelected.service;
             this.montant = transactionSelected.montant;
             this.commission = transactionSelected.commission;
@@ -255,7 +256,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
     }
     
     getNumber(obj : any) {
-        this.telephone = obj;
+        this.telephoneSearch = obj;
     }
 
     closeModal() {
@@ -275,7 +276,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
 
         let title = this.__("historique_transaction.title") + ' ' ;
         if (this.type_recherche != undefined) {
-            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephoneSearch + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
         }
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
         title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');   
@@ -306,7 +307,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
 
         let title = this.__("historique_transaction.title") + ' ';
         if (this.type_recherche != undefined) {
-            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephoneSearch + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
         }
         
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
