@@ -43,6 +43,7 @@ import { TransactionJourComponent } from './views/modules/reporting/suivi-transa
 import { RechargementEspeceComponent } from './views/modules/gestion-compte/operation-compte/rechargement-espece/rechargement-espece.component';
 import { HistoriqueTransactionComponent } from './views/modules/reporting/suivi-transaction/historique-transaction/historique-transaction.component';
 import { RetraitEspeceComponent } from './views/modules/gestion-compte/operation-compte/retrait-espece/retrait-espece.component';
+import { TransactionServiceComponent } from './views/modules/reporting/suivi-transaction/transaction-service/transaction-service.component';
 
 const routes: Routes =[
   
@@ -108,6 +109,7 @@ const routes: Routes =[
     path: 'reporting', data: { breadcrumb: 'reporting.title_module' }, children: [
       { path: 'transaction_du_jour', component: TransactionJourComponent, data: { breadcrumb: 'transaction_jour.title' } },
       { path: 'historique_transaction', component: HistoriqueTransactionComponent, data: { breadcrumb: 'historique_transaction.title' } },
+      { path: 'transaction_par_service', component: TransactionServiceComponent, data: { breadcrumb: 'transaction_service.title' } },
   ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

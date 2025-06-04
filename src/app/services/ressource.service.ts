@@ -21,4 +21,14 @@ export class RessourceService {
         );
     }
 
+    getServiceProduct() {
+        return this.httpService.get<any>(environment.service_product).pipe(
+            tap(response => {
+                if (response['code'] !== 200) {
+                    console.error("Error fetching resource:", response);
+                }
+            })
+        );
+    }
+
 }

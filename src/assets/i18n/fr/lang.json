@@ -458,8 +458,8 @@
         "tva" : "Frais TVA",
         "add_palier" : "Ajouter une palier",
         "add_form_palier" : "Ajout palier",
-        "title_detail_modal" : "Informations d'un service"
-
+        "title_detail_modal" : "Informations d'un service",
+        "all_service" : "Tous les services"
     },
 
     "header_message" : {
@@ -566,6 +566,10 @@
 
     "historique_transaction" : {
         "title" : "Historique des transactions"
+    },
+
+    "transaction_service" : {
+        "title" : "Transaction par service"
     }
    
 }
