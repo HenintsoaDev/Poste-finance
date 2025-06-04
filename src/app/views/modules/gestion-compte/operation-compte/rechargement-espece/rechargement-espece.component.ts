@@ -97,10 +97,16 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
             this.motifs = '';
             this.type_frais = '';
            
+            this.showPrint = false;
 
             
           }
-          else {
+          else if(res['code'] == 404) {
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"));
+
+          }
+          else{
             this.isDisabled=false;
             this.toastr.error(res['msg'], this.__("global.error"));
           }

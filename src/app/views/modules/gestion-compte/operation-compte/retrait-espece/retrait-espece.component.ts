@@ -105,8 +105,14 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
             this.type_frais = '';
           
             this.isDisabled = false;
+            this.showPrint = false;
 
             
+          }
+          else if(res['code'] == 404) {
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"));
+
           }
           else {
             this.isDisabled=false;
@@ -249,7 +255,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
                           this.isDisabled=false;
                           this.openModalDetailDemande();
                           this.code_validation = "";
-                          this.num_compte = "";
+                          this.num_identification = "";
                         }
                         else {
                           this.isDisabled=false;
