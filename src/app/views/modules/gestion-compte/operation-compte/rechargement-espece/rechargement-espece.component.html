@@ -88,16 +88,7 @@
                                     <div class="col-lg-12">
                                         <table style="width: 100%;">
             
-                                            <tr>
-                                                <td >
-                                                    <div class="alert alert-custom">
-                                                        <label><b class="fw-800">{{ __("operation_compte.num_serie")}}</b></label>
-                                                        <h6><b class="bold">{{  infoCompte?.carte?.numero_serie }}</b></h6>
-                                                     </div>
-                                                </td>
-                                               
-                                               
-                                            </tr>
+                                            
                                            
                                             <tr>
                                                 <td >
@@ -116,7 +107,22 @@
                                                
                                             </tr>
                                            
-    
+                                            <tr>
+                                                <td >
+                                                    <div class="alert alert-custom">
+                                                        <label><b class="fw-800">{{ __("operation_compte.email")}}</b></label>
+                                                        <h6><b class="bold">{{  infoCompte?.email }}</b></h6>
+                                                     </div>
+                                                </td>
+                                                <td >
+                                                    <div class="alert alert-custom">
+                                                        <label><b class="fw-800">{{ __("operation_compte.adresse")}}</b></label>
+                                                        <h6><b class="bold">{{  infoCompte?.adresse }}</b></h6>
+                                                     </div>
+                                                </td>
+                                               
+                                               
+                                            </tr>
     
                                             <tr>
                                                 <td >
@@ -132,6 +138,16 @@
                                                      </div>
                                                 </td>
                                               
+                                               
+                                            </tr>
+                                            <tr>
+                                                <td >
+                                                    <div class="alert alert-custom">
+                                                        <label><b class="fw-800">{{ __("operation_compte.num_serie")}}</b></label>
+                                                        <h6><b class="bold">{{  infoCompte?.carte?.numero_serie }}</b></h6>
+                                                     </div>
+                                                </td>
+                                               
                                                
                                             </tr>
     
@@ -174,7 +190,7 @@
                 
                                         <div class="col-lg-8 text-center">
                                             <div class="form-group">
-                                                <label for="xx">{{ __('operation_compte.calcul_frais') }}</label><br>
+                                                <label for="xx">{{ __('operation_compte.calcul_frais') }} *</label><br>
                                                 <mat-radio-group  [(ngModel)]="type_frais">
                                                     
                                                     <mat-radio-button class="mr-3" style="margin-right: 70px !important;" (click)="calculRecharge(1)" value="1">{{ __('operation_compte.don_frais')}}</mat-radio-button>
@@ -192,7 +208,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <mat-label>{{ __('operation_compte.montant')}} ({{ __('global.currency')}})</mat-label>
+                                                    <mat-label>{{ __('operation_compte.montant')}} ({{ __('global.currency')}}) *</mat-label>
                                                     <input matInput type="text" oninput="this.value = this.value.replace(/[^0-9]/g, '');" [(ngModel)]="montant"  (blur)="calculRecharge(type_frais)"  placeholder="{{ __('operation_compte.montant')}}"  name="montant">
                                                 </mat-form-field>
                                             </div>
@@ -201,7 +217,7 @@
                                         <div class="col-lg-4">
                                             <div class="form-group">
                                                 <mat-form-field>
-                                                    <mat-label>{{ __('operation_compte.motif')}}</mat-label>
+                                                    <mat-label>{{ __('operation_compte.motif')}} *</mat-label>
                                                     <input matInput type="text" [(ngModel)]="motifs" placeholder="{{ __('operation_compte.motif')}}"  name="motif">
                                                 </mat-form-field>
         
@@ -213,7 +229,7 @@
                     
                                     </div>
         
-                                    <div class="row">
+                                    <div class="row" *ngIf="calcul.length != 0">
                                         <div class="col-lg-2"></div>
         
                                         <div class="col-lg-8">
@@ -304,7 +320,7 @@
 
         <div class="modal-footer">
             <button type="button"  [disabled]="!code_validation || isDisabled" class="btn btn-primary" (click)="rechargeEspece()" >{{ __('global.oui')}}</button>
-            <button type="button" class="btn btn-secondary" (click)="fermerModal()" >{{ __('global.non')}}</button>
+            <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.non')}}</button>
         </div>
 
     </div>

@@ -8,6 +8,7 @@ import { AuthService } from 'app/services/auth.service';
 import { Auth, utilisateur } from 'app/shared/models/db';
 import { environment } from 'environments/environment';
 import { Translatable } from 'shared/constants/Translatable';
+import { RouteService } from '../route.service';
 
 declare const $: any;
 
@@ -61,7 +62,7 @@ export class SidebarComponent extends Translatable implements OnInit {
         }
     }
 
-    constructor(private authService: AuthService, private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService) {
+    constructor(private authService: AuthService, private router: Router,private cdr: ChangeDetectorRef, private menuService: MenuService, private routeService: RouteService) {
         super();
         this.router.events.subscribe(() => {
             this.currentRoute = this.router.url;
@@ -70,16 +71,23 @@ export class SidebarComponent extends Translatable implements OnInit {
     }
 
     async ngOnInit() {
+
         this.user = <Auth> await  this.authService.getLoginUser();
         this.sidebar = document.getElementsByClassName("sidebar")[0] as HTMLElement;
         this.toggleSidebarEvent(); 
-        const menuSelectedModule = localStorage.getItem(environment.menuItemsSelectedStorage);
-        if(menuSelectedModule)
-        {
-            const parsedMenuItems = JSON.parse(menuSelectedModule);
-            this.routes = parsedMenuItems;
-        }
-        this.updateActiveRoutes();
+      
+        this.routeService.activeRoute$.subscribe(path => {
+            const menuSelectedModule = localStorage.getItem(environment.menuItemsSelectedStorage);
+            if(menuSelectedModule)
+            {
+                const parsedMenuItems = JSON.parse(menuSelectedModule);
+                this.routes = parsedMenuItems;
+            }
+    
+            console.log("passer ici?", path);
+            this.updateActiveRoutes(path);
+          });
+          
     }
 
     goToPage(url,module){
@@ -99,26 +107,26 @@ export class SidebarComponent extends Translatable implements OnInit {
         this.toggleSidebarEvent();
     }
 
-    updateActiveRoutes() {
-        const currentUrl = this.router.url;
+    updateActiveRoutes(pathFromNavbar?: string) {
+        const currentUrl = pathFromNavbar || this.router.url;
+        console.log("currentUrl", currentUrl);
+        console.log("currentUrl", currentUrl);
 
         this.routes = this.routes.map(route => {
-            // Vérifier si la route principale ou l'un de ses enfants correspond à l'URL
-            const isParentInUrl = currentUrl.startsWith(route.path);
-           
-            route.class = isParentInUrl ? 'activeModule' : '';
-            route.showChildrenClass = isParentInUrl ? 'show' : '';
-
-            if (route.children) {
-                route.children = route.children.map(child => ({
-                ...child,
-                class: currentUrl === `${route.path}${child.path}` ? 'active' : ''
-                }));
-            }
-
-            return route;
+          const isParentInUrl = currentUrl.startsWith(route.path);
+          route.class = isParentInUrl ? 'activeModule' : '';
+          route.showChildrenClass = isParentInUrl ? 'show' : '';
+          if (route.children) {
+            route.children = route.children.map(child => ({
+              ...child,
+              class: currentUrl === `${route.path}${child.path}` ? 'active' : ''
+            }));
+          }
+          return route;
         });
-    }
+
+        console.log("route?" , this.routes);
+      }
 
     toggleSidebarEvent() {
         if (this.sidebar) {

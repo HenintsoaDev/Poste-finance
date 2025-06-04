@@ -79,6 +79,10 @@ export class ActiverCompteComponent extends Translatable implements OnInit {
             this.telephone =  this.infoCompte['telephone'];
 
             
+          }  else if(res['code'] == 404) {
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
+
           }
           else {
             this.isDisabled=false;

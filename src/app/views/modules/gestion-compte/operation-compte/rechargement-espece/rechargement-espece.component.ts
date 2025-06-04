@@ -25,7 +25,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
   telephone: any;
   motifs:any;
   montant= "";
-  calcul : any;
+  calcul : any = [];
 
   /**INPUT PHONE */
   objetPhone : any;
@@ -97,10 +97,16 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
             this.motifs = '';
             this.type_frais = '';
            
+            this.showPrint = false;
 
             
           }
-          else {
+          else if(res['code'] == 404) {
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
+
+          }
+          else{
             this.isDisabled=false;
             this.toastr.error(res['msg'], this.__("global.error"));
           }
@@ -176,7 +182,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
 
     if(walletSolde< this.calcul?.montant_total){
-      this.toastr.error(this.__('operation_compte.solde_bureau_insuffisant'), this.__("global.error"));
+      this.toastr.error(this.__('operation_compte.solde_bureau_insuffisant'), this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
     }else{
 
       let telephone = "";
