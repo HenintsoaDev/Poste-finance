@@ -79,7 +79,7 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
             
           }  else if(res['code'] == 404) {
             this.isDisabled=false;
-            this.toastr.error(res['data'], this.__("global.error"));
+            this.toastr.error(res['data'], this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
 
           }
           else {

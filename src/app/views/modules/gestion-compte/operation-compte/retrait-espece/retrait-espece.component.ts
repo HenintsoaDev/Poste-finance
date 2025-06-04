@@ -48,7 +48,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
   code_validation: any = "";
   attente: boolean = false;
   showPrint: boolean = false;
-  soldeCompteClient: string;
+  soldeCompteClient: number;
   frais: any;
   num_identification:any;
   formCINInvalid: boolean = false;
@@ -112,7 +112,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
           }
           else if(res['code'] == 404) {
             this.isDisabled=false;
-            this.toastr.error(res['data'], this.__("global.error"));
+            this.toastr.error(res['data'], this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
 
           }
           else {
@@ -217,10 +217,11 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
 
   envoiCodeRetrait(){
 
-    console.log(this.soldeCompteClient);
-    console.log(this.montant);
-    if(this.soldeCompteClient < this.montant){
-      this.toastr.error(this.__('operation_compte.solde_client_insuffisant'), this.__("global.error"));
+
+    let montantttc =  Number(this.montant)+ Number(this.frais);
+    console.log(montantttc);
+    if(this.soldeCompteClient < montantttc){
+      this.toastr.error(this.__('operation_compte.solde_client_insuffisant'), this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
     }else{
       let telephone = "";
       if(this.telephone){
@@ -408,7 +409,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
        this.operationService.verifieCode(data).subscribe({
          next: (res) => {
            if(res['code'] == 200){
-            this.formCodeInvalid = true;
+            this.formCodeInvalid = false;
 
            
            }else if(res.code == 500){

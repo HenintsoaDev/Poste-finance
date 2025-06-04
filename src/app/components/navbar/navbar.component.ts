@@ -5,6 +5,10 @@ import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 import { MenuService, ROUTES } from 'app/shared/models/route-info';
 import { AuthService } from 'app/services/auth.service';
+import { RouteService } from '../route.service';
+import { environment } from 'environments/environment';
+import { tap } from 'rxjs';
+import { HttpService } from 'app/services/http.service';
 
 
 @Component({
@@ -40,7 +44,8 @@ export class NavbarComponent implements OnInit {
         }
     }
 
-    constructor(location: Location,  private element: ElementRef, private router: Router,private menuService: MenuService, private authService : AuthService) {
+    constructor(location: Location,  private element: ElementRef, private router: Router,private menuService: MenuService, private authService : AuthService, private routeService: RouteService, private httpService: HttpService
+        ) {
         this.location = location;
         this.sidebarVisible = false;
         this.router.events.subscribe(() => {
@@ -247,8 +252,39 @@ export class NavbarComponent implements OnInit {
 
     goTo(module : string, pathSelected)
     {
+        console.log(module);
         this.menuService.updateMenuItems(module);
         this.menuService.setMenuItemsModule(module);
+        this.routeService.setActiveRoute("/app-module" + module);
+
+
+
+
+        sessionStorage.removeItem('message-header');
+        this.httpService.get(environment.header_message + module + "/display_message").pipe(
+            tap(response => {
+                console.log("response XHR", response);
+                if (response['code'] === 200) {
+                    if(response['data'].length > 0){
+                        let message = "";
+                        for(let i = 0; i < response['data'].length; i++) {
+                            message += '<b>' + response['data'][i]['expediteur'] + '</b>' + ': ' + response['data'][i]['txt_messenger'];
+                            message += "&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;****&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;"
+                        }
+                        this.messageHeader = message;
+                        sessionStorage.setItem('message-header', message);
+                    }else{
+                        this.messageHeader = '';
+                    }
+                }
+                this.menuService.updateMenuItems(module);
+                this.menuService.setMenuItemsModule(module);
+                this.router.navigate(['/app-module', module.replace('/','')]);
+            })
+        ).subscribe();
+
+
+
         this.router.navigate(['/app-module', module.replace('/','')]);
     }
 

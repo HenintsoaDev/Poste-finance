@@ -103,7 +103,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
           }
           else if(res['code'] == 404) {
             this.isDisabled=false;
-            this.toastr.error(res['data'], this.__("global.error"));
+            this.toastr.error(res['data'], this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
 
           }
           else{
@@ -182,7 +182,7 @@ export class RechargementEspeceComponent extends Translatable implements OnInit 
 
 
     if(walletSolde< this.calcul?.montant_total){
-      this.toastr.error(this.__('operation_compte.solde_bureau_insuffisant'), this.__("global.error"));
+      this.toastr.error(this.__('operation_compte.solde_bureau_insuffisant'), this.__("global.error"),{timeOut: 10000,  extendedTimeOut: 2000, closeButton: true, progressBar: true});
     }else{
 
       let telephone = "";
