@@ -102,5 +102,7 @@ export const environment = {
   
   //** Reporting TRANSACTION JOUR */
   reporting_transaction: "reporting/transaction_du_jour",
-  reporting_historique_transaction : "reporting/historique_transaction"
+  reporting_historique_transaction: "reporting/historique_transaction",
+  service_product: "parametrage/consult/service/liste_service_active",
+  reporting_transaction_service: "reporting/transaction_par_service"
 };
