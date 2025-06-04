@@ -88,12 +88,14 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
 
     listBureauActive = [];
     agenceId: number = -1;
+    agenceLabel: string = "";
     searchControlBureau = new FormControl('');
     filteredBureau = [];
 
     listServiceActive = [];
     searchControlService = new FormControl('');
     serviceId: number = -1;
+    serviceLabel: string = "";
     filteredService = [];
     
 
@@ -179,7 +181,6 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
         this.showDataTable = true;
 
         let agence = "";
-        console.log("AGENCE : ",this.agenceId)
         if (this.agenceId != -1 && this.agenceId != undefined) agence = ",agence.rowid|e|" + this.agenceId;
 
         let filtre_wallet_carte = '';
@@ -261,6 +262,72 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
 
     exportExcel(){}
     
-    exportPdf(){}
+    exportPdf() {
+        const storedData = localStorage.getItem('data');
+        let result: any;
+        
+        if (storedData) result = JSON.parse(storedData);
+        this.transactions = result.data;
+        this.list_transactions_totaux = result;
+
+        let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+        let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+        let title = this.__("transaction_service.title") + ' ';
+
+        if (this.serviceId != undefined && this.serviceId != -1) {
+            title  += ""
+        }
+        
+        title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+        title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');  
+
+        this.authService.exportPdf(this.print(this.transactions),title).then(
+            (response: any)=>{},
+            (error:any)=>{console.log(error)}
+        );
+    }
+    
+    print(transactions:any[]){
+
+        let tab = transactions.map((transac: any, index: number) => {
+          let t: any = {};
+            t[this.__('global.date')] = transac.date_transaction;
+            t[this.__('global.num_transac')] = transac.num_transac;
+            t[this.__('global.nom_client')] = transac.client;
+            //t[this.__('utilisateur.telephone')] = transac.telephone;
+            t[this.__('global.service')] = transac.service;
+            t[this.__('global.montant')] = transac.montant;
+            t[this.__('service.frais')] = transac.commission;
+            t[this.__('global.montant_brut')] = transac.montant_ttc;
+            t[this.__('global.effectue_par')] = transac.effectue_par;
+            t[this.__('global.agence')] = transac.agence;
+            t[this.__('suivi_compte.type_compte')] = transac.wallet_carte;
+                  
+            return t;
+        });
+
+
+
+        // puis ajouter les totaux à la fin
+        tab.push({
+            [this.__('global.date')]: '',
+            [this.__('global.num_transac')]: this.__('global.total_montant'),
+            [this.__('global.nom_client')]: this.list_transactions_totaux?.total_montant ?? 0,
+            //[this.__('utilisateur.telephone') ]: '',
+            
+            [this.__('global.service')]: '',
+            [this.__('global.montant') ]: this.__('global.total_commission'),
+            [this.__('service.frais') ]: this.list_transactions_totaux?.total_commission ?? 0,
+            [this.__('global.montant_brut') ]: '',
+            
+            [this.__('global.effectue_par')]: this.__('global.total_ttc'),
+            [this.__('global.agence')]: this.list_transactions_totaux?.total_ttc ?? 0,
+            [this.__('suivi_compte.type_compte')]: '',
+        });
+
+        return tab;
+    
+    }
 
 }
