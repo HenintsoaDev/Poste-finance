@@ -76,8 +76,18 @@ export class SidebarComponent extends Translatable implements OnInit {
         this.sidebar = document.getElementsByClassName("sidebar")[0] as HTMLElement;
         this.toggleSidebarEvent(); 
       
-       
-          this.updateActiveRoutes();
+        this.routeService.activeRoute$.subscribe(path => {
+            const menuSelectedModule = localStorage.getItem(environment.menuItemsSelectedStorage);
+            if(menuSelectedModule)
+            {
+                const parsedMenuItems = JSON.parse(menuSelectedModule);
+                this.routes = parsedMenuItems;
+            }
+    
+            console.log("passer ici?", path);
+            this.updateActiveRoutes(path);
+          });
+          
     }
 
     goToPage(url,module){
