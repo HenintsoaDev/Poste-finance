@@ -152,7 +152,7 @@
                                                 </td>
                                                 <td >
                                                     <div class="alert alert-custom">
-                                                        <label><b class="fw-800">{{ __("operation_compte.cin")}}</b></label>
+                                                        <label><b class="fw-800">{{ __("operation_compte.num_identification")}}</b></label>
                                                         <h6><b class="bold">{{  infoCompte?.cni }}</b></h6>
                                                      </div>
                                                 </td>
@@ -214,7 +214,7 @@
                                             <div class="form-group">
                                                 <div class="alert alert-custom">
                                                     <label><b class="fw-800">{{ __("operation_compte.frais")}} ({{ __('global.currency')}})</b></label>
-                                                    <h6><b class="bold">{{ frais ?  formatNumber(frais, ' ') : '' }}</b></h6>
+                                                    <h6><b class="bold">{{  frais!= null ?  formatNumber(frais, ' ') : '' }}</b></h6>
                                                  </div>
         
                                                

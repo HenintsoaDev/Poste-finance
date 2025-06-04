@@ -77,6 +77,10 @@ export class ChercherCompteComponent extends Translatable implements OnInit {
             this.toastr.success(res['msg'], this.__("global.success"));
             this.infoCompte = res['data'];
             
+          }  else if(res['code'] == 404) {
+            this.isDisabled=false;
+            this.toastr.error(res['data'], this.__("global.error"));
+
           }
           else {
             this.isDisabled=false;

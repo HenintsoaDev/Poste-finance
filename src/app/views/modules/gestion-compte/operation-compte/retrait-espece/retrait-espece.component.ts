@@ -103,6 +103,7 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
             this.montant = '';
             this.motifs = '';
             this.type_frais = '';
+            this.frais = null;
           
             this.isDisabled = false;
             this.showPrint = false;
@@ -407,7 +408,8 @@ export class RetraitEspeceComponent extends Translatable implements OnInit {
        this.operationService.verifieCode(data).subscribe({
          next: (res) => {
            if(res['code'] == 200){
-          
+            this.formCodeInvalid = true;
+
            
            }else if(res.code == 500){
             this.formCodeInvalid = true;
