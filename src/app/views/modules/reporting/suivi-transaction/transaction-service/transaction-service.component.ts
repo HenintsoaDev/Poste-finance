@@ -114,6 +114,18 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
         this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction_service; 
         this.passageService.clear();
 
+        this.subscription = this.passageService.getObservable().subscribe(event => {
+  
+            if( event.data){
+                this.idTransaction = event.data.id;
+  
+                if (event.data.action == 'info') {
+                    this.openModalTransaction();
+                }
+                this.passageService.clear();  // ==> à implémenter dans ton service
+            }
+        });
+
         this.bureauService.getAgenceBureauActive().subscribe({
             next: (res) => {
                 if(res['code'] == 200) {
@@ -197,6 +209,54 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
         this.passageService.appelURL(filtreParMulti);
         this.showDataTable = true;
 
+    }
+
+    recupererDonnee()
+    {
+        // Récupérer la liste affichée dans le tableau depuis le localStorage.
+        const storedData = localStorage.getItem('data');
+        let result : any;
+        if (storedData) result = JSON.parse(storedData);
+        this.listTransactions = result.data;
+
+        // Filtrer le tableau par rapport à l'ID et afficher le résultat dans le formulaire.
+        let res = this.listTransactions.filter(_ => _.id == this.idTransaction);
+
+        if (res.length != 0) { 
+            let transactionSelected = res[0];
+            this.date_transaction = transactionSelected.date_transaction;
+            this.num_transac = transactionSelected.num_transac;
+            this.client = transactionSelected.client;
+            //this.telephone = transactionSelected.telephone;
+            this.service = transactionSelected.service;
+            this.montant = transactionSelected.montant;
+            this.commission = transactionSelected.commission;
+            this.montant_ttc = transactionSelected.montant_ttc;
+            this.effectue_par = transactionSelected.effectue_par;
+            this.agence = transactionSelected.agence;
+            this.wallet_carte = transactionSelected.wallet_carte;
+        }
+
+    }
+
+    openModalTransaction()
+    {
+        this.recupererDonnee();
+
+        if (this.modalRef) {
+            this.modalRef.hide();
+        }
+
+        this.titleModal = this.__('transaction_jour.detail');
+        this.modalRef = this.modalService.show(this.detailTransaction, {
+            backdrop: 'static',
+            keyboard: false,
+            class: 'modal-lg'
+        });
+    }
+
+    closeModal() {
+        this.modalRef?.hide();
     }
 
     exportExcel(){}
