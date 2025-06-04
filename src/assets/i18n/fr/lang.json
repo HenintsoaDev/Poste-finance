@@ -504,7 +504,7 @@
     "beneficiaire" : {
         "geston_compte_beneficiare" : "Gestion des comptes",
         "title_beneficiaire" : "Lister les bénéficiaires",
-        "detail_beneficiaire" : "Détails du bénéficiaire",
+        "detail_beneficiaire" : "Détails bénéficiaire",
         "update_beneficiaire" : "Modifier le bénéficiaire",
         "creer_compte" : "Créer un compte"
     },
@@ -528,12 +528,12 @@
         "num_serie" : "N° de série",
         "type_compte" : "Type de compte",
         "info_beneficiaire" :"Informations du bénéficiaire",
-        "search_beneficiaire" : "Recherche par",
+        "search_beneficiaire" : "Rechercher par",
         "statut":"Statut",
         "cin" : "CIN",
         "solde" : "Solde",
         "filtre_tableau":"Filtrer les données du tableau",
-        "list_releve_compte" : "Relevés de compte",
+        "list_releve_compte" : "Relevé de compte",
         "calcul_frais" : "Calcul frais",
         "don_frais":"Dont frais",
         "frais_sus":"Frais en sus",
