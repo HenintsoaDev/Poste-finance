@@ -252,7 +252,7 @@ export class NavbarComponent implements OnInit {
 
     goTo(module : string, pathSelected)
     {
-       /*  console.log(module);
+        console.log(module);
         this.menuService.updateMenuItems(module);
         this.menuService.setMenuItemsModule(module);
         this.routeService.setActiveRoute("/app-module" + module);
@@ -285,7 +285,7 @@ export class NavbarComponent implements OnInit {
 
 
 
-        this.router.navigate(['/app-module', module.replace('/','')]); */
+        this.router.navigate(['/app-module', module.replace('/','')]);
     }
 
     goToLogin()
