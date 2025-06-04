@@ -274,7 +274,9 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
         let title = this.__("historique_transaction.title") + ' ' ;
-        title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        if (this.type_recherche != undefined) {
+            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        }
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
         title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');   
 
@@ -302,8 +304,11 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
         let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
-        let title = this.__("historique_transaction.title") + ' ' ;
-        title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        let title = this.__("historique_transaction.title") + ' ';
+        if (this.type_recherche != undefined) {
+            title  += this.type_recherche == "T" ? this.__("operation_compte.telephone") + " " + this.telephone + ' ' : this.__("operation_compte.num_compte") + " " + this.num_compte + ' '
+        }
+        
         title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
         title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');  
 
