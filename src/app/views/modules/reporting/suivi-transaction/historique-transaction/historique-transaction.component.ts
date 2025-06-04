@@ -151,7 +151,7 @@ export class HistoriqueTransactionComponent extends Translatable implements OnIn
         else if(this.type_recherche == "T") type = 0;
 
         let filtre_type_recherche = '';
-        if(this.type_recherche != undefined) filtre_type_recherche = "&type_recherche="+type;
+        if(this.type_recherche != undefined && (this.telephoneSearch != undefined || this.num_compte != undefined)) filtre_type_recherche = "&type_recherche="+type;
         
         let filtre_wallet_carte = '';
         if(this.typeCompte != "2") filtre_wallet_carte = "&where=transaction.wallet_carte|e|"+this.typeCompte;
