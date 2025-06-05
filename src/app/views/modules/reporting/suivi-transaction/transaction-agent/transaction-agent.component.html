@@ -1,0 +1,222 @@
+<div class="main-content">
+    <div class="container-fluid">
+
+        <div class="row">
+            <div class="col-md-12"> 
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <div class="button-container">
+                            <div class="right-button">
+                                <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel()">
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf()">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-md-12">
+
+                <div class="card">
+                    <div class="card-body">
+                        <!-- FORM FILTER -->
+                        <div class="bg-white">
+                            <form class="form-inline">
+                                <div class="form-group col-2">
+                                    <label for="account-type-1">{{ __('releve_solde_bureau.agence') }}(*)</label>
+                                    <!-- POUR ADMIN -->
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
+                                            <mat-select [(ngModel)]="agenceId" (selectionChange)="recupererAgent($event)"> 
+                                                <mat-option>
+                                                    <input matInput placeholder="Rechercher..." [formControl]="searchControlBureau" (click)="$event.stopPropagation()" />
+                                                </mat-option>
+                                                <mat-option  value="-1">{{ __('bureau.all_bureau') }}</mat-option> 
+                                                <mat-option *ngFor="let agence of filteredBureau" value="{{ agence.rowid }}">{{ agence.name }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
+
+                                <div class="form-group col-2">
+                                    <label for="account-type-1">{{ __('suivi_compte.agent') }}(*)</label>
+                                    <!-- POUR ADMIN -->
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>{{ __('suivi_compte.agent') }}</mat-label>
+                                            <mat-select [(ngModel)]="agentId"> 
+                                                <mat-option>
+                                                    <input matInput placeholder="Rechercher..." [formControl]="searchControlAgent" (click)="$event.stopPropagation()" />
+                                                </mat-option>
+                                                <mat-option  value="">{{ __('suivi_compte.all_agent') }}</mat-option> 
+                                                <mat-option *ngFor="let agent of filteredAgent" value="{{ agent.rowid }}">{{ agent.nom }} {{ agent.prenom }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
+
+                                <div class="form-group col-2">
+                                    <label for="account-type-1">{{ __('global.service') }}(*)</label>
+                                    <!-- POUR ADMIN -->
+                                    <ng-container >
+                                        <mat-form-field appearance="fill" style="width: 100%;">
+                                            <mat-label>{{ __('global.service') }}</mat-label>
+                                            <mat-select [(ngModel)]="serviceId"> 
+                                                <mat-option>
+                                                    <input matInput placeholder="Rechercher..." [formControl]="searchControlService" (click)="$event.stopPropagation()" />
+                                                </mat-option>
+                                                <mat-option  value="-1">{{ __('service.all_service') }}</mat-option> 
+                                                <mat-option *ngFor="let service of filteredService" value="{{ service.rowid }}">{{ service.label }}</mat-option>
+                                            </mat-select>
+                                        </mat-form-field>
+                                    </ng-container>
+                                </div>
+
+                             
+                                
+                                <div class="form-group col-2">
+                                    <label for="dateFonction">{{ __('suivi_compte.from') }}(*)</label>
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <input matInput [matDatepicker]="pickerDebut" [(ngModel)]="dateDebut" placeholder="{{ __('global.select_date') }}" (focus)="pickerDebut.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerDebut"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerDebut></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+                                
+                                <div class="form-group col-2">
+                                    <label for="dateFonction">{{ __('suivi_compte.to') }}(*)</label>
+                                    <mat-form-field appearance="fill" style="width: 100%;">
+                                        <input matInput [matDatepicker]="pickerFin" [(ngModel)]="dateFin" placeholder="{{ __('global.select_date') }}" (focus)="pickerFin.open()">
+                                        <mat-datepicker-toggle matSuffix [for]="pickerFin"></mat-datepicker-toggle>
+                                        <mat-datepicker #pickerFin></mat-datepicker>
+                                    </mat-form-field>
+                                </div>
+
+                                <div  class="col-2">
+                                    <button *ngIf="!loadingData" class="btn btn-primary w-100" color="primary" (click)="filtreTableau()" [disabled]="dateDebut == undefined || dateFin == undefined">{{ __('global.filter') }}</button>
+                                    <button *ngIf="loadingData" class="btn btn-primary w-100" color="primary">
+                                        <img src="assets/img/loading-spinner-button.gif" width="25px">
+                                    </button>
+                                </div>
+                                
+                            </form>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card" [ngStyle]="{'display': showDataTable ? 'block' : 'none'}">
+                    <div class="card-body">
+
+                        <div class="table-responsive">
+                            <app-table
+                                [endpoint]="endpoint"
+                                [headerTable]="header"
+                                [body]="objetBody"
+                                [listIcon]="listIcon"
+                                [searchGlobal]="searchGlobal"
+                                [formSearch] = "false"
+                                [triDescDefault] = "'date_transaction'"
+                                >
+                            </app-table>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #detailTransaction>
+    <div class="modal-header btn-primary">
+        <h5 class="modal-title" id="myModalLabel"><b> {{ titleModal }}</b></h5>
+        <button type="button" class="close" (click)="closeModal()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <div class="row">
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.date')}}</b></label>
+                    <h6><b class="info-virement">{{ date_transaction }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.num_transac')}}</b></label>
+                    <h6><b class="info-virement">{{ num_transac }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.nom_client')}}</b></label>
+                    <h6><b class="info-virement">{{ client }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('utilisateur.telephone')}}</b></label>
+                    <h6><b class="info-virement">{{ telephone }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.service')}}</b></label>
+                    <h6><b class="info-virement">{{ service }}</b></h6>
+                </div>
+            </div>
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.montant')}}</b></label>
+                    <h6><b class="info-virement">{{ montant }}</b></h6>
+                </div>
+            </div>
+            
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('service.frais')}}</b></label>
+                    <h6><b class="info-virement">{{ commission }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.montant_brut')}}</b></label>
+                    <h6><b class="info-virement">{{ montant_ttc }}</b></h6>
+                </div>
+            </div>
+            
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.effectue_par')}}</b></label>
+                    <h6><b class="info-virement">{{ effectue_par }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('global.agence')}}</b></label>
+                    <h6><b class="info-virement">{{ agence }}</b></h6>
+                </div>
+            </div>
+
+            <div class="col-6">
+                <div class="alert alert-custom">
+                    <label><b style="font-weight: 800;">{{ __('suivi_compte.type_compte')}}</b></label>
+                    <h6><b class="info-virement">{{ wallet_carte }}</b></h6>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" (click)="closeModal()" >{{ __('global.cancel')}}</button>
+    </div>
+</ng-template>

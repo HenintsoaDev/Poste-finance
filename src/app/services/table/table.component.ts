@@ -75,7 +75,7 @@ export class TableComponent extends Translatable {
       private toast :ToastrService
       ) { 
         super();
-        this.authService.initAutority("PRM","ADM");
+        //this.authService.initAutority("PRM","ADM");
     }
 
     subscription: Subscription;

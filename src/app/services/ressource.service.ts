@@ -31,4 +31,14 @@ export class RessourceService {
         );
     }
 
+    getListAgent(idAgent) {
+        return this.httpService.get<any>(environment.liste_utilisateur_active + "?where=user.fk_agence|e|" + idAgent).pipe(
+            tap(response => {
+                if (response['code'] !== 200) {
+                    console.error("Error fetching resource:", response);
+                }
+            })
+        );
+    }
+
 }

@@ -315,8 +315,10 @@
         "operation" : "Opération",
         "num_transac" : "N° transaction",
         "coms" : "Commentaire",
+        "agent" : "Agent",
         "list_suivi_compte" : "Suivi compte principal",
-        "title_export" :"Suivi compte comission"
+        "title_export" :"Suivi compte comission",
+        "all_agent" : "Tous les agents"
     },  
 
     "virement" : {
@@ -570,6 +572,9 @@
 
     "transaction_service" : {
         "title" : "Transaction par service"
+    },
+    "transaction_agent" : {
+        "title" : "Transaction par agent"
     }
    
 }

@@ -122,7 +122,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
         super()
     }
 
-    ngOnInit(): void {
+    async ngOnInit() {
         this.authService.initAutority('GCR','ADM');
         this.passageService.appelURL(null);
         this.endpoint = environment.baseUrl + '/' + environment.partenaire_financier;

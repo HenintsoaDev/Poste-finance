@@ -47,6 +47,7 @@ export const environment = {
   generateroute : 'parametrage/settings/generateroute',
   service : 'parametrage/service',
   utilisateur_api_numherit :'parametrage/user_api_numherit',
+  liste_utilisateur_active :'parametrage/consult/user/allActiveUser',
 
   regenerer_mdp_user_api :'parametrage/user_api_numherit/regenerer_password',
 
@@ -115,5 +116,6 @@ export const environment = {
   reporting_transaction: "reporting/transaction_du_jour",
   reporting_historique_transaction: "reporting/historique_transaction",
   service_product: "parametrage/consult/service/liste_service_active",
-  reporting_transaction_service: "reporting/transaction_par_service"
+  reporting_transaction_service: "reporting/transaction_par_service",
+  reporting_transaction_agent: "reporting/transaction_par_agent",
 };
