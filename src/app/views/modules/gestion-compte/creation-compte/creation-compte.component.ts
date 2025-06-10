@@ -82,7 +82,7 @@ export class CreationCompteComponent extends Translatable implements OnInit {
             prenom: [''],
             adresse: ['', Validators.required],
             email: ['', [Validators.required]],
-            telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
+            telephone: ['', [Validators.required,  Validators.minLength(9)]],
             //agence: ['', [Validators.required]],
             cni: ['', Validators.required], 
             sexe: ['',Validators.required],
