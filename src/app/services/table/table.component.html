@@ -51,7 +51,7 @@
                   
 
                   
-
+ 
                   <div *ngIf="verifStatut(cell) == 1 || verifStatut(cell) == 2 ">
                     <i class="material-icons" mat-raised-button> lock </i>
                   </div>
@@ -101,7 +101,7 @@
         
 
         <tbody *ngIf="donneeAfficher.length == 0 && !isLoading">
-            <tr class="ng-star-inserted" >  <td colspan="9"> {{ __("table.aucun_donnee")}}   </td> </tr>
+            <tr class="ng-star-inserted" >  <td colspan="13"> {{ __("table.aucun_donnee")}}   </td> </tr>
         </tbody>
 
         <tbody *ngIf="isLoading">

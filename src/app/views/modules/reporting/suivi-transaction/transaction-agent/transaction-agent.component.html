@@ -70,8 +70,8 @@
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlService" (click)="$event.stopPropagation()" />
                                                 </mat-option>
-                                                <mat-option  value="-1">{{ __('service.all_service') }}</mat-option> 
-                                                <mat-option *ngFor="let service of filteredService" value="{{ service.rowid }}">{{ service.label }}</mat-option>
+                                                <mat-option  [value]="-1">{{ __('service.all_service') }}</mat-option> 
+                                                <mat-option *ngFor="let service of filteredService" value="service.rowid">{{ service.label }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
                                     </ng-container>
@@ -98,7 +98,7 @@
                                 </div>
 
                                 <div  class="col-2">
-                                    <button *ngIf="!loadingData" class="btn btn-primary w-100" color="primary" (click)="filtreTableau()" [disabled]="dateDebut == undefined || dateFin == undefined">{{ __('global.filter') }}</button>
+                                    <button *ngIf="!loadingData" class="btn btn-primary w-100" color="primary" (click)="filtreTableau()" [disabled]="dateDebut == undefined || dateFin == undefined || !agentId">{{ __('global.filter') }}</button>
                                     <button *ngIf="loadingData" class="btn btn-primary w-100" color="primary">
                                         <img src="assets/img/loading-spinner-button.gif" width="25px">
                                     </button>
