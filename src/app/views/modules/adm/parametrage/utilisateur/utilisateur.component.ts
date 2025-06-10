@@ -231,7 +231,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
             prenom: [''],
             login: ['', [Validators.required]],
             email: ['', [Validators.required]],
-            telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
+            telephone: ['', [Validators.required,  Validators.minLength(9)]],
             fk_agence: ['', [Validators.required]],
             fk_profil: ['', [Validators.required]], 
             id_type_agence: ['', [Validators.required]] 
@@ -262,7 +262,6 @@ export class UtilisateurComponent extends Translatable implements OnInit {
           ...this.utilisateurForm.value
         };
 
-        this.utilisateur.telephone = this.dialCode + this.utilisateur.telephone;
 
 
           let msg = "";
@@ -277,7 +276,9 @@ export class UtilisateurComponent extends Translatable implements OnInit {
             msg_btn = this.__("global.oui_modifier");
           }
 
-    
+          if (this.utilisateur.telephone.startsWith(this.dialCode))this.utilisateur.telephone = this.utilisateur.telephone
+          else this.utilisateur.telephone = this.dialCode + this.utilisateur.telephone;
+        
           Swal.fire({
             title: this.__("global.confirmation"),
             text: msg,
@@ -294,7 +295,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
             if (result.isConfirmed) {
   
               if(!this.utilisateur.rowid){
-  
+
                  this.utilisateurService.ajoutUtilisateur(this.utilisateur).subscribe({
                   next: (res) => {
                       
@@ -528,7 +529,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
           prenom: [''],
           login: ['', [Validators.required]],
           email: ['', [Validators.required]],
-          telephone: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
+          telephone: ['', [Validators.required,  Validators.minLength(9)]],
           fk_agence: ['', [Validators.required]],
           fk_profil: ['', [Validators.required]], 
           id_type_agence: ['', [Validators.required]] 
@@ -613,8 +614,6 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       if(res.length != 0){
         this.utilisateur = res[0];
 
-        
-
         this.utilisateurForm.patchValue({
           nom: this.utilisateur.nom,
           prenom: this.utilisateur.prenom,
@@ -658,8 +657,12 @@ export class UtilisateurComponent extends Translatable implements OnInit {
     }
 
     getNumber(obj : any) {
+      console.log(this.dialCode, "dialcode");
+      console.log(this.dialCode);
+
       this.telephone = obj;
     }
+    
 
 
 }

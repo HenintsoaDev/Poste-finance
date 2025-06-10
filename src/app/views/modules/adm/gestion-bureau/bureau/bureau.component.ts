@@ -239,7 +239,7 @@ export class BureauComponent extends Translatable implements OnInit {
         fk_quartier: ['', [Validators.required]],
         province: ['', [Validators.required]],
         adresse: ['', [Validators.required]],
-        tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+        tel: ['', [Validators.required, Validators.minLength(9)]],
         idtype_agence: ['', [Validators.required]],
         telephone_dr: [''],
         email_dr: ['', [Validators.email]],
@@ -273,8 +273,14 @@ export class BureauComponent extends Translatable implements OnInit {
           ...this.bureauForm.value
         };
 
-        this.bureau.tel = this.dialCode + this.bureau.tel;
-        this.bureau.telephone_dr = this.dialCodeDr + this.bureau.telephone_dr;
+      
+
+        if (this.bureau.tel.startsWith(this.dialCode))this.bureau.tel = this.bureau.tel
+        else this.bureau.tel = this.dialCode + this.bureau.tel;
+
+        if (this.bureau.telephone_dr.startsWith(this.dialCodeDr))this.bureau.telephone_dr = this.bureau.telephone_dr
+        else this.bureau.telephone_dr = this.dialCodeDr + this.bureau.telephone_dr;
+      
 
         if(this.bureau.rapatrie_auto ==  'N') this.bureau.rapatrie_auto = 0;
         else this.bureau.rapatrie_auto = 1;
@@ -507,7 +513,7 @@ export class BureauComponent extends Translatable implements OnInit {
         fk_quartier: ['', [Validators.required]],
         province: ['', [Validators.required]],
         adresse: ['', [Validators.required]],
-        tel: ['', [Validators.required, Validators.minLength(9), Validators.maxLength(9)]],
+        tel: ['', [Validators.required, Validators.minLength(9)]],
         idtype_agence: ['', [Validators.required]],
         telephone_dr: [''],
         email_dr: ['', [Validators.email]],

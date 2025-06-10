@@ -201,7 +201,7 @@ export class UtilisateurApiNumheritComponent extends Translatable implements OnI
             lastname: [''],
             username: ['', [Validators.required]],
             email: ['', [Validators.required]],
-            phonenumber: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
+            phonenumber: ['', [Validators.required,  Validators.minLength(9)]],
            
         });
 
@@ -230,8 +230,9 @@ export class UtilisateurApiNumheritComponent extends Translatable implements OnI
           ...this.utilisateurForm.value
         };
 
-        this.utilisateur.phonenumber = this.dialCode + this.utilisateur.phonenumber;
-
+        if (this.utilisateur.phonenumber.startsWith(this.dialCode)) this.utilisateur.phonenumber = this.utilisateur.phonenumber
+        else this.utilisateur.phonenumber = this.dialCode + this.utilisateur.phonenumber;
+      
 
           let msg = "";
           let msg_btn = "";
@@ -492,7 +493,7 @@ export class UtilisateurApiNumheritComponent extends Translatable implements OnI
           lastname: [''],
           username: ['', [Validators.required]],
           email: ['', [Validators.required]],
-          phonenumber: ['', [Validators.required,  Validators.minLength(9), Validators.maxLength(9)]],
+          phonenumber: ['', [Validators.required,  Validators.minLength(9)]],
       });
 
       this.modalRef = this.modalService.show(template, {
