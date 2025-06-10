@@ -571,10 +571,10 @@
     },
 
     "transaction_service" : {
-        "title" : "Transaction par service"
+        "title" : "Transactions par service"
     },
     "transaction_agent" : {
-        "title" : "Transaction par agent"
+        "title" : "Transactions par agent"
     }
    
 }
