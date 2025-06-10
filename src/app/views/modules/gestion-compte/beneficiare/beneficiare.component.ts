@@ -13,6 +13,7 @@ import { BeneficiaireService } from 'app/services/gestion-compte/beneficiaire.se
 import Swal from 'sweetalert2';
 import { bureau } from '../../../../shared/models/db';
 import { DatePipe } from '@angular/common';
+import { AuthService } from 'app/services/auth.service';
 
 @Component({
   selector: 'app-beneficiare',
@@ -50,8 +51,8 @@ export class BeneficiareComponent extends Translatable implements OnInit {
     ];
 
     listIcon = [
-        {'icon' : 'info','action' : 'info','tooltip' : this.__('global.tooltip_detail'),'autority' : '',},
-        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : '',},
+        {'icon' : 'info','action' : 'info','tooltip' : this.__('global.tooltip_detail'),'autority' : 'GBF_4',},
+        {'icon' : 'edit','action' : 'edit','tooltip' : this.__('global.tooltip_edit'),'autority' : 'GBF_3',},
     ];
 
     idBeneficiaire: any;
@@ -130,12 +131,15 @@ export class BeneficiareComponent extends Translatable implements OnInit {
         private passageService: PassageService,
         private toastr: ToastrService,
         private datePipe: DatePipe,
-        private beneficiaireService : BeneficiaireService
+        private beneficiaireService : BeneficiaireService, 
+        private authService : AuthService
     ) {
         super();
     }
 
     ngOnInit(): void {
+        this.authService.initAutority("GBF","GSC");
+
         this.endpoint = environment.baseUrl + '/' + environment.beneficiaire;
         this.passageService.appelURL(null);
 
