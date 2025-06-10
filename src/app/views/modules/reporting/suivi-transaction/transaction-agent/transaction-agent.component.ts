@@ -196,6 +196,8 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
               console.log(res);
               this.listAgentActive = res['data'];
               this.filteredAgent = this.listAgentActive;
+
+              console.log(this.filteredAgent, "xxxxxxx")
           }
           else{
               this.toastr.error(res['msg'], this.__("global.error"));
@@ -217,14 +219,7 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
   filtreTableau() {
       this.showDataTable = true;
 
-      let agence = "";
-      if (this.agenceId != -1 && this.agenceId != undefined) agence = ",agence.rowid|e|" + this.agenceId;
-
-      let filtre_wallet_carte = '';
-      if (this.typeCompte != "2" && this.typeCompte != undefined) filtre_wallet_carte = "transaction.wallet_carte|e|" + this.typeCompte;
-      
-      let where = "";
-      if ((this.agenceId != -1 && this.agenceId != undefined) || (this.typeCompte != "2" && this.typeCompte != undefined)) where = "&where=";
+    
       
       let service = "";
       if(this.serviceId != -1) service = "&service=" + this.serviceId;
@@ -246,7 +241,7 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
           }
       }
       
-      let filtreParMulti = service + filtreDate + where + filtre_wallet_carte + agence + agent;
+      let filtreParMulti = service + filtreDate +  agent;
       this.passageService.appelURL(filtreParMulti);
       this.showDataTable = true;
 
@@ -313,7 +308,7 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
       let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
       let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
-      let title = this.__("transaction_service.title") + ' ';
+      let title = this.__("transaction_agent.title") + ' ';
 
       if (this.serviceId != undefined && this.serviceId != -1) {
           title  += ""

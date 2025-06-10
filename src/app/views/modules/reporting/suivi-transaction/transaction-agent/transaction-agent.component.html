@@ -34,7 +34,7 @@
                                     <ng-container >
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('releve_solde_bureau.agence') }}</mat-label>
-                                            <mat-select [(ngModel)]="agenceId" (selectionChange)="recupererAgent($event)"> 
+                                            <mat-select [(ngModel)]="agenceId" name="agenceId" (selectionChange)="recupererAgent($event)"> 
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlBureau" (click)="$event.stopPropagation()" />
                                                 </mat-option>
@@ -51,7 +51,7 @@
                                     <ng-container >
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('suivi_compte.agent') }}</mat-label>
-                                            <mat-select [(ngModel)]="agentId"> 
+                                            <mat-select [(ngModel)]="agentId" name="agentId"> 
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlAgent" (click)="$event.stopPropagation()" />
                                                 </mat-option>
@@ -68,7 +68,7 @@
                                     <ng-container >
                                         <mat-form-field appearance="fill" style="width: 100%;">
                                             <mat-label>{{ __('global.service') }}</mat-label>
-                                            <mat-select [(ngModel)]="serviceId"> 
+                                            <mat-select [(ngModel)]="serviceId" name="serviceId"> 
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlService" (click)="$event.stopPropagation()" />
                                                 </mat-option>
