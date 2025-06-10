@@ -38,7 +38,6 @@
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlBureau" (click)="$event.stopPropagation()" />
                                                 </mat-option>
-                                                <mat-option  value="-1">{{ __('bureau.all_bureau') }}</mat-option> 
                                                 <mat-option *ngFor="let agence of filteredBureau" value="{{ agence.rowid }}">{{ agence.name }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
@@ -55,7 +54,6 @@
                                                 <mat-option>
                                                     <input matInput placeholder="Rechercher..." [formControl]="searchControlAgent" (click)="$event.stopPropagation()" />
                                                 </mat-option>
-                                                <mat-option  value="">{{ __('suivi_compte.all_agent') }}</mat-option> 
                                                 <mat-option *ngFor="let agent of filteredAgent" value="{{ agent.rowid }}">{{ agent.nom }} {{ agent.prenom }}</mat-option>
                                             </mat-select>
                                         </mat-form-field>
