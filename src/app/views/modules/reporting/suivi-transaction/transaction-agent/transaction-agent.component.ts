@@ -121,6 +121,7 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
   }
 
   ngOnInit(): void {
+    this.authService.initAutority("SUT","REP");
 
       this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction_agent; 
       this.passageService.clear();
@@ -295,7 +296,38 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
       this.modalRef?.hide();
   }
 
-  exportExcel(){}
+  exportExcel() {
+    const storedData = localStorage.getItem('data');
+    let result: any;
+    
+    if (storedData) result = JSON.parse(storedData);
+    this.transactions = result.data;
+    this.list_transactions_totaux = result;
+
+    let date_debut = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
+
+      let title = this.__("transaction_agent.title") + ' ';
+
+      if (this.serviceId != undefined && this.serviceId != -1) {
+          title  += ""
+      }
+      
+      title += (date_debut != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut + ' ' : '');       
+      title += (date_fin != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin + ' ' : '');  
+
+    this.authService.exportExcel(this.print(this.transactions), title).then(
+        (response: any)=>{
+              let a = document.createElement("a"); 
+              a.href = response.data;
+              a.download = `${title}.xlsx`;
+              a.click(); 
+        },
+        (error:any)=>{
+          console.log(error)
+        }
+    );
+}
   
   exportPdf() {
       const storedData = localStorage.getItem('data');

@@ -112,6 +112,7 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
     }
 
     ngOnInit(): void {
+        this.authService.initAutority("SUT","REP");
 
         this.endpoint = environment.baseUrl + '/' + environment.reporting_transaction_service; 
         this.passageService.clear();
