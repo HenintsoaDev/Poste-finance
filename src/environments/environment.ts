@@ -118,4 +118,7 @@ export const environment = {
   service_product: "parametrage/consult/service/liste_service_active",
   reporting_transaction_service: "reporting/transaction_par_service",
   reporting_transaction_agent: "reporting/transaction_par_agent",
+
+  //** Dashboard */
+  facturation: "dashboard/facturation"
 };

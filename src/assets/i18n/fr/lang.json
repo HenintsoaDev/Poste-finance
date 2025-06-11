@@ -575,6 +575,21 @@
     },
     "transaction_agent" : {
         "title" : "Transactions par agent"
+    },
+    "dashboard" :{
+        "nom_service" : "Nom service",
+        "nb_transaction" : "Nombre",
+        "montant":"Montant",
+        "frais" :"Commission",
+        "taxe" : "Taxe",
+        "frais_ttc" :"Comission TTC",
+        "part_paoma" : "Part PHCO",
+        "part_num" : "Part Numherit",
+        "recap_global" : "Récapitulatif global",
+        "facturation_HPM" : "Facturation hors paiement de masse",
+        "facturation_SNP" : "Facturation paiement de masse"
+
+
     }
    
 }

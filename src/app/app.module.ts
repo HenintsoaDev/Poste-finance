@@ -1,3 +1,4 @@
+import { FacturationComponent } from './views/modules/reporting/tableau-de-bord/facturation/facturation.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { CUSTOM_ELEMENTS_SCHEMA, LOCALE_ID, NgModule } from '@angular/core';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -157,7 +158,8 @@ registerLocaleData(localeFr);
     RechargementEspeceComponent,
     HistoriqueTransactionComponent,
     TransactionServiceComponent,
-    TransactionAgentComponent
+    TransactionAgentComponent,
+    FacturationComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
