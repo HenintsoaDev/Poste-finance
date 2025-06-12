@@ -121,5 +121,6 @@ export const environment = {
 
   //** Dashboard */
   facturation: "dashboard/facturation",
-  details_rechargement: "dashboard/details_rechargement"
+  details_rechargement: "dashboard/details_rechargement",
+  details_retrait: "dashboard/details_retrait_titulaire"
 };

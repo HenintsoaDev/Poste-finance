@@ -12,11 +12,12 @@ import Swal from 'sweetalert2';
 import { AuthService } from 'app/services/auth.service';
 
 @Component({
-  selector: 'app-detail-rechargement',
-  templateUrl: './detail-rechargement.component.html',
-  styleUrls: ['./detail-rechargement.component.scss']
+  selector: 'app-detail-retrait',
+  templateUrl: './detail-retrait.component.html',
+  styleUrls: ['./detail-retrait.component.scss']
 })
-export class DetailRechargementComponent extends Translatable implements OnInit {
+export class DetailRetraitComponent extends Translatable implements OnInit {
+
   endpoint = "";
   header = [
       {"nomColonne" : this.__('dashboard.date'),"colonneTable" : "date_transaction","table" : "transaction"},
@@ -72,7 +73,7 @@ export class DetailRechargementComponent extends Translatable implements OnInit 
 }
 
 ngOnInit(): void {
-  this.endpoint = environment.baseUrl + '/' + environment.details_rechargement; 
+  this.endpoint = environment.baseUrl + '/' + environment.details_retrait; 
   //this.passageService.clear();
   
   this.passageService.clear();
@@ -225,6 +226,5 @@ print(transactions:any[]){
     return tab;
 
 }
-
 
 }

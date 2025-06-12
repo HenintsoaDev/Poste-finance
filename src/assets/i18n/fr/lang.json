@@ -589,6 +589,7 @@
         "facturation_HPM" : "Facturation hors paiement de masse",
         "facturation_SNP" : "Facturation paiement de masse",
         "title_detail_rechargement" : "Détails de rechargement",
+        "title_detail_retrait" : "Détails de retrait titulaire",
         "title_facturation" : "Facturations",
         "num_transac":"N° transaction",
         "date" :"Date",
