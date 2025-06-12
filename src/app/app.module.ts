@@ -75,6 +75,7 @@ import { RetraitEspeceComponent } from './views/modules/gestion-compte/operation
 import { HistoriqueTransactionComponent } from './views/modules/reporting/suivi-transaction/historique-transaction/historique-transaction.component';
 import { TransactionServiceComponent } from './views/modules/reporting/suivi-transaction/transaction-service/transaction-service.component';
 import { TransactionAgentComponent } from './views/modules/reporting/suivi-transaction/transaction-agent/transaction-agent.component';
+import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 
 
 registerLocaleData(localeFr);
@@ -159,7 +160,8 @@ registerLocaleData(localeFr);
     HistoriqueTransactionComponent,
     TransactionServiceComponent,
     TransactionAgentComponent,
-    FacturationComponent
+    FacturationComponent,
+    DetailRechargementComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

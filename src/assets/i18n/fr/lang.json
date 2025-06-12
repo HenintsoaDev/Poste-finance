@@ -587,7 +587,17 @@
         "part_num" : "Part Numherit",
         "recap_global" : "Récapitulatif global",
         "facturation_HPM" : "Facturation hors paiement de masse",
-        "facturation_SNP" : "Facturation paiement de masse"
+        "facturation_SNP" : "Facturation paiement de masse",
+        "title_detail_rechargement" : "Détails de rechargement",
+        "title_facturation" : "Facturations",
+        "num_transac":"N° transaction",
+        "date" :"Date",
+        "agence" :"Bureau",
+        "beneficiaire" :  "Bénéficiaire",
+        "num_compte":"N° compte",
+        "wallet_carte":"Type de compte"
+
+        
 
 
     }

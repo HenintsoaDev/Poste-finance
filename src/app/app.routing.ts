@@ -46,6 +46,7 @@ import { RetraitEspeceComponent } from './views/modules/gestion-compte/operation
 import { TransactionServiceComponent } from './views/modules/reporting/suivi-transaction/transaction-service/transaction-service.component';
 import { TransactionAgentComponent } from './views/modules/reporting/suivi-transaction/transaction-agent/transaction-agent.component';
 import { FacturationComponent } from './views/modules/reporting/tableau-de-bord/facturation/facturation.component';
+import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 
 const routes: Routes =[
   
@@ -116,7 +117,8 @@ const routes: Routes =[
   ]},
   {
     path: 'dashboard', data: { breadcrumb: 'reporting.title_module' }, children: [
-      { path: 'facturation', component: FacturationComponent, data: { breadcrumb: 'transaction_jour.title' } },
+      { path: 'facturation', component: FacturationComponent, data: { breadcrumb: 'dashboard.title_facturation' } },
+      { path: 'details_rechargement', component: DetailRechargementComponent, data: { breadcrumb: 'dashboard.title_detail_rechargement' } },
     ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

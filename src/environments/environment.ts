@@ -120,5 +120,6 @@ export const environment = {
   reporting_transaction_agent: "reporting/transaction_par_agent",
 
   //** Dashboard */
-  facturation: "dashboard/facturation"
+  facturation: "dashboard/facturation",
+  details_rechargement: "dashboard/details_rechargement"
 };
