@@ -584,7 +584,7 @@
         "taxe" : "Taxe",
         "frais_ttc" :"Comission TTC",
         "part_paoma" : "Part PHCO",
-        "part_num" : "Part Numherit",
+        "part_num" : "Part NUMHERIT",
         "recap_global" : "Récapitulatif global",
         "facturation_HPM" : "Facturation hors paiement de masse",
         "facturation_SNP" : "Facturation paiement de masse",
