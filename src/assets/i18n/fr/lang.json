@@ -596,7 +596,12 @@
         "agence" :"Bureau",
         "beneficiaire" :  "Bénéficiaire",
         "num_compte":"N° compte",
-        "wallet_carte":"Type de compte"
+        "wallet_carte":"Type de compte",
+        "paiement_masse_societe" : "Paiement de masse société",
+        "paiement_masse_etat" : "Paiement de masse état",
+        "title_paiement_masse" : "Paiement de masse",
+        "taux" : "Taux",
+        "societe" : "Société"
 
         
 

@@ -48,6 +48,7 @@ import { TransactionAgentComponent } from './views/modules/reporting/suivi-trans
 import { FacturationComponent } from './views/modules/reporting/tableau-de-bord/facturation/facturation.component';
 import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 import { DetailRetraitComponent } from './views/modules/reporting/tableau-de-bord/detail-retrait/detail-retrait.component';
+import { PaiementMasseComponent } from './views/modules/reporting/tableau-de-bord/paiement-masse/paiement-masse.component';
 
 const routes: Routes =[
   
@@ -121,6 +122,7 @@ const routes: Routes =[
       { path: 'facturation', component: FacturationComponent, data: { breadcrumb: 'dashboard.title_facturation' } },
       { path: 'details_rechargement', component: DetailRechargementComponent, data: { breadcrumb: 'dashboard.title_detail_rechargement' } },
       { path: 'details_retrait_titulaire', component: DetailRetraitComponent, data: { breadcrumb: 'dashboard.title_detail_retrait' } },
+      { path: 'paiement_de_masse', component: PaiementMasseComponent, data: { breadcrumb: 'dashboard.title_paiement_masse' } },
     ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];

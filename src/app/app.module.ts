@@ -77,6 +77,7 @@ import { TransactionServiceComponent } from './views/modules/reporting/suivi-tra
 import { TransactionAgentComponent } from './views/modules/reporting/suivi-transaction/transaction-agent/transaction-agent.component';
 import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 import { DetailRetraitComponent } from './views/modules/reporting/tableau-de-bord/detail-retrait/detail-retrait.component';
+import { PaiementMasseComponent } from './views/modules/reporting/tableau-de-bord/paiement-masse/paiement-masse.component';
 
 
 registerLocaleData(localeFr);
@@ -163,7 +164,8 @@ registerLocaleData(localeFr);
     TransactionAgentComponent,
     FacturationComponent,
     DetailRechargementComponent,
-    DetailRetraitComponent
+    DetailRetraitComponent,
+    PaiementMasseComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [
