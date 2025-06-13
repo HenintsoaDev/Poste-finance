@@ -63,7 +63,7 @@
         "oui_ajouter" : "Oui, ajouter",
         "oui_generer" : "Oui, générer",
         "oui_activer" : "Oui, activer",
-        "oui_desactiver" : "Oui, desactiver",
+        "oui_desactiver" : "Oui, désactiver",
         "oui_autoriser" : "Oui, autoriser",
         "oui_envoyer" : "Oui, envoyer",
         "enregistrer_donnee_?" : "Souhaitez-vous vraiment enregistrer cette donnée  ? ",
@@ -79,8 +79,8 @@
         "clique_pour_activer" : "Cliquez pour activer",
         "clique_pour_desactiver" : "Cliquez pour désactiver",
         "activer_compte_?" : "Souhaitez-vous vraiment activer ce compte ? ",
-        "desactiver_compte_?" : "Souhaitez-vous vraiment desactiver ce compte ? ",
-        "envoie_code_rechargement_?"  : "Souhaitez-vous vraiment envoier le code de rechargement? ",
+        "desactiver_compte_?" : "Souhaitez-vous vraiment désactiver ce compte ? ",
+        "envoie_code_rechargement_?"  : "Souhaitez-vous vraiment envoyer le code de rechargement? ",
         "oui_valider" : "Oui, valider",
 
         "oui" : "Oui",
@@ -196,7 +196,7 @@
         "affect" : "Affectation "  
     },
     "utilisateur" : {
-        "title_breadcrumb_api_numherit" : "Lister les utilisateurs API Numherit",
+        "title_breadcrumb_api_numherit" : "Lister les utilisateurs API NUMHERIT",
         "title_breadcrumb" : "Lister les utilisateurs",
         "title" : "Gestion des utilisateurs",
         "nom" : "Nom",
@@ -477,7 +477,7 @@
 
     "partenaire" : {
         "title" : "Lister les partenaires financiers",
-        "title_sous_module" : "Gestion commision réseau PHCO",
+        "title_sous_module" : "Gestion commission réseau PHCO",
         "new_partenaire" : "Nouveau partenaire",
         "taux_commission_paiment_hors_masse" : "Taux de commission hors paiement de masse",
         "taux_commission_paiment_masse" : "Taux de commission paiement de masse",
@@ -582,7 +582,7 @@
         "montant":"Montant",
         "frais" :"Commission",
         "taxe" : "Taxe",
-        "frais_ttc" :"Comission TTC",
+        "frais_ttc" :"Commission TTC",
         "part_paoma" : "Part PHCO",
         "part_num" : "Part NUMHERIT",
         "recap_global" : "Récapitulatif global",
@@ -597,8 +597,8 @@
         "beneficiaire" :  "Bénéficiaire",
         "num_compte":"N° compte",
         "wallet_carte":"Type de compte",
-        "paiement_masse_societe" : "Paiement de masse société",
-        "paiement_masse_etat" : "Paiement de masse état",
+        "paiement_masse_societe" : "Paiement de masse Société",
+        "paiement_masse_etat" : "Paiement de masse État",
         "title_paiement_masse" : "Paiement de masse",
         "taux" : "Taux",
         "societe" : "Société"
