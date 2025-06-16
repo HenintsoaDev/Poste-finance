@@ -20,6 +20,7 @@ export class PaiementMasseComponent extends Translatable implements OnInit {
   dateFin: string = ""//new Date().toISOString().substring(0, 10);
   walletCarteProfil : string = "";
   data: any = [];
+  titlePdf: string;
 
   constructor(
     private datePipe: DatePipe,  
@@ -60,121 +61,28 @@ export class PaiementMasseComponent extends Translatable implements OnInit {
       this.data.paiement_masse_societe = result.paiement_masse_societe
       this.data.paiement_masse_etat = result.paiement_masse_etat
       this.data.recap = result.recp_global
-  }
-
-  async exportPdf() {
 
 
-    console.log("ssss");
-    
-    this.authService.exportPdf(this.print(this.data),"title").then(
-      (response: any)=>{},
-      (error:any)=>{
-        console.log(error)
-      }
-    );
-  }
 
-  print(dataFacture:any){
+      let date_debut_fr = this.datePipe.transform(this.dateDebut, 'dd-MM-yyyy');
+      let date_fin_fr = this.datePipe.transform(this.dateFin, 'dd-MM-yyyy');
 
 
-    let tabfacturation_HPM = dataFacture.facturation_HPM.map((facturation_HPM: any, index: number) => {
-      let t: any = {};
-        t[this.__('dashboard.nom_service')] = facturation_HPM.label;
-        t[this.__('dashboard.nb_transaction')] = facturation_HPM.nb;
-        t[this.__('dashboard.montant')] = facturation_HPM.mt_total;
-        t[this.__('dashboard.frais')] = facturation_HPM.com_ht_total;
-        t[this.__('dashboard.taxe')] = facturation_HPM.tva_total;
-        t[this.__('dashboard.frais_ttc')] = facturation_HPM.com_ttc_total;
-        t[this.__('dashboard.part_paoma')] = facturation_HPM.poste_total;
-        t[this.__('dashboard.part_num')] = facturation_HPM.numherit_total;
-              
-      return t;
-    });
-
-    let tabfacturation_SNP = dataFacture.facturation_SUNUPAY.map((facturation_SUNUPAY: any, index: number) => {
-      let t: any = {};
-        t[this.__('dashboard.nom_service')] = facturation_SUNUPAY.label;
-        t[this.__('dashboard.nb_transaction')] = facturation_SUNUPAY.nb;
-        t[this.__('dashboard.montant')] = facturation_SUNUPAY.mt_total;
-        t[this.__('dashboard.frais')] = facturation_SUNUPAY.com_ht_total;
-        t[this.__('dashboard.taxe')] = facturation_SUNUPAY.tva_total;
-        t[this.__('dashboard.frais_ttc')] = facturation_SUNUPAY.com_ttc_total;
-        t[this.__('dashboard.part_paoma')] = facturation_SUNUPAY.poste_total;
-        t[this.__('dashboard.part_num')] = facturation_SUNUPAY.numherit_total;
-              
-      return t;
-    });
-
-    let tabrecap: any[] = [];     
-    
-    tabrecap.push({
-      [this.__('dashboard.nom_service')] : dataFacture.recapitulatif_global.label,
-      [this.__('dashboard.nb_transaction')] : dataFacture.recapitulatif_global.nb,
-      [this.__('dashboard.montant')] : dataFacture.recapitulatif_global.mt_total,
-      [this.__('dashboard.frais')] : dataFacture.recapitulatif_global.com_ht_total,
-      [this.__('dashboard.taxe')] : dataFacture.recapitulatif_global.tva_total,
-      [this.__('dashboard.frais_ttc')] : dataFacture.recapitulatif_global.com_ttc_total,
-      [this.__('dashboard.part_paoma')] : dataFacture.recapitulatif_global.poste_total,
-      [this.__('dashboard.part_num')] : dataFacture.recapitulatif_global.numherit_total
-    });
-
-    let tab: any[] = [];
-
-    // Ligne titre pour HPM
-    tab.push({ 
-      
-      [this.__('dashboard.nom_service')] : '',
-      [this.__('dashboard.nb_transaction')] : '',
-      [this.__('dashboard.montant')] : '',
-      [this.__('dashboard.frais')] : this.__('dashboard.nom_service'),
-      [this.__('dashboard.taxe')] : this.__('dashboard.facturation_HPM'),
-      [this.__('dashboard.frais_ttc')] : '',
-      [this.__('dashboard.part_paoma')] : '',
-      [this.__('dashboard.part_num')] : ''
-
-    });
-    tab.push(...tabfacturation_HPM);
-
-    // Ligne titre pour SNP
-    tab.push({ 
-      
-      [this.__('dashboard.nom_service')] : '',
-      [this.__('dashboard.nb_transaction')] : '',
-      [this.__('dashboard.montant')] : '',
-      [this.__('dashboard.frais')] : this.__('dashboard.nom_service'),
-      [this.__('dashboard.taxe')] : this.__('dashboard.facturation_SNP'),
-      [this.__('dashboard.frais_ttc')] : '',
-      [this.__('dashboard.part_paoma')] : '',
-      [this.__('dashboard.part_num')] : ''
-
-    });
-
-    tab.push(...tabfacturation_SNP);
-
-    // Ligne titre pour le récapitulatif
-    tab.push({ 
-      
-      [this.__('dashboard.nom_service')] : '',
-      [this.__('dashboard.nb_transaction')] : '',
-      [this.__('dashboard.montant')] : '',
-      [this.__('dashboard.frais')] : this.__('dashboard.nom_service'),
-      [this.__('dashboard.taxe')] : this.__('dashboard.recap_global'),
-      [this.__('dashboard.frais_ttc')] : '',
-      [this.__('dashboard.part_paoma')] : '',
-      [this.__('dashboard.part_num')] : ''
-
-    });
-
-    tab.push(...tabrecap);
-
- 
+      let title = this.__("dashboard.title_paiement_masse") + ' ';
 
     
-
-    return tab;
-
+      const mapTypeCompte: { [key: string]: string } = { '0': this.__("global.wallet"), '1': this.__("global.carte"),};
+      title += mapTypeCompte[this.typeCompte] || '';
+      title += (date_debut_fr != null ? " " + this.__("suivi_compte.from") + ' ' + date_debut_fr + ' ' : '');       
+      title += (date_fin_fr != null ? " " + this.__("suivi_compte.to") + ' ' + date_fin_fr + ' ' : ''); 
+      
+      this.titlePdf = title;
+      
   }
+
+  
+
+  
 
 
   exportEdtToPdf() {

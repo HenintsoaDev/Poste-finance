@@ -66,7 +66,10 @@
                     </div>
                 </div>
 
-                <div id="content" style="padding: 20px;">
+                <div id="content" style="padding: 20px; font-family: Arial, sans-serif; word-spacing: 2px;" >
+
+                    <div class="text-center"  style="width: 100%;"  *ngIf="data.paiement_masse_societe" > <h3> {{ titlePdf }}</h3></div>
+
                     <div class="text-center" *ngIf="data.paiement_masse_societe" style="width: 100%;"><h4 class="bold"> {{ __('dashboard.paiement_masse_societe')}} </h4></div>
 
                     <div class="card" *ngIf="data.paiement_masse_societe">

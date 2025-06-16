@@ -66,7 +66,10 @@
                     </div>
                 </div>
 
-                <div id="content" style="padding: 20px;">
+                <div id="content" style="padding: 20px; font-family: Arial, sans-serif; word-spacing: 2px;" >
+
+                   
+                    <div class="text-center"  style="width: 100%;"  *ngIf="data.facturation_HPM" > <h3> {{ titlePdf }}</h3></div>
                     <div class="text-center" *ngIf="data.facturation_HPM" style="width: 100%;"><h4 class="bold"> {{ __('dashboard.facturation_HPM')}} </h4></div>
 
                     <div class="card" *ngIf="data.facturation_HPM">
@@ -77,12 +80,12 @@
                                     <tr>
                                         <th > <span > {{ __("dashboard.nom_service")}}</span> </th>
                                         <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} {{ __("global.currency")}}</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
@@ -114,12 +117,12 @@
                                     <tr>
                                         <th > <span > {{ __("dashboard.nom_service")}}</span> </th>
                                         <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} {{ __("global.currency")}}</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
@@ -151,12 +154,12 @@
                                     <tr>
                                         <th > <span > {{ __("dashboard.nom_service")}}</span> </th>
                                         <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} {{ __("global.currency")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} {{ __("global.currency")}}</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
