@@ -113,7 +113,7 @@ export class FacturationComponent extends Translatable implements OnInit {
   
     pdf.html(content, {
       callback: (file) => {
-        file.save("facture.pdf", { returnPromise: true }).then(() => {
+        file.save(this.titlePdf+".pdf", { returnPromise: true }).then(() => {
           const titleRef = document.getElementById('titleEdt');
           if (titleRef) titleRef.remove(); // ou style.display = 'none';
         });
