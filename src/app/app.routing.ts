@@ -6,10 +6,7 @@ import { Routes, RouterModule } from '@angular/router';
 import { AdminLayoutComponent } from './layouts/admin-layout/admin-layout.component';
 import { LoginComponent } from './views/login/login.component';
 import { HomeComponent } from './views/home/home.component';
-//import { AdministrationComponent } from './administration/administration.component';
 import { ProfilComponent } from './views/profil/profil.component';
-import { MonetiqueComponent } from './views/modules/monetique/monetique.component';
-import { RechargeEspeceComponent } from './views/modules/monetique/recharge-espece/recharge-espece.component';
 import { WelcomeModuleComponent } from './views/welcome-module/welcome-module.component';
 import { ModuleComponent } from './views/modules/adm/parametrage/module/module.component';
 import { SousModuleComponent } from './views/modules/adm/parametrage/sous-module/sous-module.component';
@@ -122,7 +119,7 @@ const routes: Routes =[
       { path: 'facturation', component: FacturationComponent, data: { breadcrumb: 'dashboard.title_facturation' } },
       { path: 'details_rechargement', component: DetailRechargementComponent, data: { breadcrumb: 'dashboard.title_detail_rechargement' } },
       { path: 'details_retrait_titulaire', component: DetailRetraitComponent, data: { breadcrumb: 'dashboard.title_detail_retrait' } },
-      { path: 'paiement_de_masse', component: PaiementMasseComponent, data: { breadcrumb: 'dashboard.title_paiement_masse' } },
+      { path: 'etatCommissionPM', component: PaiementMasseComponent, data: { breadcrumb: 'dashboard.title_paiement_masse' } },
     ]},
   { path: '**', component: PageNotFoundComponent, data: { is404: true } }
 ];
