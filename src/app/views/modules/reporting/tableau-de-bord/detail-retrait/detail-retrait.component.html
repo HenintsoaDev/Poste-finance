@@ -5,15 +5,15 @@
                 <div class="card card-plain">
                     <div class="card-header card-header-primary">
                         <div class="button-container">
-                            <div class="left-buttons" *ngIf="transactions">
+                            <div class="left-buttons"></div>
+
+                            <div class="right-button" *ngIf="transactions">
                                <button class="btn btn-secondary export-btn excel text-white"  (click)="exportExcel()">
                                     {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
                                 </button>
                                 <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf()">
                                     {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
                                 </button>
-                            </div>
-                            <div class="right-button">
                             </div>
                         </div>
                     </div>
