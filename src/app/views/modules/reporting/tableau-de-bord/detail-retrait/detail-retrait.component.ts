@@ -22,23 +22,24 @@ export class DetailRetraitComponent extends Translatable implements OnInit {
   header = [
       {"nomColonne" : this.__('dashboard.date'),"colonneTable" : "date_transaction","table" : "transaction"},
       {"nomColonne" : this.__('dashboard.num_transac'),"colonneTable" : "num_transac","table" : "transaction"},
-      {"nomColonne" : this.__('dashboard.agence'),"colonneTable" : "agence","table" : "bureau"},
       {"nomColonne" : this.__('dashboard.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "transaction", "align": "right"},
       {"nomColonne" : this.__('dashboard.frais') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "transaction", "align": "right"},
       {"nomColonne" : this.__('dashboard.beneficiaire'),"colonneTable" : "nom","table" : "beneficiaire"},
       {"nomColonne" : this.__('dashboard.num_compte'),"colonneTable" : "num_compte","table" : "carte"},
       {"nomColonne" : this.__('dashboard.wallet_carte'),"colonneTable" : "wallet_carte","table" : "transaction"},
+      {"nomColonne" : this.__('dashboard.agence'),"colonneTable" : "agence","table" : "bureau"},
+
   ];
 
   objetBody = [
       {'name' : 'date_transaction','type' : 'text',},
       {'name' : 'num_transac','type' : 'text',},
-      {'name' : 'agence','type' : 'text',},
       {'name' : 'montant','type' : 'montant',},
       {'name' : 'commission','type' : 'montant',},
       {'name' : 'beneficiaire','type' : 'text',},
       {'name' : 'numcompte','type' : 'text',},
       {'name' : 'wallet_carte','type' : 'text',},
+      {'name' : 'agence','type' : 'text',},
   ];
 
   listIcon = [
