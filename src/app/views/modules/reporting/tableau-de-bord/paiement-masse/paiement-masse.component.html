@@ -78,19 +78,25 @@
                             <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
                                 <thead>
                                     <tr>
-                                        <th > <span > {{ __("dashboard.societe")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="w-300"> <span > {{ __("dashboard.societe")}}</span> </th>
+                                        <th  class="text-right w-300"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
                                         <th  class="text-right"> <span > {{ __("dashboard.taux")}} ({{ __("global.currency")}})</span> </th>
                                         <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
-                                <tbody>
+                                <tbody *ngIf="data.paiement_masse_societe.length != 0">
                                     <tr *ngFor="let paiement_masse_societe of data.paiement_masse_societe; let isLast = last" >
                                         <td >{{ paiement_masse_societe.societe}}</td>
                                         <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ paiement_masse_societe.somme_montant}}</td>
                                         <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ paiement_masse_societe.taux }}</td>
                                         <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ paiement_masse_societe.some_commission	}}</td>
+                                    </tr>
+                                </tbody>
+
+                                <tbody *ngIf="data.paiement_masse_societe.length == 0">
+                                    <tr>
+                                        <td colspan="4" class="text-center"> {{ __("table.aucun_donnee")}} </td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -107,14 +113,14 @@
                             <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
                                 <thead>
                                     <tr>
-                                        <th > <span > {{ __("dashboard.societe")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="w-300"> <span > {{ __("dashboard.societe")}}</span> </th>
+                                        <th  class="text-right w-300"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
                                         <th  class="text-right"> <span > {{ __("dashboard.taux")}} ({{ __("global.currency")}})</span> </th>
                                         <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
-                                <tbody>
+                                <tbody *ngIf="data.paiement_masse_etat.length != 0">
                                     <tr *ngFor="let paiment_masse_etat of data.paiement_masse_etat; let isLast = last" >
                                         <td >{{ paiment_masse_etat.societe}}</td>
                                         <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ paiment_masse_etat.somme_montant}}</td>
@@ -122,6 +128,11 @@
                                         <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ paiment_masse_etat.some_commission}}</td>
                                     </tr>
                                     
+                                </tbody>
+                                <tbody *ngIf="data.paiement_masse_etat.length == 0">
+                                    <tr>
+                                        <td colspan="4" class="text-center"> {{ __("table.aucun_donnee")}} </td>
+                                    </tr>
                                 </tbody>
                             </table>
                         </div>
@@ -137,8 +148,8 @@
                             <table class="table table-hover table-bordered table-striped mb-0 shimmer-table">
                                 <thead>
                                     <tr>
-                                        <th ></th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="w-300"> <span > {{ __("dashboard.societe")}}</span> </th>
+                                        <th  class="text-right w-300"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
                                         <th  class="text-right"> <span > {{ __("dashboard.frais")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
