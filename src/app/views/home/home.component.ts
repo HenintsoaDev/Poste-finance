@@ -60,6 +60,10 @@ export class HomeComponent extends Translatable implements OnInit {
                         }
                         sessionStorage.setItem('message-header', message);
                     }
+                }else if (response['code'] === 401 && response['msg'].includes("reconnecter")) {
+                    return this.router.navigate(['/login']);
+                }else{
+                    console.log("xxx", response['msg'].includes("reconnecter"));
                 }
                 this.menuService.updateMenuItems(module);
                 this.menuService.setMenuItemsModule(module);

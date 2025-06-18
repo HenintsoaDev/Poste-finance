@@ -259,11 +259,12 @@ export class NavbarComponent implements OnInit {
 
 
 
+        console.log('aaaaa');
 
         sessionStorage.removeItem('message-header');
         this.httpService.get(environment.header_message + module + "/display_message").pipe(
             tap(response => {
-                console.log("response XHR", response);
+                console.log("response XHsssssssR", response);
                 if (response['code'] === 200) {
                     if(response['data'].length > 0){
                         let message = "";
@@ -273,9 +274,11 @@ export class NavbarComponent implements OnInit {
                         }
                         this.messageHeader = message;
                         sessionStorage.setItem('message-header', message);
-                    }else{
+                    }else {
                         this.messageHeader = '';
                     }
+                }else if (response['code'] === 401 && response['msg'].includes("reconnecter")) {
+                    return this.router.navigate(['/login']);
                 }
                 this.menuService.updateMenuItems(module);
                 this.menuService.setMenuItemsModule(module);
