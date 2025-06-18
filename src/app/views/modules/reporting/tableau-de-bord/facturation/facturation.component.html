@@ -81,26 +81,26 @@
                                 <thead>
                                     <tr>
                                         <th class="w-300"> <span > {{ __("dashboard.nom_service")}}</span> </th>
-                                        <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="text-center" nowrap > <span > {{ __("dashboard.nb_transaction")}}</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
                                 <tbody>
                                     <tr *ngFor="let facture_HPM of data.facturation_HPM; let isLast = last" >
                                         <td [ngClass]="{ 'bold-td': isLast }">{{ facture_HPM.label}}</td>
-                                        <td class="text-center" [ngClass]="{ 'bold-td': isLast }" >{{ facture_HPM.nb}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.mt_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.com_ht_total, " ") }}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.tva_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.com_ttc_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.poste_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.numherit_total, " ")}}</td>
+                                        <td class="text-center" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ facture_HPM.nb}}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.mt_total, " ")}}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.com_ht_total, " ") }}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.tva_total, " ")}}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.com_ttc_total, " ")}}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.poste_total, " ")}}</td>
+                                        <td class="text-right" nowrap [ngClass]="{ 'bold-td': isLast }" >{{ formatNumber(facture_HPM.numherit_total, " ")}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -118,26 +118,26 @@
                                 <thead>
                                     <tr>
                                         <th class="w-300"> <span > {{ __("dashboard.nom_service")}}</span> </th>
-                                        <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="text-center" nowrap > <span > {{ __("dashboard.nb_transaction")}}</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
                                 <tbody>
                                     <tr *ngFor="let facture_SNP of nbPair; let isLast = last" >
                                         <td [ngClass]="{ 'bold-td': isLast }">{{ facture_SNP.label}}</td>
-                                        <td class="text-center" [ngClass]="{ 'bold-td': isLast }">{{ facture_SNP.nb}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.mt_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.com_ht_total, " ") }}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.tva_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.com_ttc_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.poste_total, " ")}}</td>
-                                        <td class="text-right" [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.numherit_total, " ")}}</td>
+                                        <td class="text-center" nowrap  [ngClass]="{ 'bold-td': isLast }">{{ facture_SNP.nb}}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.mt_total, " ")}}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.com_ht_total, " ") }}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.tva_total, " ")}}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.com_ttc_total, " ")}}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.poste_total, " ")}}</td>
+                                        <td class="text-right"  nowrap [ngClass]="{ 'bold-td': isLast }">{{ formatNumber(facture_SNP.numherit_total, " ")}}</td>
                                     </tr>
                                 </tbody>
                             </table>
@@ -155,26 +155,26 @@
                                 <thead>
                                     <tr>
                                         <th class="w-300"> <span ></span> </th>
-                                        <th class="text-center"> <span > {{ __("dashboard.nb_transaction")}}</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
-                                        <th  class="text-right"> <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
+                                        <th class="text-center" nowrap > <span > {{ __("dashboard.nb_transaction")}}</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.montant")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ht")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.taxe")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.frais_ttc")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_paoma")}} ({{ __("global.currency")}})</span> </th>
+                                        <th  class="text-right" nowrap > <span > {{ __("dashboard.part_num")}} ({{ __("global.currency")}})</span> </th>
                                     </tr>
                                     
                                 </thead>    
                                 <tbody>
                                     <tr >
                                         <td class="bold-td">{{ data.recapitulatif_global.label}}</td>
-                                        <td class="text-center bold-td">{{ data.recapitulatif_global.nb}}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.mt_total, " ")}}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.com_ht_total, " ") }}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.tva_total, " ")}}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.com_ttc_total, " ")}}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.poste_total, " ")}}</td>
-                                        <td class="text-right bold-td">{{ formatNumber(data.recapitulatif_global.numherit_total, " ")}}</td>
+                                        <td class="text-center bold-td" nowrap >{{ data.recapitulatif_global.nb}}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.mt_total, " ")}}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.com_ht_total, " ") }}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.tva_total, " ")}}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.com_ttc_total, " ")}}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.poste_total, " ")}}</td>
+                                        <td class="text-right bold-td" nowrap >{{ formatNumber(data.recapitulatif_global.numherit_total, " ")}}</td>
                                     </tr>
                                 </tbody>
                             </table>
