@@ -24,7 +24,7 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
         {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_compte_commission", "align": "right"},
-        {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_compte_commission", "align": "right"},
+        {"nomColonne" :  this.__('suivi_compte.montant'),"colonneTable" : "montant","table" : "releve_compte_commission", "align": "right"},
         {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_compte_commission", "align": "right"},
         {"nomColonne" :  this.__('suivi_compte.operation'),"colonneTable" : "operation","table" : "releve_compte_commission"},
         {"nomColonne" :  this.__('suivi_compte.coms'),"colonneTable" : "commentaire","table" : "releve_compte_commission"},
@@ -191,7 +191,7 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
             t[this.__('suivi_compte.date')] = suivi.date_transaction;
             t[this.__('suivi_compte.num_transac')] = suivi.num_transac;
             t[this.__('suivi_compte.solde_avant')] = suivi.solde_avant;
-            t[this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')'] = suivi.montant;
+            t[this.__('suivi_compte.montant')] = suivi.montant;
             t[this.__('suivi_compte.solde_apres')] = suivi.solde_apres;
             t[this.__('suivi_compte.operation')] = suivi.operation;
             t[this.__('suivi_compte.coms')] = suivi.commentaire;
@@ -205,7 +205,7 @@ export class SuiviCompteCommissionComponent extends Translatable implements OnIn
             [this.__('suivi_compte.date')]: '',
             [this.__('suivi_compte.num_transac')]: '',
             [this.__('suivi_compte.solde_avant')]: this.__('global.total_debit'),
-            [this.__('suivi_compte.montant') + ' (' + this.__('global.currency') + ')']: this.suivi_comptes_totaux?.DEBIT ?? 0,
+            [this.__('suivi_compte.montant')]: this.suivi_comptes_totaux?.DEBIT ?? 0,
             [this.__('suivi_compte.solde_apres')]: '',
             [this.__('suivi_compte.operation')]: this.__('global.total_credit'),
             [this.__('suivi_compte.coms')]: this.suivi_comptes_totaux?.CREDIT ?? 0,

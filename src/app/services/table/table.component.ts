@@ -503,10 +503,18 @@ export class TableComponent extends Translatable {
       const post = text.split('###');
     
       if (post[0] === 'null') return '';
-      if (post[1] && post[1] === 'montant') return 'right';
+      if (post[1] && post[1] === 'montant')  {
+        return {
+          'text-align': 'right',
+          'white-space' : 'nowrap',
+          'font-weight' : 'bold'
+        };
+      }
     
       return ''; // optionnel : ajouter un retour par défaut
     }
+
+   
 
 
 

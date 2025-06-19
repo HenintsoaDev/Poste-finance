@@ -21,7 +21,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
     endpoint = "";
     header = [
         {"nomColonne" : this.__('global.date'),"colonneTable" : "datevirement","table" : "virement"},
-        {"nomColonne" : this.__('global.montant') + "(" + this.__('global.currency') + ")","colonneTable" : "montant","table" : "virement", "align": "right"},
+        {"nomColonne" : this.__('global.montant'),"colonneTable" : "montant","table" : "virement", "align": "right"},
         {"nomColonne" : this.__('global.statut'),"colonneTable" : "statut","table" : "virement"},
         {"nomColonne" : this.__('global.date') +" "+ this.__('global.validation'),"colonneTable" : "datevalidation","table" : "virement"},
         {"nomColonne" : this.__('suivi_compte.type_compte'),"colonneTable" : "wallet_carte","table" : "virement"},
@@ -443,7 +443,7 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         let tab = virements.map((virement: any, index: number) => {
             let t: any = {};
                 t[this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')] = virement.date_virement;
-                t[this.__('global.montant')+ ' (' + this.__('global.currency') + ')'] = virement.montant;
+                t[this.__('global.montant')] = virement.montant;
                 t[this.__('global.user_creation')] = virement.user_crea;
                 t[this.__('global.statut')] = (virement.statut == 0) ? "En attente de validation" : (virement.statut == 1) ? "Validé" : "Rejeté";
                 t[this.__('global.user_validation')] = virement.user_validation;
@@ -455,9 +455,9 @@ export class HistoriqueVirementsComponent extends Translatable implements OnInit
         // puis ajouter les totaux à la fin
         tab.push({
           [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.virement')]: '',
-          [this.__('global.montant')+ ' (' + this.__('global.currency') + ')']: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
+          [this.__('global.montant')]: this.__('virement.total_carte') + ": " + (this.virement_totaux?.Carte ?? 0),
           [this.__('global.user_creation')]: '',
-          [this.__('global.statut') + ' (' + this.__('global.currency') + ')']: '',
+          [this.__('global.statut')]: '',
           [this.__('global.user_validation')]: '',
           [this.__('global.date') + " " + this.__('global.of') + " " + this.__('global.validation')]: this.__('virement.total_wallet') + ": " + (this.virement_totaux?.Wallet ?? 0),
           [this.__('suivi_compte.type_compte')]: '',

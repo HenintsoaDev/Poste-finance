@@ -27,7 +27,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
       {"nomColonne" :  this.__('demande_credit.num_demande'),"colonneTable" : "num_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_credit_bureau"},
       {"nomColonne" :  this.__('demande_credit.bureau'),"colonneTable" : "name","table" : "bureau"},
-      {"nomColonne" :  this.__('demande_credit.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_credit_bureau", "align": "right"},
+      {"nomColonne" :  this.__('demande_credit.montant'),"colonneTable" : "montant","table" : "demande_credit_bureau", "align": "right"},
       {"nomColonne" :  this.__('demande_credit.demandeur'),"colonneTable" : "nom","table" : "user"},
       {"nomColonne" :  this.__('demande_credit.wallet_carte'),"colonneTable" : "","table" : ""},
       {"nomColonne" : this.__('global.action')}
@@ -333,7 +333,7 @@ export class DemandeCreditComponent extends Translatable implements OnInit {
           t[this.__('demande_credit.num_demande')] = demande_credit.num_demande;
           t[this.__('demande_credit.ref_demande')] = demande_credit.ref_demande;
           t[this.__('demande_credit.bureau')] = demande_credit.agence_crediter;
-          t[this.__('demande_credit.montant') + ' (' + this.__('global.currency') + ')'] = demande_credit.montant;
+          t[this.__('demande_credit.montant')] = demande_credit.montant;
 
           if(demande_credit.etat == 0) t[this.__('demande_credit.user_demande')] = demande_credit.user_demande;
           if(demande_credit.etat == 1) t[this.__('demande_credit.user_autorise')] = demande_credit.user_autorise;

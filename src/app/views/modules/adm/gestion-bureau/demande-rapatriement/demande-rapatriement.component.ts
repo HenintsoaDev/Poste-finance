@@ -27,7 +27,7 @@ export class DemandeRapatriementComponent extends Translatable implements OnInit
       {"nomColonne" :  this.__('demande_rapatriement.num_demande'),"colonneTable" : "num_demande","table" : "demande_rapatriement_bureau"},
       {"nomColonne" :  this.__('demande_rapatriement.ref_demande'),"colonneTable" : "ref_demande","table" : "demande_rapatriement_bureau"},
       {"nomColonne" :  this.__('demande_rapatriement.bureau'),"colonneTable" : "name","table" : "bureau"},
-      {"nomColonne" :  this.__('demande_rapatriement.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "demande_rapatriement_bureau", "align": "right"},
+      {"nomColonne" :  this.__('demande_rapatriement.montant'),"colonneTable" : "montant","table" : "demande_rapatriement_bureau", "align": "right"},
       {"nomColonne" :  this.__('demande_rapatriement.demandeur'),"colonneTable" : "nom","table" : "user"},
       {"nomColonne" :  this.__('demande_rapatriement.wallet_carte'),"colonneTable" : "wallet_carte","table" : "demande_credit_bureau"},
       {"nomColonne" : this.__('global.action')}
