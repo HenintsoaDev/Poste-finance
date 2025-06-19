@@ -28,7 +28,6 @@ export class ProfilComponent extends Translatable implements OnInit {
 
   async ngOnInit() { 
     this.user = <Auth> await  this.authService.getLoginUser();
-    console.log("xxxxxx", this.user);
   }
 
   onResetPassword()

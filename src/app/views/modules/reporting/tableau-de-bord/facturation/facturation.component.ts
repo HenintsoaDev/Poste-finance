@@ -22,6 +22,7 @@ export class FacturationComponent extends Translatable implements OnInit {
   data: any = [];
   titlePdf: string;
   showTitle = false;
+listShow: any = false;
 
   constructor(
     private datePipe: DatePipe,  
@@ -38,6 +39,8 @@ export class FacturationComponent extends Translatable implements OnInit {
 
  async  filtreTableau()
   {
+    this.listShow =true;
+    
       let filtre_search = "" ; 
       if(this.typeCompte != '2'){
           filtre_search = "&wallet_carte="+this.typeCompte;

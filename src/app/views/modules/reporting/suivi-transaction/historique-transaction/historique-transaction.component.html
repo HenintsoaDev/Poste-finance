@@ -1,5 +1,32 @@
 <div class="main-content">
     <div class="container-fluid">
+        <div class="row" *ngIf="listShow">
+            <div class="col-md-12">
+                <div class="card card-plain">
+                    <div class="card-header card-header-primary">
+                        <div class="button-container">
+
+                            <div class="left-button">
+                            </div>
+                            <div class="right-button">
+
+                                <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel()" >
+                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
+                                </button>
+                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf()">
+                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
+                                </button>
+
+                           
+                            </div>
+                        </div>
+
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <div class="row">
             <div class="col-md-12">
 
@@ -126,16 +153,7 @@
                 <div class="card" [ngStyle]="{'display': listShow ? 'block' : 'none'}" >
                     <div class="card-body">
 
-                        <div class="button-container">
-                            <div class="right-button">
-                                <button class="btn btn-secondary export-btn excel text-white" (click)="exportExcel()">
-                                    {{ __('global.export_excel') }} <img src="assets/img/icons8-export-excel-48.png" alt="Excel Icon">
-                                </button>
-                                <button class="btn btn-secondary export-btn pdf text-white" (click)="exportPdf()">
-                                    {{ __('global.export_pdf') }} <img src="assets/img/pdf.jpeg" alt="PDF Icon">
-                                </button>
-                            </div>
-                        </div>
+                     
 
                         <div class="table-responsive">
                             <app-table

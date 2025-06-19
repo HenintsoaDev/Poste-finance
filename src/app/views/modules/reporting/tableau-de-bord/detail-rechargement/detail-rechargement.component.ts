@@ -59,6 +59,7 @@ export class DetailRechargementComponent extends Translatable implements OnInit 
   loadingData = false;
   transactions: any = [];
   list_transactions_totaux: any;
+  listShow: any = false;
 
   constructor(
     private passageService: PassageService,
@@ -103,6 +104,7 @@ ngOnDestroy() {
 
 async filtreTableau() {
  
+  this.listShow = true;
   let filtre_search = "" ;
   filtre_search = ",transaction.wallet_carte|e|"+this.typeCompte;
 

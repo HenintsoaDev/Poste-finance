@@ -219,6 +219,7 @@ export class TransactionAgentComponent extends Translatable implements OnInit {
 
   filtreTableau() {
       this.showDataTable = true;
+      this.listShow = true;
 
     
       

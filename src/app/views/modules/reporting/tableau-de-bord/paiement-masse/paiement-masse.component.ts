@@ -21,6 +21,7 @@ export class PaiementMasseComponent extends Translatable implements OnInit {
   walletCarteProfil : string = "";
   data: any = [];
   titlePdf: string;
+  listShow: any = false;
 
   constructor(
     private datePipe: DatePipe,  
@@ -37,6 +38,8 @@ export class PaiementMasseComponent extends Translatable implements OnInit {
 
  async  filtreTableau()
   {
+      this.listShow = true;
+
       let filtre_search = "" ; 
       if(this.typeCompte != '2'){
           filtre_search = "&wallet_carte="+this.typeCompte;

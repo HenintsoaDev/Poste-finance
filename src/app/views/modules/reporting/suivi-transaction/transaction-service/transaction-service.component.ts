@@ -179,7 +179,7 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
     }
 
     filtreTableau() {
-        this.showDataTable = true;
+        this.listShow = true;
 
         let agence = "";
         if (this.agenceId != -1 && this.agenceId != undefined) agence = ",agence.rowid|e|" + this.agenceId;
@@ -209,7 +209,6 @@ export class TransactionServiceComponent extends Translatable implements OnInit 
         
         let filtreParMulti = service + filtreDate + where + filtre_wallet_carte + agence;
         this.passageService.appelURL(filtreParMulti);
-        this.showDataTable = true;
 
     }
 

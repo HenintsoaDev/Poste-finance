@@ -24,7 +24,7 @@ export class ReleveCompteComponent extends Translatable implements OnInit {
       {"nomColonne" : this.__('suivi_compte.date'),"colonneTable" : "date_transaction","table" : "releve_comptes_client"},
         {"nomColonne" :  this.__('suivi_compte.num_transac'),"colonneTable" : "num_transac","table" : "releve_comptes_client"},
         {"nomColonne" :  this.__('suivi_compte.solde_avant'),"colonneTable" : "solde_avant","table" : "releve_comptes_client", "align": "right"},
-        {"nomColonne" :  this.__('suivi_compte.montant') + '(' + this.__('global.currency') + ')',"colonneTable" : "montant","table" : "releve_comptes_client", "align": "right"},
+        {"nomColonne" :  this.__('suivi_compte.montant'),"colonneTable" : "montant","table" : "releve_comptes_client", "align": "right"},
         {"nomColonne" :  this.__('suivi_compte.solde_apres'),"colonneTable" : "solde_apres","table" : "releve_comptes_client", "align": "right"},
         {"nomColonne" :  this.__('suivi_compte.operation'),"colonneTable" : "operation","table" : "releve_comptes_client"},
         {"nomColonne" :  this.__('suivi_compte.coms'),"colonneTable" : "commentaire","table" : "releve_comptes_client"},
@@ -268,9 +268,9 @@ print(releve_comptes:any[]){
         let t: any = {};
             t[this.__('suivi_compte.date')] = releve_compte.date_transaction;
             t[this.__('suivi_compte.num_transac')] = releve_compte.num_transac;
-            t[this.__('suivi_compte.solde_avant')+ ' (' + this.__('global.currency') + ')'] = releve_compte.solde_avant;
-            t[this.__('suivi_compte.montant')+ ' (' + this.__('global.currency') + ')'] = releve_compte.montant;
-            t[this.__('suivi_compte.solde_apres')+ ' (' + this.__('global.currency') + ')'] = releve_compte.solde_apres;
+            t[this.__('suivi_compte.solde_avant')] = releve_compte.solde_avant;
+            t[this.__('suivi_compte.montant')] = releve_compte.montant;
+            t[this.__('suivi_compte.solde_apres')] = releve_compte.solde_apres;
             t[this.__('suivi_compte.operation')] = releve_compte.operation;
             t[this.__('suivi_compte.coms')] = releve_compte.commentaire;
 

@@ -1,9 +1,7 @@
 <div class="main-content">
 
     <div class="container mt-4">
-        <div class="title-page-profil">
-            <h5 class="text-primary"><b>{{ __('profile.title') }}</b></h5>
-        </div>
+       
         
 
         <div class="row mt-2 g-2">
@@ -12,7 +10,8 @@
             <div class="col-md-6 d-flex">
                 <div class="card shadow-sm w-100 h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{{ __('profil.profil_user_info') }}</h5>
+                        <div class="text-center" style="width: 100%;"><h4 class="bold">{{ __('profil.profil_user_info') }}</h4></div>
+
                         <p><strong>{{ __('utilisateur.nom') }} :</strong> {{ user.info?.nom }} </p>
                         <p><strong>{{ __('utilisateur.prenom') }} :</strong> {{ user.info?.prenom }} </p>
                         <p><strong>{{ __('utilisateur.email') }} :</strong>  {{ user.info?.email }} </p>
@@ -27,7 +26,8 @@
             <div class="col-md-6 d-flex">
                 <div class="card shadow-sm w-100 h-100">
                     <div class="card-body">
-                        <h5 class="card-title text-primary">{{ __('profil.modification_mdp') }}</h5>
+                        <div class="text-center" style="width: 100%;"><h4 class="bold">{{ __('profil.modification_mdp') }}</h4></div>
+
                         <form>
                             <div class="mb-3">
                                 <mat-form-field class="example-full-width">

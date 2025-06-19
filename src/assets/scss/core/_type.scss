@@ -136,3 +136,30 @@ h2.title{
   justify-content: center !important;
   width: 100%;
 }
+
+.export-btn {
+  display: flex;
+  align-items: center;
+  padding: 8px 12px;
+  border: 1px solid #ccc;
+  background: white;
+  cursor: pointer;
+}
+
+.export-btn img {
+  width: 16px !important;
+  height: 16px !important;
+  margin-left: 5px !important;
+}
+
+.excel {
+  border-color: #0b7238 !important;
+  background-color: #0b7238 !important;
+  font-weight: bold !important;
+}
+
+.pdf {
+  border-color: #b41d01 !important;
+  background-color: #b41d01 !important;
+  font-weight: bold !important;
+}

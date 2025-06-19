@@ -59,6 +59,7 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
 
     releve_data: any = [];
     releve_totaux: any;
+listShow: any = false;
 
     constructor(
         private passageService: PassageService,
@@ -124,7 +125,8 @@ export class ReleveSoldeBureauComponent extends Translatable implements OnInit {
     }
     
     async filtreTableau() {
- 
+        
+        this.listShow = true;
         let filtre_search = "" ;
         filtre_search = ",releve_solde_agence.wallet_carte|e|"+this.typeCompte;
 

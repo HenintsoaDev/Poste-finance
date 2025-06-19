@@ -554,7 +554,8 @@
         "retrait_compte" :"Retrait du compte",
         "solde_client_insuffisant" : "Le solde du compte client est insuffisant.",
         "solde_bureau_insuffisant" : "Solde bureau insuffisant pour effectuer cette transaction!",
-        "num_identification" : "N° d'identification"
+        "num_identification" : "N° d'identification",
+        "title_releve_compte_breadcrumb" :"Relevé d'un compte"
         
     },
     
