@@ -193,7 +193,8 @@
         "le" : "le",   
         "state" : "Statut",
         "user_creation" : "Créer par",
-        "affect" : "Affectation "  
+        "affect" : "Affectation ",
+        "profil_user_info" : "Informations profil utilisateur"
     },
     "utilisateur" : {
         "title_breadcrumb_api_numherit" : "Lister les utilisateurs API NUMHERIT",
