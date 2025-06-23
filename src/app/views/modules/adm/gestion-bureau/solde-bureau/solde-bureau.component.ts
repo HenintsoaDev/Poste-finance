@@ -34,7 +34,7 @@ export class SoldeBureauComponent extends Translatable implements OnInit {
     ];
 
     listIcon = [
-        {'icon' : 'info','action' : 'info','tooltip' : 'Détail','autority' : 'GBU_6',},
+        {'icon' : 'info','action' : 'info','tooltip' : 'Détail','autority' : 'GBU_25',},
     ];
 
     subscription: Subscription;

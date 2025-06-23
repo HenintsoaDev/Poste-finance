@@ -55,19 +55,19 @@ listIcon = [
     'icon' : 'edit',
     'action' : 'edit',
     'tooltip' : this.__('global.tooltip_edit'),
-    'autority' : 'PRM_25'
+    'autority' : 'PRM_21'
 
   },
   {
     'icon' : 'delete',
     'action' : 'delete',
     'tooltip' : this.__('global.tooltip_delete'),
-    'autority' : 'PRM_27'
+    'autority' : 'PRM_23'
 
   },
   {
     'icon' : 'state',
-    'autority' : 'PRM_28',
+    'autority' : 'PRM_24',
   },
 ]
 

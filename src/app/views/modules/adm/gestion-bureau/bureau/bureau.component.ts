@@ -111,7 +111,7 @@ export class BureauComponent extends Translatable implements OnInit {
       'icon' : 'info',
       'action' : 'detail',
       'tooltip' : 'Détail',
-      'autority' : 'GBU_25',
+      'autority' : 'GBU_4',
   
     },
     
@@ -119,20 +119,20 @@ export class BureauComponent extends Translatable implements OnInit {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : 'Modification',
-      'autority' : 'GBU_24',
+      'autority' : 'GBU_3',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : 'Supression',
-      'autority' : 'GBU_26',
+      'autority' : 'GBU_5',
 
   
     },
     {
       'icon' : 'state',
-      'autority' : 'GBU_27',
+      'autority' : 'GBU_6',
     },
   ]
     searchGlobal = [ 'agence.code', 'agence.name','departement.name', 'agence.responsable', 'agence.adresse']

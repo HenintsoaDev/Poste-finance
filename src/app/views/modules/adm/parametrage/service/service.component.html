@@ -14,7 +14,7 @@
                                 </button> -->
                             </div>
                             <div class="right-button">
-                                <button *ngIf="autority('PRM_47')" class="btn btn-secondary" (click)="openModalAdd(addService)"> {{ __("service.add")}}</button>
+                                <button *ngIf="autority('PRM_45')" class="btn btn-secondary" (click)="openModalAdd(addService)"> {{ __("service.add")}}</button>
                             </div>
                         </div>
                     </div>
@@ -225,7 +225,7 @@
                 <div class="col-lg-8">
                     <div>
                         <div class="text-right" style="width: 100%;">  
-                            <button mat-icon-button color="primary" *ngIf="autority('PRM_52')" (click)="afficheForm()" matTooltip="{{ __('service.add_palier') }}">
+                            <button mat-icon-button color="primary" *ngIf="autority('PRM_50')" (click)="afficheForm()" matTooltip="{{ __('service.add_palier') }}">
                             <mat-icon>add</mat-icon>
                           </button>
                         </div>
@@ -247,7 +247,7 @@
                                     <td class="text-right">{{ getFormat(palier.ht | number:'1.2-2':'fr-FR') }}</td>
                                     <td class="text-right">{{ getFormat(palier.tva | number:'1.2-2':'fr-FR') }}</td>
                                     <td class="text-right">{{ getFormat(palier.valeur | number:'1.2-2':'fr-FR') }}</td>
-                                    <td class="text-center"><i class="material-icons" style="cursor: pointer;" *ngIf="last && autority('PRM_53') " mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
+                                    <td class="text-center"><i class="material-icons" style="cursor: pointer;" *ngIf="last && autority('PRM_51') " mat-raised-button (click)="deletePalier(palier.idfrais)" > delete </i></td>
                                 </tr>
                 
                             </tbody>

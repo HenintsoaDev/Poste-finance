@@ -101,7 +101,7 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       'icon' : 'info',
       'action' : 'detail',
       'tooltip' : this.__('global.tooltip_detail'),
-      'autority' : 'PRM_41',
+      'autority' : 'PRM_40',
   
     },
     
@@ -109,27 +109,27 @@ export class UtilisateurComponent extends Translatable implements OnInit {
       'icon' : 'lock_reset',
       'action' : 'regenerer_mdp',
       'tooltip' : 'Régeneration de mot de passe',
-      'autority' : 'PRM_44',
+      'autority' : 'PRM_43',
   
     },
     {
       'icon' : 'edit',
       'action' : 'edit',
       'tooltip' : this.__('global.tooltip_edit'),
-      'autority' : 'PRM_40',
+      'autority' : 'PRM_39',
   
     },
     {
       'icon' : 'delete',
       'action' : 'delete',
       'tooltip' : this.__('global.tooltip_delete'),
-      'autority' : 'PRM_42',
+      'autority' : 'PRM_41',
 
   
     },
     {
       'icon' : 'state',
-      'autority' : 'PRM_43',
+      'autority' : 'PRM_42',
     },
   ]
     searchGlobal = [ 'user.nom', 'user.prenom', 'user.email',  'user.telephone', 'profil.name', 'agence.name']

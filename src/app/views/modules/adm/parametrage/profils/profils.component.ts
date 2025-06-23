@@ -82,34 +82,33 @@ export class ProfilsComponent extends Translatable implements OnInit {
         'icon' : 'info',
         'action' : 'detail',
         'tooltip' : this.__('global.tooltip_detail'),
-        'autority' : 'PRM_36',
+        'autority' : 'PRM_34',
     
       },
       {
         'icon' : 'handshake',
         'action' : 'affect',
         'tooltip' : this.__('profil.affect'),
-        'autority' : 'PRM_39',
     
       },
       {
         'icon' : 'edit',
         'action' : 'edit',
         'tooltip' : this.__('global.tooltip_edit'),
-        'autority' : 'PRM_35',
+        'autority' : 'PRM_33',
     
       },
       {
         'icon' : 'delete',
         'action' : 'delete',
         'tooltip' : this.__('global.tooltip_delete'),
-        'autority' : 'PRM_37',
+        'autority' : 'PRM_35',
   
     
       },
       {
         'icon' : 'state',
-        'autority' : 'PRM_38',
+        'autority' : 'PRM_36',
       },
     ]
     

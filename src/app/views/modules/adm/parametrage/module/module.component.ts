@@ -72,17 +72,17 @@ listIcon = [
     'icon' : 'edit',
     'action' : 'edit',
     'tooltip' : this.__('global.tooltip_edit'),
-    'autority' : 'PRM_10'
+    'autority' : 'PRM_3'
   },
   {
     'icon' : 'delete',
     'action' : 'delete',
     'tooltip' : this.__('global.tooltip_delete'),
-    'autority' : 'PRM_12'
+    'autority' : 'PRM_5'
   },
   {
     'icon' : 'state',
-    'autority' : 'PRM_13',
+    'autority' : 'PRM_6',
   },
 ]
 
