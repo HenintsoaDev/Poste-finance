@@ -51,6 +51,7 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     namePartenaire : string;
     mailPartenaire : string;
     isWalletCarte : number;
+    wallet_carte : string = "WC";
 
     tauxCommissionSunupaye : number;
     tauxCommissionService : number;
@@ -197,6 +198,19 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
 
     sendNewPartenaire()
     {
+
+        if(this.wallet_carte == 'W') {
+            this.isWalletCarte = 0;
+            this.tauxCommissionServiceCarte = 0;
+            this.tauxCommissionSunupayeCarte = 0;
+        }
+        else if(this.wallet_carte == 'C') {
+            this.isWalletCarte = 1;
+            this.tauxCommissionService = 0;
+            this.tauxCommissionSunupaye = 0;
+        }
+        else if(this.wallet_carte == 'WC') this.isWalletCarte = 2;
+
         this.partenaireFinancierService.addPartenaire({
             'code' : this.code,
             'nom' : this.namePartenaire,
@@ -218,6 +232,19 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     }
 
     sendUpdatePartenaire(){
+
+        if(this.wallet_carte == 'W') {
+            this.isWalletCarte = 0;
+            this.tauxCommissionServiceCarte = 0;
+            this.tauxCommissionSunupayeCarte = 0;
+        }
+        else if(this.wallet_carte == 'C') {
+            this.isWalletCarte = 1;
+            this.tauxCommissionService = 0;
+            this.tauxCommissionSunupaye = 0;
+        }
+        else if(this.wallet_carte == 'WC') this.isWalletCarte = 2;
+        
         this.loading = true;
         this.partenaireFinancierService.updatePartenaire(this.idPartenaire,{
             'code' : this.code,
@@ -251,7 +278,15 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
                 this.tauxCommissionSunupaye = response.data.taux_commission_sunupaye;
                 this.tauxCommissionServiceCarte = response.data.taux_commission_service_carte;
                 this.tauxCommissionSunupayeCarte = response.data.taux_commission_sunupaye_carte;
-                this.isWalletCarte = response.data.walet_carte;
+
+
+
+                if(response.data.walet_carte == 0) this.wallet_carte = 'W';
+                else if(response.data.walet_carte == 1) this.wallet_carte = 'C' ;
+                else if(response.data.walet_carte == 2) this.wallet_carte = 'WC' ;
+
+
+
                 this.solde_wallet = response.data.solde_wallet;
                 this.solde_carte = response.data.solde_carte;
                 this.statePartenaire = response.data.state;
@@ -374,5 +409,17 @@ export class PartenaireFinancierComponent extends Translatable implements OnInit
     closeModal() {
         this.modalRef?.hide();
     }
+
+    isDisabledByWalletType(wallet: string): boolean {
+        if (wallet === 'W') {
+          return this.tauxCommissionService == undefined || this.tauxCommissionSunupaye == undefined;
+        } else if (wallet === 'C') {
+          return this.tauxCommissionServiceCarte == undefined || this.tauxCommissionSunupayeCarte == undefined;
+        } else if (wallet === 'WC') {
+          return this.tauxCommissionService == undefined || this.tauxCommissionSunupaye == undefined ||
+                 this.tauxCommissionServiceCarte == undefined || this.tauxCommissionSunupayeCarte == undefined;
+        }
+        return true;
+      }
 
 }
