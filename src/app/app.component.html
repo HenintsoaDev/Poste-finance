@@ -7,8 +7,8 @@
     <!--[class]="!showSidebar ? full-main-panel : main-panel"-->
     <div class="main-panel"[class.full-main-panel]="!showSidebar" [class.main-panel]="showSidebar">
         <div *ngIf="showSidebar" #navBarAppMenu><app-navbar ></app-navbar></div>
-        <div *ngIf="!showSidebar" class="navbar full-main-panel navbar-expand-lg navbar-fixed fixed-top" style="height: 4.5rem;background: white;padding-left: 25px;">
-            <img src="/assets/img/logo_poste_finance.png" style="width:3rem;"/>
+        <div *ngIf="!showSidebar" class="navbar full-main-panel navbar-expand-lg navbar-fixed fixed-top" style="height: 4rem;background: white;padding-left: 25px;">
+            <img src="/assets/img/logo_poste_finance.png" style="width:4rem;"/>
             <div style="position: absolute;right: 2rem;cursor:pointer" (click)="goToLogin()">
                 <a class="nav-link" ><i class="material-icons">logout</i>
                     <p>
