@@ -30,7 +30,7 @@
             <ul class="nav">
                 <li [class]="currentRoute == '/my-profil' ? 'nav-item active' : 'nav-item'">
                     <a routerLink="/my-profil" class="nav-link text-white">
-                        <i class="material-icons">person</i><span class="sidebar-normal" style="font-size: 12px;"> {{ __("login.my_profile")}}</span>
+                        <i class="material-icons c-icon">person</i><span class="sidebar-normal" style="font-size: 12px;"> {{ __("login.my_profile")}}</span>
                     </a>
                 </li>
                 <li class="nav-item">
@@ -47,7 +47,7 @@
             <ul class="nav" style="margin-top: 0px;">
                 <li class="nav-item">
                     <a class="nav-link" data-toggle="collapse" [href]="'#collapse' + i"  aria-expanded="true" style="color: white;">
-                        <i class="material-icons">{{menuItem.icon}}</i>
+                        <i class="material-icons ">{{menuItem.icon}}</i>
                         <p style="overflow: hidden; white-space: nowrap; text-overflow: ellipsis;font-size:12px">
                             <span style="width: 11.5rem;display: inline-flex;text-overflow: ellipsis;white-space: initial;line-height: 15px;">{{menuItem.title }}</span>
                         <b class="caret"></b></p>
