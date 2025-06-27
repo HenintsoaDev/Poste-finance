@@ -257,6 +257,7 @@
         display: block;
         position: relative;
         z-index: 4;
+        background-color: $white-body;
 
         &:after{
             content: '';
@@ -282,7 +283,7 @@
             padding: $padding-small-vertical $padding-zero;
             display: inline-block;
             font-size: 18px;
-            color: $white;
+            color: $primary;
             white-space: nowrap;
             font-weight: $font-weight-default;
             line-height: 30px;

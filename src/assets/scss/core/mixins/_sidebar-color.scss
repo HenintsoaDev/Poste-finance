@@ -53,6 +53,7 @@
 
     li.active > a{
         background-color: $color;
+        color: #333394FF !important;
         @include shadow-big-color($color);
     }
 }

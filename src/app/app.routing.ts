@@ -45,6 +45,8 @@ import { FacturationComponent } from './views/modules/reporting/tableau-de-bord/
 import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 import { DetailRetraitComponent } from './views/modules/reporting/tableau-de-bord/detail-retrait/detail-retrait.component';
 import { PaiementMasseComponent } from './views/modules/reporting/tableau-de-bord/paiement-masse/paiement-masse.component';
+import { TransfertCommissionComponent } from './views/modules/adm/gestion-commission-reseau-phco/transfert-commission/transfert-commission.component';
+import { AchatCommissionComponent } from './views/modules/adm/gestion-commission-reseau-phco/achat-commission/achat-commission.component';
 
 const routes: Routes =[
   
@@ -84,6 +86,8 @@ const routes: Routes =[
   ]}, 
   {path : 'gestion_commission_reseau_phco',data: { breadcrumb: 'partenaire.title_sous_module' },children : [
     {path : 'partenaire_financier',component: PartenaireFinancierComponent,data: { breadcrumb: 'partenaire.title' }},
+    {path : 'transferer_commission',component: TransfertCommissionComponent,data: { breadcrumb: 'transfert_commission.title' }},
+    {path : 'achat_commission',component: AchatCommissionComponent,data: { breadcrumb: 'achat_commission.title' }},
   ]
   }, 
   

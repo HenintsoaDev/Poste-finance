@@ -1,5 +1,5 @@
 <div id="right-back-sidebar" class="bars-icon-sidebar">
-    <a href="javascript:void(0)" style="color: white;" (click)="toggleSidebar()"><i class="material-icons">dehaze</i>
+    <a href="javascript:void(0)" (click)="toggleSidebar()"><i class="material-icons">dehaze</i>
         <p>
             <span class="d-lg-none d-md-block"></span>
         </p>
@@ -8,9 +8,9 @@
 <div class="logo">
     <a href="#" routerLink="home"  class="simple-text">
         <div class="logo-img">
-            <img src="/assets/img/num.webp"/>
+            <img src="/assets/img/logo_without_bg.png"/>
         </div>
-        &nbsp;&nbsp;&nbsp;&nbsp;{{ __("global.numherit")}} 
+        &nbsp;&nbsp;&nbsp;&nbsp;{{ __("app.title")}} 
     </a>
 </div>
 <div class="sidebar-wrapper">
@@ -60,7 +60,7 @@
                     <ng-container *ngFor="let child of menuItem.children">
                         <li  *ngIf="child.state == 1 || user.info.admin == 1" [class]="currentRoute == child.path ? 'nav-item active' : 'nav-item'">
                             <a routerLink="{{child.path}}" class="nav-link text-white"  >
-                                <i class="material-icons">chevron_right</i><span class="sidebar-normal" style="font-size:12px">{{child.title}}</span>
+                                <i class="material-icons c-icon">chevron_right</i><span class="sidebar-normal" style="font-size:12px">{{child.title}}</span>
                             </a>
                         </li>
                     </ng-container>

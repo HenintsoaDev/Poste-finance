@@ -78,6 +78,8 @@ import { TransactionAgentComponent } from './views/modules/reporting/suivi-trans
 import { DetailRechargementComponent } from './views/modules/reporting/tableau-de-bord/detail-rechargement/detail-rechargement.component';
 import { DetailRetraitComponent } from './views/modules/reporting/tableau-de-bord/detail-retrait/detail-retrait.component';
 import { PaiementMasseComponent } from './views/modules/reporting/tableau-de-bord/paiement-masse/paiement-masse.component';
+import { TransfertCommissionComponent } from './views/modules/adm/gestion-commission-reseau-phco/transfert-commission/transfert-commission.component';
+import { AchatCommissionComponent } from './views/modules/adm/gestion-commission-reseau-phco/achat-commission/achat-commission.component';
 
 
 registerLocaleData(localeFr);
@@ -165,7 +167,9 @@ registerLocaleData(localeFr);
     FacturationComponent,
     DetailRechargementComponent,
     DetailRetraitComponent,
-    PaiementMasseComponent
+    PaiementMasseComponent,
+    TransfertCommissionComponent,
+    AchatCommissionComponent
   ],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   providers: [

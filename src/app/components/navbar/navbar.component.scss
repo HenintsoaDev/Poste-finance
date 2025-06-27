@@ -30,7 +30,7 @@
 
 .bars-toggle{
     height: 2rem;
-    background: #ec6a30;
+    background: $secondary;
     border: none;
 }
 
@@ -151,10 +151,13 @@
     padding: 0;
     margin: 0;
 }
+.nav-link{
+    color: $primary;
+}
 
 .list-link {
     text-decoration: none;
-    color:white;
+    color: $primary;
     padding: 5px 10px;
     transition: all 0.3s ease;
     font-weight: 600;
@@ -188,12 +191,22 @@
     border-radius: 1px;
     background: white;
     transition: all 0.3s ease;
+    color: $primary;
 }
 
 .menu-list-responsive:hover{
     background: $primary;
+    color: $secondary;
 
-    i{
-        color: white;
-    }
+    
+}
+
+.title-menu-responsive{
+    font-size: 0.65rem;
+    font-weight: 800;
+    margin-top: 10px;
+    color: $primary;
+}
+.title-menu-responsive:hover{
+    color: $secondary;
 }

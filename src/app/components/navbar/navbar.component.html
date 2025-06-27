@@ -4,7 +4,7 @@
     <div class="container-fluid containers">
         <div *ngIf="showNavbar" class="navbar-wrapper-full-main">
             <button mat-raised-button class="bars-toggle" type="button" (click)="toggleSidebar()">
-                <a href="javascript:void(0)" style="color: white;"><i class="material-icons">dehaze</i>
+                <a href="javascript:void(0)" ><i class="material-icons">dehaze</i>
                     <p>
                         <span class="d-lg-none d-md-block"></span>
                     </p>
@@ -27,9 +27,9 @@
                         <div class="row" style="padding: 1rem;">
                             <div *ngFor="let m of listTitles" class="col-4" style="text-align: center;cursor:pointer" (click)="goTo(m.path,m)">
                                 <div class="menu-list-responsive">
-                                    <i class="material-icons text-secondary" style="font-size: 50px;">{{ m.icon }}</i>
+                                    <i class="material-icons" style="font-size: 50px;">{{ m.icon }}</i>
                                 </div>
-                                <h6 style="font-size: 0.65rem;font-weight: 800;margin-top: 10px;" class="text-secondary">{{ m.title }}</h6>
+                                <h6 class="title-menu-responsive" >{{ m.title }}</h6>
                             </div>
 
                         </div>
@@ -48,7 +48,7 @@
     </div>
     <div class="responsive-bar">
         <div style="padding-left: 10px;">
-            <a href="javascript:void(0)"  class="m-resp" (click)="toggleSidebarResponsive()" style="color: white;"><i class="material-icons">dehaze</i>
+            <a href="javascript:void(0)"  class="m-resp" (click)="toggleSidebarResponsive()"><i class="material-icons">dehaze</i>
                 <p>
                     <span class="d-lg-none d-md-block"></span>
                 </p>
@@ -66,9 +66,9 @@
                         <div class="row" style="padding: 1rem;">
                             <div *ngFor="let m of listTitles" class="col-4" style="text-align: center;cursor:pointer" (click)="goTo(m.path,m)">
                                 <div class="menu-list-responsive">
-                                    <i class="material-icons text-secondary" style="font-size: 50px;">{{ m.icon }}</i>
+                                    <i class="material-icons" style="font-size: 50px;">{{ m.icon }}</i>
                                 </div>
-                                <h6 style="font-size: 0.65rem;font-weight: 800;margin-top: 10px;" class="text-secondary">{{ m.title }}</h6>
+                                <h6 class="title-menu-responsive">{{ m.title }}</h6>
                             </div>
                         </div>
                     </div>

@@ -16,7 +16,7 @@
     .navbar-nav{
         .nav-item .nav-link{
             position: relative;
-            color: inherit;
+            color: $primary;
             padding: $padding-general-x;
             font-weight: $font-weight-default;
             font-size: $mdb-btn-font-size-base;

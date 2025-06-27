@@ -89,6 +89,7 @@ export const environment = {
   //** Partenaire financier */
   partenaire_financier : "gestion_commission_reseau_phco/partenaire_financier",
   suivi_mouvement_partenaire_financier: "gestion_commission_reseau_phco/partenaire_financier/1/suivi_compte_partenaire",
+  liste_partenaire: "gestion_commission_reseau_phco/liste_partenaire_achat_commission",
   
   //** Beneficiaire */
   beneficiaire: "gestion_compte/beneficiaire",

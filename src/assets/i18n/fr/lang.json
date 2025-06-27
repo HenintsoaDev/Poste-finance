@@ -1,7 +1,7 @@
 {
     "app" : {
-        "title" : "NUMHERIT",
-        "title-welcom" : "PHCO NUMHERIT"
+        "title" : "POSTEFINANCES",
+        "title-welcom" : "POSTEFINANCES"
     },
 
     "menu" : {
@@ -45,7 +45,7 @@
         "transaction-success" : "Paiement réussi",
         "print_ticket" : "Imprimer le reçu",
         "currency" : "Ar",
-        "solde_wallet" : "Solde Wallet",
+        "solde_wallet" : "Solde CCP",
         "solde_carte" : "Solde Carte",
         "mdp_non_identique" : "Les mots de passe ne correspondent pas",
         "connection_echec": "Connexion échouée",
@@ -85,8 +85,8 @@
 
         "oui" : "Oui",
         "non"  : "Non",
-        "wallet"  : "Wallet",
-        "carte" : "Carte",
+        "wallet"  : "CCP",
+        "carte" : "CNE",
         "wallet_carte" :  "Tous types comptes",
         "select_date" : "Sélectionner une date",
         "filter" : "Filtrer",
@@ -107,8 +107,8 @@
         "validate" : "Validé",
         "not_valide" : "Rejeté",
         "en_attente" : "En attente de validation",
-        "total_carte" : "Total carte",
-        "total_wallet" : "Total wallet",
+        "total_carte" : "Total CNE",
+        "total_wallet" : "Total CCP",
         "dateDebut_dateFin_error" : "La date de début doit être antérieure à la date de fin",
         "tooltip_edit" : "Modification",
         "tooltip_delete" : "Suppression",
@@ -123,7 +123,7 @@
         "loading" : "Chargement en cours...",
         "state" : "State",
         "code" : "Code",
-        "wallet_carte_label" : "Wallet / Carte",
+        "wallet_carte_label" : "CCP / CNE",
         "yes" : "Oui",
         "no" : "Non",
         "detail" : "Détails",
@@ -148,7 +148,9 @@
         "envoi_code" : "Envoyer code",
         "total_montant" : "Total montant",
         "total_commission" : "Total commision",
-        "total_ttc" : "Total TTC"
+        "total_ttc" : "Total TTC",
+        "crediter" : "Créditer",
+        "initier" : "Initier"
     },
 
     "paiement" : {
@@ -291,8 +293,8 @@
         "solde_max_rapatrie" : "Solde maximum de rapatriement",
         "rapatrie_auto" : "Rapatriement automatique",
         "state" : "Statut",
-        "solde" : "Solde wallet",
-        "solde_carte" : "Solde carte",
+        "solde" : "Solde CCP",
+        "solde_carte" : "Solde CNE",
         "add" : "Ajouter un bureau",
         "title_edit_modal" : "Modification d'un bureau",
         "title_add_modal" : "Ajouter un bureau",
@@ -328,8 +330,8 @@
         "validate_virement" : "Valider le virement",
         "oui_valider" : "Oui, valider",
         "list_virement" : "Liste des virements",
-        "total_carte" : "Total carte ",
-        "total_wallet" : "Total wallet ",
+        "total_carte" : "Total CNE ",
+        "total_wallet" : "Total CCP ",
         "rejet_virement" : "Annuler le virement",
         "oui_rejeter" : "Oui, annuler",
         "update" : "Modifier le virement",
@@ -418,8 +420,8 @@
         "type_bureau" : "Type de bureau",
         "adresse": "Adresse",
         "info_solde" : "Détails solde de bureau",
-        "solde_wallet" : "Solde wallet",
-        "solde_carte" : "Solde carte",
+        "solde_wallet" : "Solde CCP",
+        "solde_carte" : "Solde CNE",
         "list_solde_bureau" : "Solde des bureaux"
     },
 
@@ -609,6 +611,36 @@
 
         
 
+
+    },
+    "transfert_commission": {
+        "mois_precedent" : "Mois précedent",
+        "type_compte" : "Type de compte",
+        "service" :"Service",
+        "all_service" : "Tous les services",
+        "partenaire" : "Partenaire",
+        "taux_commission" :"Taux de commission",
+        "frais":"Commission",
+        "title" : "Transfert de commission",
+        "total_commission" : "Total commision",
+        "type_commission" :"Type de commission",
+        "transfert_commission" : "Transfert commission"
+
+    },
+    "achat_commission": {
+        "all_partenaire" : "Tous les partenaires",
+        "achat_commission" : "Achat commission",
+        "partenaire" : "Partenaire",
+        "title" : "Achat commission",
+        "type_compte":"Type de compte",
+        "mois" : "Mois",
+        "annee" : "Année",
+        "num_transac" :"N° transaction",
+        "date_enreg" : "Date d'enregistrement",
+        "montant" :"Montant",
+        "type_commission" : "Type de commission",
+        "total" : "Total",
+        "statut_commission" : "Statut commission"
 
     }
    
