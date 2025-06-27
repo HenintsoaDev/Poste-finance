@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-const BASE_URL = "https://ws-distributeur.preprod-paositra.com" ;
+const BASE_URL = "https://gateway-pf.sunuphco.com" ;
 
 export const environment = {
   production: false,

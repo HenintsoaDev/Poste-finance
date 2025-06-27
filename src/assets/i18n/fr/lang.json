@@ -1,7 +1,8 @@
 {
     "app" : {
         "title" : "POSTEFINANCES",
-        "title-welcom" : "POSTEFINANCES"
+        "title-welcom" : "POSTEFINANCES",
+        "title-numherit" : "Numherit"
     },
 
     "menu" : {
@@ -46,7 +47,7 @@
         "print_ticket" : "Imprimer le reçu",
         "currency" : "Ar",
         "solde_wallet" : "Solde CCP",
-        "solde_carte" : "Solde Carte",
+        "solde_carte" : "Solde CNE",
         "mdp_non_identique" : "Les mots de passe ne correspondent pas",
         "connection_echec": "Connexion échouée",
         "success" : "Succès",

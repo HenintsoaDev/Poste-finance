@@ -3,7 +3,7 @@
 // `ng build --env=prod` then `environment.prod.ts` will be used instead.
 // The list of which env maps to which file can be found in `.angular-cli.json`.
 
-const BASE_URL = "https://ws-distributeur.preprod-paositra.com" ;
+const BASE_URL = "https://gateway-pf.sunuphco.com" ;
 
 export const environment = {
   production: false,
@@ -47,11 +47,12 @@ export const environment = {
   generateroute : 'parametrage/settings/generateroute',
   service : 'parametrage/service',
   utilisateur_api_numherit :'parametrage/user_api_numherit',
+  liste_utilisateur_active :'parametrage/consult/user/allActiveUser',
 
   regenerer_mdp_user_api :'parametrage/user_api_numherit/regenerer_password',
 
   header_message : 'parametrage/header_message',
-
+  
   //** Gestion bureau */
   getSoldeUser : 'gestion_bureau/consult/bureaux/get_solde',
   liste_bureau_active :'gestion_bureau/consult/bureaux/liste_bureaux_active',
@@ -88,21 +89,40 @@ export const environment = {
   //** Partenaire financier */
   partenaire_financier : "gestion_commission_reseau_phco/partenaire_financier",
   suivi_mouvement_partenaire_financier: "gestion_commission_reseau_phco/partenaire_financier/1/suivi_compte_partenaire",
+  liste_partenaire: "gestion_commission_reseau_phco/liste_partenaire_achat_commission",
   
   //** Beneficiaire */
   beneficiaire: "gestion_compte/beneficiaire",
   add_beneficiaire: "gestion_compte/creer_compte",
 
   //** Ressource */
-  listetype: "resource/typepiece/listetype",
+  listetype : "resource/typepiece/listetype",
   //** Operation compte */
   cherche_compte:  "operation_compte/find_compte",
   infos_compte:  "operation_compte/infos_compte",
-  activer_compte: "operation_compte/activer_compte",
-  
+  activer_compte:  "operation_compte/activer_compte",
+  desactiver_compte:  "operation_compte/desactiver_compte",
+  solde_compte:"operation_compte/solde_compte",
+  releve_compte:"operation_compte/releve_compte",
+  calcul_recharge : "operation_compte/details_recharge",
+  init_rechargement_espece : "operation_compte/init_rechargement_espece",
+  cashin: "operation_compte/cashin",
+  init_cashout : "operation_compte/init_cashout",
+  executeCashOUT : "operation_compte/executeCashOUT",
+  calcul_retrait : "operation_compte/calculFraisForCashOut",
+  verifie_cin : "operation_compte/verifCNI",
+  verifie_code : "operation_compte/verifCodeRetrait",
+
   //** Reporting TRANSACTION JOUR */
   reporting_transaction: "reporting/transaction_du_jour",
   reporting_historique_transaction: "reporting/historique_transaction",
   service_product: "parametrage/consult/service/liste_service_active",
-  reporting_transaction_service: "reporting/transaction_par_service"
+  reporting_transaction_service: "reporting/transaction_par_service",
+  reporting_transaction_agent: "reporting/transaction_par_agent",
+
+  //** Dashboard */
+  facturation: "dashboard/facturation",
+  details_rechargement: "dashboard/details_rechargement",
+  details_retrait: "dashboard/details_retrait_titulaire",
+  etatCommissionPM: "dashboard/etatCommissionPM"
 };
