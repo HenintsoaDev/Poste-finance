@@ -45,7 +45,7 @@
         "back_home" : "Retour à l'accueil",
         "transaction-success" : "Paiement réussi",
         "print_ticket" : "Imprimer le reçu",
-        "currency" : "Ar",
+        "currency" : "XOF",
         "solde_wallet" : "Solde CCP",
         "solde_carte" : "Solde CNE",
         "mdp_non_identique" : "Les mots de passe ne correspondent pas",
